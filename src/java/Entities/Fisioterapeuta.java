@@ -70,7 +70,7 @@ public class Fisioterapeuta implements Serializable {
     
     public String getFullnameFisioterapeuta(){
         String nombre = this.codUsuario.getFullNameUsuario();
-        return "hola";
+        return nombre;
     }
     
     public Fisioterapeuta(Integer idFisioterapeuta) {
