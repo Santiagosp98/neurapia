@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Crear usuario</title>
+    </h:head>
+    <h:body>        
+
+        <ui:composition template="/template/common/commonLayout.xhtml">
+
+            <ui:define name="aside">
+
+                <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
+
+                    <div class="panel panel-default">
+
+                        <div  class="fondoblanco panel-heading" role="tab" id="headingOne">
+                            <h6 class="panel-title">
+                                <a  role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne"><i class="fa fa-user" aria-hidden="true"></i>
+                                    Perfil <span class="caret"></span>
+                                </a>
+                            </h6>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <a href="#">Mi perfil</a> 
+                            </div>
+                            <div class="panel-body">
+                                <a href="#">Editar mi perfil</a> 
+                            </div>
+                        </div>
+
+
+                        <div class="fondoblanco panel-heading" role="tab" id="headingOne" style="background-color: #093242;color: #fff;">
+                            <h6 class="panel-title"><i class="fa fa-users" aria-hidden="true"></i>
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsTwo" aria-expanded="true" aria-controls="collapseOne">
+                                    Usuarios en el sistema<span class="caret"></span> 
+                                </a>
+                            </h6>
+                        </div>
+
+                        <div id="collapsTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body" style="background-color: #3DCCC2; border: 1px solid transparent">
+                                <a href="ConsultarUsuarios.xhtml" style="color: #fff;">Consultar Usuarios</a> 
+                            </div>
+                            <div class="panel-body" >
+                                <a href="CrearUsuario.xhtml">Añadir nuevo usuario</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </ui:define>
+
+            <ui:define name="content">
+                <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
+                    <h5 id="ubicacionPag">Añadir nuevo usuario</h5>
+                    <div class="contenido"></div>
+                    <h:form prependId="false" id="formRegistrarse" a:name="formRegistrarse" onsubmit="return validacionRegistrarse()">
+                            
+                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                <h:outputLabel value="Estado Usuario:" for="estadoUsuario" />
+                                <h:selectOneMenu class="form-control mitooltip" value="#{controllerUsuario.usuario.tipoDocumento}">
+                                    <f:selectItems class="form-control mitooltip" value="#{controllerUsuario.usuario.seleccionDocumento}"/>
+                                </h:selectOneMenu>
+                            </div>
+                        
+                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                <h:outputLabel value="Primer Nombre:" for="Número Documento" />
+                                <h:inputText a:placeholder="Primer Nombre" a:type="text" class="form-control mitooltip" a:minlength="3" tabindex="1" a:pattern="[A-Za-z]+" onkeypress=" return permite(event, 'car')" a:data-toggle="tooltip" a:data-placement="top" id="primerNombre" value="#{controllerUsuario.usuario.numeroDocumento}" title="PrimerNombre" required="true" requiredMessage="The IdUsuario field is required.">
+                                </h:inputText>
+                            </div>
+                        
+                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                <h:outputLabel value="Primer Nombre:" for="primerNombre" />
+                                <h:inputText a:placeholder="Primer Nombre" a:type="text" class="form-control mitooltip" a:minlength="3" tabindex="1" a:pattern="[A-Za-z]+" onkeypress=" return permite(event, 'car')" a:data-toggle="tooltip" a:data-placement="top" id="primerNombre" value="#{controllerUsuario.usuario.primerNombre}" title="PrimerNombre" required="true" requiredMessage="The IdUsuario field is required.">
+                                </h:inputText>
+                            </div>
+
+                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                <h:outputLabel value="Segundo Nombre:" for="segundoNombre" />
+                                <h:inputText a:placeholder="Segundo Nombre" a:type="text" class="form-control mitooltip" tabindex="4" a:minlength="3" a:pattern="[A-Za-z]+" onkeypress="return permite(event, 'car')" a:data-toggle="tooltip" a:data-placement="top" id="segundoNombre" value="#{controllerUsuario.usuario.segundoNombre}" title="SegundoNombre" required="false">
+                                </h:inputText>
+                            </div>
+                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                <h:outputLabel value="Primer Apellido:" for="primerApellido" />
+                                <h:inputText a:placeholder="Primer Apellido" a:type="text" class="form-control mitooltip" a:minlength="3" tabindex="1" a:pattern="[A-Za-z]+" onkeypress=" return permite(event, 'car')" a:data-toggle="tooltip" a:data-placement="top"  id="primerApellido" value="#{controllerUsuario.usuario.primerApellido}" title="PrimerApellido" required="true" requiredMessage="El Primer Apellido es requerido.">
+                                </h:inputText>
+                            </div>
+
+                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                <h:outputLabel value="Segundo Apellido:" for="segundoApellido" />
+                                <h:inputText a:placeholder="Segundo Apellido" a:type="text" class="form-control mitooltip" a:minlength="3" tabindex="1" a:pattern="[A-Za-z]+" onkeypress=" return permite(event, 'car')" a:data-toggle="tooltip" a:data-placement="top"  id="segundoApellido" value="#{controllerUsuario.usuario.segundoApellido}" title="SegundoApellido" required="true" requiredMessage="El Segundo Apellido es requerido.">
+                                </h:inputText>
+                            </div>
+
+                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                <h:outputLabel value="Estado Usuario:" for="estadoUsuario" />
+                                <h:selectOneMenu class="form-control mitooltip" value="#{controllerUsuario.usuario.estadoUsuario}">
+                                    <f:selectItems class="form-control mitooltip" value="#{controllerUsuario.usuario.seleccionEstados}"/>
+                                </h:selectOneMenu>
+                            </div>
+                            
+                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                <h:outputLabel value="Correo Electrónico:" for="correo" />
+                                <h:inputText id="emailRegistro" tabindex="28" a:type="email" class="form-control" a:placeholder="ejem@ejem.com" a:pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" value="#{controllerUsuario.usuario.correoElectronico}" title="correo" required="true" requiredMessage="El correo es requerido.">
+                                </h:inputText>
+                            </div>
+
+                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                <h:outputLabel value="Clave Usuario:" for="claveUsuario" />
+                                <h:inputText a:type="password" class="form-control mitooltip" a:placeholder="****" tabindex="33" a:minlength="4" maxlength="25"  a:data-toggle="tooltip" a:data-placement="top" id="claveUsuario" value="#{controllerUsuario.usuario.claveUsuario}" title="ClaveUsuario" required="true" requiredMessage="La clave es requerida.">
+                                </h:inputText>
+                            </div>
+
+                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                <h:outputLabel value="Confirmar Clave" for="claveUsuario" />
+                                <h:inputText a:type="password" class="form-control mitooltip" a:placeholder="****" tabindex="33" a:minlength="4" maxlength="25"  a:data-toggle="tooltip" a:data-placement="top" id="claveUsuario" value="#{controllerUsuario.usuario.claveUsuario}" title="ClaveUsuario" required="true" requiredMessage="Ambas claves deben coincidir.">
+                                </h:inputText>
+                            </div>
+                            
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <h:commandButton a:name="button" class="btn btn-info" action="#{controllerUsuario.crearUsuario()}" value="Crear Usuario"/>
+                            </div>
+                        </h:form>
+                </div>
+            </ui:define>
+        </ui:composition>    
+    </h:body>
+</html>
+

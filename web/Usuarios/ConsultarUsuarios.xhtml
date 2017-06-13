@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Consultar Usuarios</title>
+    </h:head>
+
+    <h:body>
+        <!-- Aside Izq de la pagina -->
+        <ui:composition template="/template/common/commonLayout.xhtml">
+
+            <ui:define name="aside">
+
+                <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
+
+                    <div class="panel panel-default">
+
+                        <div  class="fondoblanco panel-heading" role="tab" id="headingOne">
+                            <h6 class="panel-title">
+                                <a  role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne"><i class="fa fa-user" aria-hidden="true"></i>
+                                    Perfil <span class="caret"></span>
+                                </a>
+                            </h6>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <a href="#">Mi perfil</a> 
+                            </div>
+                            <div class="panel-body">
+                                <a href="#">Editar mi perfil</a> 
+                            </div>
+                        </div>
+                        
+                        <div class="fondoblanco panel-heading" role="tab" id="headingOne" style="background-color: #093242;color: #fff;">
+                            <h6 class="panel-title"><i class="fa fa-users" aria-hidden="true"></i>
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsTwo" aria-expanded="true" aria-controls="collapseOne">
+                                    Usuarios en el sistema<span class="caret"></span> 
+                                </a>
+                            </h6>
+                        </div>
+
+                        <div id="collapsTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body" style="background-color: #3DCCC2; border: 1px solid transparent">
+                                <a href="ConsultarUsuarios.xhtml" style="color: #fff;">Consultar Usuarios</a> 
+                            </div>
+                            <div class="panel-body" >
+                                <a href="CrearUsuario.xhtml">Añadir nuevo usuario</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </ui:define>
+
+
+            <!-- Contenido de la pagina -->
+            <ui:define name="content">
+                <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
+                    <!-- Titulo -->
+                    <h5 id="ubicacionPag">Lista Usuarios</h5>
+                    <div class="contenido"></div>
+
+                    <div class="tablas col-lg-12 col-md-12 col-sm-1 col-xs-1" data-toggle="table" data-sort-name="stargazers_count" data-search="true" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-sort-order="desc">
+                        <br/>
+                            <div class="fixed-table-body">
+                            <h:form>
+                                
+                                <h:dataTable value="#{controllerUsuario.consultarUsuarios()}" var="item" class="table table-striped table-bordered">
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Número documento"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.numeroDocumento}"/>
+                                    </h:column>>
+                                    <h:column>
+                                        <f:facet name="header" >
+                                            <h:outputText value="Nombre"/>
+                                        </f:facet>
+                                        
+                                        <h:outputText value="#{item.fullNameUsuario}"/>                                        
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Estado"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.estadoUsuario}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Fecha"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.fechaRegistro}">
+                                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                                        </h:outputText>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="CorreoElectronico"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.correoElectronico}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Acciones"/>
+                                        </f:facet>
+                                            &nbsp;
+                                            <h:commandLink action="#{controllerUsuario.seleccionarUsuario(item)}" value=""><span id="botonEdita" class="fa fa-file-text" aria-hidden="true"></span>
+                                            </h:commandLink>
+                                                &nbsp;
+                                                <h:commandLink action="#{controllerUsuario.eliminarUsuario(item)}" value=""><span id="botonElimina"  class="fa fa-times" aria-hidden="true"></span>
+                                        </h:commandLink>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+
+</html>
+
+
