@@ -1,0 +1,13 @@
+/**** carpetas y archivos a omitir ******/
+
+nbproject/*
+test/*
+build/*
+build/web/*
+src/conf/*
+bin/**
+tmp/**
+tmp/**/*
+*.git
+build.xml
+/dist/
