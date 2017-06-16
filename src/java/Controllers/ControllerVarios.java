@@ -6,15 +6,15 @@
 package Controllers;
 
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import javax.faces.view.ViewScoped;
 
 /**
  *
  * @author jair3
  */
 @Named(value = "controllerVarios")
-@SessionScoped
+@ViewScoped
 public class ControllerVarios implements Serializable {
 
     public ControllerVarios() {

@@ -22,37 +22,37 @@
                         <div class="fondoblanco panel-heading" role="tab" id="headingOne" style="background-color: #093242;color: #fff;">
                             <h6 class="panel-title"><i class="fa fa-tasks" aria-hidden="true"></i>
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsOne" aria-expanded="true" aria-controls="collapseOne">
-                                    Sistema<span class="caret"></span> 
+                                    Configuración del sistema<span class="caret"></span> 
                                 </a>
                             </h6>
                         </div>
 
                         <div id="collapsOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                             <div class="panel-body" style="background-color: #3DCCC2; border: 1px solid transparent">
-                                <a href="RegistroInformacion.xhtml" style="color: #fff;">Nuevo Registro</a> 
+                                <a href="ConsultarDatosSistema.xhtml" style="color: #fff;">Registros en el Sistema</a> 
                             </div>
                         </div>
 
                         <div  class="fondoblanco panel-heading" role="tab" id="headingTwo">
                             <h6 class="panel-title">
                                 <a  role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><i class="fa fa-user" aria-hidden="true"></i>
-                                    Cita Médica <span class="caret"></span>
+                                    Historial Clinico <span class="caret"></span>
                                 </a>
                             </h6>
                         </div>
                         <div id="collapseTwo" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingTwo">
                             <div class="panel-body">
-                                <a href="ConsultarCitasMedicas.xhtml">Historial de Citas</a> 
+                                <a href="ConsultarHistorialClinico.xhtml">Consultar Historiales</a> 
                             </div>
                             <div class="panel-body">
-                                <a href="#">Citas Pendientes</a> 
+                                <a href="#">Añadir Historial Clínico</a> 
                             </div>
                         </div>
 
                         <div class="fondoblanco panel-heading" role="tab" id="headingThree">
                             <h6 class="panel-title"><i class="fa fa-users" aria-hidden="true"></i>
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsThree" aria-expanded="true" aria-controls="collapseThree">
-                                    Asignar cita<span class="caret"></span> 
+                                    Reportes de Historial Clínico<span class="caret"></span> 
                                 </a>
                             </h6>
                         </div>
@@ -139,10 +139,10 @@
                                                 <h:outputText value="Acciones"/>
                                             </f:facet>
                                             &nbsp;
-                                            <h:commandLink action="#{controllerUsuario.seleccionarUsuario(item)}" value=""><span id="botonEdita" class="fa fa-file-text" aria-hidden="true"></span>
+                                            <h:commandLink action="#{controllerUsuario.seleccionarActividad(item)}" value=""><span id="botonEdita" class="fa fa-file-text" aria-hidden="true"></span>
                                             </h:commandLink>
                                             &nbsp;
-                                            <h:commandLink action="#{controllerUsuario.eliminarUsuario(item)}" value=""><span id="botonElimina"  class="fa fa-times" aria-hidden="true"></span>
+                                            <h:commandLink action="#{controllerActividad.eliminarActividad(item)}" value=""><span id="botonElimina"  class="fa fa-times" aria-hidden="true"></span>
                                             </h:commandLink>
                                         </h:column>
                                     </h:dataTable>

@@ -69,15 +69,7 @@
                                 <h:selectOneMenu class="form-control mitooltip" value="#{controllerUsuario.usuario.tipoDocumento}">
                                     <f:selectItems class="form-control mitooltip" value="#{controllerUsuario.usuario.seleccionDocumento}"/>
                                 </h:selectOneMenu>
-                            </div>
-                        
-                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="Primer Nombre:" for="Número Documento" />
-                                <h:inputText a:placeholder="Primer Nombre" a:type="text" class="form-control mitooltip" a:minlength="3" tabindex="1" a:pattern="[A-Za-z]+" onkeypress=" return permite(event, 'car')" a:data-toggle="tooltip" a:data-placement="top" id="primerNombre" value="#{controllerUsuario.usuario.numeroDocumento}" title="PrimerNombre" required="true" requiredMessage="The IdUsuario field is required.">
-                                </h:inputText>
-                            </div>
-                        
-                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                            </div><div class="form-group col-lg-6 col-md-6 col-sm-6">
                                 <h:outputLabel value="Primer Nombre:" for="primerNombre" />
                                 <h:inputText a:placeholder="Primer Nombre" a:type="text" class="form-control mitooltip" a:minlength="3" tabindex="1" a:pattern="[A-Za-z]+" onkeypress=" return permite(event, 'car')" a:data-toggle="tooltip" a:data-placement="top" id="primerNombre" value="#{controllerUsuario.usuario.primerNombre}" title="PrimerNombre" required="true" requiredMessage="The IdUsuario field is required.">
                                 </h:inputText>
@@ -99,17 +91,23 @@
                                 <h:inputText a:placeholder="Segundo Apellido" a:type="text" class="form-control mitooltip" a:minlength="3" tabindex="1" a:pattern="[A-Za-z]+" onkeypress=" return permite(event, 'car')" a:data-toggle="tooltip" a:data-placement="top"  id="segundoApellido" value="#{controllerUsuario.usuario.segundoApellido}" title="SegundoApellido" required="true" requiredMessage="El Segundo Apellido es requerido.">
                                 </h:inputText>
                             </div>
-
+                        
+                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                <h:outputLabel value="Número Documento:" for="Número Documento" />
+                                <h:inputText a:placeholder="Num Documento" a:type="number" class="form-control mitooltip" a:minlength="10" tabindex="1" a:pattern="[A-Za-z]+" onkeypress=" return permite(event, 'num_car')" a:data-toggle="tooltip" a:data-placement="top" id="primerNombre" value="#{controllerUsuario.usuario.numeroDocumento}" title="PrimerNombre" required="true" requiredMessage="The IdUsuario field is required.">
+                                </h:inputText>
+                            </div>
+                        
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
                                 <h:outputLabel value="Estado Usuario:" for="estadoUsuario" />
-                                <h:selectOneMenu class="form-control mitooltip" value="#{controllerUsuario.usuario.estadoUsuario}">
+                                <h:selectOneMenu class="form-control mitooltip" a:data-toggle="tooltip" a:data-placement="top" value="#{controllerUsuario.usuario.estadoUsuario}">
                                     <f:selectItems class="form-control mitooltip" value="#{controllerUsuario.usuario.seleccionEstados}"/>
                                 </h:selectOneMenu>
                             </div>
                             
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
                                 <h:outputLabel value="Correo Electrónico:" for="correo" />
-                                <h:inputText id="emailRegistro" tabindex="28" a:type="email" class="form-control" a:placeholder="ejem@ejem.com" a:pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" value="#{controllerUsuario.usuario.correoElectronico}" title="correo" required="true" requiredMessage="El correo es requerido.">
+                                <h:inputText id="emailRegistro" tabindex="28" a:type="email" class="form-control" a:placeholder="ejem@ejem.com" a:pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" value="#{controllerUsuario.usuario.correoElectronico}" a:data-toggle="tooltip" a:data-placement="top" title="correo" required="true" requiredMessage="El correo es requerido.">
                                 </h:inputText>
                             </div>
 

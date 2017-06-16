@@ -8,17 +8,18 @@ package Controllers;
 import Entities.Usuario;
 import Facade.UsuarioFacade;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.view.ViewScoped;
+import javax.swing.JOptionPane;
 /**
  *
  * @author jair3
  */
 @Named(value = "controllerUsuario")
-@SessionScoped
+@ViewScoped
 public class ControllerUsuario implements Serializable {
 
     /**
@@ -58,12 +59,12 @@ public class ControllerUsuario implements Serializable {
         return "ConsultarUsuarios";
     }
     
-    public String crearUsuario(){
+    public void crearUsuario(){
         if (usuario != null) {
             usuarioFacade.create(usuario); 
-            init();            
+            init();                
         }
-        return "ConsutarUsuarios";   
+        this.consultarUsuarios();
         
     }
     /**

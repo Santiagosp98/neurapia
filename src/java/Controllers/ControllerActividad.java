@@ -7,19 +7,20 @@ package Controllers;
 
 import Entities.Actividad;
 import Facade.ActividadFacade;
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 
 /**
  *
  * @author jair3
  */
 @Named(value = "controllerActividad")
-@Dependent
-public class ControllerActividad {
+@ViewScoped
+public class ControllerActividad implements Serializable {
 
     /**
      * Creates a new instance of ControllerActividad
@@ -42,4 +43,22 @@ public class ControllerActividad {
         this.listaActividad = actividadFacade.findAll();
         return listaActividad;
     }
+    
+    public String eliminarActividad(Actividad actividad){
+        this.actividadFacade.remove(actividad);
+        return "RegistroInformacion";
+    }
+    
+    public String SeleccionarActividad(Actividad actividad){
+        this.actividad = actividad;
+        return "ActualizarRegistro";
+    }
+    
+    public String crearActividad(){
+        this.actividadFacade.create(actividad);
+        return "registroInformacion";
+    }
+    
+    
+    
 }

@@ -8,18 +8,17 @@ package Controllers;
 import Entities.Objetivotratamiento;
 import Facade.ObjetivotratamientoFacade;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-
+import javax.faces.view.ViewScoped;
 /**
  *
  * @author jair3
  */
 @Named(value = "controllerObjetivoTratamiento")
-@SessionScoped
+@ViewScoped
 public class ControllerObjetivoTratamiento implements Serializable {
 
     /**
@@ -42,6 +41,11 @@ public class ControllerObjetivoTratamiento implements Serializable {
     public List<Objetivotratamiento> consultarObjetivoTratamiento(){
         this.listaobjetivoTratamiento = objetivoTratamientoFacade.findAll();
         return listaobjetivoTratamiento;
+    }
+    
+    public String eliminarObjetivoTratamiento(){
+        this.objetivoTratamientoFacade.remove(objetivotratamiento);
+        return "ConsultarObjetivoTratamiento";
     }
 }
 

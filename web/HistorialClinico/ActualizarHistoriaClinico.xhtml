@@ -1,0 +1,158 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Registros</title>
+        <!-- En esta sesión  el administrador tendra la capacidad de agregar los registros a cada tabla de la base de datos -->
+    </h:head>
+    <h:body>
+        <ui:composition template="/template/common/commonLayout.xhtml">
+
+            <ui:define name="aside">
+                <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
+
+
+
+                    <div class="panel panel-default">
+
+                        <div class="fondoblanco panel-heading" role="tab" id="headingOne" style="background-color: #093242;color: #fff;">
+                            <h6 class="panel-title"><i class="fa fa-tasks" aria-hidden="true"></i>
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Configuración del sistema<span class="caret"></span> 
+                                </a>
+                            </h6>
+                        </div>
+
+                        <div id="collapsOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body" style="background-color: #3DCCC2; border: 1px solid transparent">
+                                <a href="ConsultarDatosSistema.xhtml" style="color: #fff;">Registros en el Sistema</a> 
+                            </div>
+                        </div>
+
+                        <div  class="fondoblanco panel-heading" role="tab" id="headingTwo">
+                            <h6 class="panel-title">
+                                <a  role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><i class="fa fa-user" aria-hidden="true"></i>
+                                    Historial Clinico <span class="caret"></span>
+                                </a>
+                            </h6>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body">
+                                <a href="ConsultarHistorialClinico.xhtml">Consultar Historiales</a> 
+                            </div>
+                            <div class="panel-body">
+                                <a href="#">Añadir Historial Clínico</a> 
+                            </div>
+                        </div>
+
+                        <div class="fondoblanco panel-heading" role="tab" id="headingThree">
+                            <h6 class="panel-title"><i class="fa fa-users" aria-hidden="true"></i>
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsThree" aria-expanded="true" aria-controls="collapseThree">
+                                    Reportes<span class="caret"></span> 
+                                </a>
+                            </h6>
+                        </div>
+
+                        <div id="collapsThree" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingThree">
+                            <div class="panel-body">
+                                <a href="CrearCitaMedica.xhtml">Nueva Cita médica</a> 
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </ui:define>
+
+
+            <!-- Contenido de la pagina -->
+            <ui:define name="content">
+                <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
+                    <!-- Titulo -->
+                    <h5 id="ubicacionPag">Consultar historiales clínicos en el sistema</h5>
+
+                    <div class="contenido">
+                        <div class="contenido">
+                            <br/>
+                            <p style="text-align: center; margin-top: 50px">Consulta aquí los datos básicos del historial clínico por usuario</p>
+                            <br/>
+                        </div>
+                    </div>
+                    <div data-toggle="table" data-sort-name="stargazers_count" data-search="true" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-sort-order="desc">
+
+                            <div class="fixed-table-body">
+                                <f:view>
+
+
+                                    <h:form>
+                                        <h1><h:outputText value="Create/Edit"/></h1>
+                                        <h:panelGrid columns="2">
+                                            <h:outputLabel value="IdHistorialClinico:" for="idHistorialClinico" />
+                                            <h:inputText id="idHistorialClinico" value="#{controllerHistorialClinico.historialClinico.idHistorialClinico}" title="IdHistorialClinico" required="true" requiredMessage="The IdHistorialClinico field is required."/>
+                                            <h:outputLabel value="FechaCreacion:" for="fechaCreacion" />
+                                            <h:inputText id="fechaCreacion" value="#{controllerHistorialClinico.historialClinico.fechaCreacion}" title="FechaCreacion" >
+                                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                            </h:inputText>
+                                            <h:outputLabel value="Direccion:" for="direccion" />
+                                            <h:inputText id="direccion" value="#{controllerHistorialClinico.historialClinico.direccion}" title="Direccion" />
+                                            <h:outputLabel value="FechaNacimiento:" for="fechaNacimiento" />
+                                            <h:inputText id="fechaNacimiento" value="#{controllerHistorialClinico.historialClinico.fechaNacimiento}" title="FechaNacimiento" >
+                                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                            </h:inputText>
+                                            <h:outputLabel value="Sexo:" for="sexo" />
+                                            <h:inputText id="sexo" value="#{controllerHistorialClinico.historialClinico.sexo}" title="Sexo" required="true" requiredMessage="The Sexo field is required."/>
+                                            <h:outputLabel value="GrupoSanguineo:" for="grupoSanguineo" />
+                                            <h:inputText id="grupoSanguineo" value="#{controllerHistorialClinico.historialClinico.grupoSanguineo}" title="GrupoSanguineo" required="true" requiredMessage="The GrupoSanguineo field is required."/>
+                                            <h:outputLabel value="Religion:" for="religion" />
+                                            <h:inputText id="religion" value="#{controllerHistorialClinico.historialClinico.religion}" title="Religion" required="true" requiredMessage="The Religion field is required."/>
+                                            <h:outputLabel value="Estrato:" for="estrato" />
+                                            <h:inputText id="estrato" value="#{controllerHistorialClinico.historialClinico.estrato}" title="Estrato" />
+                                            <h:outputLabel value="Zona:" for="zona" />
+                                            <h:inputText id="zona" value="#{controllerHistorialClinico.historialClinico.zona}" title="Zona" required="true" requiredMessage="The Zona field is required."/>
+                                            <h:outputLabel value="CiudadResidencia:" for="ciudadResidencia" />
+                                            <h:inputText id="ciudadResidencia" value="#{controllerHistorialClinico.historialClinico.ciudadResidencia}" title="CiudadResidencia" />
+                                            <h:outputLabel value="Empresa:" for="empresa" />
+                                            <h:inputText id="empresa" value="#{controllerHistorialClinico.historialClinico.empresa}" title="Empresa" />
+                                            <h:outputLabel value="Pais:" for="pais" />
+                                            <h:inputText id="pais" value="#{controllerHistorialClinico.historialClinico.pais}" title="Pais" />
+                                            <h:outputLabel value="Estudio:" for="estudio" />
+                                            <h:inputText id="estudio" value="#{controllerHistorialClinico.historialClinico.estudio}" title="Estudio" required="true" requiredMessage="The Estudio field is required."/>
+                                            <h:outputLabel value="Ocupacion:" for="ocupacion" />
+                                            <h:inputText id="ocupacion" value="#{controllerHistorialClinico.historialClinico.ocupacion}" title="Ocupacion" />
+                                            <h:outputLabel value="Telefono:" for="telefono" />
+                                            <h:inputText id="telefono" value="#{controllerHistorialClinico.historialClinico.telefono}" title="Telefono" />
+                                            <h:outputLabel value="CodUsuario:" for="codUsuario" />
+                                            <h:selectOneMenu id="codUsuario" value="#{controllerHistorialClinico.historialClinico.codUsuario}" title="CodUsuario" required="true" requiredMessage="The CodUsuario field is required.">
+                                                <!-- TODO: update below reference to list of available items-->
+                                                <f:selectItems value="#{fixme}"/>
+                                            </h:selectOneMenu>
+                                            <h:outputLabel value="CodEps:" for="codEps" />
+                                            <h:selectOneMenu id="codEps" value="#{controllerHistorialClinico.historialClinico.codEps}" title="CodEps" >
+                                                <!-- TODO: update below reference to list of available items-->
+                                                <f:selectItems value="#{fixme}"/>
+                                            </h:selectOneMenu>
+                                            <h:outputLabel value="CodLugarNacimiento:" for="codLugarNacimiento" />
+                                            <h:selectOneMenu id="codLugarNacimiento" value="#{controllerHistorialClinico.historialClinico.codLugarNacimiento}" title="CodLugarNacimiento" >
+                                                <!-- TODO: update below reference to list of available items-->
+                                                <f:selectItems value="#{fixme}"/>
+                                            </h:selectOneMenu>
+                                        </h:panelGrid>
+                                    </h:form>
+                                </f:view>
+
+                            
+                            </div>
+                        
+                        </div>
+                    </div>
+
+            </ui:define>
+
+        </ui:composition>
+    </h:body>
+</html>
+

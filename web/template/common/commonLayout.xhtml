@@ -4,22 +4,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"      
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
-      
-
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<!-- f:event type="preRenderView" lsitener="#{controllerSesion.validarSesion()}"/> -->
+    
     <h:head>
         <meta name="keywords" content="pagina,html,cs3,maquetacion"/>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
-	<h:outputStylesheet name="estilos.css" library="css" />
-	<h:outputStylesheet name="style.css" library="css" />
-	<h:outputStylesheet name="bootstrap.css" library="css" />
-	<h:outputStylesheet name="font-awesome.css" library="css" />
-	<h:outputStylesheet name="font-awesome.min.css" library="css" />
-	<h:outputStylesheet name="sweetalert.css" library="css" />        
-        <h:outputStylesheet name="bootstrap.min.css" library="css" />
-        <h:outputStylesheet name="bootstrap.min.css.map" library="css" />
-        <h:outputStylesheet name="bootstrap.css.map" library="css" />
-        <h:outputStylesheet name="export.css" library="css" />
+        <link href="#{request.contextPath}/resources/css/bootstrap.css" rel="stylesheet"/>
+        <link href="#{request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="#{request.contextPath}/resources/css/bootstrap.min.css.map" rel="stylesheet"/>
+        <link href="#{request.contextPath}/resources/css/bootstrap.css.map" rel="stylesheet"/>
+        <link href="#{request.contextPath}/resources/css/font-awesome.css" rel="stylesheet"/>
+        <link href="#{request.contextPath}/resources/css/font-awesome.min.css" rel="stylesheet"/>
+        <link href="#{request.contextPath}/resources/css/style.css" rel="stylesheet"/>
+        <link href="#{request.contextPath}/resources/css/estilos.css" rel="stylesheet"/>
+        <link href="#{request.contextPath}/resources/css/export.css" rel="stylesheet"/>
         <h:outputStylesheet name="jquery/ui/jquery-ui.css" library="primefaces" />
         <h:outputScript name="jquery2.2.3.js" library="js" />
         <h:outputScript name="bootstrap.js" library="js" />
@@ -29,12 +29,14 @@
         <h:outputScript name="sweetalert.min.js" library="js" /> 
         <h:outputScript name="jquery/jquery-plugins.js" library="primefaces" /> 
         <h:outputScript name="propioJavaSacrip.js" library="js" />
+        
 
         <link rel="shortcut icon" href="../../resources/imgs/icono.png"/>
         
     </h:head>
 
     <h:body id="back">
+        <ui:insert name="titulo"><title></title></ui:insert>
 
                 <div id="page">
 
@@ -59,7 +61,7 @@
                         <ui:insert name="content" >
                             <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
                                 <div class="panel panel-default">
-                                    hola
+                                   
                                 </div>
                             
                             </div>
