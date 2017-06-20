@@ -6,20 +6,19 @@
 package Controllers;
 
 import Entities.Objetivotratamiento;
-import Facade.ObjetivotratamientoFacade;
+import Facade.ObjetivotratamientoFacadeLocal;
 import javax.inject.Named;
-import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.ConversationScoped;
 /**
  *
  * @author jair3
  */
 @Named(value = "controllerObjetivoTratamiento")
-@ViewScoped
-public class ControllerObjetivoTratamiento implements Serializable {
+@ConversationScoped
+public class ControllerObjetivoTratamiento extends ControllerApp {
 
     /**
      * Creates a new instance of ControllerObjetivoTratamiento
@@ -27,11 +26,10 @@ public class ControllerObjetivoTratamiento implements Serializable {
     public ControllerObjetivoTratamiento() {
     }
     @EJB
-    ObjetivotratamientoFacade objetivoTratamientoFacade;
+    ObjetivotratamientoFacadeLocal objetivoTratamientoFacade;
     Objetivotratamiento objetivotratamiento;
     List<Objetivotratamiento> listaobjetivoTratamiento;
-    
-    
+
     @PostConstruct
     public void init(){
         objetivotratamiento = new Objetivotratamiento();
@@ -43,9 +41,53 @@ public class ControllerObjetivoTratamiento implements Serializable {
         return listaobjetivoTratamiento;
     }
     
-    public String eliminarObjetivoTratamiento(){
-        this.objetivoTratamientoFacade.remove(objetivotratamiento);
-        return "ConsultarObjetivoTratamiento";
+    public String eliminarObjetivoTratamiento(Objetivotratamiento objetivoTratamiento){
+        this.objetivoTratamientoFacade.remove(objetivoTratamiento);
+        return "ConsultarDatosSistema";
     }
+    
+    public String seleccionarObjetivoTratamiento(Objetivotratamiento objetivoTratamiento){
+        iniciarConversacion();
+        this.objetivotratamiento = objetivoTratamiento;
+        return "ActualizarDatosSistema";
+    }
+    
+    public String crearObjetivoTratamiento(){
+        this.objetivoTratamientoFacade.create(objetivotratamiento);
+        return "ConsultarDatosSistema";
+    }
+    
+    public String actualizarObjetivoTratamiento(){
+        this.objetivoTratamientoFacade.edit(objetivotratamiento);
+        finalizarConversacion();
+        return "ConsultarDatosSistema";
+    }
+    
+    public ObjetivotratamientoFacadeLocal getObjetivoTratamientoFacadeLocal() {
+        return objetivoTratamientoFacade;
+    }
+
+    public void setObjetivoTratamientoFacadeLocal(ObjetivotratamientoFacadeLocal objetivoTratamientoFacade) {
+        this.objetivoTratamientoFacade = objetivoTratamientoFacade;
+    }
+
+    public Objetivotratamiento getObjetivotratamiento() {
+        return objetivotratamiento;
+    }
+
+    public void setObjetivotratamiento(Objetivotratamiento objetivotratamiento) {
+        this.objetivotratamiento = objetivotratamiento;
+    }
+
+    public List<Objetivotratamiento> getListaobjetivoTratamiento() {
+        return listaobjetivoTratamiento;
+    }
+
+    public void setListaobjetivoTratamiento(List<Objetivotratamiento> listaobjetivoTratamiento) {
+        this.listaobjetivoTratamiento = listaobjetivoTratamiento;
+    }
+    
+    
+    
 }
 

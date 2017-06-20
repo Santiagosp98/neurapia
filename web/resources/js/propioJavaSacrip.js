@@ -7,6 +7,7 @@ $(document).ready(function() {
     
 });
 
+
 function olvidasteContraseña(){
 	var usuario2 = $('#emailRe').val();
 

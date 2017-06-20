@@ -8,23 +8,25 @@ package Controllers;
 import Entities.Citamedica;
 import Entities.Fisioterapeuta;
 import Entities.Usuario;
-import Facade.CitamedicaFacade;
-import Facade.FisioterapeutaFacade;
-import Facade.UsuarioFacade;
+import Facade.CitamedicaFacadeLocal;
+import Facade.FisioterapeutaFacadeLocal;
+import Facade.UsuarioFacadeLocal;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.ConversationScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 /**
  *
  * @author jair3
  */
 @Named(value = "controllerCitaMedica")
-@SessionScoped
-public class ControllerCitaMedica implements Serializable {
+@ConversationScoped
+public class ControllerCitaMedica extends ControllerApp{
 
     /**
      * Creates a new instance of ControllerCitaMedica
@@ -33,30 +35,26 @@ public class ControllerCitaMedica implements Serializable {
     }
     
     @EJB
-    CitamedicaFacade citaMedicaFacade;
+    CitamedicaFacadeLocal citaMedicaFacade;
     Citamedica citaMedica;
     List<Citamedica> listaCitas;
     
     @EJB
-    FisioterapeutaFacade fisioterapeutaFacade;
+    FisioterapeutaFacadeLocal fisioterapeutaFacade;
     Fisioterapeuta fisioterapeuta;
     List<Fisioterapeuta> listaFisioterapeutas;
     
     @EJB
-    private UsuarioFacade usuarioFacade;
-    private Usuario usuario;
-    private List<Usuario> listaUsuarios;
-    
+    UsuarioFacadeLocal usuarioFacade;       
+    Usuario usuario;
+    List<Usuario> listaUsuarios;
+  
     @PostConstruct
     public void init(){
-        this.setCitaMedica(new Citamedica());
-        this.setListaCitas(getCitaMedicaFacade().findAll());
-        
-        this.setFisioterapeuta(new Fisioterapeuta());
-        this.setListaFisioterapeutas(getFisioterapeutaFacade().findAll());
-        
-        this.setUsuario(new Usuario());
-        this.setListaUsuarios(getUsuarioFacade().findAll());
+       this.citaMedica = new Citamedica();
+       this.fisioterapeuta = new Fisioterapeuta();
+       this.usuario = new Usuario();
+       this.listaCitas = citaMedicaFacade.findAll();
     }
     
     public List<Citamedica> consultarCitaMedica(){
@@ -66,13 +64,22 @@ public class ControllerCitaMedica implements Serializable {
     } 
     
     public String seleccionarCita(Citamedica citamedica){
+        iniciarConversacion();
         this.citaMedica = citamedica;
         return "ActualizarCitasMedicas";
     }
     
     public String actualizarCita(){
-        citaMedicaFacade.edit(citaMedica);
-        return "ConsultarCitasMedicas";
+        try {
+            this.citaMedica.setCodFisioterapeuta(fisioterapeutaFacade.find(fisioterapeuta.getIdFisioterapeuta()));
+            citaMedicaFacade.edit(citaMedica);
+            this.citaMedica = new Citamedica();
+            finalizarConversacion();
+            return "ConsultarCitasMedicas";
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return "";
     }
     
     public String eliminarCita(Citamedica citamedica){
@@ -81,18 +88,22 @@ public class ControllerCitaMedica implements Serializable {
     }
     
     public String crearCitaMedica(){
-        init();
-        String redirect;
-        this.citaMedicaFacade.create(citaMedica);
-        redirect = "ConsultarCitasMedicas";
-        return redirect;
+        try {
+            this.citaMedica.setCodFisioterapeuta(fisioterapeutaFacade.find(fisioterapeuta.getIdFisioterapeuta()));
+            this.citaMedica.setCodUsuario(usuarioFacade.find(usuario.getIdUsuario()));
+            citaMedicaFacade.create(citaMedica);
+            return "ConsultarCitasMedicas";
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return "";
     }
 
-    public CitamedicaFacade getCitaMedicaFacade() {
+    public CitamedicaFacadeLocal getCitaMedicaFacade() {
         return citaMedicaFacade;
     }
 
-    public void setCitaMedicaFacade(CitamedicaFacade citaMedicaFacade) {
+    public void setCitaMedicaFacadeLocal(CitamedicaFacadeLocal citaMedicaFacade) {
         this.citaMedicaFacade = citaMedicaFacade;
     }
 
@@ -112,11 +123,11 @@ public class ControllerCitaMedica implements Serializable {
         this.listaCitas = listaCitas;
     }
 
-    public FisioterapeutaFacade getFisioterapeutaFacade() {
+    public FisioterapeutaFacadeLocal getFisioterapeutaFacade() {
         return fisioterapeutaFacade;
     }
 
-    public void setFisioterapeutaFacade(FisioterapeutaFacade fisioterapeutaFacade) {
+    public void setFisioterapeutaFacade(FisioterapeutaFacadeLocal fisioterapeutaFacade) {
         this.fisioterapeutaFacade = fisioterapeutaFacade;
     }
 
@@ -136,11 +147,11 @@ public class ControllerCitaMedica implements Serializable {
         this.listaFisioterapeutas = listaFisioterapeutas;
     }
 
-    public UsuarioFacade getUsuarioFacade() {
+    public UsuarioFacadeLocal getUsuarioFacade() {
         return usuarioFacade;
     }
 
-    public void setUsuarioFacade(UsuarioFacade usuarioFacade) {
+    public void setUsuarioFacade(UsuarioFacadeLocal usuarioFacade) {
         this.usuarioFacade = usuarioFacade;
     }
 
@@ -159,5 +170,6 @@ public class ControllerCitaMedica implements Serializable {
     public void setListaUsuarios(List<Usuario> listaUsuarios) {
         this.listaUsuarios = listaUsuarios;
     }
+
     
 }

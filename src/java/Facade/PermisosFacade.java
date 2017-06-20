@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author jair3
  */
 @Stateless
-public class PermisosFacade extends AbstractFacade<Permisos> {
+public class PermisosFacade extends AbstractFacade<Permisos> implements PermisosFacadeLocal {
 
     @PersistenceContext(unitName = "ProyectoPU")
     private EntityManager em;

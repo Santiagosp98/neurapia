@@ -3,20 +3,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-        
     <h:head>
-        <title>Facelet Title</title>
-        <link href="#{request.contextPath}/resources/fonts/fonts/bootstrap.css"></link>
+        <title>Neurapia inicio</title>
     </h:head>
     <h:body>
+        <!--inicio navbar--> 
         <ui:composition template="/template/common/commonLayout.xhtml">
-<!--            <ui:define name="content">
+            <ui:define name="aside">
+                
+            </ui:define>
+            
+            <ui:define name="content">
                 <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
-                    <h:link outcome="ConsultarUsuarios" value="Consultar Usuarios" />
-                    <h:link outcome="CrearUsuario" value="Crear Usuarios" />
+                    <!-- Titulo -->
+                    <h5 id="ubicacionPag">Agregar Registros en el sistema</h5>
+
+                    <div class="contenido">
+                    </div>
                 </div>
-            </ui:define>-->
+            </ui:define>
         </ui:composition>
+            
     </h:body>
 </html>
-

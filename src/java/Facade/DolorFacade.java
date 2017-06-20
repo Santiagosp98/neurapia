@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author jair3
  */
 @Stateless
-public class DolorFacade extends AbstractFacade<Dolor> {
+public class DolorFacade extends AbstractFacade<Dolor> implements DolorFacadeLocal {
 
     @PersistenceContext(unitName = "ProyectoPU")
     private EntityManager em;

@@ -6,20 +6,21 @@
 package Controllers;
 
 import Entities.Historialclinico;
-import Facade.HistorialclinicoFacade;
+import Facade.HistorialclinicoFacadeLocal;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 
 /**
  *
  * @author jair3
  */
 @Named(value = "controllerHistorialClinico")
-@ViewScoped
+@SessionScoped
 public class ControllerHistorialClinico implements Serializable {
 
     /**
@@ -29,7 +30,7 @@ public class ControllerHistorialClinico implements Serializable {
     }
     
     @EJB
-    HistorialclinicoFacade historialClinicoFacade;
+    HistorialclinicoFacadeLocal historialClinicoFacade;
     Historialclinico historialClinico;
     List<Historialclinico> listaHistorialClinico;
     
@@ -65,11 +66,11 @@ public class ControllerHistorialClinico implements Serializable {
         this.consultarHistorialClinico();
     }
 
-    public HistorialclinicoFacade getHistorialClinicoFacade() {
+    public HistorialclinicoFacadeLocal getHistorialClinicoFacadeLocal() {
         return historialClinicoFacade;
     }
 
-    public void setHistorialClinicoFacade(HistorialclinicoFacade historialClinicoFacade) {
+    public void setHistorialClinicoFacadeLocal(HistorialclinicoFacadeLocal historialClinicoFacade) {
         this.historialClinicoFacade = historialClinicoFacade;
     }
 

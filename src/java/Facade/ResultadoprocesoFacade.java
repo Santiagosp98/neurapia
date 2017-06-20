@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author jair3
  */
 @Stateless
-public class ResultadoprocesoFacade extends AbstractFacade<Resultadoproceso> {
+public class ResultadoprocesoFacade extends AbstractFacade<Resultadoproceso> implements ResultadoprocesoFacadeLocal {
 
     @PersistenceContext(unitName = "ProyectoPU")
     private EntityManager em;

@@ -49,7 +49,9 @@
                                 <a href="ConsultarUsuarios.xhtml" style="color: #fff;">Consultar Usuarios</a> 
                             </div>
                             <div class="panel-body" >
-                                <a href="CrearUsuario.xhtml">Añadir nuevo usuario</a>
+                                <h:form>
+                                <h:commandLink action="#{controllerUsuario.seleccionarCrear()}" value="Añadir Usuario" />
+                                </h:form>
                             </div>
                         </div>
 
@@ -67,7 +69,7 @@
                     <h5 id="ubicacionPag">Lista Usuarios</h5>
                     <div class="contenido"></div>
 
-                    <div class="tablas col-lg-12 col-md-12 col-sm-1 col-xs-1" data-toggle="table" data-sort-name="stargazers_count" data-search="true" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-sort-order="desc">
+                    <div data-toggle="table" data-sort-name="stargazers_count" data-search="true" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-sort-order="desc">
                         <br/>
                             <div class="fixed-table-body">
                             <h:form>
@@ -97,7 +99,7 @@
                                             <h:outputText value="Fecha"/>
                                         </f:facet>
                                         <h:outputText value="#{item.fechaRegistro}">
-                                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                                            <f:convertDateTime pattern="yyyy-MM-dd" />
                                         </h:outputText>
                                     </h:column>
                                     <h:column>

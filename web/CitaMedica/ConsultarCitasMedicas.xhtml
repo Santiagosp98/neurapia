@@ -13,7 +13,7 @@
 
             <ui:define name="aside">
                 <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
-                    
+
                     <div class="panel panel-default">
 
                         <div  class="fondoblanco panel-heading" role="tab" id="headingTwo" style="background-color: #093242;color: #fff;">
@@ -57,29 +57,27 @@
                 <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
                     <!-- Titulo -->
                     <h5 id="ubicacionPag">Cita Médica</h5>
-                    <div class="contenido"></div>
 
-                    <div class="tablas col-lg-12 col-md-12 col-sm-1 col-xs-1" data-toggle="table" data-sort-name="stargazers_count" data-search="true" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-sort-order="desc">
+                    <div class="tablas " data-toggle="table" data-sort-name="stargazers_count" data-search="true" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-sort-order="desc">
                         <br/>
-                        <div class="">
+                        <div>
                             <h:form>
-
                                 <h:dataTable value="#{controllerCitaMedica.consultarCitaMedica()}" var="item" class="table table-striped table-bordered">
-                                    
+
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Cod. Cita"/>
+                                            <h:outputText value="Código"/>
                                         </f:facet>
                                         <h:outputText value="#{item.idCitaMedica}"/>
                                     </h:column>
-                                    
+
                                     <h:column>
                                         <f:facet name="header">
                                             <h:outputText value="Paciente"/>
                                         </f:facet>
                                         <h:outputText value="#{item.fullNameUsuario}"/>
                                     </h:column>
-                                    
+
                                     <h:column>
                                         <f:facet name="header">
                                             <h:outputText value="Hora"/>
@@ -90,10 +88,10 @@
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Fecha"/>
+                                            <h:outputText value="Fecha Cita"/>
                                         </f:facet>
                                         <h:outputText value="#{item.fecha}">
-                                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                                            <f:convertDateTime pattern="yyyy-MM-dd" />
                                         </h:outputText>
                                     </h:column>
                                     <h:column>
@@ -104,20 +102,20 @@
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Doctor"/>
+                                            <h:outputText value="Fisioterapeuta"/>
                                         </f:facet>
                                         <h:outputText value="#{item.fullNameFisioterapeuta}"/>
                                     </h:column>
-                                    
+
                                     <h:column>
                                         <f:facet name="header">
                                             <h:outputText value="Acciones"/>
                                         </f:facet>
-                                            &nbsp;
+                                        &nbsp;
                                         <h:commandLink action="#{controllerCitaMedica.seleccionarCita(item)}" value=""><span id="botonEdita" class="fa fa-file-text" aria-hidden="true"></span>
-                                            </h:commandLink>
-                                                &nbsp;
-                                                <h:commandLink action="#{controllerCitaMedica.eliminarCita(item)}" value=""><span id="botonElimina"  class="fa fa-times" aria-hidden="true"></span>
+                                        </h:commandLink>
+                                        &nbsp;
+                                        <h:commandLink action="#{controllerCitaMedica.eliminarCita(item)}" value=""><span id="botonElimina"  class="fa fa-times" aria-hidden="true"></span>
                                         </h:commandLink>
                                     </h:column>
                                 </h:dataTable>

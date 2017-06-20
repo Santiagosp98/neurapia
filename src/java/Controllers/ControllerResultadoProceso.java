@@ -6,15 +6,12 @@
 package Controllers;
 
 import Entities.Resultadoproceso;
-import Facade.ResultadoprocesoFacade;
-import java.io.Serializable;
+import Facade.ResultadoprocesoFacadeLocal;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Named;
-import javax.inject.Inject;
 
 /**
  *
@@ -22,40 +19,21 @@ import javax.inject.Inject;
  */
 @Named(value = "controllerResultadoProceso")
 @ConversationScoped
-public class ControllerResultadoProceso implements Serializable{
+public class ControllerResultadoProceso extends ControllerApp{
     
-    private List<Resultadoproceso> listaResultadoProceso;
+    
     
     @EJB
-    private ResultadoprocesoFacade resultadoProcesoFacade;
+    private ResultadoprocesoFacadeLocal resultadoProcesoFacade;
     private Resultadoproceso resultadoProceso;
-    
-    @Inject
-    private Conversation conversacion;
+    private List<Resultadoproceso> listaResultadoProceso;
     
     @PostConstruct
     public void init(){
         resultadoProceso = new Resultadoproceso();        
     }
     
-    public void iniciarConversacion(){
-        if (conversacion.isTransient()) {
-            conversacion.begin();
-        }
-    }
-    
-    private void finalizarConversacion(){
-        if (conversacion.isTransient()) {
-            conversacion.end();
-        }
-    }
-    
-    public String cancelar(){
-        finalizarConversacion();
-        return "ConsultarResultadoProceso";
-    }
-    
-    public List<Resultadoproceso> getListaResultadoProceso() {
+    public List<Resultadoproceso> ListaResultadoProceso() {
         listaResultadoProceso = resultadoProcesoFacade.findAll();
         return listaResultadoProceso;
     }
@@ -68,22 +46,31 @@ public class ControllerResultadoProceso implements Serializable{
     
     public String ActualizarResultadoProceso(){
         resultadoProcesoFacade.edit(resultadoProceso);
-        return cancelar();
+        finalizarConversacion();
+        return "ConsultarDatosSistema";
     }
     
-    public String seleccionarEliminar(){
-        return "";
+    public String seleccionarEliminar(Resultadoproceso resultadoproceso ){
+        iniciarConversacion();
+        this.resultadoProceso = resultadoproceso;
+        return "ActualizarResultadoProceso";
+    }
+    
+    public String EliminarResultadoProceso(Resultadoproceso resultadoProceso){
+        resultadoProcesoFacade.remove(resultadoProceso);
+        return "ConsultarDatosSistema";
+        
     }
     
     public void setListaResultadoProceso(List<Resultadoproceso> listaResultadoProceso) {
         this.listaResultadoProceso = listaResultadoProceso;
     }
 
-    public ResultadoprocesoFacade getResultadoProcesoFacade() {
+    public ResultadoprocesoFacadeLocal getResultadoProcesoFacadeLocal() {
         return resultadoProcesoFacade;
     }
 
-    public void setResultadoProcesoFacade(ResultadoprocesoFacade resultadoProcesoFacade) {
+    public void setResultadoProcesoFacadeLocal(ResultadoprocesoFacadeLocal resultadoProcesoFacade) {
         this.resultadoProcesoFacade = resultadoProcesoFacade;
     }
     /**

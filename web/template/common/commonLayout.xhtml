@@ -9,6 +9,7 @@
 <!-- f:event type="preRenderView" lsitener="#{controllerSesion.validarSesion()}"/> -->
     
     <h:head>
+        <f:event type="preRenderView" listener="#{controllerSesion.validarSesion()}" />
         <meta name="keywords" content="pagina,html,cs3,maquetacion"/>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
         <link href="#{request.contextPath}/resources/css/bootstrap.css" rel="stylesheet"/>
@@ -32,6 +33,11 @@
         
 
         <link rel="shortcut icon" href="../../resources/imgs/icono.png"/>
+        
+        <div> 
+            <h:messages showDetail="true" showSummary="true" id="gmau"/>
+            <h:messages for="formRegistrarse" showDetail="true" showSummary="true" id="gmcu"/>
+        </div>
         
     </h:head>
 
@@ -61,11 +67,14 @@
                         <ui:insert name="content" >
                             <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
                                 <div class="panel panel-default">
+                                    
+                                    
                                    
                                 </div>
                             
                             </div>
                         </ui:insert>
+                        
                     </div>
         </section>
                     <div id="footer">

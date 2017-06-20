@@ -10,17 +10,17 @@ import java.io.IOException;
 import javax.inject.Named;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 
 /**
  *
  * @author jair3
  */
 @Named(value = "controllerSesion")
-@ViewScoped
+@SessionScoped
 public class ControllerSesion implements Serializable {
     private String email;
     private String clave;
@@ -52,7 +52,9 @@ public class ControllerSesion implements Serializable {
     public boolean inicioSesion(){
         if (usuarioSesion != null) {
             return true;
-        } return false;
+        } else{
+            return false;
+        }
     }
     
     public void validarSesion() throws IOException{

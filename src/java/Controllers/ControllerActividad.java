@@ -6,12 +6,11 @@
 package Controllers;
 
 import Entities.Actividad;
-import Facade.ActividadFacade;
-import java.io.Serializable;
+import Facade.ActividadFacadeLocal;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.ConversationScoped;
 import javax.inject.Named;
 
 /**
@@ -19,8 +18,8 @@ import javax.inject.Named;
  * @author jair3
  */
 @Named(value = "controllerActividad")
-@ViewScoped
-public class ControllerActividad implements Serializable {
+@ConversationScoped
+public class ControllerActividad extends ControllerApp{
 
     /**
      * Creates a new instance of ControllerActividad
@@ -28,10 +27,9 @@ public class ControllerActividad implements Serializable {
     public ControllerActividad() {
     }
     @EJB
-    ActividadFacade actividadFacade;
+    ActividadFacadeLocal actividadFacade;
     Actividad actividad;
     List<Actividad> listaActividad;
-    
     
     @PostConstruct
     public void init(){
@@ -44,19 +42,59 @@ public class ControllerActividad implements Serializable {
         return listaActividad;
     }
     
-    public String eliminarActividad(Actividad actividad){
-        this.actividadFacade.remove(actividad);
-        return "RegistroInformacion";
+    public String selecionarEliminar(Actividad actividad){
+        this.actividad = actividad;
+        return "ModalEliminar";
     }
     
-    public String SeleccionarActividad(Actividad actividad){
-        this.actividad = actividad;
-        return "ActualizarRegistro";
+    public String eliminarActividad(Actividad actividad){
+        this.actividadFacade.remove(actividad);
+        return "ConsultarDatosSistema";
+    }
+    
+    public String seleccionarActividad(Actividad actividad){
+        iniciarConversacion();
+        try {
+            this.actividad = actividad;
+            return "ActualizarDatosSistema";
+        } catch (Exception e) {
+            System.out.println(e);
+        } return "";
     }
     
     public String crearActividad(){
         this.actividadFacade.create(actividad);
-        return "registroInformacion";
+        return "ConsultarDatosSistema";
+    }
+    
+    public String actualizarActividad(){
+        this.actividadFacade.edit(actividad);
+        finalizarConversacion();
+        return "ConsultarDatosSistema";
+    }
+
+    public ActividadFacadeLocal getActividadFacadeLocal() {
+        return actividadFacade;
+    }
+
+    public void setActividadFacadeLocal(ActividadFacadeLocal actividadFacade) {
+        this.actividadFacade = actividadFacade;
+    }
+
+    public Actividad getActividad() {
+        return actividad;
+    }
+
+    public void setActividad(Actividad actividad) {
+        this.actividad = actividad;
+    }
+
+    public List<Actividad> getListaActividad() {
+        return listaActividad;
+    }
+
+    public void setListaActividad(List<Actividad> listaActividad) {
+        this.listaActividad = listaActividad;
     }
     
     

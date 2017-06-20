@@ -6,21 +6,27 @@
 package Controllers;
 
 import Entities.Usuario;
-import Facade.UsuarioFacade;
+import Facade.UsuarioFacadeLocal;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.inject.Named;
-import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.view.ViewScoped;
-import javax.swing.JOptionPane;
+import javax.enterprise.context.ConversationScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 /**
  *
  * @author jair3
  */
 @Named(value = "controllerUsuario")
-@ViewScoped
-public class ControllerUsuario implements Serializable {
+@ConversationScoped
+public class ControllerUsuario extends ControllerApp {
 
     /**
      * Creates a new instance of ControllerUsuario
@@ -28,14 +34,15 @@ public class ControllerUsuario implements Serializable {
     public ControllerUsuario() {
     }
     @EJB
-    private UsuarioFacade usuarioFacade; //Facade
+    private UsuarioFacadeLocal usuarioFacade; //Facade
     private Usuario usuario; //Entidades
     private List<Usuario> listaUsuarios;
     
+ 
+    
     @PostConstruct
     public void init(){
-        usuario = new Usuario();
-        listaUsuarios = usuarioFacade.findAll();
+        usuario = new Usuario();        
     }
     
     public List<Usuario> consultarUsuarios(){
@@ -48,24 +55,52 @@ public class ControllerUsuario implements Serializable {
         return "ConsultarUsuarios";
     }
     
-    public String seleccionarUsuario(Usuario usuario){
-        this.usuario = usuario;
-        return "ActualizarUsuario";
+    public String seleccionarUsuario(Usuario usuario) throws IOException{
+            iniciarConversacion();
+            this.usuario = usuario;
+            return "ActualizarUsuario";
     }
-    
-    
-    public String actualizarUsuario(){
-        usuarioFacade.edit(usuario);
-        return "ConsultarUsuarios";
-    }
-    
-    public void crearUsuario(){
-        if (usuario != null) {
-            usuarioFacade.create(usuario); 
-            init();                
-        }
-        this.consultarUsuarios();
         
+    public String editarUsuario(){
+        FacesContext fc = FacesContext.getCurrentInstance();
+        if (usuario != null) {
+            this.usuarioFacade.edit(usuario);
+            finalizarConversacion();
+            return "ConsultarUsuarios";
+        } else {
+            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido actualizar el usuario", "Intentelo de nuevo");
+            fc.addMessage(null, m);
+        }
+        return "";
+    }
+    
+    public String seleccionarCrear(){
+        iniciarConversacion();
+        return "CrearUsuario";
+    }
+    
+    public String crearUsuario() throws ParseException{
+        System.out.println("Creando");
+        if (usuario != null) {
+            
+            Calendar datosFecha = new GregorianCalendar();
+            int anio = datosFecha.get(Calendar.YEAR);
+            int mes = datosFecha.get(Calendar.MONTH);
+            int dia = datosFecha.get(Calendar.DAY_OF_MONTH);
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            String strFecha = anio + "-" + mes + "-" + dia;
+            Date fechaDate = null;
+            
+            fechaDate = formato.parse(strFecha);
+            usuario.setFechaRegistro(fechaDate);
+            usuarioFacade.create(usuario);
+            ControllerMensaje.enviarMensajeInformacion("formRegistrarse", "Registor satisfactorio", "El usuario se ha registrado correctamente.");
+            return "ConsultarUsuarios";
+        } else {
+            ControllerMensaje.enviarMensajeError("formRegistrarse", "No se han diligenciado los campos", "");
+
+        }
+        return"";
     }
     /**
      * @return the usuario
@@ -81,20 +116,14 @@ public class ControllerUsuario implements Serializable {
         this.usuario = usuario;
     }
 
-    /**
-     * @return the usuarioFacade
-     */
-    public UsuarioFacade getUsuarioFacade() {
+    public UsuarioFacadeLocal getUsuarioFacadeLocal() {
         return usuarioFacade;
     }
 
-    /**
-     * @param usuarioFacade the usuarioFacade to set
-     */
-    public void setUsuarioFacade(UsuarioFacade usuarioFacade) {
+    public void setUsuarioFacadeLocal(UsuarioFacadeLocal usuarioFacade) {
         this.usuarioFacade = usuarioFacade;
     }
-
+    
     /**
      * @return the listaUsuarios
      */

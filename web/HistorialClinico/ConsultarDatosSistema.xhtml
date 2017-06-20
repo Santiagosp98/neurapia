@@ -106,10 +106,10 @@
                                             <h:outputText value="Acciones"/>
                                         </f:facet>
                                         &nbsp;
-                                        <h:commandLink action="#{controllerUsuario.seleccionarUsuario(item)}" value=""><span id="botonEdita" class="fa fa-file-text" aria-hidden="true"></span>
+                                        <h:commandLink action="#{controllerActividad.seleccionarActividad(item)}" value=""><span id="botonEdita" class="fa fa-file-text" aria-hidden="true"></span>
                                         </h:commandLink>
                                         &nbsp;
-                                        <h:commandLink action="#{controllerUsuario.eliminarUsuario(item)}" value=""><span id="botonElimina"  class="fa fa-times" aria-hidden="true"></span>
+                                        <h:commandLink action="#{controllerActividad.eliminarActividad(item)}" value=""><span id="botonElimina"  class="fa fa-times" aria-hidden="true"></span>
                                         </h:commandLink>
                                     </h:column>
 
@@ -139,14 +139,17 @@
                                                 <h:outputText value="Acciones"/>
                                             </f:facet>
                                             &nbsp;
-                                            <h:commandLink action="#{controllerUsuario.seleccionarActividad(item)}" value=""><span id="botonEdita" class="fa fa-file-text" aria-hidden="true"></span>
+                                            <h:commandLink action="#{controllerObjetivoTratamiento.seleccionarObjetivoTratamiento(item)}" value=""><span id="botonEdita" class="fa fa-file-text" aria-hidden="true"></span>
                                             </h:commandLink>
                                             &nbsp;
-                                            <h:commandLink action="#{controllerActividad.eliminarActividad(item)}" value=""><span id="botonElimina"  class="fa fa-times" aria-hidden="true"></span>
+                                            <h:commandLink action="#{controllerObjetivoTratamiento.eliminarObjetivoTratamiento(item)}" value=""><span id="botonElimina"  class="fa fa-times" aria-hidden="true"></span>
                                             </h:commandLink>
                                         </h:column>
                                     </h:dataTable>
                                 </h:form>
+                                
+                                
+                                
                             </div>
                         </div>
                     </div>

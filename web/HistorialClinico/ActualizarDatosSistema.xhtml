@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Actualziar Registros</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/template/common/commonLayout.xhtml">
+            
+            <ui:define name="aside">
+                <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
+                    
+                    <div class="panel panel-default">
+
+                        <div class="fondoblanco panel-heading" role="tab" id="headingOne" style="background-color: #093242;color: #fff;">
+                            <h6 class="panel-title"><i class="fa fa-tasks" aria-hidden="true"></i>
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Configuración del sistema<span class="caret"></span> 
+                                </a>
+                            </h6>
+                        </div>
+
+                        <div id="collapsOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body" style="background-color: #3DCCC2; border: 1px solid transparent">
+                                <a href="ConsultarDatosSistema.xhtml" style="color: #fff;">Registros en el Sistema</a> 
+                            </div>
+                        </div>
+
+                        <div  class="fondoblanco panel-heading" role="tab" id="headingTwo">
+                            <h6 class="panel-title">
+                                <a  role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><i class="fa fa-user" aria-hidden="true"></i>
+                                    Historial Clinico <span class="caret"></span>
+                                </a>
+                            </h6>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body">
+                                <a href="ConsultarHistorialClinico.xhtml">Consultar Historiales</a> 
+                            </div>
+                            <div class="panel-body">
+                                <a href="#">Añadir Historial Clínico</a> 
+                            </div>
+                        </div>
+
+                        <div class="fondoblanco panel-heading" role="tab" id="headingThree">
+                            <h6 class="panel-title"><i class="fa fa-users" aria-hidden="true"></i>
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsThree" aria-expanded="true" aria-controls="collapseThree">
+                                    Reportes de Historial Clínico<span class="caret"></span> 
+                                </a>
+                            </h6>
+                        </div>
+
+                        <div id="collapsThree" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingThree">
+                            <div class="panel-body">
+                                <a href="CrearCitaMedica.xhtml">Nueva Cita médica</a> 
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </ui:define>
+            
+            <ui:define name="content">
+                <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
+                    <!-- Titulo -->
+                    <h5 id="ubicacionPag">Actualizar Registros En el sistema</h5>
+                    <h:form prependId="false">    
+                            <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                <h:outputLabel value="Código:" for="idActividad" />
+                                <h:inputText id="idActividad" class="form-control mitooltip" value="#{controllerActividad.actividad.idActividad}" title="IdActividad" required="true" requiredMessage="The IdActividad field is required."/>
+                            </div>    
+                            <div class="form-group col-lg-12 col-md-12 col-sm-12">    
+                                <h:outputLabel value="Tipo Actividad:" for="nombreActividad" />
+                                <h:inputText id="nombreActividad" class="form-control mitooltip" value="#{controllerActividad.actividad.nombreActividad}" title="NombreActividad" />
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
+                                <br></br>
+                                <h:commandButton class="btn btn-info" action="#{controllerActividad.actualizarActividad()}" value="Actualizar"/>
+                            </div>
+                        
+                    </h:form>
+                
+                    <hr class="col-lg-12 col-md-12 col-sm-12 col-sm-12" style="background-color: #f1f1f1; width: 100%; height: 20px; margin-left: -15px"/>
+                
+                    <!-- Titulo -->
+                        <h:form id="a" prependId="false">
+                            <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                <h:outputLabel value="Código:" for="idObjetivoTratamiento" />
+                                <h:inputText id="idObjetivoTratamiento" class="form-control mitooltip" value="#{controllerObjetivoTratamiento.objetivotratamiento.idObjetivoTratamiento}" title="IdObjetivoTratamiento" required="true" requiredMessage="The IdObjetivoTratamiento field is required."/>
+                            </div>    
+                            <div class="form-group col-lg-12 col-md-12 col-sm-12">    
+                                <h:outputLabel value="Tipo Objetivo:" for="nombreObjetivo" />
+                                <h:inputText id="nombreObjetivo" class="form-control mitooltip" value="#{controllerObjetivoTratamiento.objetivotratamiento.nombreObjetivo}" title="NombreObjetivo" />
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <br></br>
+                                <h:commandButton class="btn btn-info" action="#{controllerObjetivoTratamiento.actualizarObjetivoTratamiento()}" value="Actualizar"/>
+                            </div>
+                        </h:form>
+                    
+                    <hr class="col-lg-12 col-md-12 col-sm-12 col-sm-12" style="background-color: #f1f1f1; width: 100%; height: 20px; margin-left: -15px"/>
+                        
+                    <!-- Titulo -->
+                        
+                </div>
+
+            </ui:define>
+            
+        </ui:composition>
+    </h:body>
+</html>
+
