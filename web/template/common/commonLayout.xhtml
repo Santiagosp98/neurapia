@@ -6,10 +6,9 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"      
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<!-- f:event type="preRenderView" lsitener="#{controllerSesion.validarSesion()}"/> -->
     
     <h:head>
-        <f:event type="preRenderView" listener="#{controllerSesion.validarSesion()}" />
+        <f:event type="preRenderView" listener="#{controllerSession.validarSesion()}"/>
         <meta name="keywords" content="pagina,html,cs3,maquetacion"/>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
         <link href="#{request.contextPath}/resources/css/bootstrap.css" rel="stylesheet"/>
@@ -29,60 +28,51 @@
         <h:outputScript name="amcharcopiado.js" library="js" />
         <h:outputScript name="sweetalert.min.js" library="js" /> 
         <h:outputScript name="jquery/jquery-plugins.js" library="primefaces" /> 
-        <h:outputScript name="propioJavaSacrip.js" library="js" />
-        
+        <h:outputScript name="propioJavaSacrip.js" library="js" />       
 
-        <link rel="shortcut icon" href="../../resources/imgs/icono.png"/>
-        
-        <div> 
-            <h:messages showDetail="true" showSummary="true" id="gmau"/>
-            <h:messages for="formRegistrarse" showDetail="true" showSummary="true" id="gmcu"/>
-        </div>
+        <link rel="shortcut icon" href="#{request.contextPath}/resources/imgs/icono.png"/>       
+        <title><ui:insert name="titulo"></ui:insert></title>
         
     </h:head>
 
     <h:body id="back">
-        <ui:insert name="titulo"><title></title></ui:insert>
+        
+        <div id="page">
 
-                <div id="page">
-
-                    <div id="header">
-                        <ui:insert name="header" >
-                            <ui:include src="/template/common/commonHeader.xhtml" />
-                        </ui:insert>
-                    </div>
+            <div id="header">
+                <ui:insert name="header" >
+                    <ui:include src="/template/common/commonHeader.xhtml" />
+                </ui:insert>
+            </div>
         <section id="contenedorprincipal" class="container-fluid">
                     
-                    <div id="aside">
-                        <aside class="aside col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                            <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
-                                <ui:insert name="aside" >
-                            
-                                </ui:insert>
-                            </div>
-                        </aside>
-                    </div>
+            <div id="aside">
+                <aside class="aside col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                    <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
+                        <ui:insert name="aside" >
 
-                    <div id="content">
-                        <ui:insert name="content" >
-                            <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
-                                <div class="panel panel-default">
-                                    
-                                    
-                                   
-                                </div>
-                            
-                            </div>
                         </ui:insert>
-                        
                     </div>
+                </aside>
+            </div>
+
+            <div id="content">                        
+                <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <ui:insert name="content"  >        
+
+                        </ui:insert>       
+                    </div>                            
+                </div>                        
+            </div>
+            
         </section>
-                    <div id="footer">
-                        <ui:insert name="footer" >
-                            <ui:include src="/template/common/commonFooter.xhtml" />
-                        </ui:insert>
-                    </div>
-                </div>
+            <div id="footer">
+                <ui:insert name="footer" >
+                    <ui:include src="/template/common/commonFooter.xhtml" />
+                </ui:insert>
+            </div>
+        </div>
         
     </h:body>
 </html>

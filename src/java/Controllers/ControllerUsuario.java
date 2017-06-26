@@ -20,6 +20,8 @@ import javax.ejb.EJB;
 import javax.enterprise.context.ConversationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+
 /**
  *
  * @author jair3
@@ -33,56 +35,97 @@ public class ControllerUsuario extends ControllerApp {
      */
     public ControllerUsuario() {
     }
+
+    @Inject
+    private ControllerSession cs;
+
     @EJB
     private UsuarioFacadeLocal usuarioFacade; //Facade
     private Usuario usuario; //Entidades
     private List<Usuario> listaUsuarios;
-    
- 
-    
+    private String confirmarClave;
+
     @PostConstruct
-    public void init(){
-        usuario = new Usuario();        
+    public void init() {
+        usuario = new Usuario();
     }
-    
-    public List<Usuario> consultarUsuarios(){
+
+    public List<Usuario> consultarUsuarios() {
         this.listaUsuarios = usuarioFacade.findAll();
         return listaUsuarios;
     }
-    
-    public String eliminarUsuario(Usuario usuario){
-        usuarioFacade.remove(usuario);
-        return "ConsultarUsuarios";
-    }
-    
-    public String seleccionarUsuario(Usuario usuario) throws IOException{
-            iniciarConversacion();
-            this.usuario = usuario;
-            return "ActualizarUsuario";
-    }
-        
-    public String editarUsuario(){
+
+    public String eliminarUsuario(Usuario usuario) {
         FacesContext fc = FacesContext.getCurrentInstance();
+        try {
+            Usuario uS = cs.getUsuario();
+            System.out.println("Voy a eliminar el usuario: " + usuario.getPrimerNombre());
+            System.out.println("Inicio sesion: " + uS.getPrimerNombre());
+            if (uS.getIdUsuario().intValue() != usuario.getIdUsuario()) {
+                System.out.println(usuario.getRol());
+                if (!usuario.getRol().equals("Super Administrador")) {
+                    usuarioFacade.remove(usuario);
+
+                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "El usuario ha sido eliminado correctamente", null);
+                    fc.addMessage(null, m);
+                    return "ConsultarUsuarios?faces-redrect=true";
+                } else {
+                    FacesMessage m1 = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al eliminar", "No se puede eliminar un Super Administrador");
+                    fc.addMessage(null, m1);
+                    return "ConsltarUsuarios";
+                }
+            } else {
+                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al eliminar", "No se puede eliminar a sí mismo");
+                fc.addMessage(null, m);
+                return "ConsltarUsuarios";
+            }
+        } catch (Exception e) {
+            return null;
+        }
+
+    }
+
+    public String seleccionarUsuario(Usuario usuario) throws IOException {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        iniciarConversacion();
+        if (!usuario.getRol().equals("Super Administrador")) {
+            this.usuario = usuario;
+            return "ActualizarUsuario?faces-redrect=true";
+        } else {
+
+            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No puede modificar un Super administrador", "Usted no tiene permiso para esta acción");
+            fc.addMessage(null, m);
+        }
+        return "";
+
+    }
+
+    public String editarUsuario() {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        System.out.println("editar Usuario");
         if (usuario != null) {
+
             this.usuarioFacade.edit(usuario);
             finalizarConversacion();
-            return "ConsultarUsuarios";
+            return "ConsultarUsuarios?faces-redrect=true";
+
         } else {
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido actualizar el usuario", "Intentelo de nuevo");
             fc.addMessage(null, m);
         }
         return "";
     }
-    
-    public String seleccionarCrear(){
+
+    public String seleccionarCrear() {
         iniciarConversacion();
         return "CrearUsuario";
     }
-    
-    public String crearUsuario() throws ParseException{
+
+    public String crearUsuario() throws ParseException {
+
         System.out.println("Creando");
         if (usuario != null) {
-            
+
             Calendar datosFecha = new GregorianCalendar();
             int anio = datosFecha.get(Calendar.YEAR);
             int mes = datosFecha.get(Calendar.MONTH);
@@ -90,18 +133,21 @@ public class ControllerUsuario extends ControllerApp {
             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
             String strFecha = anio + "-" + mes + "-" + dia;
             Date fechaDate = null;
-            
             fechaDate = formato.parse(strFecha);
             usuario.setFechaRegistro(fechaDate);
-            usuarioFacade.create(usuario);
-            ControllerMensaje.enviarMensajeInformacion("formRegistrarse", "Registor satisfactorio", "El usuario se ha registrado correctamente.");
-            return "ConsultarUsuarios";
+            if (usuario.getClaveUsuario().equals(this.confirmarClave)) {
+                usuarioFacade.create(usuario);
+                return "ConsultarUsuarios";
+            } else {
+               
+            }
+
         } else {
-            ControllerMensaje.enviarMensajeError("formRegistrarse", "No se han diligenciado los campos", "");
 
         }
-        return"";
+        return "";
     }
+
     /**
      * @return the usuario
      */
@@ -123,7 +169,7 @@ public class ControllerUsuario extends ControllerApp {
     public void setUsuarioFacadeLocal(UsuarioFacadeLocal usuarioFacade) {
         this.usuarioFacade = usuarioFacade;
     }
-    
+
     /**
      * @return the listaUsuarios
      */
@@ -137,5 +183,13 @@ public class ControllerUsuario extends ControllerApp {
     public void setListaUsuarios(List<Usuario> listaUsuarios) {
         this.listaUsuarios = listaUsuarios;
     }
-    
+
+    public String getConfirmarClave() {
+        return confirmarClave;
+    }
+
+    public void setConfirmarClave(String confirmarClave) {
+        this.confirmarClave = confirmarClave;
+    }
+
 }

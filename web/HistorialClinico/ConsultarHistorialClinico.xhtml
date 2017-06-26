@@ -22,30 +22,27 @@
                         <div class="fondoblanco panel-heading" role="tab" id="headingOne" style="background-color: #093242;color: #fff;">
                             <h6 class="panel-title"><i class="fa fa-tasks" aria-hidden="true"></i>
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsOne" aria-expanded="true" aria-controls="collapseOne">
-                                    Configuración del sistema<span class="caret"></span> 
+                                    Historial Clínico<span class="caret"></span> 
                                 </a>
                             </h6>
                         </div>
 
                         <div id="collapsOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                             <div class="panel-body" style="background-color: #3DCCC2; border: 1px solid transparent">
-                                <a href="ConsultarDatosSistema.xhtml" style="color: #fff;">Registros en el Sistema</a> 
+                                <a href="ConsultarDatosSistema.xhtml" style="color: #fff;">Consultar Historiales</a> 
                             </div>
                         </div>
 
                         <div  class="fondoblanco panel-heading" role="tab" id="headingTwo">
                             <h6 class="panel-title">
                                 <a  role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><i class="fa fa-user" aria-hidden="true"></i>
-                                    Historial Clinico <span class="caret"></span>
+                                    Registro <span class="caret"></span>
                                 </a>
                             </h6>
                         </div>
                         <div id="collapseTwo" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingTwo">
                             <div class="panel-body">
-                                <a href="ConsultarHistorialClinico.xhtml">Consultar Historiales</a> 
-                            </div>
-                            <div class="panel-body">
-                                <a href="#">Añadir Historial Clínico</a> 
+                                <a href="CrearHistorialClinico.xhtml">Añadir nuevo Histrial clinico</a> 
                             </div>
                         </div>
 
@@ -89,7 +86,7 @@
                                         <h:dataTable class="table table-striped table-bordered" value="#{controllerHistorialClinico.consultarHistorialClinico()}" var="item">
                                             <h:column>
                                                 <f:facet name="header">
-                                                    <h:outputText value="Cód"/>
+                                                    <h:outputText value="Código"/>
                                                 </f:facet>
                                                 <h:outputText value="#{item.idHistorialClinico}"/>
                                             </h:column>
@@ -144,7 +141,7 @@
                                                     <h:outputText value="Acciones"/>
                                                 </f:facet>
                                                     &nbsp;
-                                                    <h:commandLink action="#{controllerHistorialClinico.seleccionarHistorialclinico(item)}" value=""><span id="botonEdita" class="fa fa-file-text" aria-hidden="true"></span>
+                                                    <h:commandLink action="#{controllerHistorialClinico.seleccionarHistorialclinico(item)}" value=""><span id="botonEdita" class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                                     </h:commandLink>
                                                         &nbsp;
                                                         <h:commandLink action="#{controllerHistorialClinico.eliminarHistorialClinico(item)}" value=""><span id="botonElimina"  class="fa fa-times" aria-hidden="true"></span>

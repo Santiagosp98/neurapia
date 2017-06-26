@@ -3,15 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controllers;
+package ControllersConfiguracionSistema;
 
 import Entities.Resultadoproceso;
-import Facade.ResultadoprocesoFacadeLocal;
+import Facade.ResultadoprocesoFacade;
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Named;
+import javax.inject.Inject;
 
 /**
  *
@@ -19,21 +22,40 @@ import javax.inject.Named;
  */
 @Named(value = "controllerResultadoProceso")
 @ConversationScoped
-public class ControllerResultadoProceso extends ControllerApp{
+public class ControllerResultadoProceso implements Serializable{
     
-    
+    private List<Resultadoproceso> listaResultadoProceso;
     
     @EJB
-    private ResultadoprocesoFacadeLocal resultadoProcesoFacade;
+    private ResultadoprocesoFacade resultadoProcesoFacade;
     private Resultadoproceso resultadoProceso;
-    private List<Resultadoproceso> listaResultadoProceso;
+    
+    @Inject
+    private Conversation conversacion;
     
     @PostConstruct
     public void init(){
         resultadoProceso = new Resultadoproceso();        
     }
     
-    public List<Resultadoproceso> ListaResultadoProceso() {
+    public void iniciarConversacion(){
+        if (conversacion.isTransient()) {
+            conversacion.begin();
+        }
+    }
+    
+    private void finalizarConversacion(){
+        if (conversacion.isTransient()) {
+            conversacion.end();
+        }
+    }
+    
+    public String cancelar(){
+        finalizarConversacion();
+        return "ConsultarResultadoProceso";
+    }
+    
+    public List<Resultadoproceso> getListaResultadoProceso() {
         listaResultadoProceso = resultadoProcesoFacade.findAll();
         return listaResultadoProceso;
     }
@@ -46,19 +68,18 @@ public class ControllerResultadoProceso extends ControllerApp{
     
     public String ActualizarResultadoProceso(){
         resultadoProcesoFacade.edit(resultadoProceso);
-        finalizarConversacion();
-        return "ConsultarDatosSistema";
+        return cancelar();
     }
     
-    public String seleccionarEliminar(Resultadoproceso resultadoproceso ){
+    public void seleccionarEliminar(ResultadoprocesoFacade resultadoprocesoFacade ){
         iniciarConversacion();
-        this.resultadoProceso = resultadoproceso;
-        return "ActualizarResultadoProceso";
+        this.resultadoProcesoFacade = resultadoprocesoFacade;
     }
     
-    public String EliminarResultadoProceso(Resultadoproceso resultadoProceso){
+    public String EliminarResultadoProceso(){
         resultadoProcesoFacade.remove(resultadoProceso);
-        return "ConsultarDatosSistema";
+        finalizarConversacion();
+        return "ConsultarResultadoProceso";
         
     }
     
@@ -66,11 +87,11 @@ public class ControllerResultadoProceso extends ControllerApp{
         this.listaResultadoProceso = listaResultadoProceso;
     }
 
-    public ResultadoprocesoFacadeLocal getResultadoProcesoFacadeLocal() {
+    public ResultadoprocesoFacade getResultadoProcesoFacade() {
         return resultadoProcesoFacade;
     }
 
-    public void setResultadoProcesoFacadeLocal(ResultadoprocesoFacadeLocal resultadoProcesoFacade) {
+    public void setResultadoProcesoFacade(ResultadoprocesoFacade resultadoProcesoFacade) {
         this.resultadoProcesoFacade = resultadoProcesoFacade;
     }
     /**

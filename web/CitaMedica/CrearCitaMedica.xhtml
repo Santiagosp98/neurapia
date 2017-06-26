@@ -67,38 +67,43 @@
 
 
                     <h:form prependId="false" id="formRegistrarse" a:name="formRegistrarse">
+                                
+                                <div class="mensajeError col-lg-12 col-md-12 col-sm-12">
+                                    <h:messages class="mensajeErrorForm" showSummary="true" infoClass="alert alert-sucess" errorClass="alert alert-danger" for="fecha"/>
+                                </div>
+                                
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                    <h:outputLabel value="Usuario" />
-                                    <h:selectOneMenu id="usuario" class="form-control mitooltip" value="#{controllerCitaMedica.usuario.idUsuario}">
+                                    <h:outputLabel value="Usuario" for="usuario" />
+                                    <h:selectOneMenu id="usuario" class="form-control mitooltip" value="#{controllerCitaMedica.usuario.idUsuario}" required="true" requiredMessage="El usuario es requerido">
                                         <f:selectItems value="#{controllerUsuario.consultarUsuarios()}" var="u" itemLabel="#{u.fullNameUsuario}" itemValue="#{u.idUsuario}"/>
                                     </h:selectOneMenu>
                                 </div>
                                 
                             
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                    <h:outputLabel value="Fisioterapeuta:" />
-                                    <h:selectOneMenu id="fisioterapeuta" class="form-control mitooltip" value="#{controllerCitaMedica.fisioterapeuta.idFisioterapeuta}">
-                                        <f:selectItems value="#{controllerFisioterapeuta.listaFisioterapeuta}" var="f" itemLabel="#{f.fullnameFisioterapeuta}" itemValue="#{f.idFisioterapeuta}"/>
+                                    <h:outputLabel value="Fisioterapeuta:" for="Fisioterapeuta" />
+                                    <h:selectOneMenu id="Fisioterapeuta" class="form-control mitooltip" value="#{controllerCitaMedica.fisioterapeuta.idFisioterapeuta}" required="true" requiredMessage="El fisioterapeuta es requerido.">
+                                        <f:selectItems value="#{controllerFisioterapeuta.consultarFisioterapeutas()}" var="f" itemLabel="#{f.fullnameFisioterapeuta}" itemValue="#{f.idFisioterapeuta}" />
                                     </h:selectOneMenu>
                                 </div>
                             
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                     <h:outputLabel value="Hora:" for="hora" />
-                                    <h:inputText id="hora" class="form-control mitooltip" a:placeholder="HH:mm:ss" value="#{controllerCitaMedica.citaMedica.hora}">
+                                    <h:inputText id="hora" class="form-control mitooltip" a:placeholder="HH:mm:ss" value="#{controllerCitaMedica.citaMedica.hora}" required="true" requiredMessage="La hora es requerida">
                                         <f:convertDateTime pattern="HH:mm:ss" />
                                     </h:inputText>
                                 </div>
                             
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                     <h:outputLabel value="Fecha:" for="fecha" />
-                                    <h:inputText id="fecha" styleClass="calendarDate" a:placeholder="yyyy-MM-dd" class="form-control mitooltip" value="#{controllerCitaMedica.citaMedica.fecha}">
+                                    <h:inputText id="fecha" styleClass="calendarDate" a:placeholder="yyyy-MM-dd" class="form-control mitooltip" value="#{controllerCitaMedica.citaMedica.fecha}" required="true" requiredMessage="La fecha es requerida">
                                         <f:convertDateTime pattern="yyyy-MM-dd" />
                                     </h:inputText>
                                 </div>
                             
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                 <h:outputLabel value="NumeroConsultorio:" for="numeroConsultorio" />
-                                <h:inputText id="numeroConsultorio" class="form-control mitooltip" a:placeholder="000" value="#{controllerCitaMedica.citaMedica.numeroConsultorio}" />
+                                <h:inputText id="numeroConsultorio" class="form-control mitooltip" a:placeholder="000" value="#{controllerCitaMedica.citaMedica.numeroConsultorio}" required="true" requiredMessage="El consultorio es requerido"/>
                                 </div>                            
                                 
                                 <div class="col-lg-6 col-md-6 col-sm-6">

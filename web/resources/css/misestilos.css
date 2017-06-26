@@ -3,19 +3,11 @@
 }
 @Font-Face{
 	font-family: "Ubuntu" !important;
-	src: url(../fonts/Ubuntu-B.ttf);
+	src: url(../fonts/Ubuntu-R.ttf);
 }
 * { font-family: ubuntu;
 }
-
-.checkButtons{
-        list-style: none;        
-}
-div.checkButtons{
-        padding: 0px !important;
-}
-        
-#back{
+body{
 	background-color: #F1F1F1;
 	display: table;
 	width: 100%;
@@ -29,7 +21,6 @@ div.checkButtons{
 #mainHeader{
 	width: 100%;
 	color: white;
-        background-color: black !important;
 }
 h6 i{
 	padding-right: 10px;
@@ -41,14 +32,11 @@ td i{
 	background-color: white;
 	margin: 0px;
 	width: 100%;
-        height: 80px;
-	position: z;
+	position: fixed;
 	z-index: 100;
-	box-shadow: 0 1px 2px rgba(0,0,0,0.0);
+	margin-top: 40px;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 	padding: 0px;
-}
-.navbar.navbar-default{
-        background-color: white;
 }
 header .row{
 	margin-right: 0px;
@@ -58,7 +46,7 @@ header .row{
 	background-color: #151510;
 	border-bottom: 1px solid #3DCCC2;
 	width: 101%;
-	position: static;
+	position: fixed;
 	z-index: 100;
 }
 .cabeceramenu{
@@ -67,11 +55,13 @@ header .row{
 	list-style: none;
   	color: #bbb;
   	text-align: right;
+  	margin-right: 0 80px;
   	padding: 10px 30px;
 }
 .nav{
 	min-height: 50px;
 	background-attachment: fixed;
+        background-color: whte;
 }
 .navbar-form.filtros{
 	display: inline-block !important;
@@ -89,7 +79,7 @@ header .row{
 .btn.btn-info{
 	background-color: #3DCCC2;/* !important;*/
 	transition: 0.5s all;
-	box-shadow: 0px 2px 3px rgba(0,0,0,0.2);
+	/*box-shadow: 0px 2px 5px rgba(0,0,0,0.,5);*/
 }
 .btn.btn-info:hover{
 	background-color: #fff;
@@ -120,30 +110,29 @@ header .row{
 	margin-bottom: 15px;
 }
 #contenedorprincipal{
-        margin: 20px;
-	padding-left: 1.25%;
-	padding-right: 1.25%;
-	padding-bottom: 2%;
+	padding:60px;
+        background-color: #F1F1F1;
 }
 .espacioestadistica{
 	margin-right: 4.1%;
 }
 .contenedorderecho{
 	background-color: white;
+	margin-top: 80px;
 	border-color: 1px solid #ddd;
 }
 .contenedorderecho p{
 	margin-top: 10px;
-        padding: 4px;
 }
 .fondoblanco, .panel-heading.fondoblanco{
 background-color: #fff;
 }
 .aside{
 	padding-left: 0px;
+	margin-top: 80px;
 }
 .sombraAside{
-	box-shadow: 0px 3px 5px rgba(0,0,0,0.05);
+	box-shadow: 0px 5px 5px rgba(0,0,0,0.1);
 	
 }
 .panel-group .panel + .panel{
@@ -177,7 +166,7 @@ ul.menuinterior{
 	border-bottom: 1px solid #e8e8e8;
 }
 div.contenedorderecho{
-	padding-bottom: 30px;        
+	padding-bottom: 30px;
         padding-top: 4px;
 }
 .breadcrumb{
@@ -234,6 +223,7 @@ h2{
 	text-align: left;
 	font-size: 16px;
 	padding-bottom: 20px;
+	padding-left: inherit;
 }
 h6{
 	text-decoration: none;	
@@ -290,13 +280,12 @@ div.reporteusuario.col-xs-12.col-sm-12.col-md-4.col-lg-4{
 	margin-bottom: 10px;
 }
 .footer{
-        margin: 0;
 	background-color: #151510 !important;
+	background-attachment: fixed;
 	position: fixed !important;
-	min-height: 45px;
+	min-height: 40px;
 	width: 100%;
-	bottom: 0 !important;
-	left: 0 !important;
+	bottom: 0px !important;
 	color: #888;	
 }
 .footer div span{	
@@ -365,7 +354,6 @@ thead{
 }
 div.fondoblanco.panel-heading{
 	border-top: 1px solid #e7e7e7;
-        background-color: white;
 }
 div a{
 color: #093242;
@@ -414,7 +402,7 @@ nav ul li span{
 	border:1px solid #3DCCC2;
 }
 #registropreg{
-	padding: 0px !important;
+	padding-left: 0px !important;
 }
 ul li.preguntasRegistro{
 	list-style: none;
@@ -530,11 +518,11 @@ input:optional, textarea:optional{
 
 .formularioValidacion input:focus:invalid, .formularioValidacion input:focus:invalid{
 	border-color: #FB1F1F;
-	background: #fff url(../imgs/invalid2.png) no-repeat 100% ;
+	background: #fff url(../img/invalid2.png) no-repeat 100% ;
 }
 .formularioValidacion input:valid, .formularioValidacion textarea:valid{
 	
-	background: #fff url(../imgs/validCopia.jpg) no-repeat 100%;
+	background: #fff url(../img/validCopia.jpg) no-repeat 100%;
 	box-shadow: 0 0 5px #5cd053;
 	border-color: #21E23C;
 }
@@ -551,26 +539,7 @@ input:optional, textarea:optional{
 	width	: 100%;
 	height	: 500px;
 }
-#botonElimina{
-        font-size: 17px;
-}
 
-#botonElimina:hover{
-        color : #85144b;
-}
-#botonEdita:hover{
-    color: #093242
-}
-.mensajeError{
-    display: inline-block;
-}
-
-.mensajeErrorForm{
-    list-style:  none;
-    text-align: center;
-}
-ul.mensajeErrorForm{
-    margin: 0 auto;
-    padding-right: 5%;
-    padding-left: 5%;
+li.checkButtons{
+    list-style: none;
 }

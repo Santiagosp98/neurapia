@@ -5,9 +5,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
-        <title>Consultar Usuarios</title>
-    </h:head>
+    
+    <ui:define name="titulo">Usuarios consultar Usuarios</ui:define>
 
     <h:body>
         <ui:define name="titulo">Consultar Uusuarios</ui:define>
@@ -72,12 +71,12 @@
                     <div data-toggle="table" data-sort-name="stargazers_count" data-search="true" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-sort-order="desc">
                         <br/>
                             <div class="fixed-table-body">
-                            <h:form>
-                                
+                                <h:form prependId="false">
+                                    <h:messages showSummary="true" showDetail="true"/>
                                 <h:dataTable value="#{controllerUsuario.consultarUsuarios()}" var="item" class="table table-striped table-bordered">
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Número documento"/>
+                                            <h:outputText value="Documento"/>
                                         </f:facet>
                                         <h:outputText value="#{item.numeroDocumento}"/>
                                     </h:column>>
@@ -96,6 +95,12 @@
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
+                                            <h:outputText value="Rol"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.rol}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
                                             <h:outputText value="Fecha"/>
                                         </f:facet>
                                         <h:outputText value="#{item.fechaRegistro}">
@@ -104,7 +109,7 @@
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="CorreoElectronico"/>
+                                            <h:outputText value="Correo"/>
                                         </f:facet>
                                         <h:outputText value="#{item.correoElectronico}"/>
                                     </h:column>
@@ -113,7 +118,7 @@
                                             <h:outputText value="Acciones"/>
                                         </f:facet>
                                             &nbsp;
-                                            <h:commandLink action="#{controllerUsuario.seleccionarUsuario(item)}" value=""><span id="botonEdita" class="fa fa-file-text" aria-hidden="true"></span>
+                                            <h:commandLink action="#{controllerUsuario.seleccionarUsuario(item)}" value=""><span id="botonEdita" class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                             </h:commandLink>
                                                 &nbsp;
                                                 <h:commandLink action="#{controllerUsuario.eliminarUsuario(item)}" value=""><span id="botonElimina"  class="fa fa-times" aria-hidden="true"></span>

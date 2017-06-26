@@ -66,16 +66,16 @@ public class ControllerCitaMedica extends ControllerApp{
     public String seleccionarCita(Citamedica citamedica){
         iniciarConversacion();
         this.citaMedica = citamedica;
-        return "ActualizarCitasMedicas";
+        return "ActualizarCitasMedicas?faces-redirect=true";
     }
     
-    public String actualizarCita(){
+    public String actualizarCita(){        
         try {
-            this.citaMedica.setCodFisioterapeuta(fisioterapeutaFacade.find(fisioterapeuta.getIdFisioterapeuta()));
+            System.out.println("Estoy actualizando la cita");
             citaMedicaFacade.edit(citaMedica);
-            this.citaMedica = new Citamedica();
+            System.out.println(citaMedica.getCodFisioterapeuta().getIdFisioterapeuta());
             finalizarConversacion();
-            return "ConsultarCitasMedicas";
+            return "ConsultarCitasMedicas?faces-redirect=true";
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -84,7 +84,7 @@ public class ControllerCitaMedica extends ControllerApp{
     
     public String eliminarCita(Citamedica citamedica){
         this.citaMedicaFacade.remove(citamedica);
-        return "ConsultarCitasMedicas";
+        return "ConsultarCitasMedicas?faces-redirect=true";
     }
     
     public String crearCitaMedica(){
@@ -92,7 +92,7 @@ public class ControllerCitaMedica extends ControllerApp{
             this.citaMedica.setCodFisioterapeuta(fisioterapeutaFacade.find(fisioterapeuta.getIdFisioterapeuta()));
             this.citaMedica.setCodUsuario(usuarioFacade.find(usuario.getIdUsuario()));
             citaMedicaFacade.create(citaMedica);
-            return "ConsultarCitasMedicas";
+            return "ConsultarCitasMedicas?faces-redirect=true";
         } catch (Exception e) {
             System.out.println(e);
         }

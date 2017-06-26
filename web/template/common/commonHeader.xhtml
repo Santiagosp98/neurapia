@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:body>
-	    <ui:composition>
-                    <nav class="cabecera row">
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+             
+                    <nav class="cabecera row" >
                         <ul>      
                             <li class="cabeceramenu"><span class="glyphicon glyphicon-map-marker"></span> Calle falsa 123</li>
                             <li class="cabeceramenu"><span class="glyphicon glyphicon-phone-alt"></span> (57-1) 412 83 93</li>
@@ -39,24 +38,26 @@
                                         <li><a class="menu" href="#{request.contextPath}/CitaMedica/ConsultarCitasMedicas.xhtml">Cita Médica</a></li>
                                         <li><a class="menu" href="#{request.contextPath}/HistorialClinico/ConsultarHistorialClinico.xhtml"> Informe Médico</a></li>
                                         <li><a class="menu" href="#{request.contextPath}/Prediagnostico/ConsultarPreDiagnostico.xhtml"> Pre-diagnóstico</a></li>
+                                        
 
-                                        <form class="navbar-form navbar-nav">
+                                        <h:form prependId="false" class="navbar-form navbar-nav">
                                             <div class="dropdown">
-                                                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Bryan Buitrago <span class="caret"></span>
+                                                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">#{controllerSession.usuario.fullNameUsuario} <span class="caret"></span>
                                                 </button>
-                                                <ul id="identificadorYcerrado" class="dropdown-menu" aria-labelledby="dropdownMenu1" >
-                                                    <li><a href="#" >Fisioterapeuta</a></li>
-                                                    <li><a href="#" >Administrador</a></li>
+                                                <ul id="identificadorYcerrado" class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                    <li><a href="ConsultarUsuarios.xhtml" >#{controllerSession.usuario.rol}</a></li>
+                                                    <li role="separator" class="divider"></li>                                                    
+                                                    <li><a href="#{request.contextPath}/ConfiguracionSistema/ConsultarDatosSistema.xhtml">configuracion del sistema</a></li>
                                                     <li role="separator" class="divider"></li>
-                                                    <li><a href="#" onclick="cerrar();"><span class="glyphicon glyphicon-off"></span> Cerrar sesión</a></li>
+                                                    <li>
+                                                        <h:commandLink value="Sign Out" actionListener="#{controllerSession.cerrarSesion()}"/>
+                                                    </li>
                                                 </ul>
                                             </div> 
-                                        </form>
+                                        </h:form>
                                     </ul>
                                 </ul>
                             </div><!-- /.navbar-collapse -->
                         </div><!-- /.container-fluid -->
                     </nav>
-	    </ui:composition>
-    </h:body>
-</html>
+    </ui:fragment>

@@ -46,7 +46,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Usuario.findBySegundoApellido", query = "SELECT u FROM Usuario u WHERE u.segundoApellido = :segundoApellido")
     , @NamedQuery(name = "Usuario.findByEstadoUsuario", query = "SELECT u FROM Usuario u WHERE u.estadoUsuario = :estadoUsuario")
     , @NamedQuery(name = "Usuario.findByFechaRegistro", query = "SELECT u FROM Usuario u WHERE u.fechaRegistro = :fechaRegistro")
+    , @NamedQuery(name = "Usuario.findByRol", query = "SELECT u FROM Usuario u WHERE u.rol = :rol")
     , @NamedQuery(name = "Usuario.findByCorreoElectronico", query = "SELECT u FROM Usuario u WHERE u.correoElectronico = :correoElectronico")
+    , @NamedQuery(name = "Usuario.login", query = "SELECT u FROM Usuario u WHERE u.correoElectronico = :email AND u.claveUsuario = :claveUsuario")
     , @NamedQuery(name = "Usuario.findByClaveUsuario", query = "SELECT u FROM Usuario u WHERE u.claveUsuario = :claveUsuario")})
 public class Usuario implements Serializable {
 
@@ -62,7 +64,13 @@ public class Usuario implements Serializable {
     @Column(name = "tipoDocumento")
     private String tipoDocumento;
     @Basic(optional = false)
+    @NotNull    
+    
+    @Column(name = "rol")
+    private String rol;
+    @Basic(optional = false)
     @NotNull
+    
     @Size(min = 1, max = 20)
     @Column(name = "numeroDocumento")
     private String numeroDocumento;
@@ -102,7 +110,7 @@ public class Usuario implements Serializable {
         this.idUsuario = idUsuario;
     }
 
-    public Usuario(Integer idUsuario, String tipoDocumento, String numeroDocumento, String estadoUsuario) {
+    public Usuario(Integer idUsuario, String tipoDocumento, String numeroDocumento, String estadoUsuario, String rol) {
         this.idUsuario = idUsuario;
         this.tipoDocumento = tipoDocumento;
         this.numeroDocumento = numeroDocumento;
@@ -205,6 +213,16 @@ public class Usuario implements Serializable {
     public void setHistorialclinicoList(List<Historialclinico> historialclinicoList) {
         this.historialclinicoList = historialclinicoList;
     }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+    
+    
     
     /*Edicion entidad Usuario*/
     public String getFullNameUsuario(){
@@ -226,6 +244,15 @@ public class Usuario implements Serializable {
         lista.add("CC");
         lista.add("CE");
         return lista;
+    }
+    
+    public ArrayList getSeleccionRol(){
+        ArrayList listaRol = new ArrayList();
+        listaRol.add("Administrador");
+        listaRol.add("Fisioterapeuta");
+        listaRol.add("Usuario");
+        listaRol.add("Super Administrador");
+        return listaRol;
     }
     /*Edicion entidad Usuario*/
     

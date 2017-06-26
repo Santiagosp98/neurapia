@@ -12,16 +12,14 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
-
+import javax.enterprise.context.ConversationScoped;
 /**
  *
  * @author jair3
  */
 @Named(value = "controllerFisioterapeuta")
-@SessionScoped
-public class ControllerFisioterapeuta implements Serializable {
+@ConversationScoped
+public class ControllerFisioterapeuta extends ControllerApp {
 
     /**
      * Creates a new instance of ControllerFisioterapeutas
@@ -50,12 +48,14 @@ public class ControllerFisioterapeuta implements Serializable {
     }
     
     public String seleccionarFisioterapeuta(Fisioterapeuta fisioterapeuta){
+        iniciarConversacion();
         this.fisioterapeuta = fisioterapeuta;
         return "ActualizarFisioterapeuta";
     }
     
     public String editarFisioterapeuta(){
         this.fisioterapeutaFacade.edit(fisioterapeuta);
+        finalizarConversacion();
         return "ConsultarFisioterapeutas";
     }
 

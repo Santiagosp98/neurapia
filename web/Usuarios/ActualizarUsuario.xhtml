@@ -68,7 +68,9 @@
                                 
                                     <div class="col-lg-6 col-md-6 col-sm-6">
                                         <h:outputLabel value="Tipo Documento:" for="tipoDocumento" />
-                                        <h:inputText class="form-control mitooltip" id="tipoDocumento" value="#{controllerUsuario.usuario.tipoDocumento}" title="tipoDocumento" required="true" requiredMessage="The tipo documento field is required."/>
+                                        <h:selectOneMenu id="tipoDocumento" class="form-control mitooltip" a:data-toggle="tooltip" a:data-placement="top" value="#{controllerUsuario.usuario.tipoDocumento}">
+                                            <f:selectItems class="form-control mitooltip" value="#{controllerUsuario.usuario.seleccionDocumento}"/>
+                                        </h:selectOneMenu>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6">
                                         <h:outputLabel value="NumeroDocumento:" for="numeroDocumento" />
@@ -95,6 +97,12 @@
                                         <h:inputText class="form-control mitooltip" id="fechaRegistro" value="#{controllerUsuario.usuario.fechaRegistro}" title="FechaRegistro" required="true">
                                             <f:convertDateTime pattern="yyy-mm-dd" />
                                         </h:inputText>
+                                    </div>
+                                    <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                        <h:outputLabel value="Rol:" for="rol" />
+                                        <h:selectOneMenu id="rol" class="form-control mitooltip" a:data-toggle="tooltip" a:data-placement="top" value="#{controllerUsuario.usuario.rol}">
+                                            <f:selectItems class="form-control mitooltip" value="#{controllerUsuario.usuario.seleccionRol}"/>
+                                        </h:selectOneMenu>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6">
                                         <h:outputLabel value="Correo Electronico:" for="correoElectronico" />
