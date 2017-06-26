@@ -6,7 +6,7 @@
 package ControllersConfiguracionSistema;
 
 import Entities.Actividad;
-import Facade.ActividadFacade;
+import Facade.ActividadFacadeLocal;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -24,7 +24,7 @@ public class ControllerActividadEliminar implements Serializable{
      */
     
     @EJB    
-    private ActividadFacade actividadFacade;
+    private ActividadFacadeLocal actividadFacade;
     private Actividad seleccionarEliminarActividad;
     
     public ControllerActividadEliminar() {
@@ -41,12 +41,12 @@ public class ControllerActividadEliminar implements Serializable{
     
      public void prepararEliminarActividad(Actividad elimact){
         seleccionarEliminarActividad = elimact;
-        System.out.println("fjnasjnfjnakjfnjsnkjfna  - " + seleccionarEliminarActividad.getNombreActividad());
+        System.out.println(seleccionarEliminarActividad.getNombreActividad());
     }
     
         public void eliminarActividad(){
         try {
-            System.out.println("dksakdnaskndkanskndknaskldasd - - " + seleccionarEliminarActividad);
+            System.out.println(seleccionarEliminarActividad);
             actividadFacade.remove(seleccionarEliminarActividad);
             FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, "Actividad eliminada correctamente", "");
             FacesContext.getCurrentInstance().addMessage(null, msj);

@@ -77,7 +77,7 @@ public class ControllerActividad extends ControllerApp {
         return actividadFacade;
     }
 
-    public void setActividadFacade(ActividadFacadeLocal actividadFacade) {
+    public void setActividadFacadeLocal(ActividadFacadeLocal actividadFacade) {
         this.actividadFacade = actividadFacade;
     }
 

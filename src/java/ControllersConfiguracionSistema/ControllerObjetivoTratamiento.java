@@ -6,7 +6,7 @@
 package ControllersConfiguracionSistema;
 
 import Entities.Objetivotratamiento;
-import Facade.ObjetivotratamientoFacade;
+import Facade.ObjetivotratamientoFacadeLocal;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
@@ -24,19 +24,16 @@ import javax.inject.Inject;
  */
 @Named(value = "controllerObjetivoTratamiento")
 @ConversationScoped
-public class ControllerObjetivoTratamiento implements Serializable {
+public class ControllerObjetivoTratamiento extends Controllers.ControllerApp {
 
     /**
      * Creates a new instance of ControllerObjetivoTratamiento
      */
     @EJB
-    ObjetivotratamientoFacade objetivoTratamientoFacade;
+    ObjetivotratamientoFacadeLocal objetivoTratamientoFacade;
     Objetivotratamiento objetivoTratamiento;
     List<Objetivotratamiento> listaObjetivoTratamiento;
     private Objetivotratamiento objetivoTratamientoSeleccionado;
-
-    @Inject
-    private Conversation conversacion;
 
     public void ControllerObjetivotratamiento() {
     }
@@ -67,27 +64,10 @@ public class ControllerObjetivoTratamiento implements Serializable {
         return "";
     }
 
-    public void iniciarConversacion() {
-        if (conversacion.isTransient()) {
-            conversacion.begin();
-        }
-    }
-
-    private void finalizarConversacion() {
-        if (conversacion.isTransient()) {
-            conversacion.end();
-        }
-    }
-
     public String prepararEditarobjetivoTratamiento(Objetivotratamiento objt) {
         iniciarConversacion();
         objetivoTratamientoSeleccionado = objt;
         return "EditarObjetivoTratamiento?faces-redirect=true";
-    }
-
-    public String cancelar() {
-        finalizarConversacion();
-        return "ConsultarDatosSistema?faces-redirect=true";
     }
 
     public String guardarCambios() {
@@ -106,11 +86,11 @@ public class ControllerObjetivoTratamiento implements Serializable {
         return "ConsultarObjetivoTratamiento";
     }
 
-    public ObjetivotratamientoFacade getObjetivoTratamientoFacade() {
+    public ObjetivotratamientoFacadeLocal getObjetivoTratamientoFacade() {
         return objetivoTratamientoFacade;
     }
 
-    public void setObjetivoTratamientoFacade(ObjetivotratamientoFacade objetivoTratamientoFacade) {
+    public void setObjetivoTratamientoFacadeLocal(ObjetivotratamientoFacadeLocal objetivoTratamientoFacade) {
         this.objetivoTratamientoFacade = objetivoTratamientoFacade;
     }
 
