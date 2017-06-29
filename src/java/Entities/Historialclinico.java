@@ -6,6 +6,7 @@
 package Entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -278,6 +279,73 @@ public class Historialclinico implements Serializable {
         this.codLugarNacimiento = codLugarNacimiento;
     }
 
+    public ArrayList getListaEstrato(){
+        ArrayList lista = new ArrayList();
+        lista.add("0");
+        lista.add("1");
+        lista.add("2");
+        lista.add("3");
+        lista.add("4");
+        lista.add("5");
+        lista.add("6");
+        return lista;
+    }
+    
+    public ArrayList getListaReligion(){
+        ArrayList lista = new ArrayList();
+        lista.add("Cristianismo");
+        lista.add("Judaísmo");
+        lista.add("Hinduismo");
+        lista.add("Islamismo");
+        lista.add("Budismo");
+        lista.add("Otra");
+        return lista;
+    }
+    
+    public ArrayList getListaGrupoSanguineo(){
+        ArrayList lista = new ArrayList();
+        lista.add("AB+");
+        lista.add("AB-");
+        lista.add("A+");
+        lista.add("A-");
+        lista.add("B+");
+        lista.add("B-");
+        lista.add("O+");
+        lista.add("O-");
+        return lista;
+    }
+    
+    public ArrayList getListaSexo(){
+        ArrayList lista = new ArrayList();
+        lista.add("M");
+        lista.add("F");
+        lista.add("Otro");
+        return lista;
+    }
+    
+    public ArrayList getListaZona(){
+        ArrayList lista = new ArrayList();
+        lista.add("Rural");
+        lista.add("Urbana");
+        return lista;
+    }
+    
+    public ArrayList getListaEstudios(){
+        ArrayList lista = new ArrayList();
+        lista.add("No Tiene");
+        lista.add("Primaria");
+        lista.add("Secundaria");
+        lista.add("Bachiller");
+        lista.add("Técnico");
+        lista.add("Tecnólogo");
+        lista.add("Profesional");
+        lista.add("Posgrado");
+        lista.add("Maestria");
+        lista.add("Doctorado");
+        lista.add("Otro");
+        return lista;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

@@ -15,6 +15,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Objects;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.ConversationScoped;
@@ -48,6 +49,7 @@ public class ControllerUsuario extends ControllerApp {
     @PostConstruct
     public void init() {
         usuario = new Usuario();
+        listaUsuarios = usuarioFacade.findAll();
     }
 
     public List<Usuario> consultarUsuarios() {
@@ -55,7 +57,13 @@ public class ControllerUsuario extends ControllerApp {
         return listaUsuarios;
     }
 
-    public String eliminarUsuario(Usuario usuario) {
+    public void prepararEliminarUsuario(Usuario usuario){
+        iniciarConversacion();
+        this.usuario = usuario;
+        System.out.println(usuario.getFullNameUsuario());
+    }
+    
+    public void eliminarUsuario() {
         FacesContext fc = FacesContext.getCurrentInstance();
         try {
             Usuario uS = cs.getUsuario();
@@ -65,39 +73,38 @@ public class ControllerUsuario extends ControllerApp {
                 System.out.println(usuario.getRol());
                 if (!usuario.getRol().equals("Super Administrador")) {
                     usuarioFacade.remove(usuario);
-
+                    finalizarConversacion();
                     FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "El usuario ha sido eliminado correctamente", null);
                     fc.addMessage(null, m);
-                    return "ConsultarUsuarios?faces-redrect=true";
                 } else {
                     FacesMessage m1 = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al eliminar", "No se puede eliminar un Super Administrador");
                     fc.addMessage(null, m1);
-                    return "ConsltarUsuarios";
                 }
             } else {
                 FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al eliminar", "No se puede eliminar a sí mismo");
                 fc.addMessage(null, m);
-                return "ConsltarUsuarios";
             }
         } catch (Exception e) {
-            return null;
         }
-
+        
     }
 
     public String seleccionarUsuario(Usuario usuario) throws IOException {
         FacesContext fc = FacesContext.getCurrentInstance();
         iniciarConversacion();
-        if (!usuario.getRol().equals("Super Administrador")) {
-            this.usuario = usuario;
+        this.usuario = usuario;
+        if (Objects.equals(cs.getUsuario().getIdUsuario(), this.usuario.getIdUsuario())) {
+            System.out.println(cs.getUsuario().getPrimerNombre() + " es igual a: " + this.usuario.getPrimerNombre());
+            return "ActualizarUsuario?faces-redrect=true";
+        }else
+        if (!usuario.getRol().equals("Super Administrador")) {            
             return "ActualizarUsuario?faces-redrect=true";
         } else {
 
-            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No puede modificar un Super administrador", "Usted no tiene permiso para esta acción");
+            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No puede modificar un Super administrador", "No tiene permisos para esta acción");
             fc.addMessage(null, m);
         }
         return "";
-
     }
 
     public String editarUsuario() {
@@ -122,8 +129,6 @@ public class ControllerUsuario extends ControllerApp {
     }
 
     public String crearUsuario() throws ParseException {
-
-        System.out.println("Creando");
         if (usuario != null) {
 
             Calendar datosFecha = new GregorianCalendar();
@@ -138,9 +143,7 @@ public class ControllerUsuario extends ControllerApp {
             if (usuario.getClaveUsuario().equals(this.confirmarClave)) {
                 usuarioFacade.create(usuario);
                 return "ConsultarUsuarios";
-            } else {
-               
-            }
+            } 
 
         } else {
 

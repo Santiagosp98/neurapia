@@ -59,7 +59,7 @@ public class ControllerActividad extends ControllerApp {
     public String prepararEditar(Actividad act) {
         iniciarConversacion();
         actividadSeleccionada = act;
-        return "editarActividades?faces-redirect=true";
+        return "EditarActividades?faces-redirect=true";
     }
 
     public String guardarCambios() {

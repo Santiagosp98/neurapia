@@ -20,7 +20,7 @@
                     <div class="panel panel-default">
 
                         <div class="fondoblanco panel-heading" role="tab" id="headingOne" style="background-color: #093242;color: #fff;">
-                            <h6 class="panel-title"><i class="fa fa-tasks" aria-hidden="true"></i>
+                            <h6 class="panel-title"><i class="fa fa-stethoscope" aria-hidden="true"></i>
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsOne" aria-expanded="true" aria-controls="collapseOne">
                                     Historial Clínico<span class="caret"></span> 
                                 </a>
@@ -29,13 +29,13 @@
 
                         <div id="collapsOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                             <div class="panel-body" style="background-color: #3DCCC2; border: 1px solid transparent">
-                                <a href="ConsultarDatosSistema.xhtml" style="color: #fff;">Consultar Historiales</a> 
+                                <a href="ConsultarHistorialClinico.xhtml" style="color: #fff;">Consultar Historiales</a> 
                             </div>
                         </div>
 
                         <div  class="fondoblanco panel-heading" role="tab" id="headingTwo">
                             <h6 class="panel-title">
-                                <a  role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><i class="fa fa-user" aria-hidden="true"></i>
+                                <a  role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><i class="fa fa-file-archive-o" aria-hidden="true"></i>
                                     Registro <span class="caret"></span>
                                 </a>
                             </h6>
@@ -101,7 +101,7 @@
                                                     <h:outputText value="Registro"/>
                                                 </f:facet>
                                                 <h:outputText value="#{item.fechaCreacion}">
-                                                    <f:convertDateTime pattern="yyyy-mm-dd" />
+                                                    <f:convertDateTime pattern="yyyy-MM-dd" />
                                                 </h:outputText>
                                             </h:column>
                                             <h:column>
@@ -133,7 +133,7 @@
                                                     <h:outputText value="Fecha Nac"/>
                                                 </f:facet>
                                                 <h:outputText value="#{item.fechaNacimiento}">
-                                                    <f:convertDateTime pattern="yyy-mm-dd" />
+                                                    <f:convertDateTime pattern="yyy-MM-dd" />
                                                 </h:outputText>
                                             </h:column>
                                             <h:column>

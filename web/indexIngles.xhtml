@@ -1,0 +1,267 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Neurapia home</title>
+
+        <h:outputStylesheet name="css/misestilos.css"/>
+        <h:outputStylesheet name="css/bootstrap.css"/>
+        <h:outputStylesheet name="css/sweetalert.css"/>
+        <h:outputScript name="js/jquery2.2.3.js"/>
+        <h:outputScript name="js/bootstrap.js"/>
+
+        <h:outputScript name="js/propioJavaSacrip.js"/>
+        <h:outputScript name="js/sweetalert.min.js"/>
+        <h:outputStylesheet name="css/font-awesome.css"/>
+    </h:head>
+    <h:body>
+        <header class="cabecera row">
+            <ul>      
+                <li class="cabeceramenu"><span class="glyphicon glyphicon-map-marker"></span> Calle falsa 123</li>
+                <li class="cabeceramenu"><span class="glyphicon glyphicon-phone-alt"></span> Tel: 412 83 93</li>
+                <li class="cabeceramenu">Phisycal care</li>
+                <li class="cabeceramenu"><a href="index.xhtml">Español</a></li>
+            </ul>
+            <nav class="navbar navbar-default">
+                <div class="container-fluid" style="background-color: white;">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" 
+                                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Menú responsivo</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand " href="faces/index.xhtml"><img class="logo" src="resources/imgs/neurapialetras.png" alt=""></img></a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <ul class="nav navbar-nav">
+                                <li><a class="menu" href="Inicio.html">Pre-diagnostic</a></li>
+                            </ul>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+
+
+        <!--fin del navbar--> 
+        <!-- inicio contenedor pagina -->
+        <section id="contenedorprincipal" class="container-fluid">
+
+
+            <aside class="aside aside col-lg-3 col-md-3 col-sm-4 col-xs-12">
+
+
+                <div >
+                    <div class="thumbnail sombraAside asideleft">
+                        <h3><b>Log in</b></h3> 
+
+                        <h:form class="formularioingreso form-horizontal formularioValidacion" prependId="false">
+
+                            <div class="form-group">                
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                                    <h:form prependId="false">
+                                        <div>
+                                            <h:messages id="msj-globa" showSummary="true" showDetail="true"/>
+                                        </div>
+
+                                        <h:inputText class="form-control" a:type="email" a:placeholder="ejem@ejem.co" 
+                                                     value="#{seccioncontroler.email}" required="" 
+                                                     a:pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"/>
+                                        <h:inputSecret class="form-control" a:type="password" a:placeholder="****" 
+                                                       value="#{seccioncontroler.clave}" required=""/>
+                                        <h:commandButton class="btn btn-info btn-lg" value="ingresar" action="#{seccioncontroler.iniciarSesion()}"></h:commandButton>
+
+                                    </h:form>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+
+                                </div>
+                            </div>
+                            <div>
+                                <ul id="registropreg">
+                                    <li class="preguntasRegistro"><a href="" data-toggle="modal" 
+                                                                     data-target=".bs-example-modal-sm"> Did you forget your password?</a></li>
+                                    <li class="preguntasRegistro"><a href="faces/Registro.xhtml">Check in</a></li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <div class="form-group col-lg-12" >
+                                    <div>
+                                        <input id="check" type="checkbox"></input>
+                                        <label for="">Remember password</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+
+                                </div>
+                            </div>
+
+                            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                                <div class="modal-dialog modal-sm" role="document">
+                                    <div class="modal-content" style="margin-top: 200px; width: 300px;">
+                                        <div style="background-color: #fff; height: 400px; border-radius: 20px;"> 
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span></button>
+                                                <h1 class="modal-title" id="myModalLabel">Forgot your password?</h1>
+                                            </div>
+                                            <br></br><br></br>
+                                            <form action="" class="form" >
+                                                <div class="form-group col-lg-12 " style="margin: 5px;">
+                                                    <label  for="nombre" >Recover your account, enter your email</label>
+                                                    <input type="email" class="form-control" id="emailRe" placeholder="ejem@ejem.com" 
+                                                           required="" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}">                                                                       
+                                                    </input>
+                                                </div>    
+                                                <div class="form-group col-lg-12 " style="margin: 10px;">
+                                                    <h6> <button type="submit" id="Olvidaste"  class="btn btn-info" onclick="olvidasteContraseña()">
+                                                            <i class="fa fa-floppy-o" aria-hidden="true" ></i>Send
+                                                        </button></h6>
+                                                </div>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+            </aside>
+
+            <div class="contenedorderecho col-xs-12 col-sm-8 col-md-9 col-lg-9 sombraAside">
+                <section>
+                    <div class="imagenheader"></div>
+                </section>
+                <h4><b>Pre-diagnostic</b></h4> 
+                <h5>Do you have any particular ailment? </h5>  
+                <h1><b>PERFORM OUR PRE-DIAGNOSSIS</b></h1>   
+                <div class="parrafoinicio">
+                    <p>The medical pre-diagnosis system is a tool that allows you to know the POSSIBLE discomfort that may be
+                         Affecting your health depending on the results obtained generates a response according to the selected symptoms
+                         Previously, for a professional medical diagnosis and an appropriate treatment of your disease register in our
+                         Request a medical appointment or contact our team of highly qualified physiotherapists to discuss
+                         Your ailment discomfort or particular illness.</p> <br></br>
+
+                    <center>
+                        <button type="submit" class="btn btn-info" onclick="window.location.href = 'error404.html'">
+                            Perform pre-diagnosis</button>
+                    </center>
+                    <section>
+                        <div><h1 style="font-size: 20px"><b>Check our frecuent questions</b></h1> </div>
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div  class="panel panel-default">
+                                <div class="fondoblanco panel-heading" role="tab" id="headingOne">
+                                    <h6 class="panel-title">
+                                        <a class="menulateral" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                            <b>Why a pre-diagnostic medical?</b> <span class="caret"></span> 	
+                                        </a>
+                                    </h6>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel-body">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia similique, 
+                                            accusantium ullam omnis labore perferendis, laborum culpa excepturi ipsum fuga 
+                                            et minus molestias nobis quasi esse explicabo. Error, veniam, quia.
+                                        </p>
+                                        <div class="submenu">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam a inventore dolor
+                                                et architecto nostrum reprehenderit maxime molestiae magnam doloremque, unde
+                                                perferendis ab enim labore asperiores placeat repellat, voluptatum, ipsa.
+                                            </p>sit. 
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="fondoblanco panel-heading" role="tab" id="headingTwo">
+                                    <h6 class="panel-title">
+                                        <a class="menulateral" role="button" data-toggle="collapse" 
+                                           data-parent="#accordion" href="#collapsTwo" aria-expanded="false" 
+                                           aria-controls="collapsTwo">
+                                            <b>Is the information provided by the pre-diagnosis result valid?</b> 
+                                            <span class="caret"></span> 
+                                        </a>
+                                    </h6>
+                                </div>
+
+                                <div id="collapsTwo" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingTwo">
+                                    <div class="panel-body">
+                                        <p> colapsable 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                                            Quasi sequi consequuntur magni illum, labore veritatis? Magnam voluptatem, 
+                                            voluptatum culpa incidunt. Animi esse optio, dignissimos quod voluptatibus 
+                                            iure impedit id alias!
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="fondoblanco panel-heading" role="tab" id="headingTwo">
+                                    <h6 class="panel-title">
+                                        <a class="menulateral" role="button" data-toggle="collapse" 
+                                           data-parent="#accordion" href="#collapsThree" 
+                                           aria-expanded="false" aria-controls="collapsTwo">
+                                            <b>Why make a pre-diagnosis?</b> <span class="caret"></span> 
+                                        </a>
+                                    </h6>
+                                </div>
+
+                                <div id="collapsThree" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingTwo">
+                                    <div class="panel-body">
+                                        <p> colapsable 3 Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                                            Quasi sequi consequuntur magni illum, labore veritatis? Magnam voluptatem, 
+                                            voluptatum culpa incidunt. Animi esse optio, dignissimos quod voluptatibus 
+                                            iure impedit id alias!
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="fondoblanco panel-heading" role="tab" id="headingTwo">
+                                    <h6 class="panel-title">
+                                        <a class="menulateral" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsFour" aria-expanded="false" aria-controls="collapsTwo">
+                                            <b>How to obtain a medical diagnosis?</b> <span class="caret"></span> 
+                                        </a>
+                                    </h6>
+                                </div>
+
+                                <div id="collapsFour" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingTwo">
+                                    <div class="panel-body">
+                                        <p> colapsable 4 Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                                            Quasi sequi consequuntur magni illum, labore veritatis? Magnam voluptatem, 
+                                            voluptatum culpa incidunt. Animi esse optio, dignissimos quod voluptatibus 
+                                            iure impedit id alias!
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>     
+                </div>
+            </div>
+
+        </section>
+        <footer class="footer col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+            <div> 
+                <span>Developed by J3</span>
+                <span>All rights reserved</span>
+                <span>Copyright ©</span>
+            </div>
+        </footer>
+    </h:body>
+</html>
+

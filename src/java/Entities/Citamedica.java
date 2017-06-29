@@ -7,6 +7,7 @@ package Entities;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -22,6 +23,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -37,6 +39,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Citamedica.findByIdCitaMedica", query = "SELECT c FROM Citamedica c WHERE c.idCitaMedica = :idCitaMedica")
     , @NamedQuery(name = "Citamedica.findByHora", query = "SELECT c FROM Citamedica c WHERE c.hora = :hora")
     , @NamedQuery(name = "Citamedica.findByFecha", query = "SELECT c FROM Citamedica c WHERE c.fecha = :fecha")
+    , @NamedQuery(name = "Citamedica.findByEstado", query = "SELECT c FROM Citamedica c WHERE c.estado = :estado")
     , @NamedQuery(name = "Citamedica.findByNumeroConsultorio", query = "SELECT c FROM Citamedica c WHERE c.numeroConsultorio = :numeroConsultorio")})
 public class Citamedica implements Serializable {
 
@@ -52,6 +55,10 @@ public class Citamedica implements Serializable {
     @Column(name = "fecha")
     @Temporal(TemporalType.DATE)
     private Date fecha;
+    @Column(name = "estado")
+    private String estado;
+    @Basic(optional = false)
+    @NotNull
     @Size(max = 5)
     @Column(name = "numeroConsultorio")
     private String numeroConsultorio;
@@ -126,6 +133,22 @@ public class Citamedica implements Serializable {
       String nombreCompleto =  this.codFisioterapeuta.getCodUsuario().getPrimerNombre() + " " + this.codFisioterapeuta.getCodUsuario().getPrimerApellido();
       return nombreCompleto;
     }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    
+    public ArrayList getSeleccionEstado(){
+        ArrayList listaRol = new ArrayList();
+        listaRol.add("Cancelada");
+        listaRol.add("Pendiente");
+        listaRol.add("Realizada");
+        return listaRol;
+    }
     
     public String getFullNameUsuario(){
         if(this.codUsuario != null){
@@ -155,7 +178,7 @@ public class Citamedica implements Serializable {
         }
         return true;
     }
-
+    
     @Override
     public String toString() {
         return "Entities.Citamedica[ idCitaMedica=" + idCitaMedica + " ]";

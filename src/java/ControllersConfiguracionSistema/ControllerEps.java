@@ -34,6 +34,7 @@ public class ControllerEps extends Controllers.ControllerApp {
     EpsFacadeLocal epsFacade;
     Eps eps;
     List<Eps> listaEps;
+    
     private Eps epsSeleccionada;
 
     @PostConstruct

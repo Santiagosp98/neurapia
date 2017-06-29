@@ -53,12 +53,12 @@ public class ControllerObjetivoTratamientoEliminar implements Serializable {
 
     public void prepararEliminarObjetivoTratamiento(Objetivotratamiento objt) {
         selecccionarEliminarObjetivoTratamiento = objt;
-        System.out.println("fjnasjnfjnakjfnjsnkjfna  - " + selecccionarEliminarObjetivoTratamiento.getNombreObjetivo());
+        System.out.println(selecccionarEliminarObjetivoTratamiento.getNombreObjetivo());
     }
 
     public void eliminarObjetivoTratamiento() {
         try {
-            System.out.println("fjnasjnfjnakjfnjsnkjfna  - " + selecccionarEliminarObjetivoTratamiento);
+            System.out.println(selecccionarEliminarObjetivoTratamiento);
             objetivoTratamientoFacade.remove(selecccionarEliminarObjetivoTratamiento);
             FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, "Objetivo Tratamiento elimiando correctamente", "");
             FacesContext.getCurrentInstance().addMessage(null, msj);

@@ -65,8 +65,7 @@
             <ui:define name="content">
                 <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
                     <!-- Titulo -->
-                    <h5 id="ubicacionPag">Lista Usuarios</h5>
-                    <div class="contenido"></div>
+                    <h5 id="ubicacionPag">Usuarios en el sistema</h5>
 
                     <div data-toggle="table" data-sort-name="stargazers_count" data-search="true" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-sort-order="desc">
                         <br/>
@@ -121,15 +120,50 @@
                                             <h:commandLink action="#{controllerUsuario.seleccionarUsuario(item)}" value=""><span id="botonEdita" class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                             </h:commandLink>
                                                 &nbsp;
-                                                <h:commandLink action="#{controllerUsuario.eliminarUsuario(item)}" value=""><span id="botonElimina"  class="fa fa-times" aria-hidden="true"></span>
-                                        </h:commandLink>
+                                            <h:commandLink id="botonElimina" class="btnModal" value=""><span id="botonElimina" class="fa fa-times" aria-hidden="true"></span>
+                                                <f:ajax event="click" listener="#{controllerUsuario.prepararEliminarUsuario(item)}" render=":contenido-modal-eliminar-user"/>
+                                            </h:commandLink>
                                     </h:column>
                                 </h:dataTable>
                             </h:form>
                         </div>
                     </div>
                 </div>
+                
+                <div id="myModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <h:form id="form-eliminar-user" prependId="false">
+                            <h:panelGroup id="contenido-modal-eliminar-user" layout="block" class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Confirmación eliminar Usuario</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>¿Está seguro que desea eliminar el usuario <b>#{controllerUsuario.usuario.fullNameUsuario}</b>?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <h:commandButton class="btn btn-primary" value="Eliminar" action="#{controllerUsuario.eliminarUsuario()}"></h:commandButton>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>                                            
+                                </div>
+                            </h:panelGroup>
+                        </h:form>
+                    </div>
+                </div>   
+                
             </ui:define>
+            
+            <ui:define name="ultimosScripts">
+                <script>
+                    $().ready(function () { 
+                        $(".btnModal").click(function () {
+                            console.log("imprime");
+                            $("#myModal").modal("show");
+                        });                        
+                    });
+                </script>
+            </ui:define>
+            
         </ui:composition>
 
     </h:body>

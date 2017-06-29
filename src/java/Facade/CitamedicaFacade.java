@@ -6,9 +6,11 @@
 package Facade;
 
 import Entities.Citamedica;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -27,6 +29,15 @@ public class CitamedicaFacade extends AbstractFacade<Citamedica> implements Cita
 
     public CitamedicaFacade() {
         super(Citamedica.class);
+    }
+    
+    public List<Citamedica> citasPendientes(String estado){
+        estado = "Pendiente";
+        List<Citamedica> cita = null;
+        TypedQuery<Citamedica> q = getEntityManager().createNamedQuery("Citamedica.findByTipoEstado", Citamedica.class);
+        q.setParameter("estado", estado);
+        cita = q.getResultList();
+        return cita;
     }
     
 }

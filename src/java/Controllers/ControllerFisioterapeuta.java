@@ -8,7 +8,6 @@ package Controllers;
 import Entities.Fisioterapeuta;
 import Facade.FisioterapeutaFacadeLocal;
 import javax.inject.Named;
-import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -35,6 +34,7 @@ public class ControllerFisioterapeuta extends ControllerApp {
     @PostConstruct
     public void init(){
         fisioterapeuta = new Fisioterapeuta();
+        listaFisioterapeuta = fisioterapeutaFacade.findAll();
     }
     
     public  List<Fisioterapeuta> consultarFisioterapeutas(){

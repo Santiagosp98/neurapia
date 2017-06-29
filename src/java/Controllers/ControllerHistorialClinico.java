@@ -6,22 +6,27 @@
 package Controllers;
 
 import Entities.Historialclinico;
+import Entities.Usuario;
 import Facade.HistorialclinicoFacadeLocal;
+import Facade.UsuarioFacadeLocal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.inject.Named;
-import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
+import javax.enterprise.context.ConversationScoped;
 
 /**
  *
  * @author jair3
  */
 @Named(value = "controllerHistorialClinico")
-@SessionScoped
-public class ControllerHistorialClinico implements Serializable {
+@ConversationScoped
+public class ControllerHistorialClinico extends ControllerApp {
 
     /**
      * Creates a new instance of ControllerHistorialClinico
@@ -33,6 +38,10 @@ public class ControllerHistorialClinico implements Serializable {
     HistorialclinicoFacadeLocal historialClinicoFacade;
     Historialclinico historialClinico;
     List<Historialclinico> listaHistorialClinico;
+    
+    @EJB
+    UsuarioFacadeLocal usuarioFacade;
+    Usuario usuario;
     
     @PostConstruct
     public void init(){
@@ -46,19 +55,38 @@ public class ControllerHistorialClinico implements Serializable {
     }
     
     public String seleccionarHistorialclinico(Historialclinico historialClinico){
+        iniciarConversacion();
         this.historialClinico = historialClinico;
-        return "CrearHistorialClinico";
+        System.out.println(historialClinico.getCodUsuario().getPrimerNombre());
+        return "ActualizarHistorialClinico?faces-redirect=true";
     }
     
-    public String editarHistorialClinico(Historialclinico historialClinico){
-        String pag;
+    public String editarHistorialClinico(){
+        System.out.println("Estamos editando el hsitorial");
         if (historialClinico != null) {
+            System.out.println(historialClinico.getCodEps().getIdEps());
             this.historialClinicoFacade.edit(historialClinico);
-            pag = "ConsultarHistorialclinico";
+            finalizarConversacion();
+            return "ConsultarHistorialClinico?faces-redirect=true";
         }else{
-            pag = "";
+            return "";
         }
-        return pag;
+    }
+    
+    public String crearHistorialClinico() throws ParseException{
+        System.out.println("Estamos creando un hsitorial clinico");
+        Calendar datosFecha = new GregorianCalendar();
+            int anio = datosFecha.get(Calendar.YEAR);
+            int mes = datosFecha.get(Calendar.MONTH);
+            int dia = datosFecha.get(Calendar.DAY_OF_MONTH);
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            String strFecha = anio + "-" + mes + "-" + dia;
+            Date fechaDate = null;
+            fechaDate = formato.parse(strFecha);
+//            this.historialClinico.setCodUsuario(usuarioFacade.find(usuario.getIdUsuario()));
+            historialClinico.setFechaCreacion(fechaDate);
+        this.historialClinicoFacade.create(historialClinico);
+        return "ConsultarHistorialClinico?faces-redirect=true";
     }
     
     public void eliminarHistorialClinico(Historialclinico historialclinico){

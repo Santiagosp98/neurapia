@@ -43,12 +43,12 @@ public class ControllerEpsEliminar implements Serializable{
     
     public void prepararEliminarEps(Eps ep) {
         seleccionarEliminarEps = ep;
-        System.out.println("fjnasjnfjnakjfnjsnkjfna  - " + seleccionarEliminarEps.getNombreEps());
+        System.out.println(seleccionarEliminarEps.getNombreEps());
     }
 
     public void eliminarEps() {
         try {
-            System.out.println("fjnasjnfjnakjfnjsnkjfna  - " + seleccionarEliminarEps.getNombreEps());
+            System.out.println(seleccionarEliminarEps.getNombreEps());
             epsFacade.remove(seleccionarEliminarEps);
             FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, "EPS eliminada correctamente", "");
             FacesContext.getCurrentInstance().addMessage(null, msj);

@@ -12,7 +12,6 @@ import Facade.CitamedicaFacadeLocal;
 import Facade.FisioterapeutaFacadeLocal;
 import Facade.UsuarioFacadeLocal;
 import javax.inject.Named;
-import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -38,6 +37,7 @@ public class ControllerCitaMedica extends ControllerApp{
     CitamedicaFacadeLocal citaMedicaFacade;
     Citamedica citaMedica;
     List<Citamedica> listaCitas;
+    List<Citamedica> listaCitas1;
     
     @EJB
     FisioterapeutaFacadeLocal fisioterapeutaFacade;
@@ -71,7 +71,7 @@ public class ControllerCitaMedica extends ControllerApp{
     
     public String actualizarCita(){        
         try {
-            System.out.println("Estoy actualizando la cita");
+            System.out.println("Estoy actualizando la cita"); 
             citaMedicaFacade.edit(citaMedica);
             System.out.println(citaMedica.getCodFisioterapeuta().getIdFisioterapeuta());
             finalizarConversacion();
@@ -79,7 +79,9 @@ public class ControllerCitaMedica extends ControllerApp{
         } catch (Exception e) {
             System.out.println(e);
         }
+        System.out.println(citaMedica.getCodFisioterapeuta().getIdFisioterapeuta());
         return "";
+        
     }
     
     public String eliminarCita(Citamedica citamedica){
@@ -89,8 +91,9 @@ public class ControllerCitaMedica extends ControllerApp{
     
     public String crearCitaMedica(){
         try {
-            this.citaMedica.setCodFisioterapeuta(fisioterapeutaFacade.find(fisioterapeuta.getIdFisioterapeuta()));
-            this.citaMedica.setCodUsuario(usuarioFacade.find(usuario.getIdUsuario()));
+//          this.citaMedica.setCodFisioterapeuta(fisioterapeutaFacade.find(fisioterapeuta.getIdFisioterapeuta()));
+//          this.citaMedica.setCodUsuario(usuarioFacade.find(usuario.getIdUsuario()));
+            this.citaMedica.setEstado(String.valueOf(citaMedica.getSeleccionEstado().get(1).toString()));
             citaMedicaFacade.create(citaMedica);
             return "ConsultarCitasMedicas?faces-redirect=true";
         } catch (Exception e) {
@@ -98,7 +101,7 @@ public class ControllerCitaMedica extends ControllerApp{
         }
         return "";
     }
-
+    
     public CitamedicaFacadeLocal getCitaMedicaFacade() {
         return citaMedicaFacade;
     }

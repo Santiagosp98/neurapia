@@ -28,7 +28,7 @@
                                 <a href="ConsultarCitasMedicas.xhtml" >Historial de Citas</a> 
                             </div>
                             <div class="panel-body">
-                                <a href="#">Citas Pendientes</a> 
+                                <a href="ConsultarCitasMedicasPendientes.xhtml">Citas Pendientes</a> 
                             </div>
                         </div>
 
@@ -74,16 +74,16 @@
                                 
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                     <h:outputLabel value="Usuario" for="usuario" />
-                                    <h:selectOneMenu id="usuario" class="form-control mitooltip" value="#{controllerCitaMedica.usuario.idUsuario}" required="true" requiredMessage="El usuario es requerido">
-                                        <f:selectItems value="#{controllerUsuario.consultarUsuarios()}" var="u" itemLabel="#{u.fullNameUsuario}" itemValue="#{u.idUsuario}"/>
+                                    <h:selectOneMenu id="usuario" class="form-control mitooltip" value="#{controllerCitaMedica.citaMedica.codUsuario}" converter="usuarioConverter" required="true" requiredMessage="El usuario es requerido">
+                                        <f:selectItems value="#{controllerUsuario.listaUsuarios}" var="u" itemLabel="#{u.fullNameUsuario}"/>
                                     </h:selectOneMenu>
                                 </div>
                                 
                             
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                     <h:outputLabel value="Fisioterapeuta:" for="Fisioterapeuta" />
-                                    <h:selectOneMenu id="Fisioterapeuta" class="form-control mitooltip" value="#{controllerCitaMedica.fisioterapeuta.idFisioterapeuta}" required="true" requiredMessage="El fisioterapeuta es requerido.">
-                                        <f:selectItems value="#{controllerFisioterapeuta.consultarFisioterapeutas()}" var="f" itemLabel="#{f.fullnameFisioterapeuta}" itemValue="#{f.idFisioterapeuta}" />
+                                    <h:selectOneMenu id="Fisioterapeuta" class="form-control mitooltip" value="#{controllerCitaMedica.citaMedica.codFisioterapeuta}" converter="fisioterapeutaConverter" required="true" requiredMessage="El fisioterapeuta es requerido.">
+                                        <f:selectItems value="#{controllerFisioterapeuta.listaFisioterapeuta}" var="f" itemLabel="#{f.fullnameFisioterapeuta}"/>
                                     </h:selectOneMenu>
                                 </div>
                             
@@ -107,7 +107,7 @@
                                 </div>                            
                                 
                                 <div class="col-lg-6 col-md-6 col-sm-6">
-                                <h:commandButton class="btn btn-info" action="#{controllerCitaMedica.crearCitaMedica()}" value="Crear Cita"/>
+                                <h:commandButton class="btn btn-info" action="#{controllerCitaMedica.crearCitaMedica()}" value="Guardar"/>
                                 </div>
                         </h:form>
 

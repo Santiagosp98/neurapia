@@ -42,12 +42,12 @@ public class ControllerProcesoEliminar implements Serializable{
     
      public void prepararEliminarProceso(Proceso proc) {
         seleccionarEliminarProceso = proc;
-        System.out.println("fjnasjnfjnakjfnjsnkjfna  - " + seleccionarEliminarProceso.getNombreProceso());
+        System.out.println(seleccionarEliminarProceso.getNombreProceso());
     }
 
     public void eliminarProceso() {
         try {
-            System.out.println("dksakdnaskndkanskndknaskldasd - - " + seleccionarEliminarProceso);
+            System.out.println(seleccionarEliminarProceso);
             procesoFacade.remove(seleccionarEliminarProceso);
             FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, "Proceso eliminada correctamente", "");
             FacesContext.getCurrentInstance().addMessage(null, msj);

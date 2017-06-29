@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Actualziar Registros</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/template/common/commonLayout.xhtml">
+
+            <ui:define name="aside">
+                <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="fondoblanco panel-heading" role="tab" id="headingOne" style="background-color: #093242;color: #fff;">
+                            <h6 class="panel-title"><i class="fa fa-cogs" aria-hidden="true"></i>
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Configuración del sistema<span class="caret"></span> 
+                                </a>
+                            </h6>
+                        </div>                     
+                        <div id="collapsOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <a href="ConsultarDatosSistema.xhtml">Registros en el Sistema</a> 
+                            </div>
+                        </div>
+                        <div id="collapsOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body" style="background-color: #3DCCC2; border: 1px solid transparent">
+                                <a href="" style="color: #fff;">Añadir Registro</a> 
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </ui:define>
+
+            <ui:define name="content">                
+                <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
+                    <!-- Titulo -->
+                    <h5 id="ubicacionPag">Crear Registros En el Sistema</h5>
+                    <h:form prependId="false">  
+                        <h:messages for="nombreActividad" style="color: red; list-style:none; padding: 18px" />
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12">    
+                            <h:outputLabel value="NUEVA ACTIVIDAD" for="nombreActividad" />
+                            <h:inputText id="nombreActividad" class="form-control mitooltip" value="#{controllerActividad.actividad.nombreActividad}" required="true" requiredMessage="El Campo NUEVA ACTIVIDAD no debe ser nulo" title="NombreActividad" />
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">                            
+                            <h:commandButton id="añadirAct" class="btn btn-info" action="#{controllerActividad.crearActividad()}" value="Añadir">
+                            </h:commandButton>
+                        </div>
+                    </h:form>
+
+                    <hr class="col-lg-12 col-md-12 col-sm-12 col-sm-12" style="background-color: #f1f1f1; width: 100%; height: 20px; margin-left: -15px"/>
+
+                    <h:form prependId="false">  
+                        <h:messages for="nombreObjetivoTratamiento" style="color: red; list-style:none; padding: 18px"/>
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12">    
+                            <h:outputLabel value="NUEVO OBJETIVO TRATAMIENTO" for="nombreObjetivoTratamiento" />
+                            <h:inputText id="nombreObjetivoTratamiento" class="form-control mitooltip" value="#{controllerObjetivoTratamiento.objetivoTratamiento.nombreObjetivo}" required="true" requiredMessage="El Campo NUEVO OBJETIVO TRATAMIENTO no debe ser nulo" title="NombreObjetivoTratamiento" />
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">                            
+                            <h:commandButton id="añadirObjT" class="btn btn-info" action="#{controllerObjetivoTratamiento.crearobjetivoTratamiento()}" value="Añadir" >                            
+                            </h:commandButton>
+                        </div>
+                    </h:form>                    
+
+                    <hr class="col-lg-12 col-md-12 col-sm-12 col-sm-12" style="background-color: #f1f1f1; width: 100%; height: 20px; margin-left: -15px"/>
+
+                    <h:form prependId="false">  
+                        <h:messages for="nombreDepartamento" style="color: red; list-style:none; padding: 18px"/>
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12">    
+                            <h:outputLabel value="NUEVO DEPARTAMENTO" for="nombreDepartamento" />
+                            <h:inputText id="nombreDepartamento" class="form-control mitooltip" value="#{controllerDepartamento.departamento.nombreCiudad}" required="true" requiredMessage="El Campo NUEVO DEPARTAMENTO no debe ser nulo" title="nombreDepartamento" />
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">                            
+                            <h:commandButton id="añadirDep" class="btn btn-info" action="#{controllerDepartamento.crearDepartamento()}" value="Añadir">
+                            </h:commandButton>
+                        </div>
+                    </h:form>
+
+                    <hr class="col-lg-12 col-md-12 col-sm-12 col-sm-12" style="background-color: #f1f1f1; width: 100%; height: 20px; margin-left: -15px"/>
+
+                    <h:form prependId="false">  
+                        <h:messages for="nombreEps" style="color: red; list-style:none; padding: 18px" ></h:messages>
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12">    
+                            <h:outputLabel value="NUEVA EPS" for="nombreEps" />
+                            <h:inputText id="nombreEps" class="form-control mitooltip" value="#{controllerEps.eps.nombreEps}" required="true" requiredMessage="El Campo NUEVA EPS no debe ser nulo" title="nombreEps" />
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">                            
+                            <h:commandButton id="añadirEps" class="btn btn-info" action="#{controllerEps.crearEps()}" value="Añadir">
+                            </h:commandButton>
+                        </div>
+                    </h:form>
+
+                    <hr class="col-lg-12 col-md-12 col-sm-12 col-sm-12" style="background-color: #f1f1f1; width: 100%; height: 20px; margin-left: -15px"/>
+
+                    <h:form prependId="false">  
+                        <h:messages for="tipoEducacion" style="color: red; list-style:none; padding: 18px" ></h:messages>
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12">    
+                            <h:outputLabel value="NUEVO TIPO EDUCACION" for="tipoEducacion" />
+                            <h:inputText id="tipoEducacion" class="form-control mitooltip" value="#{controllerEducacion.educacion.tipoEducacion}" required="true" requiredMessage="El Campo NUEVO TIPO EDUCACION no debe ser nulo" title="nombreEducacion" />
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">                            
+                            <h:commandButton id="añadirEducacion" class="btn btn-info" action="#{controllerEducacion.crearEducacion()}" value="Añadir">
+                            </h:commandButton>
+                        </div>
+                    </h:form>
+                    
+                    <hr class="col-lg-12 col-md-12 col-sm-12 col-sm-12" style="background-color: #f1f1f1; width: 100%; height: 20px; margin-left: -15px"/>
+                    <h:form prependId="false">
+                        <h:messages for="nombreProceso" style="color: red; list-style:none; padding: 18px" ></h:messages>
+                         <div class="form-group col-lg-12 col-md-12 col-sm-12">    
+                            <h:outputLabel value="NUEVO PROCESO" for="nombreProceso" />
+                            <h:inputText id="nombreProceso" class="form-control mitooltip" value="#{controllerProceso.proceso.nombreProceso}" required="true" requiredMessage="El Campo NUEVO PROCESO no debe ser nulo" title="nombreProceso" />
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">                            
+                            <h:commandButton id="añadirProceso" class="btn btn-info" action="#{controllerProceso.crearProceso()}" value="Añadir">
+                            </h:commandButton>
+                        </div>
+                    </h:form>
+                    
+                    <hr class="col-lg-12 col-md-12 col-sm-12 col-sm-12" style="background-color: #f1f1f1; width: 100%; height: 20px; margin-left: -15px"/>
+                    <h:form prependId="false">
+                        <h:messages for="nombreRespuesta" style="color: red; list-style:none; padding: 18px" ></h:messages>
+                         <div class="form-group col-lg-12 col-md-12 col-sm-12">    
+                            <h:outputLabel value="NUEVA RESPUESTA" for="nombreRespuesta" />
+                            <h:inputText id="nombreRespuesta" class="form-control mitooltip" value="#{controllerRespuesta.respuesta.nombreRespuesta}" required="true" requiredMessage="El Campo NUEVA RESPUESTA no debe ser nulo" title="nombreRespuesta" />
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">                            
+                            <h:commandButton id="añadirRespuesta" class="btn btn-info" action="#{controllerRespuesta.crearRespuesta()}" value="Añadir">
+                            </h:commandButton>
+                        </div>
+                    </h:form>
+
+                </div>
+
+            </ui:define>
+
+        </ui:composition>
+    </h:body>
+</html>
+
+
+
+

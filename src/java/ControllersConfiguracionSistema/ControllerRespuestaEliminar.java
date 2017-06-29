@@ -42,12 +42,12 @@ public class ControllerRespuestaEliminar implements Serializable {
     
     public void prepararEliminarRespuesta(Respuesta resp) {
         seleccionarEliminarRespuesta = resp;
-        System.out.println("fjnasjnfjnakjfnjsnkjfna  - " + seleccionarEliminarRespuesta.getNombreRespuesta());
+        System.out.println(seleccionarEliminarRespuesta.getNombreRespuesta());
     }
 
     public void eliminarRespuesta() {
         try {
-            System.out.println("fjnasjnfjnakjfnjsnkjfna  - " + seleccionarEliminarRespuesta.getNombreRespuesta());
+            System.out.println(seleccionarEliminarRespuesta.getNombreRespuesta());
             respuestaFacade.remove(seleccionarEliminarRespuesta);
             FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, "RESPUESTA eliminada correctamente", "");
             FacesContext.getCurrentInstance().addMessage(null, msj);

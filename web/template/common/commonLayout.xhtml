@@ -29,6 +29,8 @@
         <h:outputScript name="sweetalert.min.js" library="js" /> 
         <h:outputScript name="jquery/jquery-plugins.js" library="primefaces" /> 
         <h:outputScript name="propioJavaSacrip.js" library="js" />       
+        
+        
 
         <link rel="shortcut icon" href="#{request.contextPath}/resources/imgs/icono.png"/>       
         <title><ui:insert name="titulo"></ui:insert></title>
@@ -72,6 +74,14 @@
                     <ui:include src="/template/common/commonFooter.xhtml" />
                 </ui:insert>
             </div>
+            
+            <ui:insert name="ultimosScripts">
+
+            </ui:insert>
+
+            <ui:insert name="scriptObjT">
+
+            </ui:insert>   
         </div>
         
     </h:body>
