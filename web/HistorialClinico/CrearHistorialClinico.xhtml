@@ -15,8 +15,6 @@
             <ui:define name="aside">
                 <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
 
-
-
                     <div class="panel panel-default">
 
                         <div  class="fondoblanco panel-heading" role="tab" id="headingTwo" style="background-color: #093242;color: #fff;">
@@ -36,7 +34,7 @@
                         </div>
 
                         <div class="fondoblanco panel-heading" role="tab" id="headingThree">
-                            <h6 class="panel-title"><i class="fa fa-file-archive-o" aria-hidden="true"></i>
+                            <h6 class="panel-title"><i class="fa fa-folder-open" aria-hidden="true"></i>
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsThree" aria-expanded="true" aria-controls="collapseThree">
                                     Reportes<span class="caret"></span> 
                                 </a>
@@ -71,17 +69,9 @@
                         <h:form prependId="false" id="historialClinico">
                             
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="Usuario:" for="usuario" />
-                                <h:selectOneMenu id="usuario" class="form-control mitooltip" value="#{controllerHistorialClinico.historialClinico.codUsuario}" converter="usuarioConverter" title="CodEps" >
-                                    <!-- TODO: update below reference to list of available items-->
-                                    <f:selectItems value="#{controllerUsuario.listaUsuarios}" var="usuario" itemLabel="#{usuario.fullNameUsuario}"/>
-                                </h:selectOneMenu>
-                            </div> 
-                            
-                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
                                 <h:outputLabel value="Dirección:" for="direccion" />
                                 <h:inputText id="direccion" class="form-control mitooltip" value="#{controllerHistorialClinico.historialClinico.direccion}" title="Direccion" />
-                            </div> 
+                            </div>
                             
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
                                 <h:outputLabel value="Fecha de Nacimiento:" for="fecha" />
@@ -89,7 +79,6 @@
                                     <f:convertDateTime pattern="yyyy-MM-dd" />
                                 </h:inputText>
                             </div>
-                            
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
                                 <h:outputLabel value="Eps:" for="codEps" />
                                 <h:selectOneMenu id="codEps" class="form-control mitooltip" value="#{controllerHistorialClinico.historialClinico.codEps}" converter="epsConverter" title="CodEps" >
@@ -155,11 +144,11 @@
                                 </h:selectOneMenu>
                             </div>
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="Ocupacion:" for="ocupacion" />
+                                <h:outputLabel value="Ocupación:" for="ocupacion" />
                                 <h:inputText id="ocupacion" class="form-control mitooltip" value="#{controllerHistorialClinico.historialClinico.ocupacion}" title="Ocupacion" />
                             </div>
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="Telefono:" for="telefono" />
+                                <h:outputLabel value="Teléfono:" for="telefono" />
                                 <h:inputText id="telefono" class="form-control mitooltip" value="#{controllerHistorialClinico.historialClinico.telefono}" title="Telefono" />
                             </div> 
                             

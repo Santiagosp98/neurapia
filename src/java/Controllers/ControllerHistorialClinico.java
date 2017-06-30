@@ -19,6 +19,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.ConversationScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -61,18 +63,45 @@ public class ControllerHistorialClinico extends ControllerApp {
         return "ActualizarHistorialClinico?faces-redirect=true";
     }
     
-    public String editarHistorialClinico(){
-        System.out.println("Estamos editando el hsitorial");
-        if (historialClinico != null) {
+    public void editarHistorialClinico(){
+        if (historialClinico != null || !historialClinico.equals("")) {
             System.out.println(historialClinico.getCodEps().getIdEps());
             this.historialClinicoFacade.edit(historialClinico);
-            finalizarConversacion();
-            return "ConsultarHistorialClinico?faces-redirect=true";
-        }else{
-            return "";
+            siguienteHistorialClinico();
         }
     }
     
+    public String siguienteHistorialClinico(){
+     ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        System.out.println(ec.getRequestContextPath());
+        String page = "";        
+        if (page == "ActualizarHistorialClinico") {
+            return "Anamnesis?faces-redirect=true";
+        }else if (page == "Anamnesis") {
+            return "Movilidad?faces-redirect=true";
+        }else if (page == "Movilidad" ) {
+            return "ObjetivosTratamiento?faces-redirect=true";
+        }else if (page == "ObjetivosTratamiento"){
+            finalizarConversacion();
+            return "ConsultarHistorialclinico?faces-redirect=true";
+             
+        }return "";
+    }
+    
+    public String atrasHistorialClinico(){
+        String page = "";
+        if (page == "ObjetivosTratamiento" ) {
+            return "ObjetivosTratamiento?faces-redirect=true";
+        }else if (page == "ObjetivosTratamiento") {
+            return "Movilidad?faces-redirect=true";
+        }else if (page == "Movilidad") {
+            return "Anamnesis?faces-redirect=true";
+        }else if (page == "anamnesis") {
+            finalizarConversacion();
+            return "ConsultarHistorialclinico?faces-redirect=true";
+        }return "";
+    }
+     
     public String crearHistorialClinico() throws ParseException{
         System.out.println("Estamos creando un hsitorial clinico");
         Calendar datosFecha = new GregorianCalendar();

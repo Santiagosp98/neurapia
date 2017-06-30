@@ -14,30 +14,57 @@
 
             <ui:define name="aside">
                 <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
+                    
+                    <div class="fondoblanco panel-heading" role="tab" id="headingOne" style="background-color: #093242;color: #fff;">
+                            <h6 class="panel-title"><i class="fa fa-stethoscope" aria-hidden="true"></i>
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Historial Clínico<span class="caret"></span> 
+                                </a>
+                            </h6>
+                        </div>
 
+                        <div id="collapsOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" >
+                            <div class="panel-body" style="background-color: #3DCCC2; border: 1px solid transparent">
+                                <a href="ActualizarHistorialClinico.xhtml" style="color: #fff;">Información básica</a> 
+                            </div>
+                            <div class="panel-body" >
+                                <a href="Anamnesis.xhtml" >Anamnésis</a> 
+                            </div>
+                            <div class="panel-body" >
+                                <a href="Movilidad.xhtml" >Movilidad</a> 
+                            </div>
+                            <div class="panel-body" >
+                                <a href="Objetivos.xhtml" >Objetivos</a> 
+                            </div>
+                            <div class="panel-body" >
+                                <a href="ReporteTratamiento.xhtml" >Reporte de Tratamiento</a> 
+                            </div>
+                        </div>
 
 
                     <div class="panel panel-default">
 
 
-                        <div  class="fondoblanco panel-heading" role="tab" id="headingTwo" style="background-color: #093242;color: #fff;">
+                        
+
+                        <div  class="fondoblanco panel-heading" role="tab" id="headingTwo">
                             <h6 class="panel-title">
-                                <a  role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo"><i class="fa fa-stethoscope" aria-hidden="true"></i>
-                                    Historial Clinico <span class="caret"></span>
+                                <a  role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><i class="fa fa-file-archive-o" aria-hidden="true"></i>
+                                    Registros Clínicos <span class="caret"></span>
                                 </a>
                             </h6>
                         </div>
-                        <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
-                            <div class="panel-body" style="background-color: #3DCCC2; border: 1px solid transparent">
-                                <a href="ConsultarHistorialClinico.xhtml" style="color: #fff;">Consultar Historiales</a> 
+                        <div id="collapseTwo" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body">
+                                <a href="ConsultarHistorialClinico.xhtml">Consultar Historiales Clínicos</a> 
                             </div>
                             <div class="panel-body">
-                                <a href="CrearHistorialClinico.xhtml">Añadir Historial Clínico</a> 
+                                <a href="CrearHistorialClinico.xhtml">Añadir nuevo Histrial clinico</a> 
                             </div>
                         </div>
 
                         <div class="fondoblanco panel-heading" role="tab" id="headingThree">
-                            <h6 class="panel-title"><i class="fa fa-file-archive-o" aria-hidden="true"></i>
+                            <h6 class="panel-title"><i class="fa fa-folder-open" aria-hidden="true"></i>
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsThree" aria-expanded="true" aria-controls="collapseThree">
                                     Reportes<span class="caret"></span> 
                                 </a>
@@ -46,7 +73,7 @@
 
                         <div id="collapsThree" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingThree">
                             <div class="panel-body">
-                                <a href="CrearCitaMedica.xhtml">Nueva Cita médica</a> 
+                                <a href="#">Reportes de Historias clínicas</a> 
                             </div>
                         </div>
 
@@ -69,8 +96,12 @@
                             <br/>
                         </div>
                     </div>
-                    
-                    
+                    <div class="datosDeHistorial col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <h2>Historial clínico N°: #{controllerHistorialClinico.historialClinico.idHistorialClinico}</h2>
+                    </div>
+                    <div class="datosDeHistorial col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <h2>Fecha de registro: #{controllerHistorialClinico.historialClinico.fechaCreacion}</h2>
+                    </div>
                     <h:dataTable value="#{controllerHistorialClinico.historialClinico}" class="table table-striped table-bordered">
 
                         <h:column>
@@ -177,11 +208,11 @@
                                 </h:selectOneMenu>
                             </div>
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="Ocupacion:" for="ocupacion" />
+                                <h:outputLabel value="Ocupación:" for="ocupacion" />
                                 <h:inputText id="ocupacion" class="form-control mitooltip" value="#{controllerHistorialClinico.historialClinico.ocupacion}" title="Ocupacion" />
                             </div>
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="Telefono:" for="telefono" />
+                                <h:outputLabel value="Teléfono:" for="telefono" />
                                 <h:inputText id="telefono" class="form-control mitooltip" value="#{controllerHistorialClinico.historialClinico.telefono}" title="Telefono" />
                             </div> 
                             
@@ -192,7 +223,11 @@
                             
                             <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
                                 <br></br>
-                                <h:commandButton class="btn btn-info" action="#{controllerHistorialClinico.editarHistorialClinico()}" value="Guardar"/>                                
+                                <h:commandButton class="btn btn-info" action="#{controllerHistorialClinico.editarHistorialClinico()}" value="Guardar"/>  
+                                &nbsp;
+                                <h:commandButton class="btn btn-info" action="#{controllerHistorialClinico.atrasHistorialClinico()}" value="Atras"/>  
+                                &nbsp;
+                                <h:commandButton class="btn btn-info" action="#{controllerHistorialClinico.siguienteHistorialClinico()}" value="Siguiente"/>  
                             </div> 
                             
                         </h:form>

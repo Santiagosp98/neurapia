@@ -138,7 +138,8 @@ background-color: #fff;
 .panel-group .panel + .panel{
 	margin-top: 10px;
 }
-div.panel-body{
+
+div.panel-body:hover{
 	background-color: #ccc;
 }
 li.menuinterior{

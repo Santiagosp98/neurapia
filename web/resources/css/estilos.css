@@ -149,8 +149,10 @@ background-color: #fff;
 .panel-group .panel + .panel{
 	margin-top: 10px;
 }
-div.panel-body{
-	background-color: #ccc;
+div.panel-body:hover{
+	background-color: #ddd;        
+	transition: 0.7s all;
+	padding-left: 10px;
 }
 li.menuinterior{
 	list-style: none;
@@ -164,11 +166,11 @@ ul.menuinterior{
 }
 .panel-default> .panel-heading + .panel-collapse> .panel-body:hover{
 	background-color: #ddd;
-	transition: 0.5s all;
-	padding-left: 25px;
+	transition: 0.7s all;
+	padding-left: 10px;
 }
 .panel-default> .panel-heading + .panel-collapse> .panel-body:before{
-	transition: 0.5s all;
+	transition: 0.9s all;
 	padding-left: 0px;
 }
 .tituloscontenedorderecho{
@@ -573,4 +575,8 @@ ul.mensajeErrorForm{
     margin: 0 auto;
     padding-right: 5%;
     padding-left: 5%;
+}
+
+.datosDeHistorial{
+    padding: 0px !important;
 }
