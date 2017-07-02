@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"      
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    
+
     <h:head>
         <f:event type="preRenderView" listener="#{controllerSession.validarSesion()}"/>
         <meta name="keywords" content="pagina,html,cs3,maquetacion"/>
@@ -21,23 +21,25 @@
         <link href="#{request.contextPath}/resources/css/estilos.css" rel="stylesheet"/>
         <link href="#{request.contextPath}/resources/css/export.css" rel="stylesheet"/>
         <h:outputStylesheet name="jquery/ui/jquery-ui.css" library="primefaces" />
+        <h:outputStylesheet library="css" name="datatables.min.css"/>
         <h:outputScript name="jquery2.2.3.js" library="js" />
         <h:outputScript name="bootstrap.js" library="js" />
         <h:outputScript name="serial.js" library="js"/>
         <h:outputScript name="amcharcopiado.js" library="js" />
         <h:outputScript name="sweetalert.min.js" library="js" /> 
         <h:outputScript name="jquery/jquery-plugins.js" library="primefaces" /> 
-        <h:outputScript name="propioJavaSacrip.js" library="js" />       
-        
-        
+        <h:outputScript name="propioJavaSacrip.js" library="js" /> 
+        <h:outputScript library="js" name="datatables.min.js"/>
+
+
 
         <link rel="shortcut icon" href="#{request.contextPath}/resources/imgs/icono.png"/>       
         <title><ui:insert name="titulo"></ui:insert></title>
-        
+
     </h:head>
 
     <h:body id="back">
-        
+
         <div id="page">
 
             <div id="header">
@@ -45,35 +47,35 @@
                     <ui:include src="/template/common/commonHeader.xhtml" />
                 </ui:insert>
             </div>
-        <section id="contenedorprincipal" class="container-fluid">
-                    
-            <div id="aside">
-                <aside class="aside col-lg-3 col-md-3 col-sm-3 col-xs-12">
+            <section id="contenedorprincipal" class="container-fluid">
+
+                <div id="aside">
+                    <aside class="aside col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
+                            <ui:insert name="aside" >
+
+                            </ui:insert>
+                        </div>
+                    </aside>
+                </div>
+
+                <div id="content">                        
                     <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
-                        <ui:insert name="aside" >
+                        <div class="panel panel-default">
+                            <ui:insert name="content"  >        
 
-                        </ui:insert>
-                    </div>
-                </aside>
-            </div>
+                            </ui:insert>       
+                        </div>                            
+                    </div>                        
+                </div>
 
-            <div id="content">                        
-                <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
-                    <div class="panel panel-default">
-                        <ui:insert name="content"  >        
-
-                        </ui:insert>       
-                    </div>                            
-                </div>                        
-            </div>
-            
-        </section>
+            </section>
             <div id="footer">
                 <ui:insert name="footer" >
                     <ui:include src="/template/common/commonFooter.xhtml" />
                 </ui:insert>
             </div>
-            
+
             <ui:insert name="ultimosScripts">
 
             </ui:insert>
@@ -82,7 +84,7 @@
 
             </ui:insert>   
         </div>
-        
+
     </h:body>
 </html>
 
