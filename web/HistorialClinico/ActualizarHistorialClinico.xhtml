@@ -24,21 +24,25 @@
                         </div>
 
                         <div id="collapsOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" >
+                            
+                            <h:form>
                             <div class="panel-body" style="background-color: #3DCCC2; border: 1px solid transparent">
-                                <a href="ActualizarHistorialClinico.xhtml" style="color: #fff;">Información básica</a> 
+                                <h:commandLink action="#{controllerHistorialClinico.selectInformacionBasica()}" value="Información Básica" style="color:  white" /> 
                             </div>
                             <div class="panel-body" >
-                                <a href="Anamnesis.xhtml" >Anamnésis</a> 
+                                <h:commandLink action="#{controllerHistorialClinico.selectAnamnesis}" value="anamnesis" /> 
                             </div>
                             <div class="panel-body" >
-                                <a href="Movilidad.xhtml" >Movilidad</a> 
+                                <h:commandLink action="#{controllerHistorialClinico.selectMovilidad}" value="Movilidad" /> 
                             </div>
                             <div class="panel-body" >
-                                <a href="Objetivos.xhtml" >Objetivos</a> 
+                                <h:commandLink action="#{controllerHistorialClinico.selectObjetivoTratamiento()}" value="Objetivos del Tratamiento" /> 
                             </div>
                             <div class="panel-body" >
-                                <a href="ReporteTratamiento.xhtml" >Reporte de Tratamiento</a> 
+                                <h:commandLink action="#{controllerHistorialClinico.selectReporteTratamiento()}" value="Reporte del Tratamiento" /> 
                             </div>
+                            
+                            </h:form>
                         </div>
 
 
@@ -225,9 +229,9 @@
                                 <br></br>
                                 <h:commandButton class="btn btn-info" action="#{controllerHistorialClinico.editarHistorialClinico()}" value="Guardar"/>  
                                 &nbsp;
-                                <h:commandButton class="btn btn-info" action="#{controllerHistorialClinico.atrasHistorialClinico()}" value="Atras"/>  
+                                <h:commandButton class="btn btn-default" action="#{controllerHistorialClinico.consultarHistorialClinico()}" value="Atras"/>  
                                 &nbsp;
-                                <h:commandButton class="btn btn-info" action="#{controllerHistorialClinico.siguienteHistorialClinico()}" value="Siguiente"/>  
+                                <h:commandButton class="btn btn-default" action="#{controllerHistorialClinico.selectAnamnesis()}" value="Siguiente"/>  
                             </div> 
                             
                         </h:form>
