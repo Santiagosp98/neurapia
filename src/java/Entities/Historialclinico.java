@@ -278,7 +278,7 @@ public class Historialclinico implements Serializable {
     public void setCodLugarNacimiento(Departamento codLugarNacimiento) {
         this.codLugarNacimiento = codLugarNacimiento;
     }
-
+    
     public ArrayList getListaEstrato(){
         ArrayList lista = new ArrayList();
         lista.add("0");

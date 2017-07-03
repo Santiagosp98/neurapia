@@ -8,7 +8,9 @@ package Controllers;
 import Entities.Anamnesis;
 import Entities.Historialclinico;
 import Entities.Usuario;
+import Entities.Dolor;
 import Facade.AnamnesisFacadeLocal;
+import Facade.DolorFacadeLocal;
 import Facade.HistorialclinicoFacadeLocal;
 import Facade.UsuarioFacadeLocal;
 import java.text.ParseException;
@@ -39,9 +41,10 @@ public class ControllerHistorialClinico extends ControllerApp {
     }
     
     @EJB
-    HistorialclinicoFacadeLocal historialClinicoFacade;
-    Historialclinico historialClinico;
-    List<Historialclinico> listaHistorialClinico;
+    private HistorialclinicoFacadeLocal historialClinicoFacade;
+    private Historialclinico historialClinico;
+    private List<Historialclinico> listaHistorialClinico;
+    private int edad;
     
     @EJB
     private UsuarioFacadeLocal usuarioFacade;
@@ -51,6 +54,11 @@ public class ControllerHistorialClinico extends ControllerApp {
     private AnamnesisFacadeLocal anamnesisFacade;
     private Anamnesis anamnesis;
     private List<Anamnesis> listAnamnesis;
+    
+    @EJB
+    private DolorFacadeLocal dolorFacade;
+    private Dolor dolor;
+    private List<Dolor> listaDolor;
 
     public HistorialclinicoFacadeLocal getHistorialClinicoFacade() {
         return historialClinicoFacade;
@@ -99,13 +107,40 @@ public class ControllerHistorialClinico extends ControllerApp {
     public void setListAnamnesis(List<Anamnesis> listAnamnesis) {
         this.listAnamnesis = listAnamnesis;
     }
+
+    public DolorFacadeLocal getDolorFacade() {
+        return dolorFacade;
+    }
+
+    public void setDolorFacade(DolorFacadeLocal dolorFacade) {
+        this.dolorFacade = dolorFacade;
+    }
+
+    public Dolor getDolor() {
+        return dolor;
+    }
+
+    public void setDolor(Dolor dolor) {
+        this.dolor = dolor;
+    }
+
+    public List<Dolor> getListaDolor() {
+        return listaDolor;
+    }
+
+    public void setListaDolor(List<Dolor> listaDolor) {
+        this.listaDolor = listaDolor;
+    }
     
+
     @PostConstruct
     public void init(){
         historialClinico = new Historialclinico(); 
         anamnesis = new Anamnesis(); 
+        dolor = new Dolor();
         listaHistorialClinico = historialClinicoFacade.findAll();
         listAnamnesis = anamnesisFacade.findAll();
+        listaDolor = dolorFacade.findAll();
     }
     
     public List<Historialclinico> consultarHistorialClinico(){
@@ -119,6 +154,12 @@ public class ControllerHistorialClinico extends ControllerApp {
         for (Anamnesis  anamnesis : listAnamnesis) {
             if (historialClinico.getIdHistorialClinico() == anamnesis.getCodHistorialClinico().getIdHistorialClinico()) {
                 this.anamnesis = anamnesis;
+                    for (Dolor  dolor : listaDolor) {
+                        if (anamnesis.getCodDolor().getIdDolor() == dolor.getIdDolor()) {
+                            System.out.println("Estoy seleccionando el dolor: " + dolor.getIdDolor());
+                            this.dolor = dolor;
+                        }
+                    }
                 System.out.println("estoy seleccionando anamnesis: " + anamnesis.getIdAnamnesis());
                 return "ActualizarHistorialClinico?faces-redirect=true";
             }
@@ -128,7 +169,7 @@ public class ControllerHistorialClinico extends ControllerApp {
     }
     
     public void editarHistorialClinico(){
-        if (historialClinico != null || !historialClinico.equals("")) {
+        if (historialClinico != null || !historialClinico.equals("")){
             System.out.println(historialClinico.getCodEps().getIdEps());
             this.historialClinicoFacade.edit(historialClinico);
         }
@@ -136,11 +177,16 @@ public class ControllerHistorialClinico extends ControllerApp {
     
     public void editarAnamnesis(){
         System.out.println("Estamos actualizando la anamnesis");
+        this.anamnesisFacade.edit(anamnesis);
+        editarDolor();
+    }
+    
+    public void editarDolor(){
+            System.out.println("Estamos editando Dolor");
+            this.dolorFacade.edit(dolor);
     }
     
     public String selectAnamnesis(){
-        System.out.println("estoy dentro de la anamnesis con codigo numero: " + anamnesis.getIdAnamnesis());
-        System.out.println("" + anamnesis.getAnamnesis());
         return "Anamnesis";
     }
     public String selectMovilidad(){
