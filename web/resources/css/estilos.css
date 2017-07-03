@@ -136,9 +136,6 @@ header .row{
 	margin-top: 10px;
         padding: 4px;
 }
-.fondoblanco, .panel-heading.fondoblanco{
-background-color: #fff;
-}
 .aside{
 	padding-left: 0px;
 }
@@ -364,10 +361,6 @@ div.col-lg-1{
 thead{
 	background-color: #093242;
 	color: white;
-}
-div.fondoblanco.panel-heading{
-	border-top: 1px solid #e7e7e7;
-        background-color: white;
 }
 div a{
 color: #093242;
