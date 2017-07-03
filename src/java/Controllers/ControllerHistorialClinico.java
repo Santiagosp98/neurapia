@@ -5,8 +5,10 @@
  */
 package Controllers;
 
+import Entities.Anamnesis;
 import Entities.Historialclinico;
 import Entities.Usuario;
+import Facade.AnamnesisFacadeLocal;
 import Facade.HistorialclinicoFacadeLocal;
 import Facade.UsuarioFacadeLocal;
 import java.text.ParseException;
@@ -42,13 +44,68 @@ public class ControllerHistorialClinico extends ControllerApp {
     List<Historialclinico> listaHistorialClinico;
     
     @EJB
-    UsuarioFacadeLocal usuarioFacade;
-    Usuario usuario;
+    private UsuarioFacadeLocal usuarioFacade;
+    private Usuario usuario;
+    
+    @EJB
+    private AnamnesisFacadeLocal anamnesisFacade;
+    private Anamnesis anamnesis;
+    private List<Anamnesis> listAnamnesis;
+
+    public HistorialclinicoFacadeLocal getHistorialClinicoFacade() {
+        return historialClinicoFacade;
+    }
+
+    public void setHistorialClinicoFacade(HistorialclinicoFacadeLocal historialClinicoFacade) {
+        this.historialClinicoFacade = historialClinicoFacade;
+    }
+
+    public UsuarioFacadeLocal getUsuarioFacade() {
+        return usuarioFacade;
+    }
+
+    public void setUsuarioFacade(UsuarioFacadeLocal usuarioFacade) {
+        this.usuarioFacade = usuarioFacade;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public AnamnesisFacadeLocal getAnamnesisFacade() {
+        return anamnesisFacade;
+    }
+
+    public void setAnamnesisFacade(AnamnesisFacadeLocal anamnesisFacade) {
+        this.anamnesisFacade = anamnesisFacade;
+    }
+
+    public Anamnesis getAnamnesis() {
+        return anamnesis;
+    }
+
+    public void setAnamnesis(Anamnesis anamnesis) {
+        this.anamnesis = anamnesis;
+    }
+
+    public List<Anamnesis> getListAnamnesis() {
+        return listAnamnesis;
+    }
+
+    public void setListAnamnesis(List<Anamnesis> listAnamnesis) {
+        this.listAnamnesis = listAnamnesis;
+    }
     
     @PostConstruct
     public void init(){
         historialClinico = new Historialclinico(); 
+        anamnesis = new Anamnesis(); 
         listaHistorialClinico = historialClinicoFacade.findAll();
+        listAnamnesis = anamnesisFacade.findAll();
     }
     
     public List<Historialclinico> consultarHistorialClinico(){
@@ -59,6 +116,13 @@ public class ControllerHistorialClinico extends ControllerApp {
     public String seleccionarHistorialclinico(Historialclinico historialClinico){
         iniciarConversacion();
         this.historialClinico = historialClinico;
+        for (Anamnesis  anamnesis : listAnamnesis) {
+            if (historialClinico.getIdHistorialClinico() == anamnesis.getCodHistorialClinico().getIdHistorialClinico()) {
+                this.anamnesis = anamnesis;
+                System.out.println("estoy seleccionando anamnesis: " + anamnesis.getIdAnamnesis());
+                return "ActualizarHistorialClinico?faces-redirect=true";
+            }
+        }
         System.out.println(historialClinico.getCodUsuario().getPrimerNombre());
         return "ActualizarHistorialClinico?faces-redirect=true";
     }
@@ -67,41 +131,34 @@ public class ControllerHistorialClinico extends ControllerApp {
         if (historialClinico != null || !historialClinico.equals("")) {
             System.out.println(historialClinico.getCodEps().getIdEps());
             this.historialClinicoFacade.edit(historialClinico);
-            siguienteHistorialClinico();
         }
     }
     
-    public String siguienteHistorialClinico(){
-     ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-        System.out.println(ec.getRequestContextPath());
-        String page = "";        
-        if (page == "ActualizarHistorialClinico") {
-            return "Anamnesis?faces-redirect=true";
-        }else if (page == "Anamnesis") {
-            return "Movilidad?faces-redirect=true";
-        }else if (page == "Movilidad" ) {
-            return "ObjetivosTratamiento?faces-redirect=true";
-        }else if (page == "ObjetivosTratamiento"){
-            finalizarConversacion();
-            return "ConsultarHistorialclinico?faces-redirect=true";
-             
-        }return "";
+    public void editarAnamnesis(){
+        System.out.println("Estamos actualizando la anamnesis");
     }
     
-    public String atrasHistorialClinico(){
-        String page = "";
-        if (page == "ObjetivosTratamiento" ) {
-            return "ObjetivosTratamiento?faces-redirect=true";
-        }else if (page == "ObjetivosTratamiento") {
-            return "Movilidad?faces-redirect=true";
-        }else if (page == "Movilidad") {
-            return "Anamnesis?faces-redirect=true";
-        }else if (page == "anamnesis") {
-            finalizarConversacion();
-            return "ConsultarHistorialclinico?faces-redirect=true";
-        }return "";
+    public String selectAnamnesis(){
+        System.out.println("estoy dentro de la anamnesis con codigo numero: " + anamnesis.getIdAnamnesis());
+        System.out.println("" + anamnesis.getAnamnesis());
+        return "Anamnesis";
     }
-     
+    public String selectMovilidad(){
+        return "Movilidad";
+    }
+    
+    public String selectInformacionBasica(){
+        return "ActualizarHistorialClinico";
+    }   
+
+    public String selectObjetivoTratamiento(){
+        return "ObjetivoTratamiento";
+    } 
+    
+    public String selectReporteTratamiento(){
+        return "ReporteTratamiento";
+    } 
+    
     public String crearHistorialClinico() throws ParseException{
         System.out.println("Estamos creando un hsitorial clinico");
         Calendar datosFecha = new GregorianCalendar();

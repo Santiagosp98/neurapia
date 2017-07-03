@@ -6,23 +6,19 @@
 package Entities;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.ArrayList;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -56,24 +52,43 @@ public class Dolor implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "localizacion")
     private String localizacion;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 8)
     @Column(name = "evaluacionInicial")
-    private Integer evaluacionInicial;
+    private String evaluacionInicial;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 10)
     @Column(name = "frecuencia")
-    private Integer frecuencia;
+    private String frecuencia;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 14)
     @Column(name = "caracteristica")
-    private Integer caracteristica;
+    private String caracteristica;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 3)
     @Column(name = "dolorPalmacion")
-    private Short dolorPalmacion;
+    private String dolorPalmacion;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 3)
     @Column(name = "espasmos")
-    private Short espasmos;
+    private String espasmos;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 3)
     @Column(name = "presenciaCefalea")
-    private Short presenciaCefalea;
+    private String presenciaCefalea;
     @Column(name = "escalaNumerica")
     private Integer escalaNumerica;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 3)
     @Column(name = "vertigo")
-    private Short vertigo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codDolor", fetch = FetchType.LAZY)
-    private List<Anamnesis> anamnesisList;
+    private String vertigo;
 
     public Dolor() {
     }
@@ -82,9 +97,16 @@ public class Dolor implements Serializable {
         this.idDolor = idDolor;
     }
 
-    public Dolor(Integer idDolor, String localizacion) {
+    public Dolor(Integer idDolor, String localizacion, String evaluacionInicial, String frecuencia, String caracteristica, String dolorPalmacion, String espasmos, String presenciaCefalea, String vertigo) {
         this.idDolor = idDolor;
         this.localizacion = localizacion;
+        this.evaluacionInicial = evaluacionInicial;
+        this.frecuencia = frecuencia;
+        this.caracteristica = caracteristica;
+        this.dolorPalmacion = dolorPalmacion;
+        this.espasmos = espasmos;
+        this.presenciaCefalea = presenciaCefalea;
+        this.vertigo = vertigo;
     }
 
     public Integer getIdDolor() {
@@ -103,51 +125,51 @@ public class Dolor implements Serializable {
         this.localizacion = localizacion;
     }
 
-    public Integer getEvaluacionInicial() {
+    public String getEvaluacionInicial() {
         return evaluacionInicial;
     }
 
-    public void setEvaluacionInicial(Integer evaluacionInicial) {
+    public void setEvaluacionInicial(String evaluacionInicial) {
         this.evaluacionInicial = evaluacionInicial;
     }
 
-    public Integer getFrecuencia() {
+    public String getFrecuencia() {
         return frecuencia;
     }
 
-    public void setFrecuencia(Integer frecuencia) {
+    public void setFrecuencia(String frecuencia) {
         this.frecuencia = frecuencia;
     }
 
-    public Integer getCaracteristica() {
+    public String getCaracteristica() {
         return caracteristica;
     }
 
-    public void setCaracteristica(Integer caracteristica) {
+    public void setCaracteristica(String caracteristica) {
         this.caracteristica = caracteristica;
     }
 
-    public Short getDolorPalmacion() {
+    public String getDolorPalmacion() {
         return dolorPalmacion;
     }
 
-    public void setDolorPalmacion(Short dolorPalmacion) {
+    public void setDolorPalmacion(String dolorPalmacion) {
         this.dolorPalmacion = dolorPalmacion;
     }
 
-    public Short getEspasmos() {
+    public String getEspasmos() {
         return espasmos;
     }
 
-    public void setEspasmos(Short espasmos) {
+    public void setEspasmos(String espasmos) {
         this.espasmos = espasmos;
     }
 
-    public Short getPresenciaCefalea() {
+    public String getPresenciaCefalea() {
         return presenciaCefalea;
     }
 
-    public void setPresenciaCefalea(Short presenciaCefalea) {
+    public void setPresenciaCefalea(String presenciaCefalea) {
         this.presenciaCefalea = presenciaCefalea;
     }
 
@@ -159,22 +181,65 @@ public class Dolor implements Serializable {
         this.escalaNumerica = escalaNumerica;
     }
 
-    public Short getVertigo() {
+    public String getVertigo() {
         return vertigo;
     }
 
-    public void setVertigo(Short vertigo) {
+    public void setVertigo(String vertigo) {
         this.vertigo = vertigo;
     }
-
-    @XmlTransient
-    public List<Anamnesis> getAnamnesisList() {
-        return anamnesisList;
+    
+    public ArrayList getSeleccionSiNo(){
+        ArrayList lista = new ArrayList();
+        lista.add("No");
+        lista.add("Si");
+        return lista;
     }
-
-    public void setAnamnesisList(List<Anamnesis> anamnesisList) {
-        this.anamnesisList = anamnesisList;
+        
+    public ArrayList getSeleccionEscalaNumerica(){
+        ArrayList lista = new ArrayList();
+        lista.add("1");
+        lista.add("2");
+        lista.add("3");
+        lista.add("4");
+        lista.add("5");
+        lista.add("6");
+        lista.add("7");
+        lista.add("8");
+        lista.add("9");
+        lista.add("10");
+        return lista;
     }
+    
+    public ArrayList getSeleccionFrecuencia(){
+        ArrayList lista = new ArrayList();
+        lista.add("Ocacional");
+        lista.add("Intermedio");
+        lista.add("Continuo");
+        return lista;
+    }
+    
+    public ArrayList getSeleccionEvaluacionInicial(){
+        ArrayList lista = new ArrayList();
+        lista.add("Agudo");
+        lista.add("Subagudo");
+        lista.add("Crónico");
+        lista.add("Diurno");
+        lista.add("Nocturno");
+        return lista;
+    }
+    
+    public ArrayList getSeleccionCaracteristica(){
+        ArrayList lista = new ArrayList();
+        lista.add("Ardor");
+        lista.add("Adormecimiento");
+        lista.add("Calambre");
+        lista.add("Difuso");
+        lista.add("Cansancio");
+        lista.add("Tirones");
+        return lista;
+    }
+       
 
     @Override
     public int hashCode() {
