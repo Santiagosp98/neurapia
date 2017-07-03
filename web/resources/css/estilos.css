@@ -196,6 +196,16 @@ ul.menuinterior {
     background-color: #eee;
 }
 
+.panel-default > .panel-heading + .panel-collapse > form > .panel-body {
+    background-color: #eee;
+}
+
+.panel-default > .panel-heading + .panel-collapse > form > .panel-body:hover {
+    background-color: #ddd;
+    transition: 0.7s all;
+    padding-left: 10px;
+}
+
 .panel-default > .panel-heading + .panel-collapse > .panel-body:hover {
     background-color: #ddd;
     transition: 0.7s all;
@@ -701,6 +711,15 @@ ul.mensajeErrorForm {
 .panel-default > .panel-collapse > .panel-body.active {
     background-color: #3DCCC2;
     border: 1px solid transparent;
+}
+
+.panel-default > .panel-collapse > form > .panel-body.active {
+    background-color: #3DCCC2;
+    border: 1px solid transparent;
+}
+
+.panel-default > .panel-collapse > form > .panel-body.active > a {
+    color: #fff;
 }
 
 .panel-default > .panel-collapse > .panel-body.active > a {
