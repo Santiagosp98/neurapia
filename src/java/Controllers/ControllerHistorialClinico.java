@@ -9,12 +9,15 @@ import Entities.Anamnesis;
 import Entities.Historialclinico;
 import Entities.Usuario;
 import Entities.Dolor;
+import Entities.Resultadoproceso;
 import Facade.AnamnesisFacadeLocal;
 import Facade.DolorFacadeLocal;
 import Facade.HistorialclinicoFacadeLocal;
+import Facade.ResultadoprocesoFacadeLocal;
 import Facade.UsuarioFacadeLocal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -59,6 +62,12 @@ public class ControllerHistorialClinico extends ControllerApp {
     private DolorFacadeLocal dolorFacade;
     private Dolor dolor;
     private List<Dolor> listaDolor;
+    
+    @EJB
+    private ResultadoprocesoFacadeLocal resultadoProcesoFacade;
+    private Resultadoproceso resultadoProceso;
+    private List<Resultadoproceso> listaresultadoProceso;
+    private List<Resultadoproceso> resultadosOBtenidos;
 
     public HistorialclinicoFacadeLocal getHistorialClinicoFacade() {
         return historialClinicoFacade;
@@ -131,6 +140,38 @@ public class ControllerHistorialClinico extends ControllerApp {
     public void setListaDolor(List<Dolor> listaDolor) {
         this.listaDolor = listaDolor;
     }
+
+    public ResultadoprocesoFacadeLocal getResultadoProcesoFacade() {
+        return resultadoProcesoFacade;
+    }
+
+    public void setResultadoProcesoFacade(ResultadoprocesoFacadeLocal resultadoProcesoFacade) {
+        this.resultadoProcesoFacade = resultadoProcesoFacade;
+    }
+
+    public Resultadoproceso getResultadoProceso() {
+        return resultadoProceso;
+    }
+
+    public void setResultadoProceso(Resultadoproceso resultadoProceso) {
+        this.resultadoProceso = resultadoProceso;
+    }
+
+    public List<Resultadoproceso> getListaresultadoProceso() {
+        return listaresultadoProceso;
+    }
+
+    public void setListaresultadoProceso(List<Resultadoproceso> listaresultadoProceso) {
+        this.listaresultadoProceso = listaresultadoProceso;
+    }
+
+    public List<Resultadoproceso> getResultadosOBtenidos() {
+        return resultadosOBtenidos;
+    }
+
+    public void setResultadosOBtenidos(List<Resultadoproceso> resultadosOBtenidos) {
+        this.resultadosOBtenidos = resultadosOBtenidos;
+    }
     
 
     @PostConstruct
@@ -138,9 +179,12 @@ public class ControllerHistorialClinico extends ControllerApp {
         historialClinico = new Historialclinico(); 
         anamnesis = new Anamnesis(); 
         dolor = new Dolor();
+        resultadoProceso = new Resultadoproceso();
+        resultadosOBtenidos = new ArrayList();
         listaHistorialClinico = historialClinicoFacade.findAll();
         listAnamnesis = anamnesisFacade.findAll();
         listaDolor = dolorFacade.findAll();
+        listaresultadoProceso = resultadoProcesoFacade.findAll();
     }
     
     public List<Historialclinico> consultarHistorialClinico(){
@@ -153,14 +197,20 @@ public class ControllerHistorialClinico extends ControllerApp {
         this.historialClinico = historialClinico;
         for (Anamnesis  anamnesis : listAnamnesis) {
             if (historialClinico.getIdHistorialClinico() == anamnesis.getCodHistorialClinico().getIdHistorialClinico()) {
-                this.anamnesis = anamnesis;
-                    for (Dolor  dolor : listaDolor) {
-                        if (anamnesis.getCodDolor().getIdDolor() == dolor.getIdDolor()) {
-                            System.out.println("Estoy seleccionando el dolor: " + dolor.getIdDolor());
-                            this.dolor = dolor;
+                this.anamnesis = anamnesis;                
+                for (Dolor  dolor : listaDolor) {
+                    if (anamnesis.getCodDolor().getIdDolor() == dolor.getIdDolor()) {
+                        System.out.println("Seleccionando dolor: " + dolor.getIdDolor());
+                        this.dolor = dolor;
+                        for (Resultadoproceso resultadoProceso : listaresultadoProceso) {
+                            if (historialClinico.getIdHistorialClinico() == resultadoProceso.getCodHistorialClinico().getIdHistorialClinico()) {                                    
+                                resultadosOBtenidos.add(resultadoProceso);                                    
+                                System.out.println("Seleccionando resultados: " + resultadoProceso.getIdResultadoProceso());
+                            }
                         }
                     }
-                System.out.println("estoy seleccionando anamnesis: " + anamnesis.getIdAnamnesis());
+                }                    
+                System.out.println("Seleccionando anamnesis: " + anamnesis.getIdAnamnesis());
                 return "ActualizarHistorialClinico?faces-redirect=true";
             }
         }
@@ -198,7 +248,7 @@ public class ControllerHistorialClinico extends ControllerApp {
     }   
 
     public String selectObjetivoTratamiento(){
-        return "ObjetivoTratamiento";
+        return "Objetivos";
     } 
     
     public String selectReporteTratamiento(){
