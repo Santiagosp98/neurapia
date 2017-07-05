@@ -6,7 +6,6 @@
 package Entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -17,6 +16,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -27,6 +28,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import java.util.ArrayList;
 
 /**
  *
@@ -46,7 +48,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Usuario.findBySegundoApellido", query = "SELECT u FROM Usuario u WHERE u.segundoApellido = :segundoApellido")
     , @NamedQuery(name = "Usuario.findByEstadoUsuario", query = "SELECT u FROM Usuario u WHERE u.estadoUsuario = :estadoUsuario")
     , @NamedQuery(name = "Usuario.findByFechaRegistro", query = "SELECT u FROM Usuario u WHERE u.fechaRegistro = :fechaRegistro")
-    , @NamedQuery(name = "Usuario.findByRol", query = "SELECT u FROM Usuario u WHERE u.rol = :rol")
     , @NamedQuery(name = "Usuario.findByCorreoElectronico", query = "SELECT u FROM Usuario u WHERE u.correoElectronico = :correoElectronico")
     , @NamedQuery(name = "Usuario.login", query = "SELECT u FROM Usuario u WHERE u.correoElectronico = :email AND u.claveUsuario = :claveUsuario")
     , @NamedQuery(name = "Usuario.findByClaveUsuario", query = "SELECT u FROM Usuario u WHERE u.claveUsuario = :claveUsuario")})
@@ -64,13 +65,7 @@ public class Usuario implements Serializable {
     @Column(name = "tipoDocumento")
     private String tipoDocumento;
     @Basic(optional = false)
-    @NotNull    
-    
-    @Column(name = "rol")
-    private String rol;
-    @Basic(optional = false)
     @NotNull
-    
     @Size(min = 1, max = 20)
     @Column(name = "numeroDocumento")
     private String numeroDocumento;
@@ -102,6 +97,15 @@ public class Usuario implements Serializable {
     private String claveUsuario;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "codUsuario", fetch = FetchType.LAZY)
     private List<Historialclinico> historialclinicoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cudUsuario", fetch = FetchType.LAZY)
+    private List<Reportetratamiento> reportetratamientoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codUsuario", fetch = FetchType.LAZY)
+    private List<Citamedica> citamedicaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codUsuario", fetch = FetchType.LAZY)
+    private List<Fisioterapeuta> fisioterapeutaList;
+    @JoinColumn(name = "codRol", referencedColumnName = "idRol")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Rol codRol;
 
     public Usuario() {
     }
@@ -110,7 +114,7 @@ public class Usuario implements Serializable {
         this.idUsuario = idUsuario;
     }
 
-    public Usuario(Integer idUsuario, String tipoDocumento, String numeroDocumento, String estadoUsuario, String rol) {
+    public Usuario(Integer idUsuario, String tipoDocumento, String numeroDocumento, String estadoUsuario) {
         this.idUsuario = idUsuario;
         this.tipoDocumento = tipoDocumento;
         this.numeroDocumento = numeroDocumento;
@@ -214,15 +218,41 @@ public class Usuario implements Serializable {
         this.historialclinicoList = historialclinicoList;
     }
 
-    public String getRol() {
-        return rol;
+    @XmlTransient
+    public List<Reportetratamiento> getReportetratamientoList() {
+        return reportetratamientoList;
     }
 
-    public void setRol(String rol) {
-        this.rol = rol;
+    public void setReportetratamientoList(List<Reportetratamiento> reportetratamientoList) {
+        this.reportetratamientoList = reportetratamientoList;
     }
-    
-    
+
+    @XmlTransient
+    public List<Citamedica> getCitamedicaList() {
+        return citamedicaList;
+    }
+
+    public void setCitamedicaList(List<Citamedica> citamedicaList) {
+        this.citamedicaList = citamedicaList;
+    }
+
+    @XmlTransient
+    public List<Fisioterapeuta> getFisioterapeutaList() {
+        return fisioterapeutaList;
+    }
+
+    public void setFisioterapeutaList(List<Fisioterapeuta> fisioterapeutaList) {
+        this.fisioterapeutaList = fisioterapeutaList;
+    }
+
+    public Rol getCodRol() {
+        return codRol;
+    }
+
+    public void setCodRol(Rol codRol) {
+        this.codRol = codRol;
+    }
+
     
     /*Edicion entidad Usuario*/
     public String getFullNameUsuario(){
@@ -232,6 +262,7 @@ public class Usuario implements Serializable {
         String nombreCompleto = this.primerNombre + " " + this.primerApellido;
         return nombreCompleto;
     }
+    
     public ArrayList getSeleccionEstados(){
         ArrayList lista = new ArrayList();
         lista.add("Activo");
@@ -248,10 +279,10 @@ public class Usuario implements Serializable {
     
     public ArrayList getSeleccionRol(){
         ArrayList listaRol = new ArrayList();
+        listaRol.add("Super Administrador");
         listaRol.add("Administrador");
         listaRol.add("Fisioterapeuta");
         listaRol.add("Usuario");
-        listaRol.add("Super Administrador");
         return listaRol;
     }
     /*Edicion entidad Usuario*/

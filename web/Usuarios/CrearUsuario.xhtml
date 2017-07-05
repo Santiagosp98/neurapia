@@ -111,8 +111,8 @@
                         
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
                                 <h:outputLabel value="Rol:" for="rol"/>
-                                <h:selectOneMenu id="rol" class="form-control mitooltip"  tabindex="7" value="#{controllerUsuario.usuario.rol}">
-                                    <f:selectItems class="form-control mitooltip" value="#{controllerUsuario.usuario.seleccionRol}"/>
+                                <h:selectOneMenu id="rol" class="form-control mitooltip"  tabindex="7" value="#{controllerUsuario.usuario.codRol}" converter="rolConverter">
+                                    <f:selectItems class="form-control mitooltip" value="#{controllerRol.listaRol}" var="u" itemLabel="#{u.nombreRol}"/>
                                 </h:selectOneMenu>
                             </div>
                             

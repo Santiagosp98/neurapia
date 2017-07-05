@@ -70,8 +70,8 @@ public class ControllerUsuario extends ControllerApp {
             System.out.println("Voy a eliminar el usuario: " + usuario.getPrimerNombre());
             System.out.println("Inicio sesion: " + uS.getPrimerNombre());
             if (uS.getIdUsuario().intValue() != usuario.getIdUsuario()) {
-                System.out.println(usuario.getRol());
-                if (!usuario.getRol().equals("Super Administrador")) {
+                System.out.println(usuario.getCodRol());
+                if (!usuario.getCodRol().equals(1)) {
                     usuarioFacade.remove(usuario);
                     finalizarConversacion();
                     FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "El usuario ha sido eliminado correctamente", null);
@@ -97,7 +97,7 @@ public class ControllerUsuario extends ControllerApp {
             System.out.println(cs.getUsuario().getPrimerNombre() + " es igual a: " + this.usuario.getPrimerNombre());
             return "ActualizarUsuario?faces-redrect=true";
         }else
-        if (!usuario.getRol().equals("Super Administrador")) {            
+        if (!usuario.getCodRol().equals(1)) {            
             return "ActualizarUsuario?faces-redrect=true";
         } else {
 
@@ -111,7 +111,6 @@ public class ControllerUsuario extends ControllerApp {
         FacesContext fc = FacesContext.getCurrentInstance();
         System.out.println("editar Usuario");
         if (usuario != null) {
-
             this.usuarioFacade.edit(usuario);
             finalizarConversacion();
             return "ConsultarUsuarios?faces-redrect=true";
