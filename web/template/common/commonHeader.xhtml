@@ -45,7 +45,7 @@
                                                 <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">#{controllerSession.usuario.fullNameUsuario} <span class="caret"></span>
                                                 </button>
                                                 <ul id="identificadorYcerrado" class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                    <li><a href="ConsultarUsuarios.xhtml" >#{controllerSession.usuario.rol}</a></li>
+                                                    <li><a href="ConsultarUsuarios.xhtml" >#{controllerSession.usuario.codRol.nombreRol}</a></li>
                                                     <li role="separator" class="divider"></li>                                                    
                                                     <li><a href="#{request.contextPath}/ConfiguracionSistema/ConsultarDatosSistema.xhtml">configuracion del sistema</a></li>
                                                     <li role="separator" class="divider"></li>
