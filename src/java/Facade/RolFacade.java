@@ -5,7 +5,7 @@
  */
 package Facade;
 
-import Entities.Codigousuario;
+import Entities.Rol;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author jair3
  */
 @Stateless
-public class CodigousuarioFacade extends AbstractFacade<Codigousuario> implements CodigousuarioFacadeLocal {
+public class RolFacade extends AbstractFacade<Rol> implements RolFacadeLocal {
 
     @PersistenceContext(unitName = "ProyectoPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class CodigousuarioFacade extends AbstractFacade<Codigousuario> implement
         return em;
     }
 
-    public CodigousuarioFacade() {
-        super(Codigousuario.class);
+    public RolFacade() {
+        super(Rol.class);
     }
     
 }

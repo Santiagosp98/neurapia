@@ -5,7 +5,7 @@
  */
 package Facade;
 
-import Entities.Permisos;
+import Entities.Rol;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -14,19 +14,19 @@ import javax.ejb.Local;
  * @author jair3
  */
 @Local
-public interface PermisosFacadeLocal {
+public interface RolFacadeLocal {
 
-    void create(Permisos permisos);
+    void create(Rol rol);
 
-    void edit(Permisos permisos);
+    void edit(Rol rol);
 
-    void remove(Permisos permisos);
+    void remove(Rol rol);
 
-    Permisos find(Object id);
+    Rol find(Object id);
 
-    List<Permisos> findAll();
+    List<Rol> findAll();
 
-    List<Permisos> findRange(int[] range);
+    List<Rol> findRange(int[] range);
 
     int count();
     
