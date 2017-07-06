@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Resultadoproceso.findAll", query = "SELECT r FROM Resultadoproceso r")
     , @NamedQuery(name = "Resultadoproceso.findByIdResultadoProceso", query = "SELECT r FROM Resultadoproceso r WHERE r.idResultadoProceso = :idResultadoProceso")
     , @NamedQuery(name = "Resultadoproceso.findByResultadoProceso", query = "SELECT r FROM Resultadoproceso r WHERE r.resultadoProceso = :resultadoProceso")})
-public class Resultadoproceso implements Serializable {
+public class    Resultadoproceso implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id

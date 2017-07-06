@@ -17,12 +17,8 @@ import Facade.ResultadoprocesoFacadeLocal;
 import Facade.UsuarioFacadeLocal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.*;
 import javax.inject.Named;
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.ConversationScoped;
@@ -68,6 +64,7 @@ public class ControllerHistorialClinico extends ControllerApp {
     private Resultadoproceso resultadoProceso;
     private List<Resultadoproceso> listaresultadoProceso;
     private List<Resultadoproceso> resultadosOBtenidos;
+    private Map<String, List<Resultadoproceso>> mapa;
 
     public HistorialclinicoFacadeLocal getHistorialClinicoFacade() {
         return historialClinicoFacade;
@@ -191,7 +188,15 @@ public class ControllerHistorialClinico extends ControllerApp {
         this.listaHistorialClinico = historialClinicoFacade.findAll();
         return listaHistorialClinico;
     }
-    
+
+    public Map<String, List<Resultadoproceso>> getMapa() {
+        return mapa;
+    }
+
+    public void setMapa(Map<String, List<Resultadoproceso>> mapa) {
+        this.mapa = mapa;
+    }
+
     public String seleccionarHistorialclinico(Historialclinico historialClinico){
         iniciarConversacion();
         this.historialClinico = historialClinico;
@@ -209,7 +214,9 @@ public class ControllerHistorialClinico extends ControllerApp {
                             }
                         }
                     }
-                }                    
+                }
+                System.out.println("dnmsjdkhbajkbdjbsajbdjbasjbdjbasjbjdbajksbdjkbjasks");
+                inicializarListaOrdenada();
                 System.out.println("Seleccionando anamnesis: " + anamnesis.getIdAnamnesis());
                 return "ActualizarHistorialClinico?faces-redirect=true";
             }
@@ -298,6 +305,21 @@ public class ControllerHistorialClinico extends ControllerApp {
 
     public void setListaHistorialClinico(List<Historialclinico> listaHistorialClinico) {
         this.listaHistorialClinico = listaHistorialClinico;
+    }
+
+    public void inicializarListaOrdenada(){
+        mapa = new HashMap<>();
+
+        String nomTemp = "";
+        for(Resultadoproceso r : resultadosOBtenidos) {
+            if(nomTemp.equals("") || !r.getCodCaracteristicaMovilidad().getCodParteCuerpo().getNombreParteCuerpo().equals(nomTemp)){
+                nomTemp = r.getCodCaracteristicaMovilidad().getCodParteCuerpo().getNombreParteCuerpo();
+                mapa.put(nomTemp, new ArrayList<Resultadoproceso>());
+            }
+            mapa.get(nomTemp).add(r);
+
+        }
+        System.out.println("#####################" + mapa);
     }
     
 }
