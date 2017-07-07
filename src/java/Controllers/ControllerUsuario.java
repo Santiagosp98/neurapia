@@ -194,4 +194,10 @@ public class ControllerUsuario extends ControllerApp {
         this.confirmarClave = confirmarClave;
     }
 
+    public String prepararCrearHistorial(Usuario usuario) {
+        iniciarConversacion();
+        this.usuario = usuario;
+        return "CrearUsuario.xhtml?faces-redirect=true";
+    }
+
 }
