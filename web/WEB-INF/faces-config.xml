@@ -7,6 +7,7 @@
 <navigation-rule>
     <from-view-id>/Usuarios/ConsultarUsuarios.xhtml</from-view-id>
     <navigation-case>
+        <from-outcome>CrearUsuario.xhtml?faces-redirect=true</from-outcome>
         <to-view-id>/HistorialClinico/CrearHistorialClinico.xhtml</to-view-id>
     </navigation-case>
 </navigation-rule>
