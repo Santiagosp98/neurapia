@@ -18,6 +18,7 @@
         <link href="#{request.contextPath}/resources/css/style.css" rel="stylesheet"/>
         <link href="#{request.contextPath}/resources/css/misestilos.css" rel="stylesheet"/>
         <link href="#{request.contextPath}/resources/css/export.css" rel="stylesheet"/>
+        <link href="#{request.contextPath}/resources/css/sweetalert.css" rel="stylesheet"/>
         <h:outputStylesheet name="jquery/ui/jquery-ui.css" library="primefaces" />
         <h:outputScript name="jquery2.2.3.js" library="js" />
         <h:outputScript name="bootstrap.js" library="js" />
@@ -30,41 +31,41 @@
     </h:head>
     <h:body>
         <nav class="cabecera row" >
-                        <ul>      
-                            <li class="cabeceramenu"><span class="glyphicon glyphicon-map-marker"></span> Calle falsa 123</li>
-                            <li class="cabeceramenu"><span class="glyphicon glyphicon-phone-alt"></span> (57-1) 412 83 93</li>
-                            <li class="cabeceramenu">Phisycal care</li>
-                            <li class="cabeceramenu"><a href="indexIngles.xhtml">Ingles</a></li>
+            <ul>      
+                <li class="cabeceramenu"><span class="glyphicon glyphicon-map-marker"></span> Calle falsa 123</li>
+                <li class="cabeceramenu"><span class="glyphicon glyphicon-phone-alt"></span> (57-1) 412 83 93</li>
+                <li class="cabeceramenu">Phisycal care</li>
+                <li class="cabeceramenu"><a href="indexIngles.xhtml">Ingles</a></li>
+            </ul>
+        </nav>   
+
+        <nav class="navbar navbar-default">
+
+            <figure>
+                <a class="navbar-brand " href="Inicio.html"><h:graphicImage library="imgs" name="logo.png" class="logo img-responsive" /></a>
+            </figure>
+
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span> 
+                    </button>
+
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <ul class="nav navbar-nav " >
+                            <li><a class="menu" href="#{request.contextPath}/Prediagnostico/ConsultarPreDiagnostico.xhtml"> Pre-diagnóstico</a></li>
                         </ul>
-                    </nav>   
-
-                    <nav class="navbar navbar-default">
-                        
-                        <figure>
-                            <a class="navbar-brand " href="Inicio.html"><h:graphicImage library="imgs" name="logo.png" class="logo img-responsive" /></a>
-                        </figure>
-                        
-                        <div class="container-fluid">
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                                    <span class="sr-only">Toggle navigation</span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span> 
-                                </button>
-                                
-                            </div>
-                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-                                <ul class="nav navbar-nav navbar-right">
-
-                                    <ul class="nav navbar-nav " >
-                                        <li><a class="menu" href="#{request.contextPath}/Prediagnostico/ConsultarPreDiagnostico.xhtml"> Pre-diagnóstico</a></li>
-                                    </ul>
-                                </ul>
-                            </div><!-- /.navbar-collapse -->
-                        </div><!-- /.container-fluid -->
-                    </nav>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
 
 
         <!--fin del navbar--> 
@@ -74,13 +75,15 @@
             <aside class="aside aside col-lg-3 col-md-3 col-sm-4 col-xs-12">
                 <div class="thumbnail sombraAside asideleft" >
                     <h4><b>Iniciar Sesión</b></h4> 
-                    <div>
-                        <h:messages id="msj-global" showSummary="true" showDetail="true"/>
-                    </div>
+
                     <!-- formulario ingreso inicio -->
                     <h:form prependId="false" id="formIngreso" class="form-horizontal">
-                        
+                        <div>
+                            <h:messages id="msj-global" showSummary="true" showDetail="true"/>
+                        </div>
                         <h:form prependId="false">
+
+
                             <div class="form-group">                
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                     <h:inputText  id="email" class="form-control" value="#{controllerSession.email}" a:placeholder="email" required="true" a:pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" requiredMessage="El correo electrónico es requerido"/>
@@ -95,17 +98,111 @@
                             <div>
                                 <ul id="registropreg">
                                     <li class="checkButtons"><h:selectBooleanCheckbox />&nbsp;<h:outputLabel value=" Recordar Contraseña" a:data-toggle="modal" a:data-target=".bs-example-modal-sm"/></li>
-                                    <li class="checkButtons preguntasRegistro"><h:link hreflang="" value="¿Olvidó su contraseña?"/></li>
-                                    <li class="checkButtons preguntasRegistro"><h:link hreflang="" value="Registrarse"/></li>
+                                    <li class="preguntasRegistro"><a href="" data-toggle="modal" 
+                                                                     data-target=".bs-example-modal"> 
+                                            ¿Olvidaste tu contraseña?</a></li>
+                                    <li class="checkButtons preguntasRegistro"><a href="" data-toggle="modal" 
+                                                                                  data-target=".bs-example-modal-lg"> 
+                                            Registrarse</a></li>
                                 </ul>
                             </div>
                             <div id="botonElimina">
                                 <h:commandButton class="btn btn-info " value="ingresar" action="#{controllerSession.iniciarSesion()}"/>
                             </div>
                         </h:form>
-                        
 
-                        <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div style="background-color: #fff; height: 550px; border-radius: 20px;">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span></button>
+                                            <h1 class="modal-title" id="myModalLabel">Registrate</h1>
+                                        </div>
+                                        <h:form  prependId="false" id="formRegistrarse" a:name="formRegistrarse" style="background-color: white">
+                                            <div class="mensajeError col-lg-12 col-md-12 col-sm-12">
+                                                <h:messages class="mensajeErrorForm" showDetail="true" showSummary="true" infoClass="alert alert-sucess" errorClass="alert alert-danger"/>
+                                            </div>
+                                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                                <h:outputLabel value="Tipo Documento:" for="tipodocumento" />
+                                                <h:selectOneMenu id="tipodocumento" class="form-control mitooltip" value="#{controllerUsuario.usuario.tipoDocumento}" tabindex="1">
+                                                    <f:selectItems class="form-control mitooltip" value="#{controllerUsuario.usuario.seleccionDocumento}"/>
+                                                </h:selectOneMenu>
+                                            </div>
+
+                                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                                <h:outputLabel value="Número Documento:" for="numeroDocumento"/>
+                                                <h:inputText a:placeholder="Num Documento" class="form-control mitooltip" tabindex="2" id="numeroDocumento" value="#{controllerUsuario.usuario.numeroDocumento}" title="PrimerNombre" required="true" requiredMessage="The IdUsuario field is required.">
+                                                </h:inputText>
+                                            </div>                        
+
+                                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                                <h:outputLabel value="Primer Nombre:" for="primerNombre"/>
+                                                <h:inputText a:placeholder="Primer Nombre" class="form-control mitooltip" tabindex="3"  id="primerNombre" value="#{controllerUsuario.usuario.primerNombre}" title="PrimerNombre" required="true" requiredMessage="The IdUsuario field is required.">
+                                                </h:inputText>
+                                            </div>
+                                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                                <h:outputLabel value="Segundo Nombre:" for="segundoNombre"/>
+                                                <h:inputText a:placeholder="Segundo Nombre" class="form-control mitooltip" tabindex="4" a:pattern="[A-Za-z]+" id="segundoNombre" value="#{controllerUsuario.usuario.segundoNombre}" title="SegundoNombre" required="false">
+                                                </h:inputText>
+                                            </div>
+                                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                                <h:outputLabel value="Primer Apellido:" for="primerApellido"/>
+                                                <h:inputText a:placeholder="Primer Apellido" class="form-control mitooltip" tabindex="5" a:pattern="[A-Za-z]+"  id="primerApellido" value="#{controllerUsuario.usuario.primerApellido}" title="PrimerApellido" required="true" requiredMessage="El Primer Apellido es requerido.">
+                                                </h:inputText>
+                                            </div>
+
+                                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                                <h:outputLabel value="Segundo Apellido:" for="segundoApellido"/>
+                                                <h:inputText a:placeholder="Segundo Apellido" class="form-control mitooltip" tabindex="6" a:pattern="[A-Za-z]+"  id="segundoApellido" value="#{controllerUsuario.usuario.segundoApellido}" title="SegundoApellido" required="true" requiredMessage="El Segundo Apellido es requerido.">
+                                                </h:inputText>
+                                            </div>
+
+                                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                                <h:outputLabel value="Estado Usuario:" for="estadoUsuario"/>
+                                                <h:selectOneMenu id="estadoUsuario" class="form-control mitooltip"  tabindex="7" value="#{controllerUsuario.usuario.estadoUsuario}">
+                                                    <f:selectItems class="form-control mitooltip" value="#{controllerUsuario.usuario.seleccionEstados}"/>
+                                                </h:selectOneMenu>
+                                            </div>
+
+                                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                                <h:outputLabel value="Rol:" for="rol"/>
+                                                <h:selectOneMenu id="rol" class="form-control mitooltip"  tabindex="7" value="#{controllerUsuario.usuario.codRol}" converter="rolConverter">
+                                                    <f:selectItems class="form-control mitooltip" value="#{controllerRol.listaRol}" var="u" itemLabel="#{u.nombreRol}"/>
+                                                </h:selectOneMenu>
+                                            </div>
+
+                                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                                <h:outputLabel value="Correo Electrónico:" for="correo"/>
+                                                <h:inputText id="correo" tabindex="8" class="form-control" a:placeholder="ejem@ejem.com" a:pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" value="#{controllerUsuario.usuario.correoElectronico}" required="true" requiredMessage="El correo es requerido.">
+                                                </h:inputText>
+                                            </div>
+
+                                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                                <h:outputLabel value="Clave Usuario:" for="claveUsuario"/>
+                                                <h:inputSecret id="claveUsuario" class="form-control mitooltip" tabindex="9" maxlength="25"  a:data-toggle="tooltip" a:data-placement="top" value="#{controllerUsuario.usuario.claveUsuario}" title="ClaveUsuario" required="true" requiredMessage="La clave es requerida.">
+                                                </h:inputSecret>
+                                            </div>
+
+                                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                                <h:outputLabel value="Confirmar Clave" for="confirmarclave"/>
+                                                <h:inputSecret id="confirmarclave" class="form-control mitooltip" tabindex="10" maxlength="25"  a:data-toggle="tooltip" a:data-placement="top" title="confirmarClave" requiredMessage="Ambas claves deben coincidir." value="#{controllerUsuario.confirmarClave}">
+                                                </h:inputSecret>
+                                            </div>
+
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                <br></br>
+                                                <h:commandButton class="btn btn-info" action="#{controllerUsuario.crearUsuarioindex()}" value="Guardar"/>
+                                            </div>
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="modal fade bs-example-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                             <div class="modal-dialog modal-sm" role="document">
                                 <div class="modal-content" style="margin-top: 200px; width: 300px;">
                                     <div style="background-color: #fff; height: 400px; border-radius: 20px;"> 
@@ -123,19 +220,17 @@
                                                 </input>
                                             </div>    
                                             <div class="form-group col-lg-12 " style="margin: 10px;">
-                                                <h6> 
-                                                    <button type="submit" id="Olvidaste"  class="btn btn-info" onclick="olvidasteContraseña()">
+                                                <h6> <button type="submit" id="Olvidaste"  class="btn btn-info" onclick="olvidasteContraseña()">
                                                         <i class="fa fa-floppy-o" aria-hidden="true" ></i>Enviar
-                                                    </button>
-                                                </h6>
+                                                    </button></h6>
                                             </div>
                                         </form>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        
+
                     </h:form>
                 </div>
             </aside>
