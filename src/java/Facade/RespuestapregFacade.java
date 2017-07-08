@@ -5,7 +5,7 @@
  */
 package Facade;
 
-import Entities.Prediagnostico;
+import Entities.Respuestapreg;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author Jeisson Diaz
  */
 @Stateless
-public class PrediagnosticoFacade extends AbstractFacade<Prediagnostico> implements PrediagnosticoFacadeLocal {
+public class RespuestapregFacade extends AbstractFacade<Respuestapreg> implements RespuestapregFacadeLocal {
 
     @PersistenceContext(unitName = "ProyectoPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class PrediagnosticoFacade extends AbstractFacade<Prediagnostico> impleme
         return em;
     }
 
-    public PrediagnosticoFacade() {
-        super(Prediagnostico.class);
+    public RespuestapregFacade() {
+        super(Respuestapreg.class);
     }
     
 }

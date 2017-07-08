@@ -11,7 +11,7 @@ import javax.ejb.Local;
 
 /**
  *
- * @author jair3
+ * @author Jeisson Diaz
  */
 @Local
 public interface PrediagnosticoFacadeLocal {
