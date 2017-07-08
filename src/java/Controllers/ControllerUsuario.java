@@ -149,6 +149,29 @@ public class ControllerUsuario extends ControllerApp {
         }
         return "";
     }
+    public String crearUsuarioindex() throws ParseException {
+        if (usuario != null) {
+            System.out.println("indexxxxx");
+            Calendar datosFecha = new GregorianCalendar();
+            int anio = datosFecha.get(Calendar.YEAR);
+            int mes = datosFecha.get(Calendar.MONTH);
+            int dia = datosFecha.get(Calendar.DAY_OF_MONTH);
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            String strFecha = anio + "-" + mes + "-" + dia;
+            Date fechaDate = null;
+            fechaDate = formato.parse(strFecha);
+            usuario.setFechaRegistro(fechaDate);
+            if (usuario.getClaveUsuario().equals(this.confirmarClave)) {
+                usuarioFacade.create(usuario);
+                return "index.html";
+            } 
+
+        } else {
+                        System.out.println("indexxxxx");
+
+        }
+        return "";
+    }
 
     /**
      * @return the usuario
