@@ -67,6 +67,12 @@
                         </div>
                     </div>
                         <h:form prependId="false" id="historialClinico">
+                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                <h:outputLabel value="Nombre Usuario" for="usuario"/>
+                                <h:selectOneMenu id="usuario" class="form-control mitooltip" value="#{controllerHistorialClinico.historialClinico.codUsuario}" converter="usuarioConverter" title="usuario">
+                                    <f:selectItems value="#{controllerUsuario.listaUsuarios}" var="user" itemLabel="#{user.fullNameUsuario}"/>
+                                </h:selectOneMenu>
+                            </div>
                             
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
                                 <h:outputLabel value="Dirección:" for="direccion" />
