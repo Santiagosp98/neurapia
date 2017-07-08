@@ -71,7 +71,7 @@ public class ControllerSession extends ControllerApp {
         FacesContext fc = FacesContext.getCurrentInstance();
         if (email != null && !email.equals("") && clave != null && !clave.equals("") ) {
             usuario = usuarioFacade.iniciarSesion(email, clave);
-            System.out.println(usuario.getClaveUsuario() + " " + usuario.getCorreoElectronico());
+//            System.out.println(usuario.getClaveUsuario() + " " + usuario.getCorreoElectronico());
             if (usuario != null) {
                 System.out.println("El usuario ingresado es: " + usuario.getPrimerNombre());
 //                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Datos de acceso correctos", null);
