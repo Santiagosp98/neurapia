@@ -22,12 +22,13 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author jair3
+ * @author Jeisson Diaz
  */
 @Entity
 @Table(name = "prediagnostico")
@@ -35,8 +36,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Prediagnostico.findAll", query = "SELECT p FROM Prediagnostico p")
     , @NamedQuery(name = "Prediagnostico.findByIdPrediagnostico", query = "SELECT p FROM Prediagnostico p WHERE p.idPrediagnostico = :idPrediagnostico")
-    , @NamedQuery(name = "Prediagnostico.findByFecha", query = "SELECT p FROM Prediagnostico p WHERE p.fecha = :fecha")
-    , @NamedQuery(name = "Prediagnostico.findByHora", query = "SELECT p FROM Prediagnostico p WHERE p.hora = :hora")})
+    , @NamedQuery(name = "Prediagnostico.findByFecha", query = "SELECT p FROM Prediagnostico p WHERE p.fecha = :fecha")})
 public class Prediagnostico implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,28 +45,35 @@ public class Prediagnostico implements Serializable {
     @Basic(optional = false)
     @Column(name = "idPrediagnostico")
     private Integer idPrediagnostico;
-    @Column(name = "fecha")
-    @Temporal(TemporalType.DATE)
-    private Date fecha;
-    @Column(name = "hora")
-    @Temporal(TemporalType.DATE)
-    private Date hora;
     @Lob
     @Size(max = 65535)
     @Column(name = "resultadoPrediagnostico")
     private String resultadoPrediagnostico;
-    @JoinColumn(name = "codHistorialClinico", referencedColumnName = "idHistorialClinico")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Historialclinico codHistorialClinico;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "fecha")
+    @Temporal(TemporalType.DATE)
+    private Date fecha;
     @JoinColumn(name = "codCuestionario", referencedColumnName = "idCuestionario")
     @ManyToOne(fetch = FetchType.LAZY)
-    private Cuestionarioprediagnostico codCuestionario;
+    private Cuestionario codCuestionario;
+    @JoinColumn(name = "codRespuestaPreg", referencedColumnName = "idRespuestaPreg")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Respuestapreg codRespuestaPreg;
+    @JoinColumn(name = "codUsuario", referencedColumnName = "idUsuario")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Usuario codUsuario;
 
     public Prediagnostico() {
     }
 
     public Prediagnostico(Integer idPrediagnostico) {
         this.idPrediagnostico = idPrediagnostico;
+    }
+
+    public Prediagnostico(Integer idPrediagnostico, Date fecha) {
+        this.idPrediagnostico = idPrediagnostico;
+        this.fecha = fecha;
     }
 
     public Integer getIdPrediagnostico() {
@@ -77,22 +84,6 @@ public class Prediagnostico implements Serializable {
         this.idPrediagnostico = idPrediagnostico;
     }
 
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public Date getHora() {
-        return hora;
-    }
-
-    public void setHora(Date hora) {
-        this.hora = hora;
-    }
-
     public String getResultadoPrediagnostico() {
         return resultadoPrediagnostico;
     }
@@ -101,20 +92,36 @@ public class Prediagnostico implements Serializable {
         this.resultadoPrediagnostico = resultadoPrediagnostico;
     }
 
-    public Historialclinico getCodHistorialClinico() {
-        return codHistorialClinico;
+    public Date getFecha() {
+        return fecha;
     }
 
-    public void setCodHistorialClinico(Historialclinico codHistorialClinico) {
-        this.codHistorialClinico = codHistorialClinico;
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
-    public Cuestionarioprediagnostico getCodCuestionario() {
+    public Cuestionario getCodCuestionario() {
         return codCuestionario;
     }
 
-    public void setCodCuestionario(Cuestionarioprediagnostico codCuestionario) {
+    public void setCodCuestionario(Cuestionario codCuestionario) {
         this.codCuestionario = codCuestionario;
+    }
+
+    public Respuestapreg getCodRespuestaPreg() {
+        return codRespuestaPreg;
+    }
+
+    public void setCodRespuestaPreg(Respuestapreg codRespuestaPreg) {
+        this.codRespuestaPreg = codRespuestaPreg;
+    }
+
+    public Usuario getCodUsuario() {
+        return codUsuario;
+    }
+
+    public void setCodUsuario(Usuario codUsuario) {
+        this.codUsuario = codUsuario;
     }
 
     @Override

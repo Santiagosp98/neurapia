@@ -53,6 +53,9 @@ import java.util.ArrayList;
     , @NamedQuery(name = "Usuario.findByClaveUsuario", query = "SELECT u FROM Usuario u WHERE u.claveUsuario = :claveUsuario")})
 public class Usuario implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codUsuario", fetch = FetchType.LAZY)
+    private List<Prediagnostico> prediagnosticoList;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -310,6 +313,15 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "Entities.Usuario[ idUsuario=" + idUsuario + " ]";
+    }
+
+    @XmlTransient
+    public List<Prediagnostico> getPrediagnosticoList() {
+        return prediagnosticoList;
+    }
+
+    public void setPrediagnosticoList(List<Prediagnostico> prediagnosticoList) {
+        this.prediagnosticoList = prediagnosticoList;
     }
     
 }

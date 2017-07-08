@@ -8,7 +8,9 @@ package Entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,12 +21,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -51,6 +55,13 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Historialclinico.findByOcupacion", query = "SELECT h FROM Historialclinico h WHERE h.ocupacion = :ocupacion")
     , @NamedQuery(name = "Historialclinico.findByTelefono", query = "SELECT h FROM Historialclinico h WHERE h.telefono = :telefono")})
 public class Historialclinico implements Serializable {
+
+    @OneToMany(mappedBy = "codHistorialClinico", fetch = FetchType.LAZY)
+    private List<Resultadoproceso> resultadoprocesoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codHistorialClinico", fetch = FetchType.LAZY)
+    private List<Anamnesis> anamnesisList;
+    @OneToMany(mappedBy = "codHistorialClinico", fetch = FetchType.LAZY)
+    private List<Resultadoobjetivo> resultadoobjetivoList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -369,6 +380,33 @@ public class Historialclinico implements Serializable {
     @Override
     public String toString() {
         return "Entities.Historialclinico[ idHistorialClinico=" + idHistorialClinico + " ]";
+    }
+
+    @XmlTransient
+    public List<Resultadoproceso> getResultadoprocesoList() {
+        return resultadoprocesoList;
+    }
+
+    public void setResultadoprocesoList(List<Resultadoproceso> resultadoprocesoList) {
+        this.resultadoprocesoList = resultadoprocesoList;
+    }
+
+    @XmlTransient
+    public List<Anamnesis> getAnamnesisList() {
+        return anamnesisList;
+    }
+
+    public void setAnamnesisList(List<Anamnesis> anamnesisList) {
+        this.anamnesisList = anamnesisList;
+    }
+
+    @XmlTransient
+    public List<Resultadoobjetivo> getResultadoobjetivoList() {
+        return resultadoobjetivoList;
+    }
+
+    public void setResultadoobjetivoList(List<Resultadoobjetivo> resultadoobjetivoList) {
+        this.resultadoobjetivoList = resultadoobjetivoList;
     }
     
 }

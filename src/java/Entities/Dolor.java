@@ -7,18 +7,23 @@ package Entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -40,6 +45,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Dolor.findByEscalaNumerica", query = "SELECT d FROM Dolor d WHERE d.escalaNumerica = :escalaNumerica")
     , @NamedQuery(name = "Dolor.findByVertigo", query = "SELECT d FROM Dolor d WHERE d.vertigo = :vertigo")})
 public class Dolor implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codDolor", fetch = FetchType.LAZY)
+    private List<Anamnesis> anamnesisList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -264,6 +272,15 @@ public class Dolor implements Serializable {
     @Override
     public String toString() {
         return "Entities.Dolor[ idDolor=" + idDolor + " ]";
+    }
+
+    @XmlTransient
+    public List<Anamnesis> getAnamnesisList() {
+        return anamnesisList;
+    }
+
+    public void setAnamnesisList(List<Anamnesis> anamnesisList) {
+        this.anamnesisList = anamnesisList;
     }
     
 }
