@@ -76,7 +76,7 @@ public class ControllerSession extends ControllerApp {
                 System.out.println("El usuario ingresado es: " + usuario.getPrimerNombre());
 //                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Datos de acceso correctos", null);
 //                fc.addMessage(null, m);
-                return "Usuarios/ConsultarUsuarios";
+                return "Usuarios/ConsultarUsuarios?faces-redrect=true";
             }else{
                 FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Email o clave incorrectas", "verifique los datos");
                 fc.addMessage(null, m);

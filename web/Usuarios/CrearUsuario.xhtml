@@ -82,23 +82,23 @@
                             
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
                                 <h:outputLabel value="Primer Nombre:" for="primerNombre"/>
-                                <h:inputText a:placeholder="Primer Nombre" class="form-control mitooltip" tabindex="3"  id="primerNombre" value="#{controllerUsuario.usuario.primerNombre}" title="PrimerNombre" required="true" requiredMessage="The IdUsuario field is required.">
+                                <h:inputText a:placeholder="Primer Nombre" class="form-control mitooltip" tabindex="3"  id="primerNombre" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" value="#{controllerUsuario.usuario.primerNombre}" title="PrimerNombre" required="true" requiredMessage="The IdUsuario field is required.">
                                 </h:inputText>
                             </div>
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
                                 <h:outputLabel value="Segundo Nombre:" for="segundoNombre"/>
-                                <h:inputText a:placeholder="Segundo Nombre" class="form-control mitooltip" tabindex="4" a:pattern="[A-Za-z]+" id="segundoNombre" value="#{controllerUsuario.usuario.segundoNombre}" title="SegundoNombre" required="false">
+                                <h:inputText a:placeholder="Segundo Nombre" class="form-control mitooltip" tabindex="4" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" id="segundoNombre" value="#{controllerUsuario.usuario.segundoNombre}" title="SegundoNombre" required="false">
                                 </h:inputText>
                             </div>
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
                                 <h:outputLabel value="Primer Apellido:" for="primerApellido"/>
-                                <h:inputText a:placeholder="Primer Apellido" class="form-control mitooltip" tabindex="5" a:pattern="[A-Za-z]+"  id="primerApellido" value="#{controllerUsuario.usuario.primerApellido}" title="PrimerApellido" required="true" requiredMessage="El Primer Apellido es requerido.">
+                                <h:inputText a:placeholder="Primer Apellido" class="form-control mitooltip" tabindex="5" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"  id="primerApellido" value="#{controllerUsuario.usuario.primerApellido}" title="PrimerApellido" required="true" requiredMessage="El Primer Apellido es requerido.">
                                 </h:inputText>
                             </div>
 
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
                                 <h:outputLabel value="Segundo Apellido:" for="segundoApellido"/>
-                                <h:inputText a:placeholder="Segundo Apellido" class="form-control mitooltip" tabindex="6" a:pattern="[A-Za-z]+"  id="segundoApellido" value="#{controllerUsuario.usuario.segundoApellido}" title="SegundoApellido" required="true" requiredMessage="El Segundo Apellido es requerido.">
+                                <h:inputText a:placeholder="Segundo Apellido" class="form-control mitooltip" tabindex="6" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"  id="segundoApellido" value="#{controllerUsuario.usuario.segundoApellido}" title="SegundoApellido" required="true" requiredMessage="El Segundo Apellido es requerido.">
                                 </h:inputText>
                             </div>
                         

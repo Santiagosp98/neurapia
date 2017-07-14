@@ -53,14 +53,14 @@ public class ControllerHistorialClinico extends ControllerApp {
     @EJB
     private UsuarioFacadeLocal usuarioFacade;
     private Usuario usuario;
-    private List<Usuario> usuarios;
+    private List<Usuario> listaUsuarios;
 
-    public List<Usuario> getUsuarios() {
-        return usuarios;
+    public List<Usuario> getListaUsuarios() {
+        return listaUsuarios;
     }
 
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
+    public void setListaUsuarios(List<Usuario> listaUsuarios) {
+        this.listaUsuarios = listaUsuarios;
     }
 
     @EJB
@@ -196,7 +196,8 @@ public class ControllerHistorialClinico extends ControllerApp {
         listAnamnesis = anamnesisFacade.findAll();
         listaDolor = dolorFacade.findAll();
         listaresultadoProceso = resultadoProcesoFacade.findAll();
-        usuarios = usuarioFacade.findAll();
+        listaUsuarios = usuarioFacade.findAll();
+        usuario = new Usuario();
     }
 
     public List<Historialclinico> consultarHistorialClinico() {
@@ -279,20 +280,25 @@ public class ControllerHistorialClinico extends ControllerApp {
     }
 
     public String crearHistorialClinico() throws ParseException {
-        System.out.println("Estamos creando un hsitorial clinico");
-        Calendar datosFecha = new GregorianCalendar();
-        int anio = datosFecha.get(Calendar.YEAR);
-        int mes = datosFecha.get(Calendar.MONTH);
-        int dia = datosFecha.get(Calendar.DAY_OF_MONTH);
-        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-        String strFecha = anio + "-" + mes + "-" + dia;
-        Date fechaDate = null;
-        fechaDate = formato.parse(strFecha);
-//            this.historialClinico.setCodUsuario(usuarioFacade.find(usuario.getIdUsuario()));
-        historialClinico.setFechaCreacion(fechaDate);
-        historialClinico.setCodUsuario(controllerUsuario.getUsuario());
-        this.historialClinicoFacade.create(historialClinico);
-        return "ConsultarHistorialClinico?faces-redirect=true";
+        System.out.println("" + historialClinico.getCodUsuario().getPrimerNombre());
+        if (this.usuario != null) {
+            System.out.println("Estamos creando un hsitorial clinico");
+            Calendar datosFecha = new GregorianCalendar();
+            int anio = datosFecha.get(Calendar.YEAR);
+            int mes = datosFecha.get(Calendar.MONTH);
+            int dia = datosFecha.get(Calendar.DAY_OF_MONTH);
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            String strFecha = anio + "-" + mes + "-" + dia;
+            Date fechaDate = null;
+            fechaDate = formato.parse(strFecha);
+    //            this.historialClinico.setCodUsuario(usuarioFacade.find(usuario.getIdUsuario()));
+            historialClinico.setFechaCreacion(fechaDate);
+            this.historialClinicoFacade.create(historialClinico);
+            iniciarConversacion();
+            return "Anamnesis?faces-redirect=true";
+        }
+        System.out.println("no se pudo crear");
+        return "ConsultarUsuarios?faces-redirect=true";
     }
 
     public void eliminarHistorialClinico(Historialclinico historialclinico) {
