@@ -11,4 +11,11 @@
         <to-view-id>/HistorialClinico/CrearHistorialClinico.xhtml</to-view-id>
     </navigation-case>
 </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/Usuarios/ConsultarUsuarios.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>ActualizarHistorial</from-outcome>
+            <to-view-id>/HistorialClinico/ActualizarHistorialClinico.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>
