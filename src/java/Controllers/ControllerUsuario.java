@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import Entities.Historialclinico;
 import Entities.Usuario;
 import Facade.UsuarioFacadeLocal;
 import java.io.IOException;
@@ -39,6 +40,9 @@ public class ControllerUsuario extends ControllerApp {
 
     @Inject
     private ControllerSession cs;
+
+    @Inject
+    private ControllerHistorialClinico hc;
 
     @EJB
     private UsuarioFacadeLocal usuarioFacade; //Facade
@@ -220,6 +224,12 @@ public class ControllerUsuario extends ControllerApp {
     public String prepararCrearHistorial(Usuario usuario) {
         iniciarConversacion();
         this.usuario = usuario;
+        for (Historialclinico historialClinico : hc.getListaHistorialClinico()) {
+            if (historialClinico.getCodUsuario().getIdUsuario().equals(usuario.getIdUsuario())){
+                hc.seleccionarHistorialclinico(historialClinico);
+                return "ActualizarHistorial";
+            }
+        }
         return "CrearUsuario.xhtml?faces-redirect=true";
     }
 
