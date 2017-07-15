@@ -44,6 +44,14 @@ public class ControllerHistorialClinico extends ControllerApp {
     @Inject
     ControllerUsuario controllerUsuario;
 
+    public ControllerUsuario getControllerUsuario() {
+        return controllerUsuario;
+    }
+
+    public void setControllerUsuario(ControllerUsuario controllerUsuario) {
+        this.controllerUsuario = controllerUsuario;
+    }
+
     @EJB
     private HistorialclinicoFacadeLocal historialClinicoFacade;
     private Historialclinico historialClinico;
@@ -280,18 +288,19 @@ public class ControllerHistorialClinico extends ControllerApp {
     }
 
     public String crearHistorialClinico() throws ParseException {
-        System.out.println("" + historialClinico.getCodUsuario().getPrimerNombre());
+        if (controllerUsuario.getUsuario() != null) {
+            historialClinico.setCodUsuario(controllerUsuario.getUsuario());
+        }
         if (this.usuario != null) {
             System.out.println("Estamos creando un hsitorial clinico");
             Calendar datosFecha = new GregorianCalendar();
             int anio = datosFecha.get(Calendar.YEAR);
-            int mes = datosFecha.get(Calendar.MONTH);
+            int mes = datosFecha.get(Calendar.MONTH) + 1;
             int dia = datosFecha.get(Calendar.DAY_OF_MONTH);
             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
             String strFecha = anio + "-" + mes + "-" + dia;
             Date fechaDate = null;
             fechaDate = formato.parse(strFecha);
-    //            this.historialClinico.setCodUsuario(usuarioFacade.find(usuario.getIdUsuario()));
             historialClinico.setFechaCreacion(fechaDate);
             this.historialClinicoFacade.create(historialClinico);
             iniciarConversacion();
@@ -302,7 +311,8 @@ public class ControllerHistorialClinico extends ControllerApp {
     }
 
     public void eliminarHistorialClinico(Historialclinico historialclinico) {
-        historialClinicoFacade.remove(historialClinico);
+        this.historialClinico = historialclinico;
+        historialClinicoFacade.remove(historialclinico);
         this.consultarHistorialClinico();
     }
 
