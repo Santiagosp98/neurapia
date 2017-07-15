@@ -5,7 +5,9 @@
  */
 package Facade;
 
+import Entities.Rol;
 import Entities.Usuario;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -45,6 +47,19 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
         
         return u;
     }
-
+    
+    @Override
+    public List<Usuario> listaUsuariosPorRol(Rol rol){
+        List<Usuario> listaPorRol = null;
+        try {            
+            TypedQuery<Usuario> q = getEntityManager().createNamedQuery("Usuario.listaporRol", Usuario.class);
+            q.setParameter("rol", rol);
+            listaPorRol = q.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listaPorRol;
+    }
+    
     
 }

@@ -5,8 +5,11 @@
  */
 package Controllers;
 
+
 import Entities.Historialclinico;
+import Entities.Rol;
 import Entities.Usuario;
+import Facade.RolFacadeLocal;
 import Facade.UsuarioFacadeLocal;
 import java.io.IOException;
 import java.text.ParseException;
@@ -50,14 +53,34 @@ public class ControllerUsuario extends ControllerApp {
     private List<Usuario> listaUsuarios;
     private String confirmarClave;
 
+    @EJB
+    private RolFacadeLocal rolFacade;
+    private List<Rol> listaRol;
+    private Rol rol;
+    
     @PostConstruct
     public void init() {
-        usuario = new Usuario();
         listaUsuarios = usuarioFacade.findAll();
+        usuario = new Usuario();
+        listaRol = rolFacade.findAll();
+        rol = new Rol();
     }
 
     public List<Usuario> consultarUsuarios() {
         this.listaUsuarios = usuarioFacade.findAll();
+        return listaUsuarios;
+    }
+    
+    public List<Usuario> listarPacientes(){ 
+        rol.setIdRol(4);
+        try {
+            System.out.println("Estamos listando los pacientes");
+            System.out.println("" + listaUsuarios.size());
+            this.listaUsuarios = usuarioFacade.listaUsuariosPorRol(rol);            
+            return listaUsuarios; 
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         return listaUsuarios;
     }
 

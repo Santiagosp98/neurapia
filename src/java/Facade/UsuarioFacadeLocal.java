@@ -6,6 +6,7 @@
 package Facade;
 
 import Entities.Usuario;
+import Entities.Rol;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -31,5 +32,5 @@ public interface UsuarioFacadeLocal {
     int count();
     
     Usuario iniciarSesion(String email, String clave);
-    
+    List<Usuario> listaUsuariosPorRol(Rol rol);
 }

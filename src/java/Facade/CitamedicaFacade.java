@@ -6,6 +6,8 @@
 package Facade;
 
 import Entities.Citamedica;
+import Entities.Fisioterapeuta;
+import Entities.Usuario;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -31,13 +33,31 @@ public class CitamedicaFacade extends AbstractFacade<Citamedica> implements Cita
         super(Citamedica.class);
     }
     
+    @Override
     public List<Citamedica> citasPendientes(String estado){
-        estado = "Pendiente";
         List<Citamedica> cita = null;
-        TypedQuery<Citamedica> q = getEntityManager().createNamedQuery("Citamedica.findByTipoEstado", Citamedica.class);
+        TypedQuery<Citamedica> q = getEntityManager().createNamedQuery("Citamedica.findByEstado", Citamedica.class);
         q.setParameter("estado", estado);
         cita = q.getResultList();
         return cita;
     }
+//    
+    @Override
+    public List<Citamedica> citasPorUsuario(Usuario usuario){
+        List<Citamedica> cita = null;
+        TypedQuery<Citamedica> q = getEntityManager().createNamedQuery("Citamedica.citasPorUsuario", Citamedica.class);
+        q.setParameter("codUsuario", usuario);
+        cita = q.getResultList();
+        return cita;
+    }
+    
+    @Override
+    public List<Citamedica> citasPorFisioterapeuta(Fisioterapeuta fisioterapeuta){
+       List<Citamedica> cita = null;
+       TypedQuery<Citamedica> q = getEntityManager().createNamedQuery("Citamedica.citasPorFisioterapeuta", Citamedica.class);
+       q.setParameter("codFisioterapeuta", fisioterapeuta);
+       cita = q.getResultList();
+       return cita;
+   }
     
 }

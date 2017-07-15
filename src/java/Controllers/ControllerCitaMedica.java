@@ -18,6 +18,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.ConversationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 
 /**
  *
@@ -32,6 +33,9 @@ public class ControllerCitaMedica extends ControllerApp{
      */
     public ControllerCitaMedica() {
     }
+    
+    @Inject
+    private ControllerSession cs;
     
     @EJB
     CitamedicaFacadeLocal citaMedicaFacade;
@@ -55,6 +59,7 @@ public class ControllerCitaMedica extends ControllerApp{
        this.fisioterapeuta = new Fisioterapeuta();
        this.usuario = new Usuario();
        this.listaCitas = citaMedicaFacade.findAll();
+       this.listaFisioterapeutas = fisioterapeutaFacade.findAll();
     }
     
     public List<Citamedica> consultarCitaMedica(){
@@ -62,6 +67,38 @@ public class ControllerCitaMedica extends ControllerApp{
         return listaCitas;
         
     } 
+    
+    public List<Citamedica> listarCitasporEstado(){
+        this.listaCitas = citaMedicaFacade.citasPendientes("Pendiente");
+        return listaCitas;        
+    } 
+    //Consultas de el usuario desde rol usuario
+    public List<Citamedica> listarCitasporUsuario(){
+         System.out.println(listaCitas.size());
+         listaCitas = citaMedicaFacade.citasPorUsuario(cs.getUsuario());
+         System.out.println(listaCitas.size());
+        return listaCitas;        
+    } 
+    //Consulta de las citas por fisioterapeuta
+    public List<Citamedica> listarCitasporFisioterapeuta(){   
+        try {
+            fisioterapeuta.setCodUsuario(cs.getUsuario());
+            for (Fisioterapeuta ft : listaFisioterapeutas) {
+                System.out.println(ft.getCodUsuario());
+                if (fisioterapeuta.getCodUsuario().equals(ft.getCodUsuario())) {
+                    System.out.println("Estoy listando por fisoterapeuta");
+                    fisioterapeuta.setIdFisioterapeuta(ft.getIdFisioterapeuta());
+                    System.out.println(fisioterapeuta.getCodUsuario());
+                    listaCitas = citaMedicaFacade.citasPorFisioterapeuta(fisioterapeuta);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        System.out.println("No estoy en la lista de fisioterapeutas correcto");
+        return listaCitas;
+    }
+    
     
     public String seleccionarCita(Citamedica citamedica){
         iniciarConversacion();

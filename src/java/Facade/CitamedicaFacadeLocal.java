@@ -6,6 +6,8 @@
 package Facade;
 
 import Entities.Citamedica;
+import Entities.Fisioterapeuta;
+import Entities.Usuario;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -27,6 +29,12 @@ public interface CitamedicaFacadeLocal {
     List<Citamedica> findAll();
 
     List<Citamedica> findRange(int[] range);
+    
+    List<Citamedica> citasPendientes(String estado);
+    
+    List<Citamedica> citasPorUsuario(Usuario codUsuario);
+    
+    List<Citamedica> citasPorFisioterapeuta(Fisioterapeuta codFisioterapeuta);
 
     int count();
     
