@@ -138,9 +138,16 @@ public class ControllerUsuario extends ControllerApp {
         FacesContext fc = FacesContext.getCurrentInstance();
         System.out.println("editar Usuario");
         if (usuario != null) {
-            this.usuarioFacade.edit(usuario);
-            finalizarConversacion();
-            return "ConsultarUsuarios?faces-redrect=true";
+            
+            if (usuario.getClaveUsuario().equals(this.confirmarClave)) {
+                this.usuarioFacade.edit(usuario);
+                finalizarConversacion();
+                return "ConsultarUsuarios?faces-redrect=true";
+            }else{
+                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido actualizar el usuario", "Clave y confirmar clave diferentes");
+                fc.addMessage(null, m);
+            }
+
 
         } else {
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido actualizar el usuario", "Intentelo de nuevo");
