@@ -46,125 +46,123 @@
             <ui:define name="content">
                 <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
                     <!-- Titulo -->
-                    <h5 id="ubicacionPag">Añadir Nuevo Pre-Diagnostico</h5>
+                    <h5 id="ubicacionPag">Añadir Pre-Diagnostico</h5>
 
-                    <div class="contenido">
-                        <div class="contenido">
-                            <br/>
-                            <p style="text-align: center; margin-top: 50px">Edita la información básica del usuario al cual estas atendiendo</p>
-                            <br/>
-                        </div>
-                    </div>
-                    <h:form prependId="false" id="historialClinico">
+                    <h:form prependId="false" id="formCuestionarioPreguntas" a:name="formCuestionarioPreguntas">
 
-                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                            <h:outputLabel value="1. ¿Que tipo de malestar presenta en particular?" for="preg1" />
-                            <h:inputText id="preg1" class="form-control mitooltip" value="#{controllerHistorialClinico.historialClinico.direccion}" title="Direccion" />
-                        </div>
-
-                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                            <h:outputLabel value="2. ¿Padece alguna enfermedad?" for="preg2" />
-                            <h:inputText id="preg2" class="form-control mitooltip"  value="#{controllerHistorialClinico.historialClinico.fechaNacimiento}" title="FechaNacimiento" >
-                                <f:convertDateTime pattern="yyyy-MM-dd" />
-                            </h:inputText>
-                        </div>
-
-                        <div class="contenido">
-                            <div class="contenido">
-                                <br/>
-                                <p style="text-align: center; margin-top: 30px"></p>
-                                <br/>
-                            </div>
-                        </div>
-
-                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                            <h:outputLabel value="3. ¿Que tipo de malestar presenta en particular?" for="preg1" />
-                            <h:inputText id="preg3" class="form-control mitooltip" value="#{controllerHistorialClinico.historialClinico.direccion}" title="Direccion" />
-                        </div>
-
-                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                            <h:outputLabel value="4. ¿Padece alguna enfermedad?" for="preg2" />
-                            <h:inputText id="preg4" class="form-control mitooltip"  value="#{controllerHistorialClinico.historialClinico.fechaNacimiento}" title="FechaNacimiento" >
-                                <f:convertDateTime pattern="yyyy-MM-dd" />
-                            </h:inputText>
-                        </div>
-                        
-                        <div class="contenido">
-                            <div class="contenido">
-                                <br/>
-                                <p style="text-align: center; margin-top: 30px"></p>
-                                <br/>
-                            </div>
-                        </div>
-
-                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                            <h:outputLabel value="5. ¿Que tipo de malestar presenta en particular?" for="preg3" />
-                            <h:inputText id="preg5" class="form-control mitooltip" value="#{controllerHistorialClinico.historialClinico.direccion}" title="Direccion" />
-                        </div>
-
-                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                            <h:outputLabel value="6. ¿Padece alguna enfermedad?" for="preg4" />
-                            <h:inputText id="preg6" class="form-control mitooltip"  value="#{controllerHistorialClinico.historialClinico.fechaNacimiento}" title="FechaNacimiento" >
-                                <f:convertDateTime pattern="yyyy-MM-dd" />
-                            </h:inputText>
-                        </div>
-                        
-                        <div class="contenido">
-                            <div class="contenido">
-                                <br/>
-                                <p style="text-align: center; margin-top: 30px"></p>
-                                <br/>
-                            </div>
-                        </div>
-
-                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                            <h:outputLabel value="7. ¿Que tipo de malestar presenta en particular?" for="preg5" />
-                            <h:inputText id="preg7" class="form-control mitooltip" value="#{controllerHistorialClinico.historialClinico.direccion}" title="Direccion" />
-                        </div>
-
-                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                            <h:outputLabel value="8. ¿Padece alguna enfermedad?" for="preg6" />
-                            <h:inputText id="preg8" class="form-control mitooltip"  value="#{controllerHistorialClinico.historialClinico.fechaNacimiento}" title="FechaNacimiento" >
-                                <f:convertDateTime pattern="yyyy-MM-dd" />
-                            </h:inputText>
-                        </div>
-                        
-                        <div class="contenido">
-                            <div class="contenido">
-                                <br/>
-                                <p style="text-align: center; margin-top: 30px"></p>
-                                <br/>
-                            </div>
-                        </div>
-
-                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                            <h:outputLabel value="9. ¿Que tipo de malestar presenta en particular?" for="preg7" />
-                            <h:inputText id="preg9" class="form-control mitooltip" value="#{controllerHistorialClinico.historialClinico.direccion}" title="Direccion" />
-                        </div>
-
-                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                            <h:outputLabel value="10. ¿Padece alguna enfermedad?" for="preg8" />
-                            <h:inputText id="preg10" class="form-control mitooltip"  value="#{controllerHistorialClinico.historialClinico.fechaNacimiento}" title="FechaNacimiento" >
-                                <f:convertDateTime pattern="yyyy-MM-dd" />
-                            </h:inputText>
-                        </div>
-                        
-                        <div class="contenido">
-                            <div class="contenido">
-                                <br/>
-                                <p style="text-align: center; margin-top: 30px"></p>
-                                <br/>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
                             <br></br>
-                            <h:commandButton class="btn btn-info" action="#{controllerHistorialClinico.crearHistorialClinico()}" value="Guardar"/>                                
-                        </div> 
+                            <label for="Preg1">1. ¿En qué parte de su cuerpo presenta la molestia?</label>                            
+                            <h:inputTextarea class="form-control" rows="4" id="Preg1" value="#{controllerRespuestaPreg.respuestapreg.resp1}" ></h:inputTextarea>
+                        </div>
 
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">    
+                            <br></br>
+                            <label for="Preg2">2. ¿Describa la molestia?</label>                            
+                            <h:inputTextarea class="form-control" rows="4" id="Preg2" value="#{controllerRespuestaPreg.respuestapreg.resp2}"></h:inputTextarea>
+                        </div>
+
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">     
+                            <br></br>
+                            <label for="Preg3">3. ¿Aproximadamente cuando empezó la molestia?</label>                            
+                            <h:inputTextarea class="form-control" rows="4" id="Preg3" value="#{controllerRespuestaPreg.respuestapreg.resp3}" ></h:inputTextarea>
+                        </div>
+
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">    
+                            <br></br>
+                            <label for="Preg4">4. ¿Atribuye la molestia a alguna actividad que haya realizado?</label>                            
+                            <h:inputTextarea class="form-control" rows="4" id="Preg4" value="#{controllerRespuestaPreg.respuestapreg.resp4}"></h:inputTextarea>
+                        </div>
+
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
+                            <br></br>
+                            <label for="Preg5">5. ¿Qué actividad desarrolla diariamente?</label>                            
+                            <h:inputTextarea class="form-control" rows="4" id="Preg5" value="#{controllerRespuestaPreg.respuestapreg.resp5}"></h:inputTextarea>
+                        </div>
+
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
+                            <br></br>
+                            <label for="Preg6">6. ¿Toma algún medicamento para calmar la molestia?</label>                            
+                            <h:inputTextarea class="form-control" rows="4" id="Preg6" value="#{controllerRespuestaPreg.respuestapreg.resp6}"></h:inputTextarea>
+                        </div>
+
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
+                            <br></br>
+                            <label for="Preg7">7. ¿Padece o ha padecido de alguna enfermedad, cuál?</label>                            
+                            <h:inputTextarea class="form-control" rows="4" id="Preg7" value="#{controllerRespuestaPreg.respuestapreg.resp7}"></h:inputTextarea>
+                        </div>
+
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
+                            <br></br>
+                            <label for="Preg8">8. ¿Cada cuánto realiza actividad física?</label>                            
+                            <h:inputTextarea class="form-control" rows="4" id="Preg8" value="#{controllerRespuestaPreg.respuestapreg.resp8}"></h:inputTextarea>
+                        </div>
+
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
+                            <br></br>
+                            <label for="Preg9">9. ¿Tiene dificultad para realizar actividad física?</label>                            
+                            <h:inputTextarea class="form-control" rows="4" id="Preg9" value="#{controllerRespuestaPreg.respuestapreg.resp9}"></h:inputTextarea>
+                        </div>
+
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
+                            <br></br>
+                            <label for="Preg10">10. ¿Le han realizado alguna operación medica?</label>                            
+                            <h:inputTextarea class="form-control" rows="4" id="Preg10" value="#{controllerRespuestaPreg.respuestapreg.resp10}"></h:inputTextarea>
+                        </div>  
+
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">
+                            <br></br>
+                            <h:commandButton id="btnModalCrearPre" class="btnModalCrearPre btn btn-info"  action="#{controllerRespuestaPreg.crearRespuestapreg()}" value="Enviar">
+                                <f:ajax event="click" rendered=":contenido-modal-crear-prediag" listener="#{controllerPrediagnostico.seleccionarCrear()}"> 
+                                    
+                                </f:ajax>
+                            </h:commandButton>
+                        </div>  
+
+                        <div id="myModalCrearPre" class="modal fade " role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <h:form id="form-crear-prediag" prependId="false">
+                                    <h:panelGroup id="contenido-modal-crear-prediag" layout="block"  class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Confirmación de Prediagnostico</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p align="justify">Cordial saludo <strong> #{controllerSession.usuario.fullNameUsuario}</strong>,<br></br> <br></br>Gracias por completar 
+                                                nuestro cuestionario de pre-diagnóstico, este será enviado a uno de nuestros profesionales fisioterapeutas,
+                                                quien lo analizará y dará una respuesta según la información que usted completo en un tiempo máximo de 1 semana, 
+                                                usted podrá consultar el resultado en el módulo de Prediagnóstico.</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <h:commandButton class="btn btn-primary" value="Aceptar"
+                                                             action="#{controllerPrediagnostico.crearPrediagnostico()}">
+                                            </h:commandButton>
+                                                                                    
+                                        </div>
+                                    </h:panelGroup>
+                                </h:form>
+                            </div>
+                        </div>
                     </h:form>
-                </div>
 
+                </div>
+                                
+            </ui:define>
+            
+            <ui:define name="ultimosScripts">
+                <script>
+                    $().ready(function () {                       
+                        $("#btnModal").click(function () {
+                            $("#myModal").modal("show");
+                        });
+
+                        $(".btnModalCrearPre").click(function () {
+                            $("#myModalCrearPre").modal("show");
+                        });
+                      
+                    });
+                </script>
             </ui:define>
 
         </ui:composition>
