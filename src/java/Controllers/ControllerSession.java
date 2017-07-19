@@ -80,7 +80,7 @@ public class ControllerSession extends ControllerApp {
                     return "Usuarios/ConsultarUsuarios?faces-redirect=true";
                 }else if(usuario.getCodRol().getNombreRol().equals("Usuario")){
                     System.out.println("Otro rol"+ usuario.getCodRol().getNombreRol());
-                    return "UsuarioPerfil/miPerfil?faces-redirect=true";
+                    return "UsuarioPerfil/Usuarios/miPerfil?faces-redirect=true";
                 }
                 
             }else{
