@@ -5,11 +5,11 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    
+
     <ui:define name="titulo">Usuarios consultar Usuarios</ui:define>
 
     <h:body>
-        <ui:define name="titulo">Consultar Uusuarios</ui:define>
+        <ui:define name="titulo">Consultar Prediagnosticos</ui:define>
         <!-- Aside Izq de la pagina -->
         <ui:composition template="/template/common/commonLayout.xhtml">
 
@@ -19,7 +19,7 @@
 
                     <div class="panel panel-default">
 
-                        
+
                         <div id="collapseOne" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingOne">
                             <div class="panel-body">
                                 <a href="#">Mi perfil</a> 
@@ -28,7 +28,7 @@
                                 <a href="#">Editar mi perfil</a> 
                             </div>
                         </div>
-                        
+
                         <div class="panel-heading active" role="tab" id="headingOne">
                             <h6 class="panel-title"><i class="fa fa-users" aria-hidden="true"></i>
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsTwo" aria-expanded="true" aria-controls="collapseOne">
@@ -39,11 +39,16 @@
 
                         <div id="collapsTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                             <div class="panel-body active">
-                                <a href="CrearPrediagnostico.xhtml">Crear Pre-Diagnostico</a>
+                                <a href="ConsultarPrediagnostico.xhtml">Hstorial de Pre-Diagnostico</a>
                             </div>
                             <div class="panel-body" >
                                 <h:form>
-                                <h:commandLink action="#{controllerUsuario.seleccionarCrear()}" value="Consultar Resultados de Pre-Diagnostico" />
+                                    <a href="CrearPrediagnostico.xhtml">Crear Pre-Diagnostico</a>
+                                </h:form>                                
+                            </div>
+                            <div class="panel-body" >
+                                <h:form>
+                                    <h:commandLink action="#{controllerUsuario.seleccionarCrear()}" value="Consultar Resultados de Pre-Diagnostico" />
                                 </h:form>
                             </div>
                         </div>
@@ -51,132 +56,143 @@
                     </div>
                 </div>     
             </ui:define>
-            
+
             <ui:define name="content">
-                <div class="contenedorderecho col-xs-12 col-sm-8 col-md-9 col-lg-9 sombraAside">
-                <section>
-                    <div class="imagenheader"></div>
-                </section>
-                <h4><b>Pre-diagnóstico</b></h4> 
-                <h5>¿Tienes  alguna dolencia en particular? </h5>  
-                <h1><b>¿QUE ES PRE-DIAGNÓSTICO?</b></h1>   
-                <div class="parrafoinicio">
-                    <p>El sistema de pre-diagnóstico médico es una herramienta que permite conocer el POSIBLE malestar que pueda estar 
-                        afectando tu salud dependiendo de los resultados obtenidos genera una respuesta acorde con los sintomas seleccionados
-                        previamente, para un diagnóstico médico profesional y un tratamiento adecuado de tu enfermedad registrate en nuestro
-                        sistema y solicita una cita médica o comunícate con nuestro equipo de fisioterapeutas altamente calificados para tratar
-                        tu dolencia malestar o enfermedad particular.</p> <br></br>
+                <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
+                    <!-- Titulo -->
+                    <h5 id="ubicacionPag">Pre-Diagnosticos</h5>
+                    <div class="fixed-table-body">
+                        <h:form prependId="false">
+                            <h:dataTable value="#{controllerPrediagnostico.consultarPrediagnostico()}" var="item" class="table table-striped table-bordered" id="consultar-prediagnostico">
 
-                    <center>
-                        <button type="submit" class="btn btn-info" onclick="window.location.href = 'error404.html'">
-                            Realizar Pre-dianóstico</button>
-                    </center>
-                    <section>
-                        <div><h1 style="font-size: 20px"><b>Consulta nuestras preguntas frecuentes</b></h1> </div>
-                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                            <div  class="panel panel-default">
-                                <div class="panel-heading" role="tab" id="headingOne">
-                                    <h6 class="panel-title">
-                                        <a class="menulateral" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                            <b>¿Porque un pre-diagnóstico médico previo?</b> <span class="caret"></span> 	
-                                        </a>
-                                    </h6>
-                                </div>
-                                <div id="collapseOne" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingOne">
-                                    <div class="panel-body">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia similique, 
-                                            accusantium ullam omnis labore perferendis, laborum culpa excepturi ipsum fuga 
-                                            et minus molestias nobis quasi esse explicabo. Error, veniam, quia.
-                                        </p>
-                                        <div class="submenu">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam a inventore dolor
-                                                et architecto nostrum reprehenderit maxime molestiae magnam doloremque, unde
-                                                perferendis ab enim labore asperiores placeat repellat, voluptatum, ipsa.
-                                            </p>sit. 
-                                        </div>
-                                    </div>
-                                </div>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Código"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idPrediagnostico}"/>
+                                </h:column>
 
-                                <div class="panel-heading" role="tab" id="headingTwo">
-                                    <h6 class="panel-title">
-                                        <a class="menulateral" role="button" data-toggle="collapse" 
-                                           data-parent="#accordion" href="#collapsTwo" aria-expanded="false" 
-                                           aria-controls="collapsTwo">
-                                            <b>¿Es Valedera la información sumninistrada por el resultado del pre-diagnóstico?</b> 
-                                            <span class="caret"></span> 
-                                        </a>
-                                    </h6>
-                                </div>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Cuestionario"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.codCuestionario.idCuestionario}"/>
+                                </h:column>
 
-                                <div id="collapsTwo" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingTwo">
-                                    <div class="panel-body">
-                                        <p> colapsable 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                                            Quasi sequi consequuntur magni illum, labore veritatis? Magnam voluptatem, 
-                                            voluptatum culpa incidunt. Animi esse optio, dignissimos quod voluptatibus 
-                                            iure impedit id alias!
-                                        </p>
-                                    </div>
-                                </div>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Respuestas"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.codRespuestaPreg.idRespuestaPreg}">                                        
+                                    </h:outputText>
+                                </h:column>
 
-                                <div class="panel-heading" role="tab" id="headingTwo">
-                                    <h6 class="panel-title">
-                                        <a class="menulateral" role="button" data-toggle="collapse" 
-                                           data-parent="#accordion" href="#collapsThree" 
-                                           aria-expanded="false" aria-controls="collapsTwo">
-                                            <b>¿Porque realizar un pre-diagnóstico?</b> <span class="caret"></span> 
-                                        </a>
-                                    </h6>
-                                </div>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Usuario"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.codUsuario.fullNameUsuario}">                                       
+                                    </h:outputText>
+                                </h:column>                                  
 
-                                <div id="collapsThree" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingTwo">
-                                    <div class="panel-body">
-                                        <p> colapsable 3 Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                                            Quasi sequi consequuntur magni illum, labore veritatis? Magnam voluptatem, 
-                                            voluptatum culpa incidunt. Animi esse optio, dignissimos quod voluptatibus 
-                                            iure impedit id alias!
-                                        </p>
-                                    </div>
-                                </div>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Fecha"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.fecha}">
+                                        <f:convertDateTime pattern="yyyy-MM-dd" />
+                                    </h:outputText>
+                                </h:column>
 
-                                <div class="panel-heading" role="tab" id="headingTwo">
-                                    <h6 class="panel-title">
-                                        <a class="menulateral" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsFour" aria-expanded="false" aria-controls="collapsTwo">
-                                            <b>¿Como obtener un diagnóstico médico?</b> <span class="caret"></span> 
-                                        </a>
-                                    </h6>
-                                </div>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Resultado"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.resultadoPrediagnostico}"/>
+                                </h:column>
 
-                                <div id="collapsFour" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingTwo">
-                                    <div class="panel-body">
-                                        <p> colapsable 4 Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                                            Quasi sequi consequuntur magni illum, labore veritatis? Magnam voluptatem, 
-                                            voluptatum culpa incidunt. Animi esse optio, dignissimos quod voluptatibus 
-                                            iure impedit id alias!
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>     
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Acciones"/>
+                                    </f:facet>
+                                    &nbsp;
+                                    <h:commandLink action="#{controllerPrediagnostico.seleccionarPrediagnostico(item)}" value=""><span id="botonEdita" class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                    </h:commandLink>
+                                    &nbsp;
+                                    <h:commandLink id="btnModalPrediag" class="btnModalPrediag" value=""><span id="botonEliminaPrediag"  class="fa fa-times" aria-hidden="true"></span>
+                                        <f:ajax event="click" listener="#{controllerPrediagnosticoEliminar.prepararEliminarPrediagnostico(item)}" 
+                                                render=":contenido-modal-eliminar-prediagnostico"/>
+                                    </h:commandLink>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </div>
                 </div>
-            </div>
+
+                <div id="myModalPrediag" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <h:form id="form-eliminar-prediagnostico" prependId="false">
+                            <h:panelGroup id="contenido-modal-eliminar-prediagnostico" layout="block"  class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Confirmación eliminar PREDIAGNOSTICO</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>¿Está seguro que desea eliminar el PREDIAGNOSTICO N° "#{controllerPrediagnosticoEliminar.seleccionarEliminarPrediagnostico.idPrediagnostico}" ?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <h:commandButton class="btn btn-primary" value="Eliminar"
+                                                     action="#{controllerPrediagnosticoEliminar.eliminarPrediagnostico()}">
+                                    </h:commandButton>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>                                            
+                                </div>
+                            </h:panelGroup>
+                        </h:form>
+                    </div>
+                </div>
             </ui:define>
 
 
             <!-- Contenido de la pagina -->
-           
-            
+
+
             <ui:define name="ultimosScripts">
                 <script>
-                    $().ready(function () { 
-                        $(".btnModal").click(function () {
-                            console.log("imprime");
+                    $(document).ready(function () {
+
+                        $("#consultar-prediagnostico").DataTable({
+                            language: {
+                                url: "#{resource['js/spanish.lang']}"
+                            },
+                            dom: "Bfrtip",
+                            buttons: [
+                                {
+                                    extend: "csv",
+                                    className: "btn-sm"
+                                },
+                                {
+                                    extend: "excel",
+                                    className: "btn-sm"
+                                },
+                                {
+                                    extend: "pdfHtml5",
+                                    className: "btn-sm"
+                                }
+                            ]
+                        });
+
+                        $("#btnModal").click(function () {
                             $("#myModal").modal("show");
-                        });                        
+                        });
+
+                        $(".btnModalPrediag").click(function () {
+                            $("#myModalPrediag").modal("show");
+                        });
                     });
-                </script>
+                </script>  
             </ui:define>
-            
+
         </ui:composition>
 
     </h:body>
