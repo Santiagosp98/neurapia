@@ -139,14 +139,35 @@ public class ControllerUsuario extends ControllerApp {
         System.out.println("editar Usuario");
         if (usuario != null) {
             
-            if (usuario.getClaveUsuario().equals(this.confirmarClave)) {
+//            if (usuario.getClaveUsuario().equals(this.confirmarClave)) {
                 this.usuarioFacade.edit(usuario);
                 finalizarConversacion();
                 return "ConsultarUsuarios?faces-redrect=true";
-            }else{
-                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido actualizar el usuario", "Clave y confirmar clave diferentes");
-                fc.addMessage(null, m);
-            }
+//            }else{
+//                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido actualizar el usuario", "Clave y confirmar clave diferentes");
+//                fc.addMessage(null, m);
+//            }
+
+
+        } else {
+            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido actualizar el usuario", "Intentelo de nuevo");
+            fc.addMessage(null, m);
+        }
+        return "";
+    }
+    public String editarMiUsuario(){
+        FacesContext fc = FacesContext.getCurrentInstance();
+        Usuario uS = cs.getUsuario();
+        System.out.println("editar Usuario");
+        if (usuario != null) {
+            
+//            if (usuario.getClaveUsuario().equals(this.confirmarClave)) {
+                this.usuarioFacade.edit(uS);
+                return "miPerfil?faces-redrect=true";
+//            }else{
+//                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido actualizar el usuario", "Clave y confirmar clave diferentes");
+//                fc.addMessage(null, m);
+//            }
 
 
         } else {
