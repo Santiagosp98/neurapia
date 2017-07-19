@@ -100,7 +100,7 @@
                         
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
                                 <h:outputLabel value="Número Documento:" for="numeroDocumento"/>
-                                <h:inputText a:placeholder="Num Documento" class="form-control mitooltip" tabindex="2" id="numeroDocumento" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" value="#{controllerSession.usuario.numeroDocumento}" title="PrimerNombre" required="true" requiredMessage="The IdUsuario field is required.">
+                                <h:inputText a:placeholder="Num Documento" class="form-control mitooltip" tabindex="2" id="numeroDocumento" value="#{controllerSession.usuario.numeroDocumento}" title="numeroDocumento" required="true" requiredMessage="The IdUsuario field is required.">
                                 </h:inputText>
                             </div>                        
                             
@@ -160,7 +160,7 @@
                             
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <br></br>
-                                <h:commandButton class="btn btn-info" action="#{controllerUsuario.editarUsuario()}" value="Guardar"/>
+                                <h:commandButton class="btn btn-info" action="#{controllerUsuario.editarMiUsuario()}" value="Guardar"/>
                             </div>
                         </h:form>
                 </div>
