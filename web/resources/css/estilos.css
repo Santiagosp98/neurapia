@@ -1,14 +1,15 @@
+@import "fonts.css";
+
 * {
     box-sizing: border-box;
+    font-family: 'Ubuntu', sans-serif;
 }
 
-@Font-Face {
-    font-family: "Ubuntu" !important;
-    src: url(../fonts/Ubuntu-B.ttf);
-}
-
-* {
-    font-family: ubuntu;
+body {
+    background-color: #F1F1F1;
+    display: table;
+    width: 100%;
+    margin-bottom: 70px;
 }
 
 .checkButtons {
@@ -16,20 +17,12 @@
 }
 
 div.checkButtons {
-    padding: 0px !important;
-}
-
-#back {
-    background-color: #F1F1F1;
-    display: table;
-    width: 100%;
-    margin: center;
-    margin-bottom: 70px;
+    padding: 0 !important;
 }
 
 #foto {
     width: 100%;
-    padding: 0px;
+    padding: 0;
 }
 
 #mainHeader {
@@ -48,13 +41,12 @@ td i {
 
 .navbar-default {
     background-color: white;
-    margin: 0px;
+    margin: 0;
     width: 100%;
     height: 80px;
-    position: z;
     z-index: 100;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.0);
-    padding: 0px;
+    padding: 0;
 }
 
 .navbar.navbar-default {
@@ -62,7 +54,7 @@ td i {
 }
 
 header .row {
-    margin-right: 0px;
+    margin-right: 0;
 }
 
 .cabecera {
@@ -99,7 +91,7 @@ header .row {
 }
 
 .btn {
-    margin-top: 4px 0 0 0;
+    margin-top: 4px;
     padding-right: 10px;
     padding-top: 5px;
 }
@@ -107,7 +99,7 @@ header .row {
 .btn.btn-info {
     background-color: #3DCCC2; /* !important;*/
     transition: 0.5s all;
-    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
 }
 
 .btn.btn-info:hover {
@@ -126,7 +118,6 @@ header .row {
 }
 
 .menu:hover {
-    background-color: none;
     border-bottom: 1px solid #3DCCC2;
     color: #3DCCC2 !important;
 }
@@ -156,7 +147,7 @@ header .row {
 
 .contenedorderecho {
     background-color: white;
-    border-color: 1px solid #ddd;
+    border: 1px solid #ddd;
 }
 
 .contenedorderecho p {
@@ -165,11 +156,11 @@ header .row {
 }
 
 .aside {
-    padding-left: 0px;
+    padding-left: 0;
 }
 
 .sombraAside {
-    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.05);
 
 }
 
@@ -189,7 +180,7 @@ li.menuinterior {
 }
 
 ul.menuinterior {
-    padding-left: 0px;
+    padding-left: 0;
 }
 
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
@@ -214,7 +205,7 @@ ul.menuinterior {
 
 .panel-default > .panel-heading + .panel-collapse > .panel-body:before {
     transition: 0.9s all;
-    padding-left: 0px;
+    padding-left: 0;
 }
 
 .tituloscontenedorderecho {
@@ -279,7 +270,7 @@ h4 {
 h5 {
     text-align: center;
     margin-top: 10px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
     color: #333;
     font-size: 16px;
 }
@@ -311,14 +302,6 @@ label h2 {
     padding: 0 15px 0 15px;
 }
 
-#imagenheader {
-    background-image: url(../imgs/fisioterapia1.jpg);
-    background-attachment: fixed;
-    width: 100%;
-    height: 300px;
-
-}
-
 .checkbox {
     display: inline-block;
 }
@@ -341,23 +324,23 @@ div.text-left {
 
 label.check {
     padding-right: 40px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
 label.form-group.col-lg-5 {
-    padding-left: 0px;
+    padding-left: 0;
 }
 
 div.form-group .col-lg-6 {
-    padding: 0px;
+    padding: 0;
 }
 
 div.form-group .col-lg-7 {
-    padding: 0px;
+    padding: 0;
 }
 
 div.reporteusuario.col-xs-12.col-sm-12.col-md-4.col-lg-4 {
-    padding: 0 0px 20px 0;
+    padding: 0 0 20px 0;
 }
 
 .form-group {
@@ -383,7 +366,7 @@ div.reporteusuario.col-xs-12.col-sm-12.col-md-4.col-lg-4 {
 aside {
     background-color: #F1F1F1;
     width: 100%;
-    margin-top: 0px;
+    margin-top: 0;
 }
 
 .container {
@@ -420,15 +403,12 @@ center {
     text-decoration: none;
     list-style: none;
     width: 100%;
-    margin: 20px;
-    margin-left: 0px;
-    list-style: none;
-    text-decoration: none;
+    margin: 20px 20px 20px 0;
 }
 
 .thumbnail {
     border: none !important;
-    border-radius: none !important;
+    border-radius: 0 !important;
 }
 
 .icono {
@@ -488,7 +468,6 @@ h5 b {
 }
 
 .botoncrear {
-    padding-top: 10px;
     padding: 0 15px 0 15px;
 }
 
@@ -510,7 +489,7 @@ nav ul li span {
 }
 
 #registropreg {
-    padding: 0px !important;
+    padding: 0 !important;
 }
 
 ul li.preguntasRegistro {
@@ -548,14 +527,12 @@ ul li.preguntasRegistro {
 #identificadorYcerrado {
     color: #000;
     transition: all 0.5s;
-    border-radius: 0px 0px 5px 5px;
+    border-radius: 0 0 5px 5px;
 }
 
 #imagenUsuario {
-    margin: center;
     margin-top: 21px;
     background-size: cover;
-    background-position: top-center;
     position: relative;
     border-radius: 50%;
     overflow: hidden;
@@ -604,21 +581,19 @@ ul li.preguntasRegistro {
 }
 
 .arrow_box:after {
-    border-color: rgba(61, 204, 194, 0);
+    border: 10px rgba(61, 204, 194, 0);
     border-top-color: #fff;
-    border-width: 10px;
     margin-left: -10px;
 }
 
 .arrow_box:before {
-    border-color: rgba(0, 0, 0, 0);
+    border: 11px rgba(0, 0, 0, 0);
     border-top-color: #ddd;
-    border-width: 11px;
     margin-left: -11px;
 }
 
 .citas h5 {
-    margin-top: 0px;
+    margin-top: 0;
 }
 
 .citas h5:hover {
@@ -639,17 +614,6 @@ input:optional, textarea:optional{
 	border-color: #757575;
 }*/
 
-.formularioValidacion input:focus:invalid, .formularioValidacion input:focus:invalid {
-    border-color: #FB1F1F;
-    background: #fff url(../imgs/invalid2.png) no-repeat 100%;
-}
-
-.formularioValidacion input:valid, .formularioValidacion textarea:valid {
-
-    background: #fff url(../imgs/validCopia.jpg) no-repeat 100%;
-    box-shadow: 0 0 5px #5cd053;
-    border-color: #21E23C;
-}
 
 #chartdiv {
     width: 100%;
@@ -695,7 +659,7 @@ ul.mensajeErrorForm {
 }
 
 .datosDeHistorial {
-    padding: 0px !important;
+    padding: 0 !important;
 }
 
 .panel-default > .panel-heading {
