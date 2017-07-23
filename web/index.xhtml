@@ -6,13 +6,9 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Neurapia inicio</title>
-
         <meta name="keywords" content="pagina,html,cs3,maquetacion"/>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
         <link href="#{request.contextPath}/resources/css/bootstrap.css" rel="stylesheet"/>
-        <link href="#{request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet"/>
-        <link href="#{request.contextPath}/resources/css/bootstrap.min.css.map" rel="stylesheet"/>
-        <link href="#{request.contextPath}/resources/css/bootstrap.css.map" rel="stylesheet"/>
         <link href="#{request.contextPath}/resources/css/font-awesome.css" rel="stylesheet"/>
         <link href="#{request.contextPath}/resources/css/font-awesome.min.css" rel="stylesheet"/>
         <link href="#{request.contextPath}/resources/css/estilos.css" rel="stylesheet"/>
@@ -23,92 +19,86 @@
         <h:outputScript name="bootstrap.js" library="js" />
         <h:outputScript name="serial.js" library="js"/>
         <h:outputScript name="amcharcopiado.js" library="js" />
-        <h:outputScript name="sweetalert.min.js" library="js" /> 
-        <h:outputScript name="jquery/jquery-plugins.js" library="primefaces"/> 
+        <h:outputScript name="sweetalert.min.js" library="js" />
+        <h:outputScript name="jquery/jquery-plugins.js" library="primefaces"/>
         <h:outputScript name="propioJavaSacrip.js" library="js" />
         <link rel="shortcut icon" href="#{request.contextPath}/resources/imgs/icono.png"/>
     </h:head>
     <h:body>
-        <nav class="cabecera row" >
-            <ul>      
-                <li class="cabeceramenu"><span class="glyphicon glyphicon-map-marker"></span> Calle falsa 123</li>
-                <li class="cabeceramenu"><span class="glyphicon glyphicon-phone-alt"></span> (57-1) 412 83 93</li>
-                <li class="cabeceramenu">Phisycal care</li>
-                <li class="cabeceramenu"><a href="indexIngles.xhtml">Ingles</a></li>
+        <!--Header-->
+        <nav class="cabecera">
+            <ul>
+                <li><span class="glyphicon glyphicon-map-marker"></span> Carrera 21 A # 124 - 55</li>
+                <li><span class="glyphicon glyphicon-phone-alt"></span> (57-1) 214 85 22</li>
+                <li>Physical Care</li>
             </ul>
-        </nav>   
+        </nav>
 
         <nav class="navbar navbar-default">
-
-            <figure>
-                <a class="navbar-brand " href="Inicio.html"><h:graphicImage library="imgs" name="logo.png" class="logo img-responsive" /></a>
-            </figure>
-
             <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
-                        <span class="icon-bar"></span> 
+                        <span class="icon-bar"></span>
                     </button>
-
+                    <a class="navbar-brand" href="#"><h:graphicImage library="imgs" name="logo.png" class="img-responsive"/></a>
                 </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
                     <ul class="nav navbar-nav navbar-right">
-
-                        <ul class="nav navbar-nav " >
-                            <li><a class="menu" href="#{request.contextPath}/Prediagnostico/ConsultarPreDiagnostico.xhtml"> Pre-diagnóstico</a></li>
-                        </ul>
+                        <li>
+                            <a href="#">Pre-Diagnóstico</a>
+                        </li>
                     </ul>
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
+                </div>
+            </div>
         </nav>
+        <!--Header-->
 
-
-        <!--fin del navbar--> 
-        <!-- inicio contenedor pagina -->
         <section id="contenedorprincipal" class="container-fluid">
 
-            <aside class="aside aside col-lg-3 col-md-3 col-sm-4 col-xs-12">
-                <div class="thumbnail sombraAside asideleft" >
-                    <h4><b>Iniciar Sesión</b></h4> 
+            <aside class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                <div class="thumbnail sombraAside asideleft">
+                    <h4>
+                        <b>Iniciar Sesión</b>
+                    </h4>
 
-                    <!-- formulario ingreso inicio -->
+                    <!-- Formulario de inicio de sesión -->
                     <h:form prependId="false" id="formIngreso" class="form-horizontal">
                         <div>
                             <h:messages id="msj-global" showSummary="true" showDetail="true"/>
                         </div>
                         <h:form prependId="false">
-
-
-                            <div class="form-group">                
+                            <div class="form-group">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                    <h:inputText  id="email" class="form-control" value="#{controllerSession.email}" a:placeholder="email" required="true" a:pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" requiredMessage="El correo electrónico es requerido"/>
+                                    <h:inputText  id="email" class="form-control" value="#{controllerSession.email}" a:placeholder="Email" required="true" a:pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" requiredMessage="El correo electrónico es requerido"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">                                
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                     <h:inputSecret id="password" class="form-control" value="#{controllerSession.clave}" a:placeholder="Contraseña" required="true" requiredMessage="La contraseña es requerida"/>
                                 </div>
                             </div>
                             <div>
                                 <ul id="registropreg">
-                                    <li class="checkButtons"><h:selectBooleanCheckbox />&nbsp;<h:outputLabel value=" Recordar Contraseña" a:data-toggle="modal" a:data-target=".bs-example-modal-sm"/></li>
-                                    <li class="preguntasRegistro"><a href="" data-toggle="modal" 
-                                                                     data-target=".bs-example-modal"> 
-                                            ¿Olvidaste tu contraseña?</a></li>
-                                    <li class="checkButtons preguntasRegistro"><a href="" data-toggle="modal" 
-                                                                                  data-target=".bs-example-modal-lg"> 
-                                            Registrarse</a></li>
+                                    <li class="preguntasRegistro">
+                                        <a href="" data-toggle="modal" data-target=".bs-example-modal">¿Olvidaste tu contraseña?</a>
+                                    </li>
+                                    <li class="checkButtons preguntasRegistro">
+                                        <a href="" data-toggle="modal" data-target=".bs-example-modal-lg">Registrarse</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div id="botonElimina">
-                                <h:commandButton class="btn btn-info " value="ingresar" action="#{controllerSession.iniciarSesion()}"/>
+                                <h:commandButton class="btn btn-info " value="Ingresar" action="#{controllerSession.iniciarSesion()}"/>
                             </div>
                         </h:form>
+                        <!-- Formulario de inicio de sesión -->
 
                         <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                             <div class="modal-dialog modal-lg" role="document">
@@ -116,7 +106,8 @@
                                     <div style="background-color: #fff; height: 550px; border-radius: 20px;">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span></button>
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
                                             <h1 class="modal-title" id="myModalLabel">Registrate</h1>
                                         </div>
                                         <h:form  prependId="false" id="formRegistrarse" a:name="formRegistrarse" style="background-color: white">
@@ -134,7 +125,7 @@
                                                 <h:outputLabel value="Número Documento:" for="numeroDocumento"/>
                                                 <h:inputText a:placeholder="Num Documento" class="form-control mitooltip" tabindex="2" id="numeroDocumento" value="#{controllerUsuario.usuario.numeroDocumento}" title="PrimerNombre" required="true" requiredMessage="The IdUsuario field is required.">
                                                 </h:inputText>
-                                            </div>                        
+                                            </div>
 
                                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
                                                 <h:outputLabel value="Primer Nombre:" for="primerNombre"/>
@@ -200,11 +191,10 @@
                             </div>
                         </div>
 
-
                         <div class="modal fade bs-example-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                             <div class="modal-dialog modal-sm" role="document">
                                 <div class="modal-content" style="margin-top: 200px; width: 300px;">
-                                    <div style="background-color: #fff; height: 400px; border-radius: 20px;"> 
+                                    <div style="background-color: #fff; height: 400px; border-radius: 20px;">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span></button>
@@ -214,10 +204,10 @@
                                         <form action="" class="form" >
                                             <div class="form-group col-lg-12 " style="margin: 5px;">
                                                 <label  for="nombre" >Recupera tu cuenta, ingresa tu correo eectronico</label>
-                                                <input type="email" class="form-control" id="emailRe" placeholder="ejem@ejem.com" 
-                                                       required="" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}">                                                                       
+                                                <input type="email" class="form-control" id="emailRe" placeholder="ejem@ejem.com"
+                                                       required="" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}">
                                                 </input>
-                                            </div>    
+                                            </div>
                                             <div class="form-group col-lg-12 " style="margin: 10px;">
                                                 <h6> <button type="submit" id="Olvidaste"  class="btn btn-info" onclick="olvidasteContraseña()">
                                                         <i class="fa fa-floppy-o" aria-hidden="true" ></i>Enviar
@@ -238,62 +228,67 @@
                 <section>
                     <div class="imagenheader"></div>
                 </section>
-                <h4><b>Pre-diagnóstico</b></h4> 
-                <h5>¿Tienes  alguna dolencia en particular? </h5>  
-                <h1><b>REALIZA NUESTRO PRE-DIAGNÓSTICO</b></h1>   
+                <h4><b>Pre-diagnóstico</b></h4>
+                <h5>¿Tienes  alguna dolencia en particular? </h5>
+                <h1><b>REALIZA NUESTRO PRE-DIAGNÓSTICO</b></h1>
                 <div class="parrafoinicio">
-                    <p>El sistema de pre-diagnóstico médico es una herramienta que permite conocer el POSIBLE malestar que pueda estar 
+                    <p>El sistema de pre-diagnóstico médico es una herramienta que permite conocer el POSIBLE malestar que pueda estar
                         afectando tu salud dependiendo de los resultados obtenidos genera una respuesta acorde con los sintomas seleccionados
                         previamente, para un diagnóstico médico profesional y un tratamiento adecuado de tu enfermedad registrate en nuestro
                         sistema y solicita una cita médica o comunícate con nuestro equipo de fisioterapeutas altamente calificados para tratar
-                        tu dolencia malestar o enfermedad particular.</p> <br></br>
-
+                        tu dolencia malestar o enfermedad particular.
+                    </p>
+                    <br></br>
                     <center>
                         <button type="submit" class="btn btn-info" onclick="window.location.href = 'error404.html'">
-                            Realizar Pre-dianóstico</button>
+                            Realizar Pre-diagnóstico</button>
                     </center>
                     <section>
-                        <div><h1 style="font-size: 20px"><b>Consulta nuestras preguntas frecuentes</b></h1> </div>
+                        <div>
+                            <h1 style="font-size: 20px">
+                                <b>Consulta nuestras preguntas frecuentes</b>
+                            </h1>
+                        </div>
                         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                             <div  class="panel panel-default">
                                 <div class="panel-heading" role="tab" id="headingOne">
                                     <h6 class="panel-title">
                                         <a class="menulateral" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                            <b>¿Porque un pre-diagnóstico médico previo?</b> <span class="caret"></span> 	
+                                            <b>¿Porque un pre-diagnóstico médico previo?</b> <span class="caret"></span>
                                         </a>
                                     </h6>
                                 </div>
                                 <div id="collapseOne" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingOne">
                                     <div class="panel-body">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia similique, 
-                                            accusantium ullam omnis labore perferendis, laborum culpa excepturi ipsum fuga 
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia similique,
+                                            accusantium ullam omnis labore perferendis, laborum culpa excepturi ipsum fuga
                                             et minus molestias nobis quasi esse explicabo. Error, veniam, quia.
                                         </p>
                                         <div class="submenu">
                                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam a inventore dolor
                                                 et architecto nostrum reprehenderit maxime molestiae magnam doloremque, unde
                                                 perferendis ab enim labore asperiores placeat repellat, voluptatum, ipsa.
-                                            </p>sit. 
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="panel-heading" role="tab" id="headingTwo">
                                     <h6 class="panel-title">
-                                        <a class="menulateral" role="button" data-toggle="collapse" 
-                                           data-parent="#accordion" href="#collapsTwo" aria-expanded="false" 
+                                        <a class="menulateral" role="button" data-toggle="collapse"
+                                           data-parent="#accordion" href="#collapsTwo" aria-expanded="false"
                                            aria-controls="collapsTwo">
-                                            <b>¿Es Valedera la información sumninistrada por el resultado del pre-diagnóstico?</b> 
-                                            <span class="caret"></span> 
+                                            <b>¿Es Valedera la información sumninistrada por el resultado del pre-diagnóstico?</b>
+                                            <span class="caret"></span>
                                         </a>
                                     </h6>
                                 </div>
 
                                 <div id="collapsTwo" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingTwo">
                                     <div class="panel-body">
-                                        <p> colapsable 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                                            Quasi sequi consequuntur magni illum, labore veritatis? Magnam voluptatem, 
-                                            voluptatum culpa incidunt. Animi esse optio, dignissimos quod voluptatibus 
+                                        <p> colapsable 2 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                            Quasi sequi consequuntur magni illum, labore veritatis? Magnam voluptatem,
+                                            voluptatum culpa incidunt. Animi esse optio, dignissimos quod voluptatibus
                                             iure impedit id alias!
                                         </p>
                                     </div>
@@ -301,19 +296,19 @@
 
                                 <div class="panel-heading" role="tab" id="headingTwo">
                                     <h6 class="panel-title">
-                                        <a class="menulateral" role="button" data-toggle="collapse" 
-                                           data-parent="#accordion" href="#collapsThree" 
+                                        <a class="menulateral" role="button" data-toggle="collapse"
+                                           data-parent="#accordion" href="#collapsThree"
                                            aria-expanded="false" aria-controls="collapsTwo">
-                                            <b>¿Porque realizar un pre-diagnóstico?</b> <span class="caret"></span> 
+                                            <b>¿Porque realizar un pre-diagnóstico?</b> <span class="caret"></span>
                                         </a>
                                     </h6>
                                 </div>
 
                                 <div id="collapsThree" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingTwo">
                                     <div class="panel-body">
-                                        <p> colapsable 3 Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                                            Quasi sequi consequuntur magni illum, labore veritatis? Magnam voluptatem, 
-                                            voluptatum culpa incidunt. Animi esse optio, dignissimos quod voluptatibus 
+                                        <p> colapsable 3 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                            Quasi sequi consequuntur magni illum, labore veritatis? Magnam voluptatem,
+                                            voluptatum culpa incidunt. Animi esse optio, dignissimos quod voluptatibus
                                             iure impedit id alias!
                                         </p>
                                     </div>
@@ -322,23 +317,23 @@
                                 <div class="panel-heading" role="tab" id="headingTwo">
                                     <h6 class="panel-title">
                                         <a class="menulateral" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsFour" aria-expanded="false" aria-controls="collapsTwo">
-                                            <b>¿Como obtener un diagnóstico médico?</b> <span class="caret"></span> 
+                                            <b>¿Como obtener un diagnóstico médico?</b> <span class="caret"></span>
                                         </a>
                                     </h6>
                                 </div>
 
                                 <div id="collapsFour" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingTwo">
                                     <div class="panel-body">
-                                        <p> colapsable 4 Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                                            Quasi sequi consequuntur magni illum, labore veritatis? Magnam voluptatem, 
-                                            voluptatum culpa incidunt. Animi esse optio, dignissimos quod voluptatibus 
+                                        <p> colapsable 4 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                            Quasi sequi consequuntur magni illum, labore veritatis? Magnam voluptatem,
+                                            voluptatum culpa incidunt. Animi esse optio, dignissimos quod voluptatibus
                                             iure impedit id alias!
                                         </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </section>     
+                    </section>
                 </div>
             </div>
 
