@@ -33,4 +33,5 @@ public interface UsuarioFacadeLocal {
     
     Usuario iniciarSesion(String email, String clave);
     List<Usuario> listaUsuariosPorRol(Rol rol);
+    List<Usuario> listaUsuariosPorRolDoble(Rol rol, Rol rol2);
 }

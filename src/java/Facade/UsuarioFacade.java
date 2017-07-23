@@ -61,5 +61,19 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
         return listaPorRol;
     }
     
+    @Override
+    public List<Usuario> listaUsuariosPorRolDoble(Rol rol, Rol rol2){
+        List<Usuario> listaPorRolDoble = null;
+        try {            
+            TypedQuery<Usuario> q = getEntityManager().createNamedQuery("Usuario.listaporRolDoble", Usuario.class);
+            q.setParameter("rol", rol);
+            q.setParameter("rol2", rol2);
+            listaPorRolDoble = q.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listaPorRolDoble;
+    }
+    
     
 }
