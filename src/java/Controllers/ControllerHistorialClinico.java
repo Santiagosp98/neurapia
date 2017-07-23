@@ -347,7 +347,9 @@ public class ControllerHistorialClinico extends ControllerApp {
         for (Resultadoproceso r : resultadosOBtenidos) {
             if (nomTemp.equals("") || !r.getCodCaracteristicaMovilidad().getCodParteCuerpo().getNombreParteCuerpo().equals(nomTemp)) {
                 nomTemp = r.getCodCaracteristicaMovilidad().getCodParteCuerpo().getNombreParteCuerpo();
-                mapa.put(nomTemp, new ArrayList<Resultadoproceso>());
+                if(!mapa.containsKey(nomTemp)) {
+                    mapa.put(nomTemp, new ArrayList<Resultadoproceso>());
+                }
             }
             mapa.get(nomTemp).add(r);
 
