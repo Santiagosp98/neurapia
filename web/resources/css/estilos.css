@@ -1,5 +1,10 @@
 @import "fonts.css";
 
+html {
+    height: 100%;
+    box-sizing: border-box;
+}
+
 * {
     box-sizing: border-box;
     font-family: 'Ubuntu', sans-serif;
@@ -9,7 +14,82 @@ body {
     background-color: #F1F1F1;
     display: table;
     width: 100%;
-    margin-bottom: 70px;
+    position: relative;
+    min-height: 100%;
+}
+
+.container-fluid {
+    padding: 10px 14px 10px 10px;
+}
+
+/*Header*/
+.cabecera {
+    height: 40px;
+    background-color: #151510;
+    border-bottom: 1px solid #3DCCC2;
+    position: static;
+    z-index: 100;
+}
+
+.cabecera > ul {
+    margin-top: -10px;
+}
+
+.cabecera > ul > li {
+    float: right;
+    display: inline-block;
+    list-style: none;
+    color: #bbb;
+    text-align: right;
+    padding: 10px 30px;
+}
+
+.navbar-default {
+    background-color: white;
+    margin: 0;
+    width: 100%;
+    height: 80px;
+    z-index: 100;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.0);
+    padding: 0;
+}
+
+.navbar.navbar-default {
+    background-color: white;
+}
+
+.nav {
+    min-height: 50px;
+    background-attachment: fixed;
+}
+
+.navbar-brand > img {
+    height: 40px;
+    margin-left: 50px;
+}
+
+.nav.navbar-nav > li > a {
+    background-color: #fff;
+    color: #000;
+    border-bottom: 2px solid transparent;
+    transition: 0.5s all;
+}
+
+.nav.navbar-nav > li > a:hover {
+    border-bottom: 1px solid #3DCCC2;
+    color: #3DCCC2 !important;
+}
+
+/*Header*/
+
+@media (max-width: 576px) {
+    .cabecera {
+        display: none;
+    }
+
+    .navbar-brand > img {
+        margin-left: 0;
+    }
 }
 
 .checkButtons {
@@ -39,55 +119,13 @@ td i {
     padding-right: 10px;
 }
 
-.navbar-default {
-    background-color: white;
-    margin: 0;
-    width: 100%;
-    height: 80px;
-    z-index: 100;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.0);
-    padding: 0;
-}
-
-.navbar.navbar-default {
-    background-color: white;
-}
-
 header .row {
     margin-right: 0;
-}
-
-.cabecera {
-    height: 40px;
-    background-color: #151510;
-    border-bottom: 1px solid #3DCCC2;
-    width: 101%;
-    position: static;
-    z-index: 100;
-}
-
-.cabeceramenu {
-    float: right;
-    display: inline-block;
-    list-style: none;
-    color: #bbb;
-    text-align: right;
-    padding: 10px 30px;
-}
-
-.nav {
-    min-height: 50px;
-    background-attachment: fixed;
 }
 
 .navbar-form.filtros {
     display: inline-block !important;
     padding: 10px 0 10px 0;
-}
-
-.logo {
-    height: 40px;
-    margin-left: 50px;
 }
 
 .btn {
@@ -106,20 +144,6 @@ header .row {
     background-color: #fff;
     color: #3DCCC2;
 
-}
-
-.menu {
-    padding-right: 20px;
-    padding-top: 5px;
-    background-color: #fff;
-    color: #000;
-    border-bottom: 2px solid transparent;
-    transition: 0.5s all;
-}
-
-.menu:hover {
-    border-bottom: 1px solid #3DCCC2;
-    color: #3DCCC2 !important;
 }
 
 .menulateral {
@@ -153,10 +177,6 @@ header .row {
 .contenedorderecho p {
     margin-top: 10px;
     padding: 4px;
-}
-
-.aside {
-    padding-left: 0;
 }
 
 .sombraAside {
@@ -350,17 +370,23 @@ div.reporteusuario.col-xs-12.col-sm-12.col-md-4.col-lg-4 {
 .footer {
     margin: 0;
     background-color: #151510 !important;
-    position: fixed !important;
     min-height: 45px;
     width: 100%;
-    bottom: 0 !important;
-    left: 0 !important;
     color: #888;
 }
 
 .footer div span {
     padding: 20px 20px 20px 20px;
     float: right;
+}
+
+@media (min-height: 863px) {
+    .footer {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        left: 0;
+    }
 }
 
 aside {
@@ -613,7 +639,6 @@ input:invalid, textarea:invalid {
 input:optional, textarea:optional{
 	border-color: #757575;
 }*/
-
 
 #chartdiv {
     width: 100%;
