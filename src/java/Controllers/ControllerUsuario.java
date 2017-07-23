@@ -5,7 +5,6 @@
  */
 package Controllers;
 
-
 import Entities.Historialclinico;
 import Entities.Rol;
 import Entities.Usuario;
@@ -57,39 +56,71 @@ public class ControllerUsuario extends ControllerApp {
     private RolFacadeLocal rolFacade;
     private List<Rol> listaRol;
     private Rol rol;
-    
+    private Rol rol2;
+
     @PostConstruct
     public void init() {
         listaUsuarios = usuarioFacade.findAll();
         usuario = new Usuario();
         listaRol = rolFacade.findAll();
         rol = new Rol();
+        rol2 = new Rol();
     }
 
     public List<Usuario> consultarUsuarios() {
-        this.listaUsuarios = usuarioFacade.findAll();
+        Usuario uS = cs.getUsuario();
+        System.out.println("rol "+ uS.getCodRol());
+        if(uS.getCodRol() != null){
+            if (uS.getCodRol().getNombreRol().equals("Super Administrador")) {
+                this.listaUsuarios = usuarioFacade.findAll();
+            }else if(uS.getCodRol().getNombreRol().equals("Administrador")){
+                rol.setIdRol(4);
+                rol2.setIdRol(3);
+                try {
+                    System.out.println("Listando por Paciente y Fisioterapeuta");
+                    System.out.println("N° " + listaUsuarios.size());
+                    this.listaUsuarios = usuarioFacade.listaUsuariosPorRolDoble(rol, rol2);
+                    return listaUsuarios;
+                } catch (Exception e) {
+                }
+            } else if (uS.getCodRol().getNombreRol().equals("Fisioterapeuta")) {
+                rol.setIdRol(4);
+                try {
+                    System.out.println("Estamos listando los pacientes");
+                    System.out.println("" + listaUsuarios.size());
+                    this.listaUsuarios = usuarioFacade.listaUsuariosPorRol(rol);
+                    return listaUsuarios;
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+
+            }
+        }else{
+            System.out.println("Campo nulo getCodRol");
+        }
+        
         return listaUsuarios;
     }
-    
-    public List<Usuario> listarPacientes(){ 
+
+    public List<Usuario> listarPacientes() {
         rol.setIdRol(4);
         try {
             System.out.println("Estamos listando los pacientes");
             System.out.println("" + listaUsuarios.size());
-            this.listaUsuarios = usuarioFacade.listaUsuariosPorRol(rol);            
-            return listaUsuarios; 
+            this.listaUsuarios = usuarioFacade.listaUsuariosPorRol(rol);
+            return listaUsuarios;
         } catch (Exception e) {
             System.out.println(e);
         }
         return listaUsuarios;
     }
 
-    public void prepararEliminarUsuario(Usuario usuario){
+    public void prepararEliminarUsuario(Usuario usuario) {
         iniciarConversacion();
         this.usuario = usuario;
         System.out.println(usuario.getFullNameUsuario());
     }
-    
+
     public void eliminarUsuario() {
         FacesContext fc = FacesContext.getCurrentInstance();
         try {
@@ -113,7 +144,7 @@ public class ControllerUsuario extends ControllerApp {
             }
         } catch (Exception e) {
         }
-        
+
     }
 
     public String seleccionarUsuario(Usuario usuario) throws IOException {
@@ -123,8 +154,7 @@ public class ControllerUsuario extends ControllerApp {
         if (Objects.equals(cs.getUsuario().getIdUsuario(), this.usuario.getIdUsuario())) {
             System.out.println(cs.getUsuario().getPrimerNombre() + " es igual a: " + this.usuario.getPrimerNombre());
             return "ActualizarUsuario?faces-redrect=true";
-        }else
-        if (!usuario.getCodRol().equals(1)) {            
+        } else if (!usuario.getCodRol().equals(1)) {
             return "ActualizarUsuario?faces-redrect=true";
         } else {
 
@@ -138,16 +168,15 @@ public class ControllerUsuario extends ControllerApp {
         FacesContext fc = FacesContext.getCurrentInstance();
         System.out.println("editar Usuario");
         if (usuario != null) {
-            
+
 //            if (usuario.getClaveUsuario().equals(this.confirmarClave)) {
-                this.usuarioFacade.edit(usuario);
-                finalizarConversacion();
-                return "ConsultarUsuarios?faces-redrect=true";
+            this.usuarioFacade.edit(usuario);
+            finalizarConversacion();
+            return "ConsultarUsuarios?faces-redrect=true";
 //            }else{
 //                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido actualizar el usuario", "Clave y confirmar clave diferentes");
 //                fc.addMessage(null, m);
 //            }
-
 
         } else {
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido actualizar el usuario", "Intentelo de nuevo");
@@ -155,20 +184,20 @@ public class ControllerUsuario extends ControllerApp {
         }
         return "";
     }
-    public String editarMiUsuario(){
+
+    public String editarMiUsuario() {
         FacesContext fc = FacesContext.getCurrentInstance();
         Usuario uS = cs.getUsuario();
         System.out.println("editar Usuario");
         if (usuario != null) {
-            
+
 //            if (usuario.getClaveUsuario().equals(this.confirmarClave)) {
-                this.usuarioFacade.edit(uS);
-                return "miPerfil?faces-redrect=true";
+            this.usuarioFacade.edit(uS);
+            return "miPerfil?faces-redrect=true";
 //            }else{
 //                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido actualizar el usuario", "Clave y confirmar clave diferentes");
 //                fc.addMessage(null, m);
 //            }
-
 
         } else {
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido actualizar el usuario", "Intentelo de nuevo");
@@ -197,13 +226,14 @@ public class ControllerUsuario extends ControllerApp {
             if (usuario.getClaveUsuario().equals(this.confirmarClave)) {
                 usuarioFacade.create(usuario);
                 return "ConsultarUsuarios";
-            } 
+            }
 
         } else {
 
         }
         return "";
     }
+
     public String crearUsuarioindex() throws ParseException {
         if (usuario != null) {
             System.out.println("indexxxxx");
@@ -219,10 +249,10 @@ public class ControllerUsuario extends ControllerApp {
             if (usuario.getClaveUsuario().equals(this.confirmarClave)) {
                 usuarioFacade.create(usuario);
                 return "index.html";
-            } 
+            }
 
         } else {
-                        System.out.println("indexxxxx");
+            System.out.println("indexxxxx");
 
         }
         return "";
@@ -276,7 +306,7 @@ public class ControllerUsuario extends ControllerApp {
         iniciarConversacion();
         this.usuario = usuario;
         for (Historialclinico historialClinico : hc.getListaHistorialClinico()) {
-            if (historialClinico.getCodUsuario().getIdUsuario().equals(usuario.getIdUsuario())){
+            if (historialClinico.getCodUsuario().getIdUsuario().equals(usuario.getIdUsuario())) {
                 hc.seleccionarHistorialclinico(historialClinico);
                 return "ActualizarHistorial";
             }
