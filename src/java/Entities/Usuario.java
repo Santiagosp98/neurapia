@@ -50,6 +50,7 @@ import java.util.ArrayList;
     , @NamedQuery(name = "Usuario.findByFechaRegistro", query = "SELECT u FROM Usuario u WHERE u.fechaRegistro = :fechaRegistro")
     , @NamedQuery(name = "Usuario.findByCorreoElectronico", query = "SELECT u FROM Usuario u WHERE u.correoElectronico = :correoElectronico")
     , @NamedQuery(name = "Usuario.listaporRol", query = "SELECT u FROM Usuario u WHERE u.codRol = :rol")
+    , @NamedQuery(name = "Usuario.listaporRolDoble", query = "SELECT u FROM Usuario u WHERE u.codRol = :rol OR u.codRol = :rol2")
     , @NamedQuery(name = "Usuario.login", query = "SELECT u FROM Usuario u WHERE u.correoElectronico = :email AND u.claveUsuario = :claveUsuario")
     , @NamedQuery(name = "Usuario.findByClaveUsuario", query = "SELECT u FROM Usuario u WHERE u.claveUsuario = :claveUsuario")})
 public class Usuario implements Serializable {
