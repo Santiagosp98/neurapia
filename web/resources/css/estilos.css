@@ -12,7 +12,6 @@ html {
 
 body {
     background-color: #F1F1F1;
-    display: table;
     width: 100%;
     position: relative;
     min-height: 100%;
@@ -60,7 +59,7 @@ body {
 
 .nav {
     min-height: 50px;
-    background-attachment: fixed;
+    background-color: #fff;
 }
 
 .navbar-brand > img {
@@ -75,22 +74,66 @@ body {
     transition: 0.5s all;
 }
 
-.nav.navbar-nav > li > a:hover {
+.nav.navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
     border-bottom: 1px solid #3DCCC2;
     color: #3DCCC2 !important;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.dropdown-menu > li > form > a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap
+}
+
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+    border-color: #fff;
 }
 
 /*Header*/
+
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > form > a {
+        color: #777;
+    }
+
+    .navbar-nav .open .dropdown-menu > li > form > a {
+        padding: 5px 15px 5px 25px;
+    }
+
+    .navbar-default .navbar-nav .open .dropdown-menu > li > form > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > li > form > a:focus {
+        color: #333;
+    }
+
+    .navbar-nav .open .dropdown-menu {
+        background-color: #fff;
+    }
+
+
+    .navbar-brand > img {
+        margin-left: 0;
+    }
+}
 
 @media (max-width: 576px) {
     .cabecera {
         display: none;
     }
 
-    .navbar-brand > img {
-        margin-left: 0;
+    div.dataTables_info {
+        display: none !important;
     }
 }
+
 
 .checkButtons {
     list-style: none;
