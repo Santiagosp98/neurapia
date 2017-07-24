@@ -1,63 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:fragment xmlns="http://www.w3.org/1999/xhtml"
              xmlns:h="http://xmlns.jcp.org/jsf/html"
              xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-             
-                    <nav class="cabecera row" >
-                        <ul>      
-                            <li class="cabeceramenu"><span class="glyphicon glyphicon-map-marker"></span> Calle falsa 123</li>
-                            <li class="cabeceramenu"><span class="glyphicon glyphicon-phone-alt"></span> (57-1) 412 83 93</li>
-                            <li class="cabeceramenu">Phisycal care</li>
+
+    <nav class="cabecera">
+        <ul>
+            <li><span class="glyphicon glyphicon-map-marker"></span> Carrera 21 A # 124 - 55</li>
+            <li><span class="glyphicon glyphicon-phone-alt"></span> (57-1) 214 85 22</li>
+            <li>Physical Care</li>
+        </ul>
+    </nav>
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <h:graphicImage library="imgs" name="logo.png" class="img-responsive"/>
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#{request.contextPath}/Usuarios/ConsultarUsuarios.xhtml">Usuario</a>
+                    </li>
+                    <li>
+                        <a href="#{request.contextPath}/CitaMedica/ConsultarCitasMedicas.xhtml">Cita médica</a>
+                    </li>
+                    <li>
+                        <a href="#{request.contextPath}/HistorialClinico/ConsultarHistorialClinico.xhtml">Informe médico</a>
+                    </li>
+                    <li>
+                        <a href="#{request.contextPath}/Prediagnostico/ConsultarPrediagnostico.xhtml">Pre-diagnóstico</a>
+                    </li>
+                    <li class="dropdown">
+
+                        <a class="dropdown-toggle" id="dropdownMenu1"
+                           data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="true">#{controllerSession.usuario.fullNameUsuario} <span
+                                class="caret"></span>
+                        </a>
+                        <ul id="identificadorYcerrado" class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li>
+                                <a href="ConsultarUsuarios.xhtml">#{controllerSession.usuario.codRol.nombreRol}</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="#{request.contextPath}/ConfiguracionSistema/ConsultarDatosSistema.xhtml">Configuración del sistema</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <h:form prependId="false">
+                                    <h:commandLink value="Sign Out" actionListener="#{controllerSession.cerrarSesion()}"/>
+                                </h:form>
+                            </li>
                         </ul>
-                    </nav>   
 
-                    <nav class="navbar navbar-default">
-                        
-                        <figure>
-                            <a class="navbar-brand " href="Inicio.html"><h:graphicImage library="imgs" name="logo.png" class="logo img-responsive" /></a>
-                        </figure>
-                        
-                        <div class="container-fluid">
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                                    <span class="sr-only">Toggle navigation</span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span> 
-                                </button>
-                                
-                            </div>
-                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-                                <ul class="nav navbar-nav navbar-right">
-
-                                    <ul class="nav navbar-nav " >
-                                        <li><a class="menu" href="#{request.contextPath}/Usuarios/ConsultarUsuarios.xhtml"> Usuario</a></li>
-                                        <li><a class="menu" href="#{request.contextPath}/CitaMedica/ConsultarCitasMedicas.xhtml">Cita Médica</a></li>
-                                        <li><a class="menu" href="#{request.contextPath}/HistorialClinico/ConsultarHistorialClinico.xhtml"> Informe Médico</a></li>
-                                        <li><a class="menu" href="#{request.contextPath}/Prediagnostico/ConsultarPrediagnostico.xhtml"> Pre-diagnóstico</a></li>
-                                        
-
-                                        <h:form prependId="false" class="navbar-form navbar-nav">
-                                            <div class="dropdown">
-                                                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">#{controllerSession.usuario.fullNameUsuario} <span class="caret"></span>
-                                                </button>
-                                                <ul id="identificadorYcerrado" class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                                    <li><a href="ConsultarUsuarios.xhtml" >#{controllerSession.usuario.codRol.nombreRol}</a></li>
-                                                    <li role="separator" class="divider"></li>                                                    
-                                                    <li><a href="#{request.contextPath}/ConfiguracionSistema/ConsultarDatosSistema.xhtml">configuracion del sistema</a></li>
-                                                    <li role="separator" class="divider"></li>
-                                                    <li>
-                                                        <h:commandLink value="Sign Out" actionListener="#{controllerSession.cerrarSesion()}"/>
-                                                    </li>
-                                                </ul>
-                                            </div> 
-                                        </h:form>
-                                    </ul>
-                                </ul>
-                            </div><!-- /.navbar-collapse -->
-                        </div><!-- /.container-fluid -->
-                    </nav>
-    </ui:fragment>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</ui:fragment>
