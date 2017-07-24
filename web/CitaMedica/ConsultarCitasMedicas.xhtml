@@ -60,14 +60,6 @@
                     <div class="fixed-table-body">
                         <h:form prependId="false">
                             <h:dataTable value="#{controllerCitaMedica.consultarCitaMedica()}" var="item" class="table table-striped table-bordered" id="consultar-citas">
-
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Código"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.idCitaMedica}"/>
-                                </h:column>
-
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Paciente"/>
@@ -136,9 +128,15 @@
                     $(document).ready(function () {
 
                         $("#consultar-citas").DataTable({
+                            autoWidth: false,
                             language: {
                                 url: "#{resource['js/spanish.lang']}"
                             },
+                            responsive: true,
+                            columnDefs:[
+                                { responsivePriority: 1, targets: -1 },
+                                { responsivePriority: 2, targets: 1 }
+                            ],
                             dom: "Bfrtip",
                             buttons: [
                                 {

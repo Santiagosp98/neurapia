@@ -149,11 +149,16 @@
                  <ui:define name="ultimosScripts">
                 <script>
                     $(document).ready(function () {
-
                         $("#consultar-historial").DataTable({
+                            autoWidth: false,
                             language: {
                                 url: "#{resource['js/spanish.lang']}"
                             },
+                            responsive: true,
+                            columnDefs:[
+                                { responsivePriority: 1, targets: -1 },
+                                { responsivePriority: 2, targets: 1 }
+                            ],
                             dom: "Bfrtip",
                             buttons: [
                                 {
