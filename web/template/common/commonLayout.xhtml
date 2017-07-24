@@ -1,89 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"      
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <h:head>
-        <f:event type="preRenderView" listener="#{controllerSession.validarSesion()}"/>
-        <meta name="keywords" content="pagina,html,cs3,maquetacion"/>
-        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
-        <link href="#{request.contextPath}/resources/css/bootstrap.css" rel="stylesheet"/>
-        <link href="#{request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet"/>
-        <link href="#{request.contextPath}/resources/css/bootstrap.min.css.map" rel="stylesheet"/>
-        <link href="#{request.contextPath}/resources/css/bootstrap.css.map" rel="stylesheet"/>
-        <link href="#{request.contextPath}/resources/css/font-awesome.css" rel="stylesheet"/>
-        <link href="#{request.contextPath}/resources/css/font-awesome.min.css" rel="stylesheet"/>
-        <link href="#{request.contextPath}/resources/css/estilos.css" rel="stylesheet"/>
-        <link href="#{request.contextPath}/resources/css/export.css" rel="stylesheet"/>
-        <h:outputStylesheet name="jquery/ui/jquery-ui.css" library="primefaces" />
-        <h:outputStylesheet library="css" name="datatables.min.css"/>
-        <h:outputScript name="jquery2.2.3.js" library="js" />
-        <h:outputScript name="bootstrap.js" library="js" />
-        <h:outputScript name="serial.js" library="js"/>
-        <h:outputScript name="amcharcopiado.js" library="js" />
-        <h:outputScript name="sweetalert.min.js" library="js" /> 
-        <h:outputScript name="jquery/jquery-plugins.js" library="primefaces" /> 
-        <h:outputScript name="propioJavaSacrip.js" library="js" /> 
-        <h:outputScript library="js" name="datatables.min.js"/>
+<h:head>
+    <f:event type="preRenderView" listener="#{controllerSession.validarSesion()}"/>
+    <meta name="keywords" content="pagina,html,cs3,maquetacion"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <link href="#{request.contextPath}/resources/css/bootstrap.css" rel="stylesheet"/>
+    <link href="#{request.contextPath}/resources/css/font-awesome.css" rel="stylesheet"/>
+    <link href="#{request.contextPath}/resources/css/estilos.css" rel="stylesheet"/>
+    <link href="#{request.contextPath}/resources/css/export.css" rel="stylesheet"/>
+    <h:outputStylesheet name="jquery/ui/jquery-ui.css" library="primefaces"/>
+    <h:outputStylesheet library="css" name="datatables.min.css"/>
+    <h:outputScript name="jquery2.2.3.js" library="js"/>
+    <h:outputScript name="bootstrap.js" library="js"/>
+    <h:outputScript name="sweetalert.min.js" library="js"/>
+    <h:outputScript name="jquery/jquery-plugins.js" library="primefaces"/>
+    <h:outputScript name="propioJavaSacrip.js" library="js"/>
+    <h:outputScript library="js" name="datatables.min.js"/>
 
 
+    <link rel="shortcut icon" href="#{request.contextPath}/resources/imgs/icono.png"/>
+    <title><ui:insert name="titulo"></ui:insert></title>
 
-        <link rel="shortcut icon" href="#{request.contextPath}/resources/imgs/icono.png"/>       
-        <title><ui:insert name="titulo"></ui:insert></title>
+</h:head>
 
-    </h:head>
+<h:body>
+    <ui:insert name="header">
+        <ui:include src="/template/common/commonHeader.xhtml"/>
+    </ui:insert>
 
-    <h:body id="back">
+    <section id="contenedorprincipal" class="container-fluid">
 
-        <div id="page">
-
-            <div id="header">
-                <ui:insert name="header" >
-                    <ui:include src="/template/common/commonHeader.xhtml" />
-                </ui:insert>
-            </div>
-            <section id="contenedorprincipal" class="container-fluid">
-
-                <div id="aside">
-                    <aside class="aside col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                        <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
-                            <ui:insert name="aside" >
-
-                            </ui:insert>
-                        </div>
-                    </aside>
-                </div>
-
-                <div id="content">                        
-                    <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
-                        <div class="panel panel-default">
-                            <ui:insert name="content"  >        
-
-                            </ui:insert>       
-                        </div>                            
-                    </div>                        
-                </div>
-
-            </section>
-            <div id="footer">
-                <ui:insert name="footer" >
-                    <ui:include src="/template/common/commonFooter.xhtml" />
-                </ui:insert>
-            </div>
-
-            <ui:insert name="ultimosScripts">
+        <aside class="aside col-lg-3 col-md-3 col-sm-3 col-xs-12">
+            <ui:insert name="aside">
 
             </ui:insert>
+        </aside>
 
-            <ui:insert name="scriptObjT">
+        <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <ui:insert name="content">
 
-            </ui:insert>   
+                </ui:insert>
+            </div>
         </div>
 
-    </h:body>
+    </section>
+
+    <ui:insert name="footer">
+        <ui:include src="/template/common/commonFooter.xhtml"/>
+    </ui:insert>
+
+    <ui:insert name="ultimosScripts">
+
+    </ui:insert>
+
+    <ui:insert name="scriptObjT">
+
+    </ui:insert>
+</h:body>
 </html>
 
