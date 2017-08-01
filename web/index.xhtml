@@ -5,7 +5,7 @@
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Neurapia inicio</title>
+        <title>Neurapia</title>
         <meta name="keywords" content="pagina,html,cs3,maquetacion"/>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
         <link href="#{request.contextPath}/resources/css/bootstrap.css" rel="stylesheet"/>
@@ -31,6 +31,11 @@
                 <li><span class="glyphicon glyphicon-map-marker"></span> Carrera 21 A # 124 - 55</li>
                 <li><span class="glyphicon glyphicon-phone-alt"></span> (57-1) 214 85 22</li>
                 <li>Physical Care</li>
+                <li>
+                    <h:form>
+                        <h:commandLink action="#{lenguaje.cambiarLenguaje('en')}" value="English"></h:commandLink>
+                    </h:form>
+                </li>
             </ul>
         </nav>
 
@@ -51,7 +56,9 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="#">Pre-Diagnóstico</a>
+                            <a href="#">
+                                <h:outputText value="#{msg['prediagnosis']}"></h:outputText>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -64,7 +71,9 @@
             <aside class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
                 <div class="thumbnail sombraAside asideleft">
                     <h4>
-                        <b>Iniciar Sesión</b>
+                        <b>
+                            <h:outputText value="#{msg['signin']}"></h:outputText>
+                        </b>
                     </h4>
 
                     <!-- Formulario de inicio de sesión -->
@@ -81,21 +90,25 @@
 
                             <div class="form-group">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                    <h:inputSecret id="password" class="form-control" value="#{controllerSession.clave}" a:placeholder="Contraseña" required="true" requiredMessage="La contraseña es requerida"/>
+                                    <h:inputSecret id="password" class="form-control" value="#{controllerSession.clave}" a:placeholder="#{msg['password']}" required="true" requiredMessage="La contraseña es requerida"/>
                                 </div>
                             </div>
                             <div>
                                 <ul id="registropreg">
                                     <li class="preguntasRegistro">
-                                        <a href="" data-toggle="modal" data-target=".bs-example-modal">¿Olvidaste tu contraseña?</a>
+                                        <a href="" data-toggle="modal" data-target=".bs-example-modal">
+                                            <h:outputText value="#{msg['forgot-password']}"></h:outputText>
+                                        </a>
                                     </li>
                                     <li class="checkButtons preguntasRegistro">
-                                        <a href="" data-toggle="modal" data-target=".bs-example-modal-lg">Registrarse</a>
+                                        <a href="" data-toggle="modal" data-target=".bs-example-modal-lg">
+                                            <h:outputText value="#{msg['signup']}"></h:outputText>
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
                             <div id="botonElimina">
-                                <h:commandButton class="btn btn-info " value="Ingresar" action="#{controllerSession.iniciarSesion()}"/>
+                                <h:commandButton class="btn btn-info " value="#{msg['enter']}" action="#{controllerSession.iniciarSesion()}"/>
                             </div>
                         </h:form>
                         <!-- Formulario de inicio de sesión -->
@@ -228,25 +241,35 @@
                 <section>
                     <div class="imagenheader"></div>
                 </section>
-                <h4><b>Pre-diagnóstico</b></h4>
-                <h5>¿Tienes  alguna dolencia en particular? </h5>
-                <h1><b>REALIZA NUESTRO PRE-DIAGNÓSTICO</b></h1>
+                <h4>
+                    <b>
+                        <h:outputText value="#{msg['prediagnosis']}"></h:outputText>
+                    </b>
+                </h4>
+                <h5>
+                    <h:outputText value="#{msg['particular-pain']}"></h:outputText>
+                </h5>
+                <h1>
+                    <b>
+                        <h:outputText value="#{msg['perform-prediagnosis']}"></h:outputText>
+                    </b>
+                </h1>
                 <div class="parrafoinicio">
-                    <p>El sistema de pre-diagnóstico médico es una herramienta que permite conocer el POSIBLE malestar que pueda estar
-                        afectando tu salud dependiendo de los resultados obtenidos genera una respuesta acorde con los sintomas seleccionados
-                        previamente, para un diagnóstico médico profesional y un tratamiento adecuado de tu enfermedad registrate en nuestro
-                        sistema y solicita una cita médica o comunícate con nuestro equipo de fisioterapeutas altamente calificados para tratar
-                        tu dolencia malestar o enfermedad particular.
+                    <p>
+                        <h:outputText value="#{msg['prediagnosis-paragraph']}"></h:outputText>
                     </p>
                     <br></br>
                     <center>
                         <button type="submit" class="btn btn-info" onclick="window.location.href = 'error404.html'">
-                            Realizar Pre-diagnóstico</button>
+                            <h:outputText value="#{msg['prediagnosis-button']}"></h:outputText>
+                        </button>
                     </center>
                     <section>
                         <div>
                             <h1 style="font-size: 20px">
-                                <b>Consulta nuestras preguntas frecuentes</b>
+                                <b>
+                                    <h:outputText value="#{msg['prediagnosis-faq']}"></h:outputText>
+                                </b>
                             </h1>
                         </div>
                         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -254,7 +277,10 @@
                                 <div class="panel-heading" role="tab" id="headingOne">
                                     <h6 class="panel-title">
                                         <a class="menulateral" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                            <b>¿Porque un pre-diagnóstico médico previo?</b> <span class="caret"></span>
+                                            <b>
+                                                <h:outputText value="#{msg['prediagnosis-question1']}"></h:outputText>
+                                            </b>
+                                            <span class="caret"></span>
                                         </a>
                                     </h6>
                                 </div>
@@ -278,7 +304,9 @@
                                         <a class="menulateral" role="button" data-toggle="collapse"
                                            data-parent="#accordion" href="#collapsTwo" aria-expanded="false"
                                            aria-controls="collapsTwo">
-                                            <b>¿Es Valedera la información sumninistrada por el resultado del pre-diagnóstico?</b>
+                                            <b>
+                                                <h:outputText value="#{msg['prediagnosis-question2']}"></h:outputText>
+                                            </b>
                                             <span class="caret"></span>
                                         </a>
                                     </h6>
@@ -299,7 +327,10 @@
                                         <a class="menulateral" role="button" data-toggle="collapse"
                                            data-parent="#accordion" href="#collapsThree"
                                            aria-expanded="false" aria-controls="collapsTwo">
-                                            <b>¿Porque realizar un pre-diagnóstico?</b> <span class="caret"></span>
+                                            <b>
+                                                <h:outputText value="#{msg['prediagnosis-question3']}"></h:outputText>
+                                            </b>
+                                            <span class="caret"></span>
                                         </a>
                                     </h6>
                                 </div>
@@ -317,7 +348,10 @@
                                 <div class="panel-heading" role="tab" id="headingTwo">
                                     <h6 class="panel-title">
                                         <a class="menulateral" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsFour" aria-expanded="false" aria-controls="collapsTwo">
-                                            <b>¿Como obtener un diagnóstico médico?</b> <span class="caret"></span>
+                                            <b>
+                                                <h:outputText value="#{msg['prediagnosis-question4']}"></h:outputText>
+                                            </b>
+                                            <span class="caret"></span>
                                         </a>
                                     </h6>
                                 </div>
