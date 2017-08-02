@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 <ui:define name="titulo">Usuarios consultar Usuarios</ui:define>
@@ -12,7 +13,7 @@
     <ui:define name="titulo">Consultar Uusuarios</ui:define>
     <!-- Aside Izq de la pagina -->
     <ui:composition template="/template/common/commonLayout.xhtml">
-
+       
         <ui:define name="aside">
 
             <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
@@ -31,7 +32,7 @@
                     <div id="collapseOne" class="panel-collapse collapse of" role="tabpanel"
                          aria-labelledby="headingOne">
                         <div class="panel-body">
-                            <a href="#">Mi perfil</a>
+                            <a href="#{request.contextPath}/Usuarios/miPerfil.xhtml">Mi perfil</a>
                         </div>
                         <div class="panel-body">
                             <a href="#">Editar mi perfil</a>
@@ -121,19 +122,19 @@
                                     <h:outputText value="Acciones"/>
                                 </f:facet>
                                 &nbsp;
-                                <h:commandLink action="#{controllerUsuario.seleccionarUsuario(item)}" value=""><span
+                                <h:commandLink action="#{controllerUsuario.seleccionarUsuario(item)}" value="" class="mitooltip" a:data-toggle="tooltip" a:data-placement="top" title="Editar"><span
                                         id="botonEdita" class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                 </h:commandLink>
                                 &nbsp;
-                                <h:commandLink id="botonElimina" class="btnModal" value=""><span id="botonElimina"
+                                <h:commandLink id="botonElimina" class="btnModal mitooltip" value="" a:data-toggle="tooltip" a:data-placement="top" title="Eliminar"><span id="botonElimina"
                                                                                                  class="fa fa-times"
                                                                                                  aria-hidden="true"></span>
                                     <f:ajax event="click" listener="#{controllerUsuario.prepararEliminarUsuario(item)}"
-                                            render=":form-eliminar-user"/>
+                                            render=":form-eliminar-user"   />
                                 </h:commandLink>
                                 &nbsp;
                                 <h:commandLink rendered="#{item.codRol.idRol eq 4}"
-                                               action="#{controllerUsuario.prepararCrearHistorial(item)}">
+                                               action="#{controllerUsuario.prepararCrearHistorial(item)}" class="mitooltip" a:data-toggle="tooltip" a:data-placement="top" title="Historial clinico">
                                     <span class="fa fa-stethoscope" aria-hidden="true"></span>
                                 </h:commandLink>
                             </h:column>
@@ -169,6 +170,8 @@
 
         <ui:define name="ultimosScripts">
             <script>
+                $('.mitooltip').tooltip();
+
                 $(document).ready(function () {
                     $("#lista-usuarios").DataTable({
                         autoWidth: false,

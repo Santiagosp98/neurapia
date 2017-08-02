@@ -4,6 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Crear Usuario</title>
@@ -11,7 +12,7 @@
     <h:body>        
 
         <ui:composition template="/template/common/commonLayout.xhtml">
-
+            
             <ui:define name="aside">
 
                 <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
@@ -27,7 +28,7 @@
                         </div>
                         <div id="collapseOne" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingOne">
                             <div class="panel-body">
-                                <a href="#">Mi perfil</a> 
+                                <a href="#{request.contextPath}/Usuarios/miPerfil.xhtml">Mi perfil</a> 
                             </div>
                             <div class="panel-body">
                                 <a href="#">Editar mi perfil</a> 
@@ -108,13 +109,14 @@
                                     <f:selectItems class="form-control mitooltip" value="#{controllerUsuario.usuario.seleccionEstados}"/>
                                 </h:selectOneMenu>
                             </div>
-                        
+                       
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
                                 <h:outputLabel value="Rol:" for="rol"/>
                                 <h:selectOneMenu id="rol" class="form-control mitooltip"  tabindex="7" value="#{controllerUsuario.usuario.codRol}" converter="rolConverter">
                                     <f:selectItems class="form-control mitooltip" value="#{controllerRol.listaRol}" var="u" itemLabel="#{u.nombreRol}"/>
                                 </h:selectOneMenu>
                             </div>
+                        
                             
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
                                 <h:outputLabel value="Correo Electrónico:" for="correo"/>
