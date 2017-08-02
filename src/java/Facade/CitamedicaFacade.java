@@ -59,5 +59,14 @@ public class CitamedicaFacade extends AbstractFacade<Citamedica> implements Cita
        cita = q.getResultList();
        return cita;
    }
+    @Override
+    public List<Citamedica> citasPorFisioterapeutaEstado(Fisioterapeuta fisioterapeuta, String estado){
+       List<Citamedica> cita = null;
+       TypedQuery<Citamedica> q = getEntityManager().createNamedQuery("Citamedica.citasPorFisioterapeutaEstado", Citamedica.class);
+       q.setParameter("codFisioterapeuta", fisioterapeuta);
+       q.setParameter("estado", estado);
+       cita = q.getResultList();
+       return cita;
+   }
     
 }

@@ -76,7 +76,7 @@ public class ControllerSession extends ControllerApp {
                 System.out.println("El usuario ingresado es: " + usuario.getPrimerNombre());
 //                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Datos de acceso correctos", null);
 //                fc.addMessage(null, m);
-                if(usuario.getCodRol().getNombreRol().equals("Super Administrador")){
+                if(usuario.getCodRol().getNombreRol().equals("Super Administrador") || usuario.getCodRol().getNombreRol().equals("Administrador") || usuario.getCodRol().getNombreRol().equals("Fisioterapeuta")){
                     return "Usuarios/ConsultarUsuarios?faces-redirect=true";
                 }else if(usuario.getCodRol().getNombreRol().equals("Usuario")){
                     System.out.println("Otro rol"+ usuario.getCodRol().getNombreRol());

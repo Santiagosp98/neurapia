@@ -42,6 +42,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Citamedica.findByEstado", query = "SELECT c FROM Citamedica c WHERE c.estado = :estado")
     , @NamedQuery(name = "Citamedica.citasPorUsuario", query = "SELECT c FROM Citamedica c WHERE c.codUsuario = :codUsuario")
     , @NamedQuery(name = "Citamedica.citasPorFisioterapeuta", query = "SELECT c FROM Citamedica c WHERE c.codFisioterapeuta = :codFisioterapeuta")
+    , @NamedQuery(name = "Citamedica.citasPorFisioterapeutaEstado", query = "SELECT c FROM Citamedica c WHERE c.codFisioterapeuta = :codFisioterapeuta AND c.estado = :estado")
     , @NamedQuery(name = "Citamedica.findByNumeroConsultorio", query = "SELECT c FROM Citamedica c WHERE c.numeroConsultorio = :numeroConsultorio")})
 public class Citamedica implements Serializable {
 

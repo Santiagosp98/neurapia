@@ -63,7 +63,18 @@ public class ControllerCitaMedica extends ControllerApp{
     }
     
     public List<Citamedica> consultarCitaMedica(){
-        this.listaCitas = citaMedicaFacade.findAll();
+        Usuario uS = cs.getUsuario();
+        System.out.println("rol: "+ uS.getCodRol().getNombreRol());
+        if(uS.getCodRol()!= null){
+            if(uS.getCodRol().getNombreRol().equals("Super Administrador") || uS.getCodRol().getNombreRol().equals("Administrador") ){
+                this.listaCitas = citaMedicaFacade.findAll();
+                return listaCitas;
+            }else if(uS.getCodRol().getNombreRol().equals("Fisioterapeuta")){
+                listarCitasporFisioterapeuta();
+            }
+        }else{
+            System.out.println("Campo nulo en codRol");
+        }
         return listaCitas;
         
     } 
@@ -90,6 +101,25 @@ public class ControllerCitaMedica extends ControllerApp{
                     fisioterapeuta.setIdFisioterapeuta(ft.getIdFisioterapeuta());
                     System.out.println(fisioterapeuta.getCodUsuario());
                     listaCitas = citaMedicaFacade.citasPorFisioterapeuta(fisioterapeuta);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        System.out.println("No estoy en la lista de fisioterapeutas correcto");
+        return listaCitas;
+    }
+    public List<Citamedica> listarCitasporFisioterapeutaEstado(){   
+        
+        try {
+            fisioterapeuta.setCodUsuario(cs.getUsuario());
+            for (Fisioterapeuta ft : listaFisioterapeutas) {
+                System.out.println(ft.getCodUsuario());
+                if (fisioterapeuta.getCodUsuario().equals(ft.getCodUsuario())) {
+                    System.out.println("Estoy listando por fisoterapeuta");
+                    fisioterapeuta.setIdFisioterapeuta(ft.getIdFisioterapeuta());
+                    System.out.println(fisioterapeuta.getCodUsuario());
+                    listaCitas = citaMedicaFacade.citasPorFisioterapeutaEstado(fisioterapeuta, "Pendiente");
                 }
             }
         } catch (Exception e) {
