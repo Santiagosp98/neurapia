@@ -21,16 +21,21 @@
                         <div  class="panel-heading" role="tab" id="headingOne">
                             <h6 class="panel-title">
                                 <a  role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne"><i class="fa fa-user" aria-hidden="true"></i>
-                                    Perfil <span class="caret"></span>
+                                    <h:outputText value="#{msg['profile']}"></h:outputText>
+                                    <span class="caret"></span>
                                 </a>
                             </h6>
                         </div>
                         <div id="collapseOne" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingOne">
                             <div class="panel-body">
-                                <a href="#{request.contextPath}/Usuarios/miPerfil.xhtml">Mi perfil</a> 
+                                <a href="#{request.contextPath}/Usuarios/miPerfil.xhtml">
+                                    <h:outputText value="#{msg['my-profile']}"></h:outputText>
+                                </a>
                             </div>
                             <div class="panel-body">
-                                <a href="#">Editar mi perfil</a> 
+                                <a href="#">
+                                    <h:outputText value="#{msg['edit-profile']}"></h:outputText>
+                                </a>
                             </div>
                         </div>
 
@@ -38,17 +43,22 @@
                         <div class="panel-heading active" role="tab" id="headingOne">
                             <h6 class="panel-title"><i class="fa fa-users" aria-hidden="true"></i>
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsTwo" aria-expanded="true" aria-controls="collapseOne">
-                                    Usuarios en el sistema<span class="caret"></span> 
+                                    <h:outputText value="#{msg['users-system']}"></h:outputText>
+                                    <span class="caret"></span>
                                 </a>
                             </h6>
                         </div>
 
                         <div id="collapsTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                             <div class="panel-body active">
-                                <a href="ConsultarUsuarios.xhtml">Consultar Usuarios</a>
+                                <a href="ConsultarUsuarios.xhtml">
+                                    <h:outputText value="#{msg['check-users']}"></h:outputText>
+                                </a>
                             </div>
                             <div class="panel-body" >
-                                <a href="CrearUsuario.xhtml">Añadir nuevo usuario</a>
+                                <a href="CrearUsuario.xhtml">
+                                    <h:outputText value="#{msg['add-user']}"></h:outputText>
+                                </a>
                             </div>
                         </div>
 
@@ -60,7 +70,9 @@
 
             <ui:define name="content">
                 <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
-                    <h5 id="ubicacionPag">Editar usuario</h5>
+                    <h5 id="ubicacionPag">
+                        <h:outputText value="#{msg['edit-user']}"></h:outputText>
+                    </h5>
                     <div class="contenido"></div>
                     
                                      
@@ -69,78 +81,77 @@
                             <h:messages class="mensajeErrorForm" showDetail="true" showSummary="true" infoClass="alert alert-sucess" errorClass="alert alert-danger"/>
                         </div>
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="Tipo Documento:" for="tipodocumento" />
+                                <h:outputLabel value="#{msg['document-type']}:" for="tipodocumento" />
                                 <h:selectOneMenu id="tipodocumento" class="form-control mitooltip" value="#{controllerUsuario.usuario.tipoDocumento}" tabindex="1">
                                     <f:selectItems class="form-control mitooltip" value="#{controllerUsuario.usuario.seleccionDocumento}"/>
                                 </h:selectOneMenu>
                             </div>
                         
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="Número Documento:" for="numeroDocumento"/>
-                                <h:inputText a:placeholder="Num Documento" class="form-control mitooltip" tabindex="2" id="numeroDocumento" a:type="number" value="#{controllerUsuario.usuario.numeroDocumento}" title="PrimerNombre" required="true" requiredMessage="The IdUsuario field is required.">
+                                <h:outputLabel value="#{msg['document-number']}:" for="numeroDocumento"/>
+                                <h:inputText a:placeholder="#{msg['document-number']}" class="form-control mitooltip" tabindex="2" id="numeroDocumento" a:type="number" value="#{controllerUsuario.usuario.numeroDocumento}" title="PrimerNombre" required="true" requiredMessage="The IdUsuario field is required.">
                                 </h:inputText>
                             </div>                        
                             
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="Primer Nombre:" for="primerNombre"/>
-                                <h:inputText a:placeholder="Primer Nombre" class="form-control mitooltip" tabindex="3"  id="primerNombre" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" value="#{controllerUsuario.usuario.primerNombre}" title="PrimerNombre" required="true" requiredMessage="The IdUsuario field is required.">
+                                <h:outputLabel value="#{msg['first-name']}:" for="primerNombre"/>
+                                <h:inputText a:placeholder="#{msg['first-name']}" class="form-control mitooltip" tabindex="3"  id="primerNombre" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" value="#{controllerUsuario.usuario.primerNombre}" title="PrimerNombre" required="true" requiredMessage="The IdUsuario field is required.">
                                 </h:inputText>
                             </div>
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="Segundo Nombre:" for="segundoNombre"/>
-                                <h:inputText a:placeholder="Segundo Nombre" class="form-control mitooltip" tabindex="4" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" id="segundoNombre" value="#{controllerUsuario.usuario.segundoNombre}" title="SegundoNombre" required="false">
+                                <h:outputLabel value="#{msg['middle-name']}:" for="segundoNombre"/>
+                                <h:inputText a:placeholder="#{msg['middle-name']}:" class="form-control mitooltip" tabindex="4" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" id="segundoNombre" value="#{controllerUsuario.usuario.segundoNombre}" title="SegundoNombre" required="false">
                                 </h:inputText>
                             </div>
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="Primer Apellido:" for="primerApellido"/>
-                                <h:inputText a:placeholder="Primer Apellido" class="form-control mitooltip" tabindex="5" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"  id="primerApellido" value="#{controllerUsuario.usuario.primerApellido}" title="PrimerApellido" required="true" requiredMessage="El Primer Apellido es requerido.">
+                                <h:outputLabel value="#{msg['surname']}:" for="primerApellido"/>
+                                <h:inputText a:placeholder="#{msg['surname']}" class="form-control mitooltip" tabindex="5" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"  id="primerApellido" value="#{controllerUsuario.usuario.primerApellido}" title="PrimerApellido" required="true" requiredMessage="El Primer Apellido es requerido.">
                                 </h:inputText>
                             </div>
 
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="Segundo Apellido:" for="segundoApellido"/>
-                                <h:inputText a:placeholder="Segundo Apellido" class="form-control mitooltip" tabindex="6" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"  id="segundoApellido" value="#{controllerUsuario.usuario.segundoApellido}" title="SegundoApellido" required="true" requiredMessage="El Segundo Apellido es requerido.">
+                                <h:outputLabel value="#{msg['second-surname']}:" for="segundoApellido"/>
+                                <h:inputText a:placeholder="#{msg['second-surname']}" class="form-control mitooltip" tabindex="6" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"  id="segundoApellido" value="#{controllerUsuario.usuario.segundoApellido}" title="SegundoApellido" required="true" requiredMessage="El Segundo Apellido es requerido.">
                                 </h:inputText>
                             </div>
                         
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="Estado Usuario:" for="estadoUsuario"/>
+                                <h:outputLabel value="#{msg['user-status']}:" for="estadoUsuario"/>
                                 <h:selectOneMenu id="estadoUsuario" class="form-control mitooltip"  tabindex="7" value="#{controllerUsuario.usuario.estadoUsuario}">
                                     <f:selectItems class="form-control mitooltip" value="#{controllerUsuario.usuario.seleccionEstados}"/>
                                 </h:selectOneMenu>
                             </div>
                         
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="Rol:" for="rol"/>
+                                <h:outputLabel value="#{msg['role']}:" for="rol"/>
                                 <h:selectOneMenu id="rol" class="form-control mitooltip"  tabindex="7" value="#{controllerUsuario.usuario.codRol}" converter="rolConverter">
                                     <f:selectItems class="form-control mitooltip" value="#{controllerRol.listaRol}" var="u" itemLabel="#{u.nombreRol}"/>
                                 </h:selectOneMenu>
                             </div>
                             
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="Correo Electrónico:" for="correo"/>
+                                <h:outputLabel value="#{msg['email']}:" for="correo"/>
                                 <h:inputText id="correo" tabindex="8" class="form-control" a:placeholder="ejem@ejem.com" a:pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" value="#{controllerUsuario.usuario.correoElectronico}" required="true" requiredMessage="El correo es requerido.">
                                 </h:inputText>
                             </div>
 
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="Clave Usuario:" for="claveUsuario"/>
+                                <h:outputLabel value="#{msg['user-password']}:" for="claveUsuario"/>
                                 <h:inputSecret id="claveUsuario" class="form-control mitooltip" tabindex="9" maxlength="25"  a:data-toggle="tooltip" a:data-placement="top" value="#{controllerUsuario.usuario.claveUsuario}" title="ClaveUsuario" required="true" requiredMessage="La clave es requerida.">
                                 </h:inputSecret>
                             </div>
 
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="Confirmar Clave" for="confirmarclave"/>
+                                <h:outputLabel value="#{msg['confirm-password']}:" for="confirmarclave"/>
                                 <h:inputSecret id="confirmarclave" class="form-control mitooltip" tabindex="10" maxlength="25"  a:data-toggle="tooltip" a:data-placement="top" title="confirmarClave" requiredMessage="Ambas claves deben coincidir." value="#{controllerUsuario.confirmarClave}">
                                 </h:inputSecret>
                             </div>
                             
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <br></br>
-                                <h:commandButton class="btn btn-info" action="#{controllerUsuario.editarUsuario()}" value="Guardar"/>
+                                <h:commandButton class="btn btn-info" action="#{controllerUsuario.editarUsuario()}" value="#{msg['save']}"/>
                             </div>
                         </h:form>
-                    
                 </div>
             </ui:define>
         </ui:composition>    

@@ -1,49 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:define name="titulo">Usuarios Mi Perfil</ui:define>
+<ui:define name="titulo">Usuarios Mi Perfil</ui:define>
 
-    <h:body>
-        <ui:define name="titulo">Mi Perfil</ui:define>
-        <!-- Aside Izq de la pagina -->
-        <ui:composition template="/template/common/commonLayout.xhtml">
-            
-            <ui:define name="aside">
-
-                <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
-
-                    <div class="panel panel-default">
-
-                        <div class="panel-heading active" role="tab" id="headingOne">
-                            <h6 class="panel-title">
-                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
-                                   aria-expanded="false" aria-controls="collapseOne"><i class="fa fa-user"
-                                                                                     aria-hidden="true"></i>
-                                    Perfil <span class="caret"></span>
-                                </a>
-                            </h6>
+<h:body>
+    <ui:define name="titulo">Mi Perfil</ui:define>
+    <!-- Aside Izq de la pagina -->
+    <ui:composition template="/template/common/commonLayout.xhtml">
+        <ui:define name="aside">
+            <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading active" role="tab" id="headingOne">
+                        <h6 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                               aria-expanded="false" aria-controls="collapseOne">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                <h:outputText value="#{msg['profile']}"></h:outputText>
+                                <span class="caret"></span>
+                            </a>
+                        </h6>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
+                         aria-labelledby="headingOne">
+                        <div class="panel-body active">
+                            <a href="miPerfil.xhtml">
+                                <h:outputText value="#{msg['my-profile']}"></h:outputText>
+                            </a>
                         </div>
-                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
-                             aria-labelledby="headingOne">
-                            <div class="panel-body active">
-                                <a href="miPerfil.xhtml">Mi perfil</a>
-                            </div>
-                            <div class="panel-body">
-                                <a href="editarMiPerfil.xhtml">Editar mi perfil</a>
-                            </div>
+                        <div class="panel-body">
+                            <a href="#">
+                                <h:outputText value="#{msg['edit-profile']}"></h:outputText>
+                            </a>
                         </div>
-                        
-                        <div class="panel-heading" role="tab" id="headingOne">
+                    </div>
+                    <div class="panel-heading" role="tab" id="headingOne">
                         <h6 class="panel-title"><i class="fa fa-users" aria-hidden="true"></i>
                             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsTwo"
                                aria-expanded="true" aria-controls="collapseOne">
-                                Usuarios en el sistema<span class="caret"></span>
+                                <h:outputText value="#{msg['users-system']}"></h:outputText>
+                                <span class="caret"></span>
                             </a>
                         </h6>
                     </div>
@@ -51,160 +52,169 @@
                     <div id="collapsTwo" class="panel-collapse collapse of" role="tabpanel"
                          aria-labelledby="headingOne">
                         <div class="panel-body">
-                            <a href="#{request.contextPath}/Usuarios/ConsultarUsuarios.xhtml">Consultar Usuarios</a>
+                            <a href="#{request.contextPath}/Usuarios/ConsultarUsuarios.xhtml">
+                                <h:outputText value="#{msg['check-users']}"></h:outputText>
+                            </a>
                         </div>
                         <div class="panel-body">
                             <h:form>
-                                <a href="#{request.contextPath}/Usuarios/CrearUsuario.xhtml">Añadir nuevo usuario</a>
+                                <a href="#{request.contextPath}/Usuarios/CrearUsuario.xhtml">
+                                    <h:outputText value="#{msg['add-user']}"></h:outputText>
+                                </a>
                             </h:form>
                         </div>
                     </div>
-                                
-                        
+                </div>
+            </div>
+        </ui:define>
+        <!-- Contenido de la pagina -->
+        <ui:define name="content">
+            <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
+                <!-- Titulo -->
+                <h5 id="ubicacionPag">
+                    <h:outputText value="#{msg['my-profile']}"></h:outputText>
+                </h5>
+                <div class="fixed-table-body">
+                    <div class="form-group col xs-12 col-sm-12 col-md-3 col-lg-3">
+                        <h5><b>#{controllerSession.usuario.fullNameUsuario}</b></h5>
+                        <center id="foto">
+                            <figure class="img-circle img-thumbnail" id="imagenUsuario"
+                                    style="background-image: url(#{request.contextPath}/resources/imgs/willFerrell.jpg);">
+                            </figure>
+                        </center>
+                    </div>
+                </div>
+                <div class="form-group col xs-12 col-sm-12 col-md-9 col-lg-9">
+                    <label class="form-group col xs-12 col-sm-12 col-md-12 col-lg-12" id="tipodeusuario">
+                        <h5>
+                            <b> <h:outputText
+                                    value="#{msg['user-type']}"></h:outputText> #{controllerSession.usuario.codRol.nombreRol}
+                            </b>
+                        </h5>
+                    </label>
+                    <div class="form-group col xs-12 col-sm-12 col-md-6 col-lg-6 arrow_box">
+                        <a href="Cita Medica/Citas pendientes FisiAdministrador.html">
+                            <h5>
+                                <h:outputText value="#{msg['pending-appointments']}" escape="false"></h:outputText>
+                            </h5>
+                            <h6>
+                                <h:outputText value="#{msg['appointments']}"></h:outputText>
+                            </h6>
+                        </a>
+                    </div>
+                    <div class="form-group col xs-12 col-sm-12 col-md-6 col-lg-6 arrow_box">
+                        <a href="Cita Medica/Historial de citas FisiAdministrador.html">
+                            <h5>
+                                <h:outputText value="#{msg['accomplished-appointments']}" escape="false"></h:outputText>
+                            </h5>
+                            <h6>
+                                <h:outputText value="#{msg['appointments']}"></h:outputText>
+                            </h6>
+                        </a>
+                    </div>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>
+                                <h:outputText value="#{msg['user-status']}"></h:outputText>
+                            </th>
+                            <td>#{controllerSession.usuario.estadoUsuario}</td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <h:outputText value="#{msg['last-session']}"></h:outputText>
+                            </th>
+                            <td>12/06/2016</td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <h:outputText value="#{msg['system-entries']}"></h:outputText>
+                            </th>
+                            <td>56 <h:outputText value="#{msg['entries']}"></h:outputText></td>
+                        </tr>
+                    </table>
+                </div>
+                <h5 id="ubicacionPag" style="text-align: left">
+                    <b>
+                        <h:outputText value="#{msg['basic-information']}"></h:outputText>
+                    </b>
+                </h5>
+                <h:form prependId="false" id="formRegistrarse" a:name="formRegistrarse">
+                    <div class="mensajeError col-lg-12 col-md-12 col-sm-12">
+                        <h:messages class="mensajeErrorForm" showDetail="true" showSummary="true"
+                                    infoClass="alert alert-sucess" errorClass="alert alert-danger"/>
+                    </div>
+                    <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                        <h:outputLabel value="#{msg['document-type']}" for="tipo-documento"/>
+                        <h:inputText class="form-control mitooltip" disabled="true" tabindex="7"
+                                     value="#{controllerSession.usuario.tipoDocumento}" id="tipo-documento"/>
 
                     </div>
-
-                </div>
-
-            </ui:define>
-
-
-            <!-- Contenido de la pagina -->
-            <ui:define name="content">
-                <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
-                    <!-- Titulo -->
-                    <h5 id="ubicacionPag">Mi perfil</h5>
-
-                    <div class="fixed-table-body">
-                        <div class="form-group col xs-12 col-sm-12 col-md-3 col-lg-3">
-                            <h5><b>#{controllerSession.usuario.fullNameUsuario}</b></h5>
-                            <center id="foto" ><figure class="img-circle img-thumbnail" id="imagenUsuario" style="background-image: url(#{request.contextPath}/resources/imgs/willFerrell.jpg);">                      
-                                </figure></center>
-                        </div>
+                    <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                        <h:outputLabel value="#{msg['document-number']}" for="numero-documento"/>
+                        <h:inputText a:placeholder="Num Documento" disabled="true" class="form-control mitooltip"
+                                     tabindex="2" id="numero-documento" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"
+                                     value="#{controllerSession.usuario.numeroDocumento}" title="PrimerNombre"
+                                     required="true" requiredMessage="The IdUsuario field is required.">
+                        </h:inputText>
+                    </div>
+                    <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                        <h:outputLabel value="#{msg['first-name']}" for="primer-nombre"/>
+                        <h:inputText a:placeholder="Primer Nombre" disabled="true" class="form-control mitooltip"
+                                     tabindex="3" id="primer-nombre" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"
+                                     value="#{controllerSession.usuario.primerNombre}" title="PrimerNombre"
+                                     required="true" requiredMessage="The IdUsuario field is required.">
+                        </h:inputText>
+                    </div>
+                    <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                        <h:outputLabel value="#{msg['middle-name']}" for="segundo-nombre"/>
+                        <h:inputText a:placeholder="Segundo Nombre" disabled="true" class="form-control mitooltip"
+                                     tabindex="4" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" id="segundo-nombre"
+                                     value="#{controllerSession.usuario.segundoNombre}" title="SegundoNombre"
+                                     required="false">
+                        </h:inputText>
+                    </div>
+                    <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                        <h:outputLabel value="#{msg['surname']}" for="primer-apellido"/>
+                        <h:inputText a:placeholder="Primer Apellido" disabled="true" class="form-control mitooltip"
+                                     tabindex="5" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" id="primer-apellido"
+                                     value="#{controllerSession.usuario.primerApellido}" title="PrimerApellido"
+                                     required="true" requiredMessage="El Primer Apellido es requerido.">
+                        </h:inputText>
+                    </div>
+                    <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                        <h:outputLabel value="#{msg['second-surname']}" for="segundo-apellido"/>
+                        <h:inputText a:placeholder="Segundo Apellido" disabled="true" class="form-control mitooltip"
+                                     tabindex="6" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" id="segundo-apellido"
+                                     value="#{controllerSession.usuario.segundoApellido}" title="SegundoApellido"
+                                     required="true" requiredMessage="El Segundo Apellido es requerido.">
+                        </h:inputText>
+                    </div>
+                    <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                        <h:outputLabel value="#{msg['user-status']}" for="estado-usuario"/>
+                        <h:inputText class="form-control mitooltip" disabled="true" tabindex="7"
+                                     value="#{controllerSession.usuario.estadoUsuario}" id="estado-usuario"/>
 
                     </div>
-                    <div class="form-group col xs-12 col-sm-12 col-md-9 col-lg-9">
-                        <label class="form-group col xs-12 col-sm-12 col-md-12 col-lg-12" id="tipodeusuario" ><h5><b>Tipo de usuario: #{controllerSession.usuario.codRol.nombreRol}</b></h5></label>
-                        <div class="form-group col xs-12 col-sm-12 col-md-6 col-lg-6 arrow_box">
-                            <a href="Cita Medica/Citas pendientes FisiAdministrador.html"><h5>Citas <br/>pendientes <h6>4 citas</h6></h5></a>
-                        </div>
-                        <div class="form-group col xs-12 col-sm-12 col-md-6 col-lg-6 arrow_box">
-                            <a href="Cita Medica/Historial de citas FisiAdministrador.html"><h5>Citas <br/>realizadas<h6>73 citas</h6></h5></a>
-                        </div>
+                    <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                        <h:outputLabel value="#{msg['role']}" for="rol"/>
+                        <h:inputText class="form-control mitooltip" disabled="true" tabindex="7"
+                                     value="#{controllerSession.usuario.codRol.nombreRol}" id="rol"/>
 
-                        <table class="table table-bordered">
-                            <tr>
-                                <th>Estado usuario</th>
-                                <td>#{controllerSession.usuario.estadoUsuario}</td>
-                            </tr>
-                            <tr>
-                                <th>Ultima sesión</th>
-                                <td>12/06/2016</td>
-                            </tr>  
-                            <tr>
-                                <th>Ingresos al sitema</th>
-                                <td>56 ingresos</td>
-                            </tr>                      
-                        </table>
-                    </div>  
-                    <h5 id="ubicacionPag" style="text-align: left"><b>Información básica</b></h5>
-                    <h:form prependId="false" id="formRegistrarse" a:name="formRegistrarse">
-                        <div class="mensajeError col-lg-12 col-md-12 col-sm-12">
-                            <h:messages class="mensajeErrorForm" showDetail="true" showSummary="true" infoClass="alert alert-sucess" errorClass="alert alert-danger"/>
-                        </div>
-                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                            <h:outputLabel value="Tipo Documento:" for="tipodocumento" />
-                            <h:inputText class="form-control mitooltip" disabled="true" tabindex="7" value="#{controllerSession.usuario.tipoDocumento}"/>
-
-                        </div>
-
-                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                            <h:outputLabel value="Número Documento:" for="numeroDocumento"/>
-                            <h:inputText a:placeholder="Num Documento" disabled="true" class="form-control mitooltip" tabindex="2" id="numeroDocumento" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" value="#{controllerSession.usuario.numeroDocumento}" title="PrimerNombre" required="true" requiredMessage="The IdUsuario field is required.">
-                            </h:inputText>
-                        </div>                        
-
-                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                            <h:outputLabel value="Primer Nombre:" for="primerNombre"/>
-                            <h:inputText a:placeholder="Primer Nombre" disabled="true" class="form-control mitooltip" tabindex="3"  id="primerNombre" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" value="#{controllerSession.usuario.primerNombre}" title="PrimerNombre" required="true" requiredMessage="The IdUsuario field is required.">
-                            </h:inputText>
-                        </div>
-                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                            <h:outputLabel value="Segundo Nombre:" for="segundoNombre"/>
-                            <h:inputText a:placeholder="Segundo Nombre" disabled="true" class="form-control mitooltip" tabindex="4" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" id="segundoNombre" value="#{controllerSession.usuario.segundoNombre}" title="SegundoNombre" required="false">
-                            </h:inputText>
-                        </div>
-                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                            <h:outputLabel value="Primer Apellido:" for="primerApellido"/>
-                            <h:inputText a:placeholder="Primer Apellido" disabled="true" class="form-control mitooltip" tabindex="5" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"  id="primerApellido" value="#{controllerSession.usuario.primerApellido}" title="PrimerApellido" required="true" requiredMessage="El Primer Apellido es requerido.">
-                            </h:inputText>
-                        </div>
-
-                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                            <h:outputLabel value="Segundo Apellido:" for="segundoApellido"/>
-                            <h:inputText a:placeholder="Segundo Apellido" disabled="true" class="form-control mitooltip" tabindex="6" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"  id="segundoApellido" value="#{controllerSession.usuario.segundoApellido}" title="SegundoApellido" required="true" requiredMessage="El Segundo Apellido es requerido.">
-                            </h:inputText>
-                        </div>
-
-                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                            <h:outputLabel value="Estado Usuario:" for="estadoUsuario"/>
-                            <h:inputText class="form-control mitooltip" disabled="true"  tabindex="7" value="#{controllerSession.usuario.estadoUsuario}"/>
-
-                        </div>
-
-                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                            <h:outputLabel value="Rol:" for="rol"/>
-                            <h:inputText class="form-control mitooltip" disabled="true"  tabindex="7" value="#{controllerSession.usuario.codRol.nombreRol}"/>
-
-                        </div>
-
-                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                            <h:outputLabel value="Correo Electrónico:" for="correo"/>
-                            <h:inputText id="correo" tabindex="8" disabled="true" class="form-control" a:placeholder="ejem@ejem.com" a:pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" value="#{controllerSession.usuario.correoElectronico}" required="true" requiredMessage="El correo es requerido.">
-                            </h:inputText>
-                        </div>
-                    </h:form>
-                </div>
-
-
-            </ui:define>
-
-            <ui:define name="ultimosScripts">
-                <script>
-                    $(document).ready(function () {
-                        $("#lista-usuarios").DataTable({
-                            language: {
-                                url: "#{resource['js/spanish.lang']}"
-                            },
-                            dom: "Bfrtip",
-                            buttons: [
-                                {
-                                    extend: "csv",
-                                    className: "btn-sm"
-                                },
-                                {
-                                    extend: "excel",
-                                    className: "btn-sm"
-                                },
-                                {
-                                    extend: "pdfHtml5",
-                                    className: "btn-sm"
-                                }
-                            ]
-                        });
-
-                        $(".btnModal").click(function () {
-                            console.log("imprime");
-                            $("#myModal").modal("show");
-                        });
-                    });
-                </script>
-            </ui:define>
-
-        </ui:composition>
-
-    </h:body>
-
+                    </div>
+                    <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                        <h:outputLabel value="#{msg['email']}" for="correo"/>
+                        <h:inputText id="correo" tabindex="8" disabled="true" class="form-control"
+                                     a:placeholder="ejem@ejem.com"
+                                     a:pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
+                                     value="#{controllerSession.usuario.correoElectronico}" required="true"
+                                     requiredMessage="El correo es requerido.">
+                        </h:inputText>
+                    </div>
+                </h:form>
+            </div>
+        </ui:define>
+    </ui:composition>
+</h:body>
 </html>
 
 

@@ -10,6 +10,11 @@
             <li><span class="glyphicon glyphicon-map-marker"></span> Carrera 21 A # 124 - 55</li>
             <li><span class="glyphicon glyphicon-phone-alt"></span> (57-1) 214 85 22</li>
             <li>Physical Care</li>
+            <li>
+                <h:form>
+                    <h:commandLink action="#{lenguaje.cambiarLenguaje('en')}" value="English"></h:commandLink>
+                </h:form>
+            </li>
         </ul>
     </nav>
 
@@ -31,16 +36,24 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="#{request.contextPath}/Usuarios/ConsultarUsuarios.xhtml">Usuario</a>
+                        <a href="#{request.contextPath}/Usuarios/ConsultarUsuarios.xhtml">
+                            <h:outputText value="#{msg['users']}"></h:outputText>
+                        </a>
                     </li>
                     <li>
-                        <a href="#{request.contextPath}/CitaMedica/ConsultarCitasMedicas.xhtml">Cita médica</a>
+                        <a href="#{request.contextPath}/CitaMedica/ConsultarCitasMedicas.xhtml">
+                            <h:outputText value="#{msg['medical-appointment']}"></h:outputText>
+                        </a>
                     </li>
                     <li>
-                        <a href="#{request.contextPath}/HistorialClinico/ConsultarHistorialClinico.xhtml">Informe médico</a>
+                        <a href="#{request.contextPath}/HistorialClinico/ConsultarHistorialClinico.xhtml">
+                            <h:outputText value="#{msg['medical-history']}"></h:outputText>
+                        </a>
                     </li>
                     <li>
-                        <a href="#{request.contextPath}/Prediagnostico/ConsultarPrediagnostico.xhtml">Pre-diagnóstico</a>
+                        <a href="#{request.contextPath}/Prediagnostico/ConsultarPrediagnostico.xhtml">
+                            <h:outputText value="#{msg['prediagnosis']}"></h:outputText>
+                        </a>
                     </li>
                     <li class="dropdown">
 
@@ -55,12 +68,14 @@
                             </li>
                             <li role="separator" class="divider"></li>
                             <li>
-                                <a href="#{request.contextPath}/ConfiguracionSistema/ConsultarDatosSistema.xhtml">Configuración del sistema</a>
+                                <a href="#{request.contextPath}/ConfiguracionSistema/ConsultarDatosSistema.xhtml">
+                                    <h:outputText value="#{msg['system-configuration']}"></h:outputText>
+                                </a>
                             </li>
                             <li role="separator" class="divider"></li>
                             <li>
                                 <h:form prependId="false">
-                                    <h:commandLink value="Sign Out" actionListener="#{controllerSession.cerrarSesion()}"/>
+                                    <h:commandLink value="#{msg['sign-out']}" actionListener="#{controllerSession.cerrarSesion()}"/>
                                 </h:form>
                             </li>
                         </ul>
