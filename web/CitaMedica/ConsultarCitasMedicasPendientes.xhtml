@@ -19,30 +19,38 @@
                         <div  class="panel-heading active" role="tab" id="headingTwo">
                             <h6 class="panel-title">
                                 <a  role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><i class="fa fa-user" aria-hidden="true"></i>
-                                    Cita Médica <span class="caret"></span>
+                                    <h:outputText value="#{msg['medical-appointment']}"/>
+                                    <span class="caret"></span>
                                 </a>
                             </h6>
                         </div>
                         <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
                             <div class="panel-body">
-                                <a href="ConsultarCitasMedicas.xhtml">Historial de Citas</a>
+                                <a href="ConsultarCitasMedicas.xhtml">
+                                    <h:outputText value="#{msg['appointment-history']}"/>
+                                </a>
                             </div>
                             <div class="panel-body active">
-                                <a href="#">Citas Pendientes</a> 
+                                <a href="#">
+                                    <h:outputText value="#{msg['pending-appointments-b']}"/>
+                                </a>
                             </div>
                         </div>
 
                         <div class="panel-heading" role="tab" id="headingThree">
                             <h6 class="panel-title"><i class="fa fa-users" aria-hidden="true"></i>
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsThree" aria-expanded="true" aria-controls="collapseThree">
-                                    Asignar cita<span class="caret"></span> 
+                                    <h:outputText value="#{msg['assign-appointment']}"/>
+                                    <span class="caret"></span>
                                 </a>
                             </h6>
                         </div>
 
                         <div id="collapsThree" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingThree">
                             <div class="panel-body">
-                                <a href="CrearCitaMedica.xhtml">Nueva Cita médica</a> 
+                                <a href="CrearCitaMedica.xhtml">
+                                    <h:outputText value="#{msg['new-medical-appointment']}"/>
+                                </a>
                             </div>
                         </div>
 
@@ -56,28 +64,30 @@
             <ui:define name="content">
                 <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
                     <!-- Titulo -->
-                    <h5 id="ubicacionPag">Cita Médica</h5>
+                    <h5 id="ubicacionPag">
+                        <h:outputText value="#{msg['medical-appointment']}"/>
+                    </h5>
                     <div class="fixed-table-body">
                         <h:form prependId="false">
                             <h:dataTable value="#{controllerCitaMedica.listarCitasporFisioterapeutaEstado()}" var="item" class="table table-striped table-bordered" id="citas-pendientes">
 
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Código"/>
+                                        <h:outputText value="#{msg['code']}"/>
                                     </f:facet>
                                     <h:outputText value="#{item.idCitaMedica}"/>
                                 </h:column>
 
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Paciente"/>
+                                        <h:outputText value="#{msg['patient']}"/>
                                     </f:facet>
                                     <h:outputText value="#{item.fullNameUsuario}"/>
                                 </h:column>
 
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Fecha Cita"/>
+                                        <h:outputText value="#{msg['date']}"/>
                                     </f:facet>
                                     <h:outputText value="#{item.fecha}">
                                         <f:convertDateTime pattern="yyyy-MM-dd" />
@@ -86,7 +96,7 @@
 
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Hora"/>
+                                        <h:outputText value="#{msg['hour']}"/>
                                     </f:facet>
                                     <h:outputText value="#{item.hora}">
                                         <f:convertDateTime pattern="HH:mm:ss" />
@@ -95,28 +105,28 @@
 
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Fisioterapeuta"/>
+                                        <h:outputText value="#{msg['physiotherapist']}"/>
                                     </f:facet>
                                     <h:outputText value="#{item.fullNameFisioterapeuta}"/>
                                 </h:column>
 
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Consultorio"/>
+                                        <h:outputText value="#{msg['doctors-office']}"/>
                                     </f:facet>
                                     <h:outputText value="#{item.numeroConsultorio}"/>
                                 </h:column>  
 
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Estado"/>
+                                        <h:outputText value="#{msg['status']}"/>
                                     </f:facet>
                                     <h:outputText value="#{item.estado}"/>
                                 </h:column> 
 
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Acciones"/>
+                                        <h:outputText value="#{msg['actions']}"/>
                                     </f:facet>
                                     &nbsp;
                                     <h:commandLink action="#{controllerCitaMedica.seleccionarCita(item)}" value=""><span id="botonEdita" class="fa fa-pencil-square-o" aria-hidden="true"></span>
@@ -137,7 +147,7 @@
                         $("#citas-pendientes").DataTable({
                             autoWidth: false,
                             language: {
-                                url: "#{resource['js/spanish.lang']}"
+                                url: "#{resource[msg['datatables-lang']]}"
                             },
                             responsive: true,
                             columnDefs:[

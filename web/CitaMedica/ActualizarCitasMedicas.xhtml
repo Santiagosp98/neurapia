@@ -10,41 +10,44 @@
     </h:head>
     <h:body>
         <ui:composition template="/template/common/commonLayout.xhtml">
-
             <ui:define name="aside">
                 <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
-
-
-
                     <div class="panel panel-default">
-
                         <div  class="panel-heading active" role="tab">
                             <h6 class="panel-title">
                                 <a  role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><i class="fa fa-folder-open" aria-hidden="true"></i>
-                                    Cita Médica <span class="caret"></span>
+                                    <h:outputText value="#{msg['medical-appointment']}"/>
+                                    <span class="caret"></span>
                                 </a>
                             </h6>
                         </div>
                         <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
                             <div class="panel-body active">
-                                <a href="ConsultarCitasMedicas.xhtml">Historial de Citas</a>
+                                <a href="ConsultarCitasMedicas.xhtml">
+                                    <h:outputText value="#{msg['appointment-history']}"/>
+                                </a>
                             </div>
                             <div class="panel-body">
-                                <a href="#">Citas Pendientes</a> 
+                                <a href="#">
+                                    <h:outputText value="#{msg['pending-appointments-b']}"/>
+                                </a>
                             </div>
                         </div>
 
                         <div class="panel-heading" role="tab" id="headingThree">
                             <h6 class="panel-title"><i class="fa fa-calendar" aria-hidden="true"></i>
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsThree" aria-expanded="true" aria-controls="collapseThree">
-                                    Asignar cita<span class="caret"></span> 
+                                    <h:outputText value="#{msg['assign-appointment']}"/>
+                                    <span class="caret"></span>
                                 </a>
                             </h6>
                         </div>
 
                         <div id="collapsThree" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingThree">
                             <div class="panel-body">
-                                <a href="CrearCitaMedica.xhtml">Nueva Cita médica</a> 
+                                <a href="CrearCitaMedica.xhtml">
+                                    <h:outputText value="#{msg['new-medical-appointment']}"/>
+                                </a>
                             </div>
                         </div>
 
@@ -58,11 +61,15 @@
             <ui:define name="content">
                 <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
                     <!-- Titulo -->
-                    <h5 id="ubicacionPag">Actualizar Cita Médica</h5>
+                    <h5 id="ubicacionPag">
+                        <h:outputText value="#{msg['update-medical-appointment']}"/>
+                    </h5>
                     <div class="contenido">
                         <div class="contenido">
                             <br/>
-                            <p style="text-align: center; margin-top: 50px">En esta sección puedes modificar el consultorio, fecha y hora de la cita médica asignada para el paciente seleccionado</p>
+                            <p style="text-align: center; margin-top: 50px">
+                                <h:outputText value="#{msg['update-appointment-description']}"></h:outputText>
+                            </p>
                             <br/>
                         </div>
                     </div>
@@ -74,21 +81,21 @@
 
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="Nombre Paciente"/>
+                                    <h:outputText value="#{msg['patient']}"/>
                                 </f:facet>
                                 <h:outputText value="#{controllerCitaMedica.citaMedica.fullNameUsuario}"/>
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="Número Documento"/>
+                                    <h:outputText value="#{msg['document-number']}"/>
                                 </f:facet>
                                 <h:outputText value="#{controllerCitaMedica.citaMedica.codUsuario.numeroDocumento}"/>
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="Estado Usuario"/>
+                                    <h:outputText value="#{msg['status']}"/>
                                 </f:facet>
                                 <h:outputText value="#{controllerCitaMedica.citaMedica.codUsuario.estadoUsuario}"/>
                             </h:column>
@@ -98,47 +105,44 @@
                     <h:form prependId="false" id="formRegistrarse" a:name="formRegistrarse">
 
                         <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                            <h:outputLabel value="Fisioterapeuta:" for="Fisioterapeuta" />
+                            <h:outputLabel value="#{msg['physiotherapist']}:" for="Fisioterapeuta" />
                             <h:selectOneMenu id="Fisioterapeuta" class="form-control mitooltip" value="#{controllerCitaMedica.citaMedica.codFisioterapeuta}" converter="fisioterapeutaConverter" requiredMessage="El fisioterapeuta es requerido.">
                                 <f:selectItems value="#{controllerFisioterapeuta.listaFisioterapeuta}" var="f" itemLabel="#{f.fullnameFisioterapeuta}"/>
                             </h:selectOneMenu>
                         </div>
 
                         <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                            <h:outputLabel value="fecha:" for="fecha" />
+                            <h:outputLabel value="#{msg['date']}:" for="fecha" />
                             <h:inputText a:placeholder="yyyy-MM-dd" class="form-control mitooltip" id="fecha" value="#{controllerCitaMedica.citaMedica.fecha}" title="fecha" required="false" requiredMessage="La fecha es requerida.">                               
                                 <f:convertDateTime pattern="yyyy-MM-dd" /> 
                             </h:inputText>
                         </div>
 
                         <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                            <h:outputLabel value="hora:" for="hora" />
+                            <h:outputLabel value="#{msg['hour']}:" for="hora" />
                             <h:inputText class="form-control mitooltip" a:minlength="8" a:pattern="(0[0-9]|1[0-9]|2[0-3])(:[0-5][0-9]){2}" a:data-toggle="tooltip" a:data-placement="top"  id="hora" value="#{controllerCitaMedica.citaMedica.hora}" title="hora" required="true" requiredMessage="La hora es requerida.">
                                 <f:convertDateTime pattern="HH:mm:ss" /> 
                             </h:inputText>
                         </div>
 
                         <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                            <h:outputLabel value="consultorio:" for="consultorio" />
+                            <h:outputLabel value="#{msg['doctors-office']}:" for="consultorio" />
                             <h:inputText a:placeholder="000" class="form-control mitooltip" a:data-toggle="tooltip" a:data-placement="top"  id="consultorio" value="#{controllerCitaMedica.citaMedica.numeroConsultorio}" title="consultorio" required="true" requiredMessage="El número de consultorio es requerido.">
                             </h:inputText>
                         </div>
 
                         <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                            <h:outputLabel value="Estado:" for="estado" />
+                            <h:outputLabel value="#{msg['status']}:" for="estado" />
                             <h:selectOneMenu id="estado" class="form-control mitooltip" value="#{controllerCitaMedica.citaMedica.estado}" requiredMessage="El fisioterapeuta es requerido.">
                                 <f:selectItems value="#{controllerCitaMedica.citaMedica.seleccionEstado}"/>
                             </h:selectOneMenu>
                         </div>
 
                         <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                            <h:commandButton class="btn btn-info" action="#{controllerCitaMedica.actualizarCita()}" value="Guardar"/>
+                            <h:commandButton class="btn btn-info" action="#{controllerCitaMedica.actualizarCita()}" value="#{msg['save']}"/>
                         </div>
                     </h:form>
-
-
                 </div>
-
 
             </ui:define>
         </ui:composition>
