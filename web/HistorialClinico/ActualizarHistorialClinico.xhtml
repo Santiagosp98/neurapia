@@ -19,7 +19,8 @@
                         <div class="panel-heading active" role="tab" id="headingOne" >
                             <h6 class="panel-title"><i class="fa fa-stethoscope" aria-hidden="true"></i>
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsOne" aria-expanded="true" aria-controls="collapseOne">
-                                    Historial Clínico<span class="caret"></span> 
+                                    <h:outputText value="#{msg['medical-record']}"/>
+                                    <span class="caret"></span>
                                 </a>
                             </h6>
                         </div>
@@ -28,19 +29,19 @@
 
                             <h:form>
                                 <div class="panel-body active">
-                                    <h:commandLink action="#{controllerHistorialClinico.selectInformacionBasica()}" value="Información Básica"/> 
+                                    <h:commandLink action="#{controllerHistorialClinico.selectInformacionBasica()}" value="#{msg['basic-information']}"/>
                                 </div>
                                 <div class="panel-body" >
-                                    <h:commandLink action="#{controllerHistorialClinico.selectAnamnesis}" value="anamnesis" /> 
+                                    <h:commandLink action="#{controllerHistorialClinico.selectAnamnesis}" value="Anamnesis" />
                                 </div>
                                 <div class="panel-body" >
-                                    <h:commandLink action="#{controllerHistorialClinico.selectMovilidad}" value="Movilidad" /> 
+                                    <h:commandLink action="#{controllerHistorialClinico.selectMovilidad}" value="#{msg['mobility']}" />
                                 </div>
                                 <div class="panel-body" >
-                                    <h:commandLink action="#{controllerHistorialClinico.selectObjetivoTratamiento()}" value="Objetivos del Tratamiento" /> 
+                                    <h:commandLink action="#{controllerHistorialClinico.selectObjetivoTratamiento()}" value="#{msg['treatment-objectives']}" />
                                 </div>
                                 <div class="panel-body" >
-                                    <h:commandLink action="#{controllerHistorialClinico.selectReporteTratamiento()}" value="Reporte del Tratamiento" /> 
+                                    <h:commandLink action="#{controllerHistorialClinico.selectReporteTratamiento()}" value="#{msg['treatment-report']}" />
                                 </div>
 
                             </h:form>
@@ -48,19 +49,24 @@
                         <div class="panel-heading" role="tab" id="headingTwo">
                             <h6 class="panel-title">
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
-                                   aria-expanded="false" aria-controls="collapseTwo"><i class="fa fa-file-archive-o"
-                                                                                     aria-hidden="true"></i>
-                                    Registros Clínicos <span class="caret"></span>
+                                   aria-expanded="false" aria-controls="collapseTwo">
+                                    <i class="fa fa-file-archive-o" aria-hidden="true"></i>
+                                    <h:outputText value="#{msg['clinical-records']}"/>
+                                    <span class="caret"></span>
                                 </a>
                             </h6>
                         </div>
                         <div id="collapseTwo" class="panel-collapse collapse of" role="tabpanel"
                              aria-labelledby="headingTwo">
                             <div class="panel-body">
-                                <a href="ConsultarHistorialClinico.xhtml">Consultar Historiales Clínicos</a>
+                                <a href="ConsultarHistorialClinico.xhtml">
+                                    <h:outputText value="#{msg['consult-clinical-records']}"/>
+                                </a>
                             </div>
                             <div class="panel-body">
-                                <a href="CrearHistorialClinico.xhtml">Añadir nuevo Histrial clinico</a>
+                                <a href="CrearHistorialClinico.xhtml">
+                                    <h:outputText value="#{msg['add-clinical-record']}"/>
+                                </a>
                             </div>
                         </div>
 
@@ -68,7 +74,8 @@
                             <h6 class="panel-title"><i class="fa fa-folder-open" aria-hidden="true"></i>
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsThree"
                                    aria-expanded="true" aria-controls="collapseThree">
-                                    Reportes<span class="caret"></span>
+                                    <h:outputText value="#{msg['reports']}"/>
+                                    <span class="caret"></span>
                                 </a>
                             </h6>
                         </div>
@@ -76,7 +83,9 @@
                         <div id="collapsThree" class="panel-collapse collapse of" role="tabpanel"
                              aria-labelledby="headingThree">
                             <div class="panel-body">
-                                <a href="#">Reportes de Historias clínicas</a>
+                                <a href="#">
+                                    <h:outputText value="#{msg['clinical-reports']}"/>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -90,22 +99,26 @@
             <ui:define name="content">
                 <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
                     <!-- Titulo -->
-                    <h5 id="ubicacionPag">Actualizacion del historial clínico</h5>
+                    <h5 id="ubicacionPag">
+                        <h:outputText value="#{msg['record-update']}"/>
+                    </h5>
 
                     <div class="contenido">
                         <div class="contenido">
                             <br/>
-                            <p style="text-align: center; margin-top: 50px">Edita la información básica del usuario al cual estas atendiendo</p>
+                            <p style="text-align: center; margin-top: 50px">
+                                <h:outputText value="#{msg['record-update-description']}"/>
+                            </p>
                             <br/>
                         </div>
                         
                         <div class="datosDeHistorial col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                            <h2>Historial clínico N°: #{controllerHistorialClinico.historialClinico.idHistorialClinico}</h2>
+                            <h2>#{msg['medical-record']} N°: #{controllerHistorialClinico.historialClinico.idHistorialClinico}</h2>
                         </div>
                         <div class="datosDeHistorial col-lg-3 col-md-3 col-sm-3 col-xs-12">
 
                             <h2>
-                                Fecha de registro:
+                                <h:outputText value="#{msg['register-date']}: "/>
                                 <h:outputText value="#{controllerHistorialClinico.historialClinico.fechaCreacion}">
                                     <f:convertDateTime pattern="yyyy-MM-dd" />
                                 </h:outputText>
@@ -116,21 +129,21 @@
 
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="Nombre Paciente"/>
+                                    <h:outputText value="#{msg['patient']}"/>
                                 </f:facet>
                                 <h:outputText value="#{controllerHistorialClinico.historialClinico.codUsuario.fullNameUsuario}"/>
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="Número Documento"/>
+                                    <h:outputText value="#{msg['document-number']}"/>
                                 </f:facet>
                                 <h:outputText value="#{controllerHistorialClinico.historialClinico.codUsuario.numeroDocumento}"/>
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="Estado Usuario"/>
+                                    <h:outputText value="#{msg['user-status']}"/>
                                 </f:facet>
                                 <h:outputText value="#{controllerHistorialClinico.historialClinico.codUsuario.estadoUsuario}"/>
                             </h:column>
@@ -143,12 +156,12 @@
                         <h:form prependId="false" id="historialClinico">
 
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="Dirección:" for="direccion" />
+                                <h:outputLabel value="#{msg['address']}:" for="direccion" />
                                 <h:inputText id="direccion" class="form-control mitooltip" value="#{controllerHistorialClinico.historialClinico.direccion}" title="Direccion" />
                             </div>
 
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="Fecha de Nacimiento:" for="fecha" />
+                                <h:outputLabel value="#{msg['birth-date-l']}:" for="fecha" />
                                 <h:inputText id="fecha" class="form-control mitooltip"  value="#{controllerHistorialClinico.historialClinico.fechaNacimiento}" title="FechaNacimiento" >
                                     <f:convertDateTime pattern="yyyy-MM-dd" />
                                 </h:inputText>
@@ -162,44 +175,44 @@
                             </div>
 
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="Grupo Sanguineo:" for="grupoSanguineo" />
+                                <h:outputLabel value="Rh:" for="grupoSanguineo" />
                                 <h:selectOneMenu id="grupoSanguineo" class="form-control mitooltip" value="#{controllerHistorialClinico.historialClinico.grupoSanguineo}" title="GrupoSanguineo" required="true" requiredMessage="The GrupoSanguineo field is required.">
                                     <f:selectItems value="#{controllerHistorialClinico.historialClinico.listaGrupoSanguineo}"/>
                                 </h:selectOneMenu>
                             </div>
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="Religion:" for="religion" />
+                                <h:outputLabel value="#{msg['religion']}:" for="religion" />
                                 <h:selectOneMenu id="religion" class="form-control mitooltip" value="#{controllerHistorialClinico.historialClinico.religion}" title="Religion" required="true" requiredMessage="The Religion field is required.">
                                     <f:selectItems value="#{controllerHistorialClinico.historialClinico.listaReligion}"/>
                                 </h:selectOneMenu>
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-3">
-                                <h:outputLabel value="Estrato:" for="estrato" />
+                                <h:outputLabel value="#{msg['stratum']}:" for="estrato" />
                                 <h:selectOneMenu id="estrato" class="form-control mitooltip" value="#{controllerHistorialClinico.historialClinico.estrato}" title="Estrato">
                                     <f:selectItems value="#{controllerHistorialClinico.historialClinico.listaEstrato}"/>
                                 </h:selectOneMenu>
                             </div>
 
                             <div class="form-group col-lg-3 col-md-3 col-sm-3">
-                                <h:outputLabel value="Sexo:" for="sexo" />
+                                <h:outputLabel value="#{msg['gender']}:" for="sexo" />
                                 <h:selectOneMenu id="sexo" class="form-control mitooltip" value="#{controllerHistorialClinico.historialClinico.sexo}" title="Sexo" required="true" requiredMessage="The Sexo field is required.">
                                     <f:selectItems value="#{controllerHistorialClinico.historialClinico.listaSexo}" a:type="radio" a:style="padding-right: 10px"/>
                                 </h:selectOneMenu>
                             </div>
 
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="Zona:" for="zona" />
+                                <h:outputLabel value="#{msg['area']}:" for="zona" />
                                 <h:selectOneMenu id="zona" class="form-control mitooltip" value="#{controllerHistorialClinico.historialClinico.zona}" title="Zona" required="true" requiredMessage="The Zona field is required.">
                                     <f:selectItems value="#{controllerHistorialClinico.historialClinico.listaZona}"/>
                                 </h:selectOneMenu>
                             </div>
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="Ciudad de Residencia:" for="ciudadResidencia" />
+                                <h:outputLabel value="#{msg['city-of-residence']}:" for="ciudadResidencia" />
                                 <h:inputText id="ciudadResidencia" class="form-control mitooltip" value="#{controllerHistorialClinico.historialClinico.ciudadResidencia}" title="CiudadResidencia" />
                             </div>  
 
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="Ciduad de Nacimiento:" for="codLugarNacimiento" />
+                                <h:outputLabel value="#{msg['place-of-birth']}:" for="codLugarNacimiento" />
                                 <h:selectOneMenu id="codLugarNacimiento" class="form-control mitooltip" value="#{controllerHistorialClinico.historialClinico.codLugarNacimiento}" converter="departamentoConverter" title="CodLugarNacimiento" >
                                     <!-- TODO: update below reference to list of available items-->
                                     <f:selectItems value="#{controllerDepartamento.listaDepartamento}" var="dep" itemLabel="#{dep.nombreCiudad}"/>
@@ -207,37 +220,37 @@
                             </div>
 
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="Pais:" for="pais" />
+                                <h:outputLabel value="#{msg['country']}:" for="pais" />
                                 <h:inputText id="pais" class="form-control mitooltip" value="#{controllerHistorialClinico.historialClinico.pais}" title="Pais" />
                             </div>
 
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="Estudio:" for="estudio" />
+                                <h:outputLabel value="#{msg['degree']}:" for="estudio" />
                                 <h:selectOneMenu id="estudio" class="form-control mitooltip" value="#{controllerHistorialClinico.historialClinico.estudio}" title="Estudio" required="true" requiredMessage="The Estudio field is required.">
                                     <f:selectItems value="#{controllerHistorialClinico.historialClinico.listaEstudios}"/>
                                 </h:selectOneMenu>
                             </div>
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="Ocupación:" for="ocupacion" />
+                                <h:outputLabel value="#{msg['employment']}:" for="ocupacion" />
                                 <h:inputText id="ocupacion" class="form-control mitooltip" value="#{controllerHistorialClinico.historialClinico.ocupacion}" title="Ocupacion" />
                             </div>
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="Teléfono:" for="telefono" />
+                                <h:outputLabel value="#{msg['phone-number']}:" for="telefono" />
                                 <h:inputText id="telefono" class="form-control mitooltip" value="#{controllerHistorialClinico.historialClinico.telefono}" title="Telefono" />
                             </div> 
 
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="Empresa:" for="empresa" />
+                                <h:outputLabel value="#{msg['company']}:" for="empresa" />
                                 <h:inputText id="empresa" class="form-control mitooltip" value="#{controllerHistorialClinico.historialClinico.empresa}" title="Empresa" />
                             </div>
 
                             <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
                                 <br></br>
-                                <h:commandButton class="btn btn-info" action="#{controllerHistorialClinico.editarHistorialClinico()}" value="Guardar"/>  
+                                <h:commandButton class="btn btn-info" action="#{controllerHistorialClinico.editarHistorialClinico()}" value="#{msg['save']}"/>
                                 &nbsp;
-                                <h:commandButton class="btn btn-default" action="#{controllerHistorialClinico.consultarHistorialClinico()}" value="Atras"/>  
+                                <h:commandButton class="btn btn-default" action="#{controllerHistorialClinico.consultarHistorialClinico()}" value="#{msg['back']}"/>
                                 &nbsp;
-                                <h:commandButton class="btn btn-default" action="#{controllerHistorialClinico.selectAnamnesis()}" value="Siguiente"/>  
+                                <h:commandButton class="btn btn-default" action="#{controllerHistorialClinico.selectAnamnesis()}" value="#{msg['next']}"/>
                             </div> 
 
                         </h:form>
