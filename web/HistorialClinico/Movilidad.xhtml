@@ -1,206 +1,211 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="#{lenguaje.lenguaje}"
+      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-
-<ui:composition template="/template/common/commonLayout.xhtml">
-    <ui:define name="aside">
-        <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
-            <div class="panel panel-default">
-                <div class="panel-heading active" role="tab" id="headingOne">
-                    <h6 class="panel-title">
-                        <i class="fa fa-stethoscope" aria-hidden="true"></i>
-                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsOne"
-                           aria-expanded="true" aria-controls="collapseOne">
-                            <h:outputText value="#{msg['medical-record']}"></h:outputText>
-                            <span class="caret"></span>
-                        </a>
-                    </h6>
-                </div>
-
-                <div id="collapsOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-
-                    <h:form>
-                        <div class="panel-body">
-                            <h:commandLink action="#{controllerHistorialClinico.selectInformacionBasica()}"
-                                           value="#{msg['basic-information']}"/>
-                        </div>
-                        <div class="panel-body">
-                            <h:commandLink action="#{controllerHistorialClinico.selectAnamnesis}" value="Anamnesis"/>
-                        </div>
-                        <div class="panel-body active">
-                            <h:commandLink action="#{controllerHistorialClinico.selectMovilidad}"
-                                           value="#{msg['mobility']}"/>
-                        </div>
-                        <div class="panel-body">
-                            <h:commandLink action="#{controllerHistorialClinico.selectObjetivoTratamiento()}"
-                                           value="#{msg['treatment-objectives']}"/>
-                        </div>
-                        <div class="panel-body">
-                            <h:commandLink action="#{controllerHistorialClinico.selectReporteTratamiento()}"
-                                           value="#{msg['treatment-report']}"/>
-                        </div>
-                    </h:form>
-                </div>
-                <div class="panel-heading" role="tab" id="headingTwo">
-                    <h6 class="panel-title">
-                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
-                           aria-expanded="false" aria-controls="collapseTwo">
-                            <i class="fa fa-file-archive-o" aria-hidden="true"></i>
-                            <h:outputText value="#{msg['clinical-records']}"></h:outputText>
-                            <span class="caret"></span>
-                        </a>
-                    </h6>
-                </div>
-                <div id="collapseTwo" class="panel-collapse collapse of" role="tabpanel"
-                     aria-labelledby="headingTwo">
-                    <div class="panel-body">
-                        <a href="ConsultarHistorialClinico.xhtml">
-                            <h:outputText value="#{msg['consult-clinical-records']}"></h:outputText>
-                        </a>
+<f:view locale="#{lenguaje.locale}">
+    <ui:composition template="/template/common/commonLayout.xhtml">
+        <ui:define name="aside">
+            <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading active" role="tab" id="headingOne">
+                        <h6 class="panel-title">
+                            <i class="fa fa-stethoscope" aria-hidden="true"></i>
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsOne"
+                               aria-expanded="true" aria-controls="collapseOne">
+                                <h:outputText value="#{msg['medical-record']}"></h:outputText>
+                                <span class="caret"></span>
+                            </a>
+                        </h6>
                     </div>
-                    <div class="panel-body">
-                        <a href="CrearHistorialClinico.xhtml">Añadir nuevo Histrial clinico</a>
+
+                    <div id="collapsOne" class="panel-collapse collapse in" role="tabpanel"
+                         aria-labelledby="headingOne">
+
+                        <h:form>
+                            <div class="panel-body">
+                                <h:commandLink action="#{controllerHistorialClinico.selectInformacionBasica()}"
+                                               value="#{msg['basic-information']}"/>
+                            </div>
+                            <div class="panel-body">
+                                <h:commandLink action="#{controllerHistorialClinico.selectAnamnesis}"
+                                               value="Anamnesis"/>
+                            </div>
+                            <div class="panel-body active">
+                                <h:commandLink action="#{controllerHistorialClinico.selectMovilidad}"
+                                               value="#{msg['mobility']}"/>
+                            </div>
+                            <div class="panel-body">
+                                <h:commandLink action="#{controllerHistorialClinico.selectObjetivoTratamiento()}"
+                                               value="#{msg['treatment-objectives']}"/>
+                            </div>
+                            <div class="panel-body">
+                                <h:commandLink action="#{controllerHistorialClinico.selectReporteTratamiento()}"
+                                               value="#{msg['treatment-report']}"/>
+                            </div>
+                        </h:form>
                     </div>
-                </div>
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h6 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
+                               aria-expanded="false" aria-controls="collapseTwo">
+                                <i class="fa fa-file-archive-o" aria-hidden="true"></i>
+                                <h:outputText value="#{msg['clinical-records']}"></h:outputText>
+                                <span class="caret"></span>
+                            </a>
+                        </h6>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse of" role="tabpanel"
+                         aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            <a href="ConsultarHistorialClinico.xhtml">
+                                <h:outputText value="#{msg['consult-clinical-records']}"></h:outputText>
+                            </a>
+                        </div>
+                        <div class="panel-body">
+                            <a href="CrearHistorialClinico.xhtml">Añadir nuevo Histrial clinico</a>
+                        </div>
+                    </div>
 
-                <div class="panel-heading" role="tab" id="headingThree">
-                    <h6 class="panel-title">
-                        <i class="fa fa-folder-open" aria-hidden="true"></i>
-                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsThree"
-                           aria-expanded="true" aria-controls="collapseThree">
-                            <h:outputText value="#{msg['reports']}"></h:outputText>
-                            <span class="caret"></span>
-                        </a>
-                    </h6>
-                </div>
+                    <div class="panel-heading" role="tab" id="headingThree">
+                        <h6 class="panel-title">
+                            <i class="fa fa-folder-open" aria-hidden="true"></i>
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsThree"
+                               aria-expanded="true" aria-controls="collapseThree">
+                                <h:outputText value="#{msg['reports']}"></h:outputText>
+                                <span class="caret"></span>
+                            </a>
+                        </h6>
+                    </div>
 
-                <div id="collapsThree" class="panel-collapse collapse of" role="tabpanel"
-                     aria-labelledby="headingThree">
-                    <div class="panel-body">
-                        <a href="#">
-                            <h:outputText value="#{msg['clinical-reports']}"></h:outputText>
-                        </a>
+                    <div id="collapsThree" class="panel-collapse collapse of" role="tabpanel"
+                         aria-labelledby="headingThree">
+                        <div class="panel-body">
+                            <a href="#">
+                                <h:outputText value="#{msg['clinical-reports']}"></h:outputText>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </ui:define>
-    <ui:define name="content">
-        <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
-            <!-- Titulo -->
-            <h5 id="ubicacionPag">
-                <h:outputText value="#{msg['mobility']}"></h:outputText>
-            </h5>
-            <div class="contenido">
+        </ui:define>
+        <ui:define name="content">
+            <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
+                <!-- Titulo -->
+                <h5 id="ubicacionPag">
+                    <h:outputText value="#{msg['mobility']}"></h:outputText>
+                </h5>
                 <div class="contenido">
                     <div class="contenido">
-                        <br/>
-                        <p style="text-align: center; margin-top: 50px">
-                            <h:outputText value="#{msg['record-update-description']}"></h:outputText>
-                        </p>
-                        <br/>
+                        <div class="contenido">
+                            <br/>
+                            <p style="text-align: center; margin-top: 50px">
+                                <h:outputText value="#{msg['record-update-description']}"></h:outputText>
+                            </p>
+                            <br/>
+                        </div>
                     </div>
-                </div>
 
-                <div class="datosDeHistorial col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                    <h2>#{msg['medical-record']} N°: #{controllerHistorialClinico.historialClinico.idHistorialClinico}</h2>
-                </div>
-                <div class="datosDeHistorial col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                    <h2>
-                        <h:outputText value="#{msg['register-date']}: "></h:outputText>
-                        <h:outputText value="#{controllerHistorialClinico.historialClinico.fechaCreacion}">
-                            <f:convertDateTime pattern="yyyy-MM-dd"/>
-                        </h:outputText>
-                    </h2>
-                </div>
+                    <div class="datosDeHistorial col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                        <h2>#{msg['medical-record']} N°: #{controllerHistorialClinico.historialClinico.idHistorialClinico}</h2>
+                    </div>
+                    <div class="datosDeHistorial col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <h2>
+                            <h:outputText value="#{msg['register-date']}: "></h:outputText>
+                            <h:outputText value="#{controllerHistorialClinico.historialClinico.fechaCreacion}">
+                                <f:convertDateTime pattern="yyyy-MM-dd"/>
+                            </h:outputText>
+                        </h2>
+                    </div>
 
-                <h:dataTable value="#{controllerHistorialClinico.historialClinico}"
-                             class="table table-striped table-bordered">
+                    <h:dataTable value="#{controllerHistorialClinico.historialClinico}"
+                                 class="table table-striped table-bordered">
 
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{msg['patient']}"/>
-                        </f:facet>
-                        <h:outputText
-                                value="#{controllerHistorialClinico.historialClinico.codUsuario.fullNameUsuario}"/>
-                    </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{msg['patient']}"/>
+                            </f:facet>
+                            <h:outputText
+                                    value="#{controllerHistorialClinico.historialClinico.codUsuario.fullNameUsuario}"/>
+                        </h:column>
 
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{msg['document-number']}"/>
-                        </f:facet>
-                        <h:outputText
-                                value="#{controllerHistorialClinico.historialClinico.codUsuario.numeroDocumento}"/>
-                    </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{msg['document-number']}"/>
+                            </f:facet>
+                            <h:outputText
+                                    value="#{controllerHistorialClinico.historialClinico.codUsuario.numeroDocumento}"/>
+                        </h:column>
 
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{msg['user-status']}"/>
-                        </f:facet>
-                        <h:outputText value="#{controllerHistorialClinico.historialClinico.codUsuario.estadoUsuario}"/>
-                    </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{msg['user-status']}"/>
+                            </f:facet>
+                            <h:outputText
+                                    value="#{controllerHistorialClinico.historialClinico.codUsuario.estadoUsuario}"/>
+                        </h:column>
 
-                </h:dataTable>
+                    </h:dataTable>
 
-                <div class="contenido list-group">
-                    <ul class="nav nav-tabs">
-                        <li role="presentation" class="active">
-                            <a href="#">
-                                <h:outputText value="#{msg['superior-mobility']}: "></h:outputText>
-                            </a>
-                        </li>
-                        <li role="presentation">
-                            <a href="#">
-                                <h:outputText value="#{msg['inferior-mobility']}: "></h:outputText>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <c:forEach items="#{controllerHistorialClinico.mapa}" var="l" varStatus="vs">
-                    <h:outputText value="#{l.key}"/>
-                    <table class="table table-striped table-bordered">
-                        <thead>
-                        <tr>
-                            <th>
-                                <h:outputText value="#{msg['characteristic']}: "></h:outputText>
-                            </th>
-                            <th>
-                                <h:outputText value="#{msg['initial-status']}: "></h:outputText>
-                            </th>
-                            <th>
-                                <h:outputText value="#{msg['objective']}: "></h:outputText>
-                            </th>
-                            <th>
-                                <h:outputText value="#{msg['result']}: "></h:outputText>
-                            </th>
-                            <th>
-                                <h:outputText value="#{msg['accomplishment-percentage']}: "></h:outputText>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach begin="0" end="#{l.value.size() - 1}" step="4" var="i">
-
+                    <div class="contenido list-group">
+                        <ul class="nav nav-tabs">
+                            <li role="presentation" class="active">
+                                <a href="#">
+                                    <h:outputText value="#{msg['superior-mobility']}: "></h:outputText>
+                                </a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#">
+                                    <h:outputText value="#{msg['inferior-mobility']}: "></h:outputText>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <c:forEach items="#{controllerHistorialClinico.mapa}" var="l" varStatus="vs">
+                        <h:outputText value="#{l.key}"/>
+                        <table class="table table-striped table-bordered">
+                            <thead>
                             <tr>
-                                <td>#{l.value.get(i).codCaracteristicaMovilidad.tipoCaracteristica}</td>
-                                <td>#{l.value.get(i).resultadoProceso}</td>
-                                <td>#{l.value.get(i+1).resultadoProceso}</td>
-                                <td>#{l.value.get(i+2).resultadoProceso}</td>
-                                <td>#{l.value.get(i+3).resultadoProceso}</td>
+                                <th>
+                                    <h:outputText value="#{msg['characteristic']}: "></h:outputText>
+                                </th>
+                                <th>
+                                    <h:outputText value="#{msg['initial-status']}: "></h:outputText>
+                                </th>
+                                <th>
+                                    <h:outputText value="#{msg['objective']}: "></h:outputText>
+                                </th>
+                                <th>
+                                    <h:outputText value="#{msg['result']}: "></h:outputText>
+                                </th>
+                                <th>
+                                    <h:outputText value="#{msg['accomplishment-percentage']}: "></h:outputText>
+                                </th>
                             </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            <c:forEach begin="0" end="#{l.value.size() - 1}" step="4" var="i">
 
-                </c:forEach>
+                                <tr>
+                                    <td>#{l.value.get(i).codCaracteristicaMovilidad.tipoCaracteristica}</td>
+                                    <td>#{l.value.get(i).resultadoProceso}</td>
+                                    <td>#{l.value.get(i+1).resultadoProceso}</td>
+                                    <td>#{l.value.get(i+2).resultadoProceso}</td>
+                                    <td>#{l.value.get(i+3).resultadoProceso}</td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+
+                    </c:forEach>
+                </div>
             </div>
-        </div>
-    </ui:define>
-</ui:composition>
+        </ui:define>
+    </ui:composition>
+</f:view>
 </html>
 

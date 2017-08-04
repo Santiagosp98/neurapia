@@ -1,34 +1,39 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="#{lenguaje.lenguaje}"
+      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view locale="#{lenguaje.locale}">
     <h:head>
         <title>Crear Usuario</title>
     </h:head>
-    <h:body>        
+    <h:body>
 
         <ui:composition template="/template/common/commonLayout.xhtml">
-            
+
             <ui:define name="aside">
 
                 <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
 
                     <div class="panel panel-default">
 
-                        <div  class="panel-heading" role="tab" id="headingOne">
+                        <div class="panel-heading" role="tab" id="headingOne">
                             <h6 class="panel-title">
-                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                                   aria-expanded="false" aria-controls="collapseOne">
                                     <i class="fa fa-user" aria-hidden="true"></i>
                                     <h:outputText value="#{msg['profile']}"></h:outputText>
                                     <span class="caret"></span>
                                 </a>
                             </h6>
                         </div>
-                        <div id="collapseOne" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingOne">
+                        <div id="collapseOne" class="panel-collapse collapse of" role="tabpanel"
+                             aria-labelledby="headingOne">
                             <div class="panel-body">
                                 <a href="#{request.contextPath}/Usuarios/miPerfil.xhtml">
                                     <h:outputText value="#{msg['my-profile']}"></h:outputText>
@@ -44,14 +49,16 @@
 
                         <div class="panel-heading active" role="tab" id="headingOne">
                             <h6 class="panel-title"><i class="fa fa-users" aria-hidden="true"></i>
-                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsTwo" aria-expanded="true" aria-controls="collapseOne">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsTwo"
+                                   aria-expanded="true" aria-controls="collapseOne">
                                     <h:outputText value="#{msg['users-system']}"></h:outputText>
                                     <span class="caret"></span>
                                 </a>
                             </h6>
                         </div>
 
-                        <div id="collapsTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                        <div id="collapsTwo" class="panel-collapse collapse in" role="tabpanel"
+                             aria-labelledby="headingOne">
                             <div class="panel-body">
                                 <a href="ConsultarUsuarios.xhtml">
                                     <h:outputText value="#{msg['check-users']}"></h:outputText>
@@ -71,7 +78,7 @@
             </ui:define>
 
             <ui:define name="content">
-                
+
                 <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
                     <h5 id="ubicacionPag">
                         <h:outputText value="#{msg['add-user']}"></h:outputText>
@@ -79,84 +86,117 @@
                     <div class="contenido"></div>
                     <h:form prependId="false" id="formRegistrarse" a:name="formRegistrarse">
                         <div class="mensajeError col-lg-12 col-md-12 col-sm-12">
-                            <h:messages class="mensajeErrorForm" showDetail="true" showSummary="true" infoClass="alert alert-sucess" errorClass="alert alert-danger"/>
+                            <h:messages class="mensajeErrorForm" showDetail="true" showSummary="true"
+                                        infoClass="alert alert-sucess" errorClass="alert alert-danger"/>
                         </div>
-                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="#{msg['document-type']}:" for="tipo-documento" />
-                                <h:selectOneMenu id="tipo-documento" class="form-control mitooltip" value="#{controllerUsuario.usuario.tipoDocumento}" tabindex="1">
-                                    <f:selectItems class="form-control mitooltip" value="#{controllerUsuario.usuario.seleccionDocumento}"/>
-                                </h:selectOneMenu>
-                            </div>
-                        
-                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="#{msg['document-number']}:" for="numero-documento"/>
-                                <h:inputText a:placeholder="#{msg['document-number']}" class="form-control mitooltip" tabindex="2" id="numero-documento" value="#{controllerUsuario.usuario.numeroDocumento}" title="PrimerNombre" required="true" requiredMessage="The IdUsuario field is required.">
-                                </h:inputText>
-                            </div>                        
-                            
-                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="#{msg['first-name']}:" for="primer-nombre"/>
-                                <h:inputText a:placeholder="#{msg['first-name']}" class="form-control mitooltip" tabindex="3"  id="primer-nombre" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" value="#{controllerUsuario.usuario.primerNombre}" title="PrimerNombre" required="true" requiredMessage="The IdUsuario field is required.">
-                                </h:inputText>
-                            </div>
-                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="#{msg['middle-name']}:" for="segundo-nombre"/>
-                                <h:inputText a:placeholder="#{msg['middle-name']}" class="form-control mitooltip" tabindex="4" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" id="segundo-nombre" value="#{controllerUsuario.usuario.segundoNombre}" title="SegundoNombre" required="false">
-                                </h:inputText>
-                            </div>
-                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="#{msg['surname']}:" for="primer-apellido"/>
-                                <h:inputText a:placeholder="#{msg['surname']}" class="form-control mitooltip" tabindex="5" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"  id="primer-apellido" value="#{controllerUsuario.usuario.primerApellido}" title="PrimerApellido" required="true" requiredMessage="El Primer Apellido es requerido.">
-                                </h:inputText>
-                            </div>
+                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                            <h:outputLabel value="#{msg['document-type']}:" for="tipo-documento"/>
+                            <h:selectOneMenu id="tipo-documento" class="form-control mitooltip"
+                                             value="#{controllerUsuario.usuario.tipoDocumento}" tabindex="1">
+                                <f:selectItems class="form-control mitooltip"
+                                               value="#{controllerUsuario.usuario.seleccionDocumento}"/>
+                            </h:selectOneMenu>
+                        </div>
 
-                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="#{msg['second-surname']}:" for="segundo-apellido"/>
-                                <h:inputText a:placeholder="#{msg['second-surname']}" class="form-control mitooltip" tabindex="6" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"  id="segundo-apellido" value="#{controllerUsuario.usuario.segundoApellido}" title="SegundoApellido" required="true" requiredMessage="El Segundo Apellido es requerido.">
-                                </h:inputText>
-                            </div>
-                        
-                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="#{msg['user-status']}:" for="estado-usuario"/>
-                                <h:selectOneMenu id="estado-usuario" class="form-control mitooltip"  tabindex="7" value="#{controllerUsuario.usuario.estadoUsuario}">
-                                    <f:selectItems class="form-control mitooltip" value="#{controllerUsuario.usuario.seleccionEstados}"/>
-                                </h:selectOneMenu>
-                            </div>
-                       
-                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="#{msg['role']}:" for="rol"/>
-                                <h:selectOneMenu id="rol" class="form-control mitooltip"  tabindex="7" value="#{controllerUsuario.usuario.codRol}" converter="rolConverter">
-                                    <f:selectItems class="form-control mitooltip" value="#{controllerRol.listaRol}" var="u" itemLabel="#{u.nombreRol}"/>
-                                </h:selectOneMenu>
-                            </div>
-                        
-                            
-                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="#{msg['email']}:" for="correo"/>
-                                <h:inputText id="correo" tabindex="8" class="form-control" a:placeholder="ejem@ejem.com" a:pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" value="#{controllerUsuario.usuario.correoElectronico}" required="true" requiredMessage="El correo es requerido.">
-                                </h:inputText>
-                            </div>
+                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                            <h:outputLabel value="#{msg['document-number']}:" for="numero-documento"/>
+                            <h:inputText a:placeholder="#{msg['document-number']}" class="form-control mitooltip"
+                                         tabindex="2" id="numero-documento"
+                                         value="#{controllerUsuario.usuario.numeroDocumento}" title="PrimerNombre"
+                                         required="true" requiredMessage="The IdUsuario field is required.">
+                            </h:inputText>
+                        </div>
 
-                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="#{msg['user-password']}:" for="clave-usuario"/>
-                                <h:inputSecret id="clave-usuario" class="form-control mitooltip" tabindex="9" maxlength="25"  a:data-toggle="tooltip" a:data-placement="top" value="#{controllerUsuario.usuario.claveUsuario}" title="ClaveUsuario" required="true" requiredMessage="La clave es requerida.">
-                                </h:inputSecret>
-                            </div>
+                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                            <h:outputLabel value="#{msg['first-name']}:" for="primer-nombre"/>
+                            <h:inputText a:placeholder="#{msg['first-name']}" class="form-control mitooltip"
+                                         tabindex="3" id="primer-nombre" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"
+                                         value="#{controllerUsuario.usuario.primerNombre}" title="PrimerNombre"
+                                         required="true" requiredMessage="The IdUsuario field is required.">
+                            </h:inputText>
+                        </div>
+                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                            <h:outputLabel value="#{msg['middle-name']}:" for="segundo-nombre"/>
+                            <h:inputText a:placeholder="#{msg['middle-name']}" class="form-control mitooltip"
+                                         tabindex="4" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" id="segundo-nombre"
+                                         value="#{controllerUsuario.usuario.segundoNombre}" title="SegundoNombre"
+                                         required="false">
+                            </h:inputText>
+                        </div>
+                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                            <h:outputLabel value="#{msg['surname']}:" for="primer-apellido"/>
+                            <h:inputText a:placeholder="#{msg['surname']}" class="form-control mitooltip" tabindex="5"
+                                         a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" id="primer-apellido"
+                                         value="#{controllerUsuario.usuario.primerApellido}" title="PrimerApellido"
+                                         required="true" requiredMessage="El Primer Apellido es requerido.">
+                            </h:inputText>
+                        </div>
 
-                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="#{msg['confirm-password']}:" for="confirmar-clave"/>
-                                <h:inputSecret id="confirmar-clave" class="form-control mitooltip" tabindex="10" maxlength="25"  a:data-toggle="tooltip" a:data-placement="top" title="confirmarClave" requiredMessage="Ambas claves deben coincidir." value="#{controllerUsuario.confirmarClave}">
-                                </h:inputSecret>
-                            </div>
-                            
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <br></br>
-                                <h:commandButton class="btn btn-info" action="#{controllerUsuario.crearUsuario()}" value="#{msg['save']}"/>
-                            </div>
-                        </h:form>
+                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                            <h:outputLabel value="#{msg['second-surname']}:" for="segundo-apellido"/>
+                            <h:inputText a:placeholder="#{msg['second-surname']}" class="form-control mitooltip"
+                                         tabindex="6" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" id="segundo-apellido"
+                                         value="#{controllerUsuario.usuario.segundoApellido}" title="SegundoApellido"
+                                         required="true" requiredMessage="El Segundo Apellido es requerido.">
+                            </h:inputText>
+                        </div>
+
+                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                            <h:outputLabel value="#{msg['user-status']}:" for="estado-usuario"/>
+                            <h:selectOneMenu id="estado-usuario" class="form-control mitooltip" tabindex="7"
+                                             value="#{controllerUsuario.usuario.estadoUsuario}">
+                                <f:selectItems class="form-control mitooltip"
+                                               value="#{controllerUsuario.usuario.seleccionEstados}"/>
+                            </h:selectOneMenu>
+                        </div>
+
+                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                            <h:outputLabel value="#{msg['role']}:" for="rol"/>
+                            <h:selectOneMenu id="rol" class="form-control mitooltip" tabindex="7"
+                                             value="#{controllerUsuario.usuario.codRol}" converter="rolConverter">
+                                <f:selectItems class="form-control mitooltip" value="#{controllerRol.listaRol}" var="u"
+                                               itemLabel="#{u.nombreRol}"/>
+                            </h:selectOneMenu>
+                        </div>
+
+
+                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                            <h:outputLabel value="#{msg['email']}:" for="correo"/>
+                            <h:inputText id="correo" tabindex="8" class="form-control" a:placeholder="ejem@ejem.com"
+                                         a:pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
+                                         value="#{controllerUsuario.usuario.correoElectronico}" required="true"
+                                         requiredMessage="El correo es requerido.">
+                            </h:inputText>
+                        </div>
+
+                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                            <h:outputLabel value="#{msg['user-password']}:" for="clave-usuario"/>
+                            <h:inputSecret id="clave-usuario" class="form-control mitooltip" tabindex="9" maxlength="25"
+                                           a:data-toggle="tooltip" a:data-placement="top"
+                                           value="#{controllerUsuario.usuario.claveUsuario}" title="ClaveUsuario"
+                                           required="true" requiredMessage="La clave es requerida.">
+                            </h:inputSecret>
+                        </div>
+
+                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                            <h:outputLabel value="#{msg['confirm-password']}:" for="confirmar-clave"/>
+                            <h:inputSecret id="confirmar-clave" class="form-control mitooltip" tabindex="10"
+                                           maxlength="25" a:data-toggle="tooltip" a:data-placement="top"
+                                           title="confirmarClave" requiredMessage="Ambas claves deben coincidir."
+                                           value="#{controllerUsuario.confirmarClave}">
+                            </h:inputSecret>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <br></br>
+                            <h:commandButton class="btn btn-info" action="#{controllerUsuario.crearUsuario()}"
+                                             value="#{msg['save']}"/>
+                        </div>
+                    </h:form>
                 </div>
             </ui:define>
-        </ui:composition>    
+        </ui:composition>
     </h:body>
+</f:view>
 </html>
 
