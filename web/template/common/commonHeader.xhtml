@@ -10,11 +10,20 @@
             <li><span class="glyphicon glyphicon-map-marker"></span> Carrera 21 A # 124 - 55</li>
             <li><span class="glyphicon glyphicon-phone-alt"></span> (57-1) 214 85 22</li>
             <li>Physical Care</li>
-            <li>
-                <h:form>
-                    <h:commandLink action="#{lenguaje.cambiarLenguaje('en')}" value="English"></h:commandLink>
-                </h:form>
-            </li>
+            <ui:fragment rendered="#{lenguaje.lenguaje eq 'es'}">
+                <li>
+                    <h:form>
+                        <h:commandLink action="#{lenguaje.cambiarLenguaje('en')}" value="English"></h:commandLink>
+                    </h:form>
+                </li>
+            </ui:fragment>
+            <ui:fragment rendered="#{lenguaje.lenguaje eq 'en'}">
+                <li>
+                    <h:form>
+                        <h:commandLink action="#{lenguaje.cambiarLenguaje('es')}" value="Español"></h:commandLink>
+                    </h:form>
+                </li>
+            </ui:fragment>
         </ul>
     </nav>
 
