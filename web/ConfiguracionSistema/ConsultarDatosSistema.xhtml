@@ -18,17 +18,22 @@
                         <div class="panel-heading active" role="tab" id="headingOne">
                             <h6 class="panel-title"><i class="fa fa-cogs" aria-hidden="true"></i>
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsOne" aria-expanded="true" aria-controls="collapseOne">
-                                    Configuración del sistema<span class="caret"></span> 
+                                    <h:outputText value="#{msg['system-configuration']}"/>
+                                    <span class="caret"></span>
                                 </a>
                             </h6>
                         </div>
 
                         <div id="collapsOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                             <div class="panel-body active">
-                                <a href="ConsultarDatosSistema.xhtml">Registros en el Sistema</a>
+                                <a href="ConsultarDatosSistema.xhtml">
+                                    <h:outputText value="#{msg['system-records']}"/>
+                                </a>
                             </div>                            
                             <div class="panel-body">
-                                <a href="CrearRegistros.xhtml">Añadir Registro</a> 
+                                <a href="CrearRegistros.xhtml">
+                                    <h:outputText value="#{msg['add-record']}"/>
+                                </a>
                             </div>
                         </div>
 
@@ -40,34 +45,40 @@
             <ui:define name="content">
                 <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
                     <!-- Titulo -->
-                    <h5 id="ubicacionPag">Registros en el Sistema</h5>
+                    <h5 id="ubicacionPag">
+                        <h:outputText value="#{msg['system-records']}"/>
+                    </h5>
 
                     <div class="contenido">
                         <div class="contenido">
                             <br/> 
-                            <p style="text-align: center; margin-top: 50px">En esta sección encontraras los campos para asignar nuevos registros en el sistema</p>
+                            <p style="text-align: center; margin-top: 50px">
+                                <h:outputText value="#{msg['system-records-desc']}"/>
+                            </p>
                             <br/>
                         </div>
                     </div>
-                    <h4><h:outputText value="Lista de Actividades Disponibles" /></h4>
+                    <h4>
+                        <h:outputText value="#{msg['activities-list']}"/>
+                    </h4>
                     <div class="fixed-table-body">
                         <h:form prependId="false">
                             <h:dataTable value="#{controllerActividad.consultarActividad()}" var="item" class="table table-striped table-bordered" id="actividades-disponibles">
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Codigo"/>
+                                        <h:outputText value="#{msg['code']}"/>
                                     </f:facet>
                                     <h:outputText value="#{item.idActividad}"/>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header"> 
-                                        <h:outputText value="Nombre Actividad"/>
+                                        <h:outputText value="#{msg['activity-name']}"/>
                                     </f:facet>
                                     <h:outputText value="#{item.nombreActividad}"/>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Acciones"/>
+                                        <h:outputText value="#{msg['actions']}"/>
                                     </f:facet>
                                     &nbsp;
                                     <h:commandLink action="#{controllerActividad.prepararEditar(item)}" value="" ><span id="botonEdita" class="fa fa-pencil-square-o" aria-hidden="true"></span>
@@ -84,26 +95,28 @@
                     </div>
                     <hr class="col-lg-12 col-md-12 col-sm-12 col-sm-12" style="background-color: #f1f1f1; width: 100%; height: 20px; margin-left: -15px"/>
 
-                    <h4><h:outputText value="Lista de tipos de Objetivos de tratamiento Disponibles" /></h4>
+                    <h4>
+                        <h:outputText value="#{msg['treatment-objectives-list']}"/>
+                    </h4>
 
                     <div class="fixed-table-body">
                         <h:form prependId="false">
                             <h:dataTable value="#{controllerObjetivoTratamiento.consultarObjetivoTratamiento()}" var="item" class="table table-striped table-bordered" id="objetivos">
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Código"/>
+                                        <h:outputText value="#{msg['code']}"/>
                                     </f:facet>
                                     <h:outputText value="#{item.idObjetivoTratamiento}"/>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Descripción del Objetivo"/>
+                                        <h:outputText value="#{msg['objective-description']}"/>
                                     </f:facet>
                                     <h:outputText value="#{item.nombreObjetivo}"/>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Acciones"/>
+                                        <h:outputText value="#{msg['actions']}"/>
                                     </f:facet>
                                     &nbsp;
                                     <h:commandLink action="#{controllerObjetivoTratamiento.prepararEditarobjetivoTratamiento(item)}" value=""><span id="botonEdita" class="fa fa-pencil-square-o" aria-hidden="true"></span>
@@ -119,25 +132,25 @@
                     </div>
                     <hr class="col-lg-12 col-md-12 col-sm-12 col-sm-12" style="background-color: #f1f1f1; width: 100%; height: 20px; margin-left: -15px"/>
 
-                    <h4><h:outputText value="Lista de Departamentos" /></h4>
+                    <h4><h:outputText value="#{msg['department-list']}" /></h4>
                     <div class="fixed-table-body">
                         <h:form prependId="false">
                             <h:dataTable value="#{controllerDepartamento.consultarDepartamento()}" var="item" class="table table-striped table-bordered" id="departamentos">
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Código"/>
+                                        <h:outputText value="#{msg['code']}"/>
                                     </f:facet>
                                     <h:outputText value="#{item.idDepartamento}"/>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Ciudad"/>
+                                        <h:outputText value="#{msg['city']}"/>
                                     </f:facet>
                                     <h:outputText value="#{item.nombreCiudad}"/>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Acciones" />    
+                                        <h:outputText value="#{msg['actions']}"/>
                                     </f:facet>
                                     &nbsp;
                                     <h:commandLink action="#{controllerDepartamento.prepararEditar(item)}" value=""><span id="botonEdita" class="fa fa-pencil-square-o" aria-hidden="true"></span>
@@ -153,13 +166,13 @@
                     </div>
                     <hr class="col-lg-12 col-md-12 col-sm-12 col-sm-12" style="background-color: #f1f1f1; width: 100%; height: 20px; margin-left: -15px"/>
 
-                    <h4><h:outputText value="Lista de EPS" /></h4>
+                    <h4><h:outputText value="#{msg['eps-list']}" /></h4>
                         <div class="fixed-table-body">
                             <h:form prependId="false">
                                 <h:dataTable value="#{controllerEps.consultarEps()}" var="item" class="table table-striped table-bordered" id="lista-eps">
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Código"/>
+                                            <h:outputText value="#{msg['code']}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.idEps}"/>
                                     </h:column>
@@ -171,7 +184,7 @@
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Acciones" />    
+                                            <h:outputText value="#{msg['actions']}" />
                                         </f:facet>
                                         &nbsp;
                                         <h:commandLink action="#{controllerEps.prepararEditar(item)}" value=""><span id="botonEdita" class="fa fa-pencil-square-o" aria-hidden="true"></span>
@@ -187,25 +200,25 @@
                         </div>
                     <hr class="col-lg-12 col-md-12 col-sm-12 col-sm-12" style="background-color: #f1f1f1; width: 100%; height: 20px; margin-left: -15px"/>
 
-                    <h4><h:outputText value="Lista Tipo Educación" /></h4>
+                    <h4><h:outputText value="#{msg['degree-list']}" /></h4>
                         <div class="fixed-table-body">
                             <h:form prependId="false">
                                 <h:dataTable value="#{controllerEducacion.consultarEducacion()}" var="item" class="table table-striped table-bordered" id="tipo-educacion">
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Código"/>
+                                            <h:outputText value="#{msg['code']}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.idEducacion}"/>
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Tipo Educacion"/>
+                                            <h:outputText value="#{msg['degree']}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.tipoEducacion}"/>
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Acciones" />    
+                                            <h:outputText value="#{msg['actions']}" />
                                         </f:facet>
                                         &nbsp;
                                         <h:commandLink action="#{controllerEducacion.prepararEditar(item)}" value=""><span id="botonEdita" class="fa fa-pencil-square-o" aria-hidden="true"></span>
@@ -223,25 +236,25 @@
                     <hr class="col-lg-12 col-md-12 col-sm-12 col-sm-12" style="background-color: #f1f1f1; width: 100%; height: 20px; margin-left: -15px"/>
 
 
-                    <h4><h:outputText value="Lista de Procesos" /></h4>
+                    <h4><h:outputText value="#{msg['process-list']}" /></h4>
                         <div class="fixed-table-body">
                             <h:form prependId="false">
                                 <h:dataTable value="#{controllerProceso.consultarProceso()}" var="item" class="table table-striped table-bordered" id="lista-procesos">
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Código" />
+                                            <h:outputText value="#{msg['code']}" />
                                         </f:facet>
                                         <h:outputText value="#{item.idProceso}"/>
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Proceso"/>
+                                            <h:outputText value="#{msg['process']}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.nombreProceso}"/>
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Acciones" />    
+                                            <h:outputText value="#{msg['actions']}" />
                                         </f:facet>
                                         &nbsp;
                                         <h:commandLink action="#{controllerProceso.prepararEditar(item)}" value=""><span id="botonEdita" class="fa fa-pencil-square-o" aria-hidden="true"></span>
@@ -258,19 +271,19 @@
                     <hr class="col-lg-12 col-md-12 col-sm-12 col-sm-12" style="background-color: #f1f1f1; width: 100%; height: 20px; margin-left: -15px"/>
 
 
-                    <h4><h:outputText value="Lista de Respuesta" /></h4>
+                    <h4><h:outputText value="#{msg['response-list']}" /></h4>
                         <div class="fixed-table-body">
                             <h:form prependId="false">
                                 <h:dataTable value="#{controllerRespuesta.consultarRespuesta()}" var="item" class="table table-striped table-bordered" id="lista-respuesta">
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Código"/>
+                                            <h:outputText value="#{msg['code']}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.idRespuesta}"/>
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Respuesta"/>
+                                            <h:outputText value="#{msg['response']}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.nombreRespuesta}"/>
                                     </h:column>
@@ -301,16 +314,18 @@
                             <h:panelGroup id="contenido-modal-eliminar-act" layout="block"  class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Confirmación eliminar actividad</h4>
+                                    <h4 class="modal-title">
+                                        <h:outputText value="#{msg['delete-activity-title']}"/>
+                                    </h4>
                                 </div>
                                 <div class="modal-body">
-                                    <p>¿Está seguro que desea eliminar la Actividad "#{controllerActividadEliminar.seleccionarEliminarActividad.nombreActividad}"?</p>
+                                    <p> <h:outputText value="#{msg['delete-activity-warn']}"/> "<strong>#{controllerActividadEliminar.seleccionarEliminarActividad.nombreActividad}</strong>"?</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <h:commandButton class="btn btn-primary" value="Eliminar"
+                                    <h:commandButton class="btn btn-primary" value="#{msg['delete']}"
                                                      action="#{controllerActividadEliminar.eliminarActividad()}">
                                     </h:commandButton>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>                                            
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">#{msg['cancel']}</button>
                                 </div>
                             </h:panelGroup>
                         </h:form>
@@ -324,16 +339,18 @@
                             <h:panelGroup id="contenido-modal-eliminar-objt" layout="block"  class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Confirmación eliminar Objetivo Tratamiento</h4>
+                                    <h4 class="modal-title">
+                                        <h:outputText value="#{msg['delete-treatment-objective']}"/>
+                                    </h4>
                                 </div>
                                 <div class="modal-body">
-                                    <p>¿Está seguro que desea eliminar el Objetivo Tratamiento: "#{controllerObjetivoTratamientoEliminar.selecccionarEliminarObjetivoTratamiento.nombreObjetivo}" ?</p>
+                                    <p><h:outputText value="#{msg['delete-treatment-warn']}"/>: "<strong>#{controllerObjetivoTratamientoEliminar.selecccionarEliminarObjetivoTratamiento.nombreObjetivo}</strong>" ?</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <h:commandButton class="btn btn-primary" value="Eliminar"
+                                    <h:commandButton class="btn btn-primary" value="#{msg['delete']}"
                                                      action="#{controllerObjetivoTratamientoEliminar.eliminarObjetivoTratamiento()}">
                                     </h:commandButton>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>                                            
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">#{msg['cancel']}</button>
                                 </div>
                             </h:panelGroup>
                         </h:form>
@@ -347,16 +364,18 @@
                             <h:panelGroup id="contenido-modal-eliminar-departamento" layout="block"  class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Confirmación eliminar Departamento</h4>
+                                    <h4 class="modal-title">
+                                        <h:outputText value="#{msg['delete-department-title']}"/>
+                                    </h4>
                                 </div>
                                 <div class="modal-body">
-                                    <p>¿Está seguro que desea eliminar el Departamento: "#{controllerDepartamentoEliminar.seleccionarEliminarDepartamento.nombreCiudad}" ?</p>
+                                    <p><h:outputText value="#{msg['delete-department-warn']}"/>: "<strong>#{controllerDepartamentoEliminar.seleccionarEliminarDepartamento.nombreCiudad}</strong>" ?</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <h:commandButton class="btn btn-primary" value="Eliminar"
+                                    <h:commandButton class="btn btn-primary" value="#{msg['delete']}"
                                                      action="#{controllerDepartamentoEliminar.eliminarDepartamento()}">
                                     </h:commandButton>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>                                            
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">#{msg['cancel']}</button>
                                 </div>
                             </h:panelGroup>
                         </h:form>
@@ -370,16 +389,18 @@
                             <h:panelGroup id="contenido-modal-eliminar-eps" layout="block"  class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Confirmación eliminar EPS</h4>
+                                    <h4 class="modal-title">
+                                        <h:outputText value="#{msg['delete-eps-title']}"/>
+                                    </h4>
                                 </div>
                                 <div class="modal-body">
-                                    <p>¿Está seguro que desea eliminar la EPS "#{controllerEpsEliminar.seleccionarEliminarEps.nombreEps}" ?</p>
+                                    <p><h:outputText value="#{msg['delete-eps-warn']}"/> "<strong>#{controllerEpsEliminar.seleccionarEliminarEps.nombreEps}</strong>" ?</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <h:commandButton class="btn btn-primary" value="Eliminar"
+                                    <h:commandButton class="btn btn-primary" value="#{msg['delete']}"
                                                      action="#{controllerEpsEliminar.eliminarEps()}">
                                     </h:commandButton>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>                                            
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">#{msg['cancel']}</button>
                                 </div>
                             </h:panelGroup>
                         </h:form>
@@ -393,16 +414,18 @@
                             <h:panelGroup id="contenido-modal-eliminar-educacion" layout="block"  class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Confirmación eliminar TIPO EDUCACIÓN</h4>
+                                    <h4 class="modal-title">
+                                        <h:outputText value="#{msg['delete-degree-title']}"/>
+                                    </h4>
                                 </div>
                                 <div class="modal-body">
-                                    <p>¿Está seguro que desea eliminar el TIPO EDUCACIÓN "#{controllerEducacionEliminar.seleccionarEliminarEducacion.tipoEducacion}" ?</p>
+                                    <p><h:outputText value="#{msg['delete-degree-warn']}"/> "<strong>#{controllerEducacionEliminar.seleccionarEliminarEducacion.tipoEducacion}</strong>" ?</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <h:commandButton class="btn btn-primary" value="Eliminar"
+                                    <h:commandButton class="btn btn-primary" value="#{msg['delete']}"
                                                      action="#{controllerEducacionEliminar.eliminarEducacion()}">
                                     </h:commandButton>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>                                            
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">#{msg['cancel']}</button>
                                 </div>
                             </h:panelGroup>
                         </h:form>
@@ -416,16 +439,18 @@
                             <h:panelGroup id="contenido-modal-eliminar-proc" layout="block"  class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Confirmación eliminar PROCESO</h4>
+                                    <h4 class="modal-title">
+                                        <h:outputText value="#{msg['delete-process-title']}"/>
+                                    </h4>
                                 </div>
                                 <div class="modal-body">
-                                    <p>¿Está seguro que desea eliminar el PROCESO "#{controllerProcesoEliminar.seleccionarEliminarProceso.nombreProceso}" ?</p>
+                                    <p><h:outputText value="#{msg['delete-process-warn']}"/> "<strong>#{controllerProcesoEliminar.seleccionarEliminarProceso.nombreProceso}</strong>" ?</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <h:commandButton class="btn btn-primary" value="Eliminar"
+                                    <h:commandButton class="btn btn-primary" value="#{msg['delete']}"
                                                      action="#{controllerProcesoEliminar.eliminarProceso()}">
                                     </h:commandButton>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>                                            
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">#{msg['cancel']}</button>
                                 </div>
                             </h:panelGroup>
                         </h:form>
@@ -439,16 +464,18 @@
                             <h:panelGroup id="contenido-modal-eliminar-respuesta" layout="block"  class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Confirmación eliminar RESPUESTA</h4>
+                                    <h4 class="modal-title">
+                                        <h:outputText value="#{msg['delete-response-title']}"/>
+                                    </h4>
                                 </div>
                                 <div class="modal-body">
-                                    <p>¿Está seguro que desea eliminar la RESPUESTA "#{controllerRespuestaEliminar.seleccionarEliminarRespuesta.nombreRespuesta}" ?</p>
+                                    <p><h:outputText value="#{msg['delete-response-warn']}"/> "<strong>#{controllerRespuestaEliminar.seleccionarEliminarRespuesta.nombreRespuesta}</strong>" ?</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <h:commandButton class="btn btn-primary" value="Eliminar"
+                                    <h:commandButton class="btn btn-primary" value="#{msg['delete']}"
                                                      action="#{controllerRespuestaEliminar.eliminarRespuesta()}">
                                     </h:commandButton>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>                                            
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">#{msg['cancel']}</button>
                                 </div>
                             </h:panelGroup>
                         </h:form>
@@ -462,7 +489,7 @@
                     $().ready(function () {
                         $("#actividades-disponibles,#objetivos,#departamentos,#lista-eps,#tipo-educacion,#lista-procesos, #lista-respuesta").DataTable({
                             language: {
-                                url: "#{resource['js/spanish.lang']}"
+                                url: "#{resource[msg['datatables-lang']]}"
                             },
                             dom: "Bfrtip",
                             buttons: [

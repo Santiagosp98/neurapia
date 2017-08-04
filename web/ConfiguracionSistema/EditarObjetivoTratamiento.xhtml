@@ -15,20 +15,26 @@
                 <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
                     <div class="panel panel-default">
                         <div class="panel-heading active" role="tab" id="headingOne">
-                            <h6 class="panel-title"><i class="fa fa-cogs" aria-hidden="true"></i>
+                            <h6 class="panel-title">
+                                <i class="fa fa-cogs" aria-hidden="true"></i>
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsOne" aria-expanded="true" aria-controls="collapseOne">
-                                    Configuración del sistema<span class="caret"></span> 
+                                    <h:outputText value="#{msg['system-configuration']}"/>
+                                    <span class="caret"></span>
                                 </a>
                             </h6>
                         </div>      
                         <div id="collapsOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                             <div class="panel-body">
-                                <a href="ConsultarDatosSistema.xhtml">Registros en el Sistema</a> 
+                                <a href="ConsultarDatosSistema.xhtml">
+                                    <h:outputText value="#{msg['system-records']}"/>
+                                </a>
                             </div>
                         </div>
                         <div id="collapsTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
                             <div class="panel-body active">
-                                <a href="#">Añadir Registro</a>
+                                <a href="#">
+                                    <h:outputText value="#{msg['add-record']}"/>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -37,22 +43,24 @@
 
             <ui:define name="content">                
                 <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
-                    <h5 id="ubicacionPag">Editar Objetivo Tratamiento</h5>
+                    <h5 id="ubicacionPag">
+                        <h:outputText value="#{msg['edit-treatment-objective']}"/>
+                    </h5>
                     <h:form prependId="false">  
                         <h:messages for="nombreObjetivoTratamiento" style="color: red; list-style:none; padding: 18px"/>
                         <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                            <h:outputLabel value="CÓDIGO" for="idObjetivoTratamiento" />
+                            <h:outputLabel value="#{msg['code']}" for="idObjetivoTratamiento" />
                             <h:inputText id="idObjetivoTratamiento" disabled="true" class="form-control mitooltip" value="#{controllerObjetivoTratamiento.objetivoTratamientoSeleccionado.idObjetivoTratamiento}" title="IdObjetivoTratamiento" required="true" requiredMessage="The IdObjetivoTratamiento field is required."/>
                         </div>    
                         <div class="form-group col-lg-12 col-md-12 col-sm-12">    
-                            <h:outputLabel value="OBJETIVO TRATAMIENTO" for="nombreObjetivoTratamiento" />
+                            <h:outputLabel value="#{msg['treatment-objective']}" for="nombreObjetivoTratamiento" />
                             <h:inputText id="nombreObjetivoTratamiento" class="form-control mitooltip" value="#{controllerObjetivoTratamiento.objetivoTratamientoSeleccionado.nombreObjetivo}" required="true" requiredMessage="El Campo OBJETIVO TRATAMIENTO no debe ser nulo" title="NombreObjetivoTratamiento" />
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
                             <br></br>
-                            <h:commandButton class="btn btn-info" action="#{controllerObjetivoTratamiento.guardarCambios()}" value="Guardar"/>
+                            <h:commandButton class="btn btn-info" action="#{controllerObjetivoTratamiento.guardarCambios()}" value="#{msg['save']}"/>
                             &nbsp;
-                            <h:commandButton class="btn btn-info" action="#{controllerObjetivoTratamiento.cancelar()}" value="Cancelar"/>
+                            <h:commandButton class="btn btn-default" action="#{controllerObjetivoTratamiento.cancelar()}" value="#{msg['cancel']}"/>
                         </div>                        
                     </h:form>                    
                 </div>

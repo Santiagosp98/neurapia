@@ -17,18 +17,23 @@
                         <div class="panel-heading active" role="tab" id="headingOne">
                             <h6 class="panel-title"><i class="fa fa-cogs" aria-hidden="true"></i>
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsOne" aria-expanded="true" aria-controls="collapseOne">
-                                    Configuración del sistema<span class="caret"></span> 
+                                    <h:outputText value="#{msg['system-configuration']}"/>
+                                    <span class="caret"></span>
                                 </a>
                             </h6>
                         </div>      
                         <div id="collapsOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                             <div class="panel-body">
-                                <a href="ConsultarDatosSistema.xhtml">Registros en el Sistema</a> 
+                                <a href="ConsultarDatosSistema.xhtml">
+                                    <h:outputText value="#{msg['system-records']}"/>
+                                </a>
                             </div>
                         </div>
                         <div id="collapsTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
                             <div class="panel-body active">
-                                <a href="#">Añadir Registro</a>
+                                <a href="#">
+                                    <h:outputText value="#{msg['add-record']}"/>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -37,22 +42,24 @@
 
             <ui:define name="content">                
                 <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
-                    <h5 id="ubicacionPag">Editar Departamento</h5>
+                    <h5 id="ubicacionPag">
+                        <h:outputText value="#{msg['edit-department']}"/>
+                    </h5>
                     <h:form prependId="false">  
                         <h:messages for="nombreDepartamento" style="color: red; list-style:none; padding: 18px" />
                         <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                            <h:outputLabel value="CÓDIGO" for="idDepartamento" />
+                            <h:outputLabel value="#{msg['code']}" for="idDepartamento" />
                             <h:inputText id="idDepartamento" disabled="true" class="form-control mitooltip" value="#{controllerDepartamento.departamentoSeleccionado.idDepartamento}" title="idDepartamento" required="true" requiredMessage="The idDepartamento field is required."/>
                         </div>    
                         <div class="form-group col-lg-12 col-md-12 col-sm-12">    
-                            <h:outputLabel value="NOMBRE DEPARTAMENTO" for="nombreDepartamento" />
+                            <h:outputLabel value="#{msg['department-name']}" for="nombreDepartamento" />
                             <h:inputText id="nombreDepartamento" class="form-control mitooltip" value="#{controllerDepartamento.departamentoSeleccionado.nombreCiudad}" required="true" requiredMessage="El Campo NOMBRE DEPARTAMENTO no debe ser nulo" title="nombreDepartamento" />
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
                             <br></br>
-                            <h:commandButton class="btn btn-info" action="#{controllerDepartamento.guardarCambios()}" value="Guardar"/>
+                            <h:commandButton class="btn btn-info" action="#{controllerDepartamento.guardarCambios()}" value="#{msg['save']}"/>
                             &nbsp;
-                            <h:commandButton class="btn btn-info" action="#{controllerDepartamento.cancelar()}" value="Cancelar"/>
+                            <h:commandButton class="btn btn-default" action="#{controllerDepartamento.cancelar()}" value="#{msg['cancel']}"/>
                         </div>                        
                     </h:form>                    
                 </div>
