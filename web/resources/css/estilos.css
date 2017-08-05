@@ -763,3 +763,7 @@ ul.mensajeErrorForm {
     background-color: #3DCCC2;
     color: #fff;
 }
+
+div.fixed-table-body {
+    padding: 15px;
+}
