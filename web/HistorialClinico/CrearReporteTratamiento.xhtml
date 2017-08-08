@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+<ui:composition template="/template/common/commonLayout.xhtml">
+    <ui:define name="aside">
+        <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading active" role="tab" id="headingOne">
+                    <h6 class="panel-title"><i class="fa fa-stethoscope" aria-hidden="true"></i>
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsOne"
+                           aria-expanded="true" aria-controls="collapseOne">
+                            Historial Clínico<span class="caret"></span>
+                        </a>
+                    </h6>
+                </div>
+                <div id="collapsOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+
+                    <h:form>
+                        <div class="panel-body">
+                            <h:commandLink action="#{controllerHistorialClinico.selectInformacionBasica()}"
+                                           value="Información Básica"/>
+                        </div>
+                        <div class="panel-body">
+                            <h:commandLink action="#{controllerHistorialClinico.selectAnamnesis}" value="Anámnesis"/>
+                        </div>
+                        <div class="panel-body">
+                            <h:commandLink action="#{controllerHistorialClinico.selectMovilidad}" value="Movilidad"/>
+                        </div>
+                        <div class="panel-body">
+                            <h:commandLink action="#{controllerHistorialClinico.selectObjetivoTratamiento()}"
+                                           value="Objetivos del Tratamiento"/>
+                        </div>
+                        <div class="panel-body active">
+                            <h:commandLink action="#{controllerHistorialClinico.selectReporteTratamiento()}"
+                                           value="Reporte del Tratamiento"/>
+                        </div>
+
+                    </h:form>
+                </div>
+                <div class="panel-heading" role="tab" id="headingTwo">
+                    <h6 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
+                           aria-expanded="false" aria-controls="collapseTwo"><i class="fa fa-file-archive-o"
+                                                                                aria-hidden="true"></i>
+                            Registros Clínicos <span class="caret"></span>
+                        </a>
+                    </h6>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse of" role="tabpanel"
+                     aria-labelledby="headingTwo">
+                    <div class="panel-body">
+                        <a href="ConsultarHistorialClinico.xhtml">Consultar Historiales Clínicos</a>
+                    </div>
+                    <div class="panel-body">
+                        <a href="CrearHistorialClinico.xhtml">Añadir nuevo Histrial clinico</a>
+                    </div>
+                </div>
+
+                <div class="panel-heading" role="tab" id="headingThree">
+                    <h6 class="panel-title"><i class="fa fa-folder-open" aria-hidden="true"></i>
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsThree"
+                           aria-expanded="true" aria-controls="collapseThree">
+                            Reportes<span class="caret"></span>
+                        </a>
+                    </h6>
+                </div>
+
+                <div id="collapsThree" class="panel-collapse collapse of" role="tabpanel"
+                     aria-labelledby="headingThree">
+                    <div class="panel-body">
+                        <a href="#">Reportes de Historias clínicas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+
+    <ui:define name="content">
+        <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
+            <!-- Titulo -->
+            <h5 id="ubicacionPag">Reporte de Tratamiento</h5>
+            <div class="contenido">
+                <div class="contenido">
+                    <div class="contenido">
+                        <div class="datosDeHistorial col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                            <h2>Historial clínico N°: #{controllerHistorialClinico.historialClinico.idHistorialClinico}</h2>
+                        </div>
+                        <div class="datosDeHistorial col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <h2>
+                                Fecha de registro:
+                                <h:outputText value="#{controllerHistorialClinico.historialClinico.fechaCreacion}">
+                                    <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                </h:outputText>
+                            </h2>
+                        </div>
+                        <h:dataTable value=""
+                                     class="table table-striped table-bordered">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nombre Paciente"/>
+                                </f:facet>
+                                <h:outputText
+                                    value="#{controllerHistorialClinico.historialClinico.codUsuario.fullNameUsuario}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Número Documento"/>
+                                </f:facet>
+                                <h:outputText
+                                    value="#{controllerHistorialClinico.historialClinico.codUsuario.numeroDocumento}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Estado"/>
+                                </f:facet>
+                                <h:outputText
+                                    value="#{controllerHistorialClinico.historialClinico.codUsuario.estadoUsuario}"/>
+                            </h:column>                            
+                        </h:dataTable >                       
+                    </div>                    
+                </div>                
+            </div>
+            <div class="">
+                <h3>Añadir nueva Actividad</h3> 
+            <h:form>
+                    <h:outputLabel value="Nombre de Respuesta" for="nombreRespuesta" />                    
+                    <h:selectOneMenu id="nombreRespuesta" value="#{controllerRespuestaActividad.respuestaAct.codRespuesta}" title="DescripcionRespuesta">
+                        <f:selectItems value="#{controllerRespuesta.seleccionRespuestas()}"/>
+                    </h:selectOneMenu>
+                    
+                    <h:outputLabel value="DescripcionRespuesta:" for="descripcionRespuesta" />
+                    <h:inputTextarea rows="4" cols="30" id="descripcionRespuesta" value="#{controllerRespuestaActividad.respuestaAct.descripcionRespuesta}" title="DescripcionRespuesta" />
+                    
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12">
+                        <h:commandButton class="btn btn-info" actionListener="#{controllerRespuestaActividad.crearRespuestaActividad()}" value="Añadir Actividad"/>
+                    </div>
+            </h:form>
+        </div>
+        </div>
+    </ui:define>
+</ui:composition>
+</html>

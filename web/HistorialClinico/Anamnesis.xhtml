@@ -7,7 +7,7 @@
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
+    <f:view locale="#{lenguaje.locale}">
     <ui:composition template="/template/common/commonLayout.xhtml">
         <ui:define name="aside">
             <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
@@ -163,7 +163,7 @@
 
                                 <br> </br>
                                 <h3>Anamnesis</h3>
-
+                    
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                     <h:outputLabel value="#{msg['initial-assessment']}:" for="anamnesis"/>
                                     <h:inputTextarea class="form-control mitooltip" rows="4" cols="30" id="anamnesis"
