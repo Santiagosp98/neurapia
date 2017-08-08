@@ -102,12 +102,15 @@ public class ControllerRespuestaActividad extends ControllerApp {
         this.listRespActSeleccionadas = listRespActSeleccionadas;
     }
     
-    public void crearRespuestaActividad(){
-        try {
-            System.out.println("Estamos creando una respuesta de actividad nueva");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+    public String crearRespuestaActividad(){
+        iniciarConversacion();
+        System.out.println("Estamos creando");
+        System.out.println(hc.getHistorialClinico().getIdHistorialClinico());
+        respuestaAct.setIdHistorialclinico(hc.getHistorialClinico());
+        respuestaAct.setFechaActividad(new Date());
+        this.respActFac.create(respuestaAct);        
+        System.out.println("Respuesta id creada: " + respuestaAct.getIdRespuestaActividad());
+        return "ReporteTratamiento.xhtml?faces-redirect=true";
     }
     
     public void editarRespuestaActividad(){
@@ -119,10 +122,5 @@ public class ControllerRespuestaActividad extends ControllerApp {
             System.out.println("codActividad a modificar: " + respuestaAct.getCodTipoActividad().getCodActividad().getIdActividad());
             respActFac.edit(this.respuestaAct);
         }
-    }
-    
-    public String redireccionarCrearRespAct(){
-        System.out.println("Redireccionar");
-        return "CrearReporteTratamiento.xhtml?faces-redirect=true";
     }
 }
