@@ -28,7 +28,7 @@ import javax.inject.Inject;
 
 /**
  *
- * @author jair3
+ * @author Bryan
  */
 @Named(value = "controllerUsuario")
 @ConversationScoped
@@ -51,6 +51,8 @@ public class ControllerUsuario extends ControllerApp {
     private Usuario usuario; //Entidades
     private List<Usuario> listaUsuarios;
     private String confirmarClave;
+    private String claveAnterior;
+    private String estado;
 
     @EJB
     private RolFacadeLocal rolFacade;
@@ -69,11 +71,11 @@ public class ControllerUsuario extends ControllerApp {
 
     public List<Usuario> consultarUsuarios() {
         Usuario uS = cs.getUsuario();
-        System.out.println("rol "+ uS.getCodRol());
-        if(uS.getCodRol() != null){
+        System.out.println("rol " + uS.getCodRol());
+        if (uS.getCodRol() != null) {
             if (uS.getCodRol().getNombreRol().equals("Super Administrador")) {
                 this.listaUsuarios = usuarioFacade.findAll();
-            }else if(uS.getCodRol().getNombreRol().equals("Administrador")){
+            } else if (uS.getCodRol().getNombreRol().equals("Administrador")) {
                 rol.setIdRol(4);
                 rol2.setIdRol(3);
                 try {
@@ -95,10 +97,10 @@ public class ControllerUsuario extends ControllerApp {
                 }
 
             }
-        }else{
+        } else {
             System.out.println("Campo nulo getCodRol");
         }
-        
+
         return listaUsuarios;
     }
 
@@ -151,10 +153,9 @@ public class ControllerUsuario extends ControllerApp {
         FacesContext fc = FacesContext.getCurrentInstance();
         iniciarConversacion();
         this.usuario = usuario;
-        if (Objects.equals(cs.getUsuario().getIdUsuario(), this.usuario.getIdUsuario())) {
-            System.out.println(cs.getUsuario().getPrimerNombre() + " es igual a: " + this.usuario.getPrimerNombre());
-            return "ActualizarUsuario?faces-redrect=true";
-        } else if (!usuario.getCodRol().equals(1)) {
+        if (!usuario.getCodRol().equals(1)) {
+            estado = usuario.getEstadoUsuario();
+            System.out.println(estado);
             return "ActualizarUsuario?faces-redrect=true";
         } else {
 
@@ -166,17 +167,23 @@ public class ControllerUsuario extends ControllerApp {
 
     public String editarUsuario() {
         FacesContext fc = FacesContext.getCurrentInstance();
+        Usuario uS = cs.getUsuario();
         System.out.println("editar Usuario");
         if (usuario != null) {
 
-//            if (usuario.getClaveUsuario().equals(this.confirmarClave)) {
-            this.usuarioFacade.edit(usuario);
-            finalizarConversacion();
-            return "ConsultarUsuarios?faces-redrect=true";
-//            }else{
-//                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido actualizar el usuario", "Clave y confirmar clave diferentes");
-//                fc.addMessage(null, m);
-//            }
+            if (usuario.getEstadoUsuario().equals(estado) || 1 == uS.getCodRol().getIdRol()) {
+                if (usuario.getClaveUsuario().equals(this.confirmarClave) || 1 != uS.getCodRol().getIdRol()) {
+                    this.usuarioFacade.edit(usuario);
+                    finalizarConversacion();
+                    return "ConsultarUsuarios?faces-redrect=true";
+                } else {
+                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido actualizar el usuario", "Clave y confirmar clave diferentes");
+                    fc.addMessage(null, m);
+                }
+            } else {
+                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido actualizar el usuario;", " El estado de usuario solo se puede cambiar por Administrador");
+                fc.addMessage(null, m);
+            }
 
         } else {
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido actualizar el usuario", "Intentelo de nuevo");
@@ -191,13 +198,13 @@ public class ControllerUsuario extends ControllerApp {
         System.out.println("editar Usuario");
         if (usuario != null) {
 
-//            if (usuario.getClaveUsuario().equals(this.confirmarClave)) {
-            this.usuarioFacade.edit(uS);
-            return "miPerfil?faces-redrect=true";
-//            }else{
-//                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido actualizar el usuario", "Clave y confirmar clave diferentes");
-//                fc.addMessage(null, m);
-//            }
+            if (uS.getClaveUsuario().equals(this.confirmarClave)) {
+                this.usuarioFacade.edit(uS);
+                return "miPerfil?faces-redrect=true";
+            } else {
+                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido actualizar el usuario", "Clave y confirmar clave diferentes");
+                fc.addMessage(null, m);
+            }
 
         } else {
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido actualizar el usuario", "Intentelo de nuevo");
@@ -213,6 +220,7 @@ public class ControllerUsuario extends ControllerApp {
 
     public String crearUsuario() throws ParseException {
         if (usuario != null) {
+            Usuario uS = cs.getUsuario();
 
             Calendar datosFecha = new GregorianCalendar();
             int anio = datosFecha.get(Calendar.YEAR);
@@ -223,10 +231,21 @@ public class ControllerUsuario extends ControllerApp {
             Date fechaDate = null;
             fechaDate = formato.parse(strFecha);
             usuario.setFechaRegistro(fechaDate);
-            if (usuario.getClaveUsuario().equals(this.confirmarClave)) {
-                usuarioFacade.create(usuario);
-                return "ConsultarUsuarios";
+            if(uS.getCodRol().getIdRol()==3){
+                if (usuario.getClaveUsuario().equals(this.confirmarClave)) {
+                    rol.setIdRol(4);
+                    usuario.setCodRol(rol);
+                    usuario.setEstadoUsuario("Inactivo");
+                    usuarioFacade.create(usuario);
+                    return "ConsultarUsuarios";
+                }
+            }else{
+                if (usuario.getClaveUsuario().equals(this.confirmarClave)) {
+                    usuarioFacade.create(usuario);
+                    return "ConsultarUsuarios";
+                }
             }
+            
 
         } else {
 
