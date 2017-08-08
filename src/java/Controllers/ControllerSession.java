@@ -71,18 +71,15 @@ public class ControllerSession extends ControllerApp {
         FacesContext fc = FacesContext.getCurrentInstance();
         if (email != null && !email.equals("") && clave != null && !clave.equals("") ) {
             usuario = usuarioFacade.iniciarSesion(email, clave);
-//            System.out.println(usuario.getClaveUsuario() + " " + usuario.getCorreoElectronico());
             if (usuario != null) {
-                System.out.println("El usuario ingresado es: " + usuario.getPrimerNombre());
-//                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,"Datos de acceso correctos", null);
-//                fc.addMessage(null, m);
-                if(usuario.getCodRol().getNombreRol().equals("Super Administrador") || usuario.getCodRol().getNombreRol().equals("Administrador") || usuario.getCodRol().getNombreRol().equals("Fisioterapeuta")){
-                    return "Usuarios/ConsultarUsuarios?faces-redirect=true";
-                }else if(usuario.getCodRol().getNombreRol().equals("Usuario")){
-                    System.out.println("Otro rol"+ usuario.getCodRol().getNombreRol());
-                    return "UsuarioPerfil/Usuarios/miPerfil?faces-redirect=true";
+                if(usuario.getEstadoUsuario().equals("Activo")){
+                    System.out.println("El usuario ingresado es: " + usuario.getPrimerNombre());
+                    return "Usuarios/miPerfil?faces-redirect=true";     
+                }else{
+                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Lo sentimos tu usuario esta inactivo", "Hable con el administrador para activar");
+                    fc.addMessage(null, m);
                 }
-                
+                        
             }else{
                 FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Email o clave incorrectas", "verifique los datos");
                 fc.addMessage(null, m);
@@ -114,6 +111,29 @@ public class ControllerSession extends ControllerApp {
     public boolean inicioSesion(){
         return(usuario != null);
     }
+//    public boolean NoPaciente(){
+//        if(usuario!= null){
+//            System.out.println(usuario.getCodRol().getNombreRol());
+//            return (usuario.getCodRol().getNombreRol().equals("Usuario"));
+//        }
+//        else{
+//            System.out.println(usuario.getCodRol().getNombreRol());
+//
+//            return false;
+//        }
+//    }
+//    public String redireccionSinPermiso(){
+//        return "Usuarios/miPerfil?faces-redirect=true";
+//    }
+//    
+//    public void validarPermiso(){
+//        if(!NoPaciente()){
+//            redireccionSinPermiso();
+//        }else{
+//            System.out.println("NO ingreso");
+//        }
+//        
+//    }
     
     public void validarSesion(){
         if (!inicioSesion()) {
