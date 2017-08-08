@@ -161,23 +161,44 @@
                                 <h:outputLabel  value="#{item.codRespuesta.nombreRespuesta}" for="descripcionRespuesta" />
                                 <h:inputTextarea class="form-control mitooltip" rows="4" cols="30" id="descripcionRespuesta" value="#{item.descripcionRespuesta}" title="DescripcionRespuesta" />
                             </div>
-
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
-                                <br></br>                                   
-                            </div>
-                            
                         </ui:repeat>
-                            <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
                                 <h:commandButton class="btn btn-info" actionListener="#{controllerRespuestaActividad.editarRespuestaActividad()}" value="Guardar"/>
-                            </div>              
-                            <div class="col-lg-2 col-md-2 col-sm-12 col-sm-12">
-                                <h:commandButton class="btn btn-default" action="#{controllerRespuestaActividad.redireccionarCrearRespAct()}" value="Añadir Actividad"/>
                             </div>
                         </h:form>
-                    </div>                    
-                </div>                
-            </div>
-            
+                    </div>     
+                
+                <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
+                    <br></br>
+<!--                          Espaciado                       -->
+                </div> 
+                
+                <h3>Añadir nueva Actividad</h3> 
+                <div class="conenido">
+                    <h:form prependId="false">                
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <h:outputLabel value="Nombre de Respuesta" for="nombreRespuesta" />                    
+                            <h:selectOneMenu id="nombreRespuesta" class="form-control mitooltip" value="#{controllerRespuestaActividad.respuestaAct.codRespuesta}" converter="respuestaConverter"  title="DescripcionRespuesta">
+                                <f:selectItems value="#{controllerRespuesta.listaRespuesta}" var="r" itemLabel="#{r.nombreRespuesta}"/>
+                            </h:selectOneMenu>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <h:outputLabel value="Nombre de Respuesta" for="tipoActividad" />                    
+                            <h:selectOneMenu id="tipoActividad" class="form-control mitooltip" value="#{controllerRespuestaActividad.respuestaAct.codTipoActividad}" converter="tipoActividadConverter" title="DescripcionRespuesta">
+                                <f:selectItems value="#{controllerTipoActividad.listadoTipoActividades()}" var="t" itemLabel="#{t.descripcionActividad}"/>
+                            </h:selectOneMenu>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <h:outputLabel value="DescripcionRespuesta:" for="descripcionRespuesta" />
+                            <h:inputTextarea rows="4" cols="30" id="descripcionRespuesta" class="form-control mitooltip" value="#{controllerRespuestaActividad.respuestaAct.descripcionRespuesta}" title="DescripcionRespuesta" />
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                            <h:commandButton class="btn btn-info" action="#{controllerRespuestaActividad.crearRespuestaActividad()}" value="Añadir Actividad"/>
+                        </div>
+                    </h:form>
+                </div>
+            </div>                
+            </div>            
         </div>
     </ui:define>
 </ui:composition>
