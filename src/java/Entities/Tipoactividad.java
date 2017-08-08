@@ -6,7 +6,9 @@
 package Entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,6 +19,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -32,6 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Tipoactividad.findAll", query = "SELECT t FROM Tipoactividad t")
     , @NamedQuery(name = "Tipoactividad.findByIdTipoActividad", query = "SELECT t FROM Tipoactividad t WHERE t.idTipoActividad = :idTipoActividad")
+    , @NamedQuery(name = "Tipoactividad.findBycodActividad", query = "SELECT t FROM Tipoactividad t WHERE t.codActividad = :codActividad")
     , @NamedQuery(name = "Tipoactividad.findByDescripcionActividad", query = "SELECT t FROM Tipoactividad t WHERE t.descripcionActividad = :descripcionActividad")})
 public class Tipoactividad implements Serializable {
 
@@ -49,6 +53,8 @@ public class Tipoactividad implements Serializable {
     @JoinColumn(name = "codActividad", referencedColumnName = "idActividad")
     @ManyToOne(fetch = FetchType.LAZY)
     private Actividad codActividad;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codTipoActividad", fetch = FetchType.LAZY)
+    private List<Respuestaactividad> respuestaactividadList;
 
     public Tipoactividad() {
     }
@@ -85,6 +91,15 @@ public class Tipoactividad implements Serializable {
     public void setCodActividad(Actividad codActividad) {
         this.codActividad = codActividad;
     }
+
+    public List<Respuestaactividad> getRespuestaactividadList() {
+        return respuestaactividadList;
+    }
+
+    public void setRespuestaactividadList(List<Respuestaactividad> respuestaactividadList) {
+        this.respuestaactividadList = respuestaactividadList;
+    }
+    
 
     @Override
     public int hashCode() {

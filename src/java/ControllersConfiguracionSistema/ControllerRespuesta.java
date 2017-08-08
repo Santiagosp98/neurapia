@@ -5,13 +5,16 @@
  */
 package ControllersConfiguracionSistema;
 
+import Controllers.ControllerHistorialClinico;
 import Entities.Respuesta;
 import Facade.RespuestaFacadeLocal;
+import java.util.ArrayList;
 import javax.inject.Named;
 import javax.enterprise.context.ConversationScoped;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 /**
  *
@@ -26,6 +29,9 @@ public class ControllerRespuesta extends Controllers.ControllerApp {
      */
     public ControllerRespuesta() {
     }
+    
+    @Inject ControllerHistorialClinico hc;
+    
 
     @EJB
     RespuestaFacadeLocal respuestaFacade;
@@ -100,6 +106,15 @@ public class ControllerRespuesta extends Controllers.ControllerApp {
 
     public void setRespuestaSeleccionada(Respuesta respuestaSeleccionada) {
         this.respuestaSeleccionada = respuestaSeleccionada;
-    }
+    }           
     
+    public List seleccionRespuestas(){
+        ArrayList lista = new ArrayList();
+        lista.add("Dolor escala analoga visual");
+        lista.add("Espasmos");
+        lista.add("Fuerza");
+        lista.add("Movilidad");      
+        return lista;
+    }
+
 }

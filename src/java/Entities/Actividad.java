@@ -49,8 +49,6 @@ public class Actividad implements Serializable {
     private List<Tipoactividad> tipoactividadList;
     @OneToMany(mappedBy = "codActividad", fetch = FetchType.LAZY)
     private List<Anamnesis> anamnesisList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codActividad", fetch = FetchType.LAZY)
-    private List<Respuestaactividad> respuestaactividadList;
 
     public Actividad() {
     }
@@ -93,14 +91,6 @@ public class Actividad implements Serializable {
         this.anamnesisList = anamnesisList;
     }
 
-    @XmlTransient
-    public List<Respuestaactividad> getRespuestaactividadList() {
-        return respuestaactividadList;
-    }
-
-    public void setRespuestaactividadList(List<Respuestaactividad> respuestaactividadList) {
-        this.respuestaactividadList = respuestaactividadList;
-    }
 
     @Override
     public int hashCode() {

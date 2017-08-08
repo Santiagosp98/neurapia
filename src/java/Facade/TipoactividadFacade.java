@@ -6,9 +6,11 @@
 package Facade;
 
 import Entities.Tipoactividad;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -27,6 +29,20 @@ public class TipoactividadFacade extends AbstractFacade<Tipoactividad> implement
 
     public TipoactividadFacade() {
         super(Tipoactividad.class);
+    }
+    
+    @Override
+    public List<Tipoactividad> listaporCodActividad(Tipoactividad codActividad){
+        List<Tipoactividad> lista = null;
+        try {            
+            TypedQuery<Tipoactividad> q = getEntityManager().createNamedQuery("Tipoactividad.findBycodActividad", Tipoactividad.class);
+            q.setParameter("codActividad", codActividad);
+            lista = q.getResultList();
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return lista;
     }
     
 }

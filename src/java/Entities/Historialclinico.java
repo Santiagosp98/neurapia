@@ -129,6 +129,8 @@ public class Historialclinico implements Serializable {
     @JoinColumn(name = "codLugarNacimiento", referencedColumnName = "idDepartamento")
     @ManyToOne(fetch = FetchType.LAZY)
     private Departamento codLugarNacimiento;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idHistorialclinico", fetch = FetchType.LAZY)
+    private List<Respuestaactividad> respuestaactividadList;
 
     public Historialclinico() {
     }
@@ -289,6 +291,16 @@ public class Historialclinico implements Serializable {
     public void setCodLugarNacimiento(Departamento codLugarNacimiento) {
         this.codLugarNacimiento = codLugarNacimiento;
     }
+
+    public List<Respuestaactividad> getRespuestaactividadList() {
+        return respuestaactividadList;
+    }
+
+    public void setRespuestaactividadList(List<Respuestaactividad> respuestaactividadList) {
+        this.respuestaactividadList = respuestaactividadList;
+    }
+    
+    
     
     public ArrayList getListaEstrato(){
         ArrayList lista = new ArrayList();

@@ -6,6 +6,7 @@
 package Facade;
 
 import Entities.Tipoactividad;
+import static Entities.Tipoactividad_.codActividad;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -27,7 +28,8 @@ public interface TipoactividadFacadeLocal {
     List<Tipoactividad> findAll();
 
     List<Tipoactividad> findRange(int[] range);
-
+    
+    List<Tipoactividad> listaporCodActividad(Tipoactividad codActividad);
     int count();
     
 }

@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -34,7 +35,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Respuestaactividad.findAll", query = "SELECT r FROM Respuestaactividad r")
     , @NamedQuery(name = "Respuestaactividad.findByIdRespuestaActividad", query = "SELECT r FROM Respuestaactividad r WHERE r.idRespuestaActividad = :idRespuestaActividad")
-    , @NamedQuery(name = "Respuestaactividad.findByDescripcionRespuesta", query = "SELECT r FROM Respuestaactividad r WHERE r.descripcionRespuesta = :descripcionRespuesta")
     , @NamedQuery(name = "Respuestaactividad.findByFechaActividad", query = "SELECT r FROM Respuestaactividad r WHERE r.fechaActividad = :fechaActividad")})
 public class Respuestaactividad implements Serializable {
 
@@ -44,18 +44,22 @@ public class Respuestaactividad implements Serializable {
     @Basic(optional = false)
     @Column(name = "idRespuestaActividad")
     private Integer idRespuestaActividad;
-    @Size(max = 45)
+    @Lob
+    @Size(max = 65535)
     @Column(name = "descripcionRespuesta")
     private String descripcionRespuesta;
     @Column(name = "fechaActividad")
     @Temporal(TemporalType.DATE)
     private Date fechaActividad;
-    @JoinColumn(name = "codActividad", referencedColumnName = "idActividad")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Actividad codActividad;
     @JoinColumn(name = "codRespuesta", referencedColumnName = "idRespuesta")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Respuesta codRespuesta;
+    @JoinColumn(name = "idHistorialclinico", referencedColumnName = "idHistorialClinico")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Historialclinico idHistorialclinico;
+    @JoinColumn(name = "codTipoActividad", referencedColumnName = "idTipoActividad")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Tipoactividad codTipoActividad;
 
     public Respuestaactividad() {
     }
@@ -88,20 +92,28 @@ public class Respuestaactividad implements Serializable {
         this.fechaActividad = fechaActividad;
     }
 
-    public Actividad getCodActividad() {
-        return codActividad;
-    }
-
-    public void setCodActividad(Actividad codActividad) {
-        this.codActividad = codActividad;
-    }
-
     public Respuesta getCodRespuesta() {
         return codRespuesta;
     }
 
     public void setCodRespuesta(Respuesta codRespuesta) {
         this.codRespuesta = codRespuesta;
+    }
+
+    public Historialclinico getIdHistorialclinico() {
+        return idHistorialclinico;
+    }
+
+    public void setIdHistorialclinico(Historialclinico idHistorialclinico) {
+        this.idHistorialclinico = idHistorialclinico;
+    }
+
+    public Tipoactividad getCodTipoActividad() {
+        return codTipoActividad;
+    }
+
+    public void setCodTipoActividad(Tipoactividad codTipoActividad) {
+        this.codTipoActividad = codTipoActividad;
     }
 
     @Override
