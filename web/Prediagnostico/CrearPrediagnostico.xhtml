@@ -27,11 +27,11 @@
 
                         <div id="collapsTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                             <div class="panel-body active">
-                                <a href="CrearPrediagnostico.xhtml">Crear Pre-Diagnostico</a>
+                                <a href="ConsultarPrediagnostico.xhtml">Historial de Prediagnostico</a>
                             </div>
                             <div class="panel-body" >
                                 <h:form>
-                                    <h:commandLink action="#{controllerUsuario.seleccionarCrear()}" value="Consultar Resultados de Pre-Diagnostico" />
+                                    <h:commandLink action="#{controllerUsuario.seleccionarCrear()}" value="Consultar resultados de Prediagnostico" />
                                 </h:form>
                             </div>
                         </div>
@@ -52,71 +52,89 @@
 
                         <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
                             <br></br>
-                            <label for="Preg1">1. ¿En qué parte de su cuerpo presenta la molestia?</label>                            
-                            <h:inputTextarea class="form-control" rows="4" id="Preg1" value="#{controllerRespuestaPreg.respuestapreg.resp1}" ></h:inputTextarea>
+                            <label for="pregunta1">1. ¿En qué parte de su cuerpo presenta la molestia?</label>  
+                            <h:messages for="pregunta1" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
+                            <h:inputTextarea class="form-control" rows="4" id="pregunta1" value="#{controllerRespuestaPreg.respuestapreg.resp1}" 
+                                             required="true" requiredMessage="El Campo no debe ser nulo" title="pregunta1" ></h:inputTextarea>
                         </div>
 
                         <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">    
                             <br></br>
-                            <label for="Preg2">2. ¿Describa la molestia?</label>                            
-                            <h:inputTextarea class="form-control" rows="4" id="Preg2" value="#{controllerRespuestaPreg.respuestapreg.resp2}"></h:inputTextarea>
+                            <label for="pregunta2">2. ¿Describa la molestia?</label>       
+                            <h:messages for="pregunta2" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
+                            <h:inputTextarea class="form-control" rows="4" id="pregunta2" value="#{controllerRespuestaPreg.respuestapreg.resp2}"
+                                             required="true" requiredMessage="El Campo no debe ser nulo" title="pregunta2" ></h:inputTextarea>
                         </div>
 
                         <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">     
                             <br></br>
-                            <label for="Preg3">3. ¿Aproximadamente cuando empezó la molestia?</label>                            
-                            <h:inputTextarea class="form-control" rows="4" id="Preg3" value="#{controllerRespuestaPreg.respuestapreg.resp3}" ></h:inputTextarea>
+                            <label for="pregunta3">3. ¿Aproximadamente cuando empezó la molestia?</label>        
+                            <h:messages for="pregunta3" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
+                            <h:inputTextarea class="form-control" rows="4" id="pregunta3" value="#{controllerRespuestaPreg.respuestapreg.resp3}" 
+                                             required="true" requiredMessage="El Campo no debe ser nulo" title="pregunta3" ></h:inputTextarea>
                         </div>
 
                         <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">    
                             <br></br>
-                            <label for="Preg4">4. ¿Atribuye la molestia a alguna actividad que haya realizado?</label>                            
-                            <h:inputTextarea class="form-control" rows="4" id="Preg4" value="#{controllerRespuestaPreg.respuestapreg.resp4}"></h:inputTextarea>
+                            <label for="pregunta4">4. ¿Atribuye la molestia a alguna actividad que haya realizado?</label>    
+                            <h:messages for="pregunta4" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
+                            <h:inputTextarea class="form-control" rows="4" id="pregunta4" value="#{controllerRespuestaPreg.respuestapreg.resp4}"
+                                             required="true" requiredMessage="El Campo no debe ser nulo" title="pregunta4" ></h:inputTextarea>
                         </div>
 
                         <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
                             <br></br>
-                            <label for="Preg5">5. ¿Qué actividad desarrolla diariamente?</label>                            
-                            <h:inputTextarea class="form-control" rows="4" id="Preg5" value="#{controllerRespuestaPreg.respuestapreg.resp5}"></h:inputTextarea>
+                            <label for="pregunta5">5. ¿Qué actividad desarrolla diariamente?</label>         
+                            <h:messages for="pregunta5" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
+                            <h:inputTextarea class="form-control" rows="4" id="pregunta5" value="#{controllerRespuestaPreg.respuestapreg.resp5}"
+                                             required="true" requiredMessage="El Campo no debe ser nulo" title="pregunta5" ></h:inputTextarea>
                         </div>
 
                         <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
                             <br></br>
-                            <label for="Preg6">6. ¿Toma algún medicamento para calmar la molestia?</label>                            
-                            <h:inputTextarea class="form-control" rows="4" id="Preg6" value="#{controllerRespuestaPreg.respuestapreg.resp6}"></h:inputTextarea>
+                            <label for="pregunta6">6. ¿Toma algún medicamento para calmar la molestia?</label>  
+                            <h:messages for="pregunta6" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
+                            <h:inputTextarea class="form-control" rows="4" id="pregunta6" value="#{controllerRespuestaPreg.respuestapreg.resp6}"
+                                             required="true" requiredMessage="El Campo no debe ser nulo" title="pregunta6" ></h:inputTextarea>
                         </div>
 
                         <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
                             <br></br>
-                            <label for="Preg7">7. ¿Padece o ha padecido de alguna enfermedad, cuál?</label>                            
-                            <h:inputTextarea class="form-control" rows="4" id="Preg7" value="#{controllerRespuestaPreg.respuestapreg.resp7}"></h:inputTextarea>
+                            <label for="pregunta7">7. ¿Padece o ha padecido de alguna enfermedad, cuál?</label>   
+                            <h:messages for="pregunta7" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
+                            <h:inputTextarea class="form-control" rows="4" id="pregunta7" value="#{controllerRespuestaPreg.respuestapreg.resp7}"
+                                             required="true" requiredMessage="El Campo no debe ser nulo" title="pregunta7" ></h:inputTextarea>
                         </div>
 
                         <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
                             <br></br>
-                            <label for="Preg8">8. ¿Cada cuánto realiza actividad física?</label>                            
-                            <h:inputTextarea class="form-control" rows="4" id="Preg8" value="#{controllerRespuestaPreg.respuestapreg.resp8}"></h:inputTextarea>
+                            <label for="pregunta8">8. ¿Cada cuánto realiza actividad física?</label>        
+                            <h:messages for="pregunta8" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
+                            <h:inputTextarea class="form-control" rows="4" id="pregunta8" value="#{controllerRespuestaPreg.respuestapreg.resp8}"
+                                             required="true" requiredMessage="El Campo no debe ser nulo" title="pregunta8" ></h:inputTextarea>
                         </div>
 
                         <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
                             <br></br>
-                            <label for="Preg9">9. ¿Tiene dificultad para realizar actividad física?</label>                            
-                            <h:inputTextarea class="form-control" rows="4" id="Preg9" value="#{controllerRespuestaPreg.respuestapreg.resp9}"></h:inputTextarea>
+                            <label for="pregunta9">9. ¿Tiene dificultad para realizar actividad física?</label>  
+                            <h:messages for="pregunta9" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
+                            <h:inputTextarea class="form-control" rows="4" id="pregunta9" value="#{controllerRespuestaPreg.respuestapreg.resp9}"
+                                             required="true" requiredMessage="El Campo no debe ser nulo" title="pregunta9" ></h:inputTextarea>
                         </div>
 
                         <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
                             <br></br>
-                            <label for="Preg10">10. ¿Le han realizado alguna operación medica?</label>                            
-                            <h:inputTextarea class="form-control" rows="4" id="Preg10" value="#{controllerRespuestaPreg.respuestapreg.resp10}"></h:inputTextarea>
+                            <label for="pregunta10">10. ¿Le han realizado alguna operación medica?</label>     
+                            <h:messages for="pregunta10" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
+                            <h:inputTextarea class="form-control" rows="4" id="pregunta10" value="#{controllerRespuestaPreg.respuestapreg.resp10}"
+                                             required="true" requiredMessage="El Campo no debe ser nulo" title="pregunta10" ></h:inputTextarea>
                         </div>  
 
                         <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">
                             <br></br>
-                            <h:commandButton id="btnModalCrearPre" class="btnModalCrearPre btn btn-info"  action="#{controllerRespuestaPreg.crearRespuestapreg()}" value="Enviar">
-                                <f:ajax event="click" rendered=":contenido-modal-crear-prediag" listener="#{controllerPrediagnostico.seleccionarCrear()}"> 
-                                    
-                                </f:ajax>
-                            </h:commandButton>
+                            <button  type="button" id="btnModalCrearPre" class="btnModalCrearPre btn btn-info"  value="Enviar">
+                               Enviar
+                            </button>
                         </div>  
 
                         <div id="myModalCrearPre" class="modal fade " role="dialog">
@@ -131,12 +149,12 @@
                                         <div class="modal-body">
                                             <p align="justify">Cordial saludo <strong> #{controllerSession.usuario.fullNameUsuario}</strong>,<br></br> <br></br>Gracias por completar 
                                                 nuestro cuestionario de pre-diagnóstico, este será enviado a uno de nuestros profesionales fisioterapeutas,
-                                                quien lo analizará y dará una respuesta según la información que usted completo en un tiempo máximo de 1 semana, 
-                                                usted podrá consultar el resultado en el módulo de Prediagnóstico.</p>
+                                                quien lo analizará y dará una respuesta según la información que usted registro en un tiempo máximo de 1 semana, 
+                                                usted podrá consultar el resultado de este en el módulo de Prediagnóstico.</p>
                                         </div>
                                         <div class="modal-footer">
-                                            <h:commandButton class="btn btn-primary" value="Aceptar"
-                                                             action="#{controllerPrediagnostico.crearPrediagnostico()}">
+                                            <h:commandButton class="btn btn-primary" value="Aceptar"  action="#{controllerRespuestaPreg.crearRespuestapreg()}"
+                                                             >
                                             </h:commandButton>
                                                                                     
                                         </div>
