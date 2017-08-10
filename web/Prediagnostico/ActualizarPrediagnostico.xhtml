@@ -6,7 +6,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:define name="titulo">Usuarios consultar Usuarios</ui:define>
+    <ui:define name="titulo">Prediagnostico consultar Prediagnostico</ui:define>
 
     <h:body>
         <ui:define name="titulo">Consultar Prediagnosticos</ui:define>
@@ -20,15 +20,6 @@
                     <div class="panel panel-default">
 
 
-                        <div id="collapseOne" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingOne">
-                            <div class="panel-body">
-                                <a href="#">Mi perfil</a> 
-                            </div>
-                            <div class="panel-body">
-                                <a href="#">Editar mi perfil</a> 
-                            </div>
-                        </div>
-
                         <div class="panel-heading active" role="tab" id="headingOne">
                             <h6 class="panel-title"><i class="fa fa-users" aria-hidden="true"></i>
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsTwo" aria-expanded="true" aria-controls="collapseOne">
@@ -39,16 +30,16 @@
 
                         <div id="collapsTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                             <div class="panel-body active">
-                                <a href="ConsultarPrediagnostico.xhtml">Hstorial de Pre-Diagnostico</a>
+                                <a href="ConsultarPrediagnostico.xhtml">Hstorial de Prediagnostico</a>
                             </div>
                             <div class="panel-body" >
                                 <h:form>
-                                    <a href="CrearPrediagnostico.xhtml">Crear Pre-Diagnostico</a>
+                                    <a href="CrearPrediagnostico.xhtml">Crear Prediagnostico</a>
                                 </h:form>                                
                             </div>
                             <div class="panel-body" >
                                 <h:form>
-                                    <h:commandLink action="#{controllerUsuario.seleccionarCrear()}" value="Consultar Resultados de Pre-Diagnostico" />
+                                    <h:commandLink action="#{controllerUsuario.seleccionarCrear()}" value="Consultar resultados de Prediagnostico" />
                                 </h:form>
                             </div>
                         </div>
@@ -60,10 +51,10 @@
             <ui:define name="content">
                 <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
                     <!-- Titulo -->
-                    <h5 id="ubicacionPag">Actualización Resultado de Prediagnóstico</h5>
+                    <h5 id="ubicacionPag">Actualización resultado de prediagnóstico</h5>
 
                     <div class="contenido">
-                        
+
                         <div class="datosDePrediagnostico col-lg-9 col-md-9 col-sm-9 col-xs-12">
                             <h2>Prediagnostico N°: #{controllerPrediagnostico.prediagnostico.idPrediagnostico}</h2>
                         </div>
@@ -164,11 +155,14 @@
                             <label for="Preg10">#{controllerPrediagnostico.prediagnostico.codCuestionario.preg10}</label>                            
                             <h:inputTextarea class="form-control" rows="4" id="Preg10" value="#{controllerPrediagnostico.prediagnostico.codRespuestaPreg.resp10}" disabled="true"></h:inputTextarea>
                         </div>
-                        
-                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
+
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px"> 
+
                             <br></br>
-                            <label for="Resultado">Resultado</label>                            
-                            <h:inputTextarea class="form-control" rows="4" id="Resultado" value="#{controllerPrediagnostico.prediagnostico.resultadoPrediagnostico}" ></h:inputTextarea>
+                            <h:messages for="resultado" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
+                            <label for="resultado">Resultado</label>     
+                            <h:inputTextarea class="form-control" rows="4" id="resultado" value="#{controllerPrediagnostico.prediagnostico.resultadoPrediagnostico}" 
+                                             required="true" requiredMessage="El Campo Resultado no debe ser nulo" title="resultado" ></h:inputTextarea>
                         </div>
 
                         <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">  
