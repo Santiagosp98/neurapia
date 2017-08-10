@@ -5,14 +5,19 @@
  */
 package Controllers;
 
+import Entities.Prediagnostico;
 import Entities.Respuestapreg;
+import Facade.CuestionarioFacadeLocal;
+import Facade.PrediagnosticoFacadeLocal;
 import Facade.RespuestapregFacadeLocal;
 import javax.inject.Named;
 import javax.enterprise.context.ConversationScoped;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 /**
  *
@@ -22,17 +27,26 @@ import javax.ejb.EJB;
 @ConversationScoped
 public class ControllerRespuestaPreg extends ControllerApp {
 
+    @Inject
+    private ControllerSession cs;
+    
+    @EJB 
+    private PrediagnosticoFacadeLocal pfl;
+
+    @EJB
+    private CuestionarioFacadeLocal cfl;
+    
+    @EJB
+    private RespuestapregFacadeLocal respuestapregFacade;
+    private Respuestapreg respuestapreg;
+    private List<Respuestapreg> listaRespuestapreg;
+    private Respuestapreg respuestapregSeleccionado;
+    
     /**
      * Creates a new instance of ControllerRespuestaPreg
      */
     public ControllerRespuestaPreg() {
     }
-
-    @EJB
-    RespuestapregFacadeLocal respuestapregFacade;
-    Respuestapreg respuestapreg;
-    List<Respuestapreg> listaRespuestapreg;
-    private Respuestapreg respuestapregSeleccionado;
 
     @PostConstruct
     public void init() {
@@ -46,9 +60,22 @@ public class ControllerRespuestaPreg extends ControllerApp {
     }
 
     public String crearRespuestapreg() {
+        
         System.out.println("iniciando crear respuestas");
-        this.respuestapregFacade.create(respuestapreg);        
-        return "";
+        this.respuestapregFacade.create(respuestapreg); 
+        Prediagnostico pre = new Prediagnostico();
+        pre.setCodUsuario(cs.getUsuario());
+        pre.setCodRespuestaPreg(respuestapreg);
+        pre.setFecha(new Date());
+        pre.setResultadoPrediagnostico("Pendiente");
+        pre.setCodCuestionario(cfl.find(1));
+        pfl.create(pre);
+        return "ConsultarPrediagnostico?faces-redirect=true";
+    }
+    
+    public String aceptar(){
+        
+        return "ConsultarPrediagnostico?faces-redirect=true";
     }
 
     public RespuestapregFacadeLocal getRespuestapregFacade() {
