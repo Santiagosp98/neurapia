@@ -767,3 +767,7 @@ ul.mensajeErrorForm {
 div.fixed-table-body {
     padding: 15px;
 }
+
+td[rowspan] {
+    vertical-align: middle !important;
+}
