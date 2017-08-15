@@ -771,3 +771,8 @@ div.fixed-table-body {
 td[rowspan] {
     vertical-align: middle !important;
 }
+
+.custom-modal > .modal-content > .modal-footer {
+    border: none;
+    text-align: left
+}
