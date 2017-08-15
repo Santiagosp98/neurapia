@@ -11,7 +11,8 @@
     <h:head>
         <title>Neurapia</title>
         <meta name="keywords" content="pagina,html,cs3,maquetacion"/>
-        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
         <link href="#{request.contextPath}/resources/css/bootstrap.css" rel="stylesheet"/>
         <link href="#{request.contextPath}/resources/css/font-awesome.css" rel="stylesheet"/>
         <link href="#{request.contextPath}/resources/css/font-awesome.min.css" rel="stylesheet"/>
@@ -36,11 +37,11 @@
                 <li><span class="glyphicon glyphicon-phone-alt"></span> (57-1) 214 85 22</li>
                 <li>Physical Care</li>
                 <ui:fragment rendered="#{lenguaje.lenguaje eq 'es'}">
-                <li>
-                    <h:form>
-                        <h:commandLink action="#{lenguaje.cambiarLenguaje('en')}" value="English"></h:commandLink>
-                    </h:form>
-                </li>
+                    <li>
+                        <h:form>
+                            <h:commandLink action="#{lenguaje.cambiarLenguaje('en')}" value="English"></h:commandLink>
+                        </h:form>
+                    </li>
                 </ui:fragment>
                 <ui:fragment rendered="#{lenguaje.lenguaje eq 'en'}">
                     <li>
@@ -116,14 +117,11 @@
                             <div>
                                 <ul id="registropreg">
                                     <li class="preguntasRegistro">
-                                        <a href="" data-toggle="modal" data-target=".bs-example-modal">
-                                            <h:outputText value="#{msg['forgot-password']}"></h:outputText>
-                                        </a>
+                                        <h:commandLink value="#{msg['forgot-password']}"
+                                                       onclick="$('#modal-recuperar').modal('show')"/>
                                     </li>
                                     <li class="checkButtons preguntasRegistro">
-                                        <a href="" data-toggle="modal" data-target=".bs-example-modal-lg">
-                                            <h:outputText value="#{msg['signup']}"></h:outputText>
-                                        </a>
+                                        <h:commandLink value="#{msg['signup']}" onclick="$('#sign-up').modal('show')"/>
                                     </li>
                                 </ul>
                             </div>
@@ -134,26 +132,27 @@
                         </h:form>
                         <!-- Formulario de inicio de sesión -->
 
-                        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
-                             aria-labelledby="myLargeModalLabel">
+                        <div class="modal fade" tabindex="-1" role="dialog"
+                             aria-labelledby="myLargeModalLabel" id="sign-up">
                             <div class="modal-dialog modal-lg" role="document">
-                                <div class="modal-content">
-                                    <div style="background-color: #fff; height: 550px; border-radius: 20px;">
+                                <h:form prependId="false" id="registro" styleClass="custom-modal">
+                                    <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
-                                            <h1 class="modal-title" id="myModalLabel">Registrate</h1>
+                                            <h1 class="modal-title" id="myModalLabel">#{msg['sign-up-text']}</h1>
                                         </div>
-                                        <h:form prependId="false" id="formRegistrarse" a:name="formRegistrarse"
-                                                style="background-color: white">
+
+                                        <div class="modal-body">
+
                                             <div class="mensajeError col-lg-12 col-md-12 col-sm-12">
                                                 <h:messages class="mensajeErrorForm" showDetail="true"
                                                             showSummary="true" infoClass="alert alert-sucess"
                                                             errorClass="alert alert-danger"/>
                                             </div>
                                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                                <h:outputLabel value="Tipo Documento:" for="tipodocumento"/>
+                                                <h:outputLabel value="#{msg['document-type']}:" for="tipodocumento"/>
                                                 <h:selectOneMenu id="tipodocumento" class="form-control mitooltip"
                                                                  value="#{controllerUsuario.usuario.tipoDocumento}"
                                                                  tabindex="1">
@@ -163,9 +162,9 @@
                                             </div>
 
                                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                                <h:outputLabel value="Número Documento:" for="numeroDocumento"/>
-                                                <h:inputText a:placeholder="Num Documento"
-                                                             class="form-control mitooltip" tabindex="2"
+                                                <h:outputLabel value="#{msg['document-number']}:"
+                                                               for="numeroDocumento"/>
+                                                <h:inputText class="form-control mitooltip" tabindex="2"
                                                              id="numeroDocumento"
                                                              value="#{controllerUsuario.usuario.numeroDocumento}"
                                                              title="PrimerNombre" required="true"
@@ -174,9 +173,8 @@
                                             </div>
 
                                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                                <h:outputLabel value="Primer Nombre:" for="primerNombre"/>
-                                                <h:inputText a:placeholder="Primer Nombre"
-                                                             class="form-control mitooltip" tabindex="3"
+                                                <h:outputLabel value="#{msg['first-name']}:" for="primerNombre"/>
+                                                <h:inputText class="form-control mitooltip" tabindex="3"
                                                              id="primerNombre"
                                                              value="#{controllerUsuario.usuario.primerNombre}"
                                                              title="PrimerNombre" required="true"
@@ -184,18 +182,16 @@
                                                 </h:inputText>
                                             </div>
                                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                                <h:outputLabel value="Segundo Nombre:" for="segundoNombre"/>
-                                                <h:inputText a:placeholder="Segundo Nombre"
-                                                             class="form-control mitooltip" tabindex="4"
+                                                <h:outputLabel value="#{msg['middle-name']}:" for="segundoNombre"/>
+                                                <h:inputText class="form-control mitooltip" tabindex="4"
                                                              a:pattern="[A-Za-z]+" id="segundoNombre"
                                                              value="#{controllerUsuario.usuario.segundoNombre}"
                                                              title="SegundoNombre" required="false">
                                                 </h:inputText>
                                             </div>
                                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                                <h:outputLabel value="Primer Apellido:" for="primerApellido"/>
-                                                <h:inputText a:placeholder="Primer Apellido"
-                                                             class="form-control mitooltip" tabindex="5"
+                                                <h:outputLabel value="#{msg['surname']}:" for="primerApellido"/>
+                                                <h:inputText class="form-control mitooltip" tabindex="5"
                                                              a:pattern="[A-Za-z]+" id="primerApellido"
                                                              value="#{controllerUsuario.usuario.primerApellido}"
                                                              title="PrimerApellido" required="true"
@@ -204,9 +200,8 @@
                                             </div>
 
                                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                                <h:outputLabel value="Segundo Apellido:" for="segundoApellido"/>
-                                                <h:inputText a:placeholder="Segundo Apellido"
-                                                             class="form-control mitooltip" tabindex="6"
+                                                <h:outputLabel value="#{msg['second-surname']}:" for="segundoApellido"/>
+                                                <h:inputText class="form-control mitooltip" tabindex="6"
                                                              a:pattern="[A-Za-z]+" id="segundoApellido"
                                                              value="#{controllerUsuario.usuario.segundoApellido}"
                                                              title="SegundoApellido" required="true"
@@ -215,30 +210,8 @@
                                             </div>
 
                                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                                <h:outputLabel value="Estado Usuario:" for="estadoUsuario"/>
-                                                <h:selectOneMenu id="estadoUsuario" class="form-control mitooltip"
-                                                                 tabindex="7"
-                                                                 value="#{controllerUsuario.usuario.estadoUsuario}">
-                                                    <f:selectItems class="form-control mitooltip"
-                                                                   value="#{controllerUsuario.usuario.seleccionEstados}"/>
-                                                </h:selectOneMenu>
-                                            </div>
-
-                                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                                <h:outputLabel value="Rol:" for="rol"/>
-                                                <h:selectOneMenu id="rol" class="form-control mitooltip" tabindex="7"
-                                                                 value="#{controllerUsuario.usuario.codRol}"
-                                                                 converter="rolConverter">
-                                                    <f:selectItems class="form-control mitooltip"
-                                                                   value="#{controllerRol.listaRol}" var="u"
-                                                                   itemLabel="#{u.nombreRol}"/>
-                                                </h:selectOneMenu>
-                                            </div>
-
-                                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                                <h:outputLabel value="Correo Electrónico:" for="correo"/>
+                                                <h:outputLabel value="#{msg['email']}:" for="correo"/>
                                                 <h:inputText id="correo" tabindex="8" class="form-control"
-                                                             a:placeholder="ejem@ejem.com"
                                                              a:pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
                                                              value="#{controllerUsuario.usuario.correoElectronico}"
                                                              required="true" requiredMessage="El correo es requerido.">
@@ -246,7 +219,7 @@
                                             </div>
 
                                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                                <h:outputLabel value="Clave Usuario:" for="claveUsuario"/>
+                                                <h:outputLabel value="#{msg['user-password']}:" for="claveUsuario"/>
                                                 <h:inputSecret id="claveUsuario" class="form-control mitooltip"
                                                                tabindex="9" maxlength="25" a:data-toggle="tooltip"
                                                                a:data-placement="top"
@@ -257,7 +230,7 @@
                                             </div>
 
                                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                                <h:outputLabel value="Confirmar Clave" for="confirmarclave"/>
+                                                <h:outputLabel value="#{msg['confirm-password']}" for="confirmarclave"/>
                                                 <h:inputSecret id="confirmarclave" class="form-control mitooltip"
                                                                tabindex="10" maxlength="25" a:data-toggle="tooltip"
                                                                a:data-placement="top" title="confirmarClave"
@@ -266,50 +239,53 @@
                                                 </h:inputSecret>
                                             </div>
 
+                                        </div>
+                                        <div class="modal-footer">
                                             <div class="col-lg-12 col-md-12 col-sm-12">
-                                                <br></br>
                                                 <h:commandButton class="btn btn-info"
-                                                                 action="#{controllerUsuario.crearUsuarioindex()}"
-                                                                 value="Guardar"/>
+                                                                 action="#{controllerUsuario.registrarUsuario()}"
+                                                                 value="#{msg['save']}">
+                                                    <f:ajax execute="@form" render="@form"/>
+                                                </h:commandButton>
                                             </div>
-                                        </h:form>
+                                        </div>
                                     </div>
-                                </div>
+                                </h:form>
                             </div>
                         </div>
 
-                        <div class="modal fade bs-example-modal" tabindex="-1" role="dialog"
-                             aria-labelledby="myLargeModalLabel">
+
+                        <div class="modal fade" tabindex="-1" role="dialog"
+                             aria-labelledby="myLargeModalLabel" id="modal-recuperar">
                             <div class="modal-dialog modal-sm" role="document">
-                                <div class="modal-content" style="margin-top: 200px; width: 300px;">
-                                    <div style="background-color: #fff; height: 400px; border-radius: 20px;">
+                                <h:form prependId="false" id="recuperar-contrasena" styleClass="custom-modal">
+                                    <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span></button>
-                                            <h1 class="modal-title" id="myModalLabel">¿OLVIDASTE LA CONTRASEÑA?</h1>
+                                            <h1 class="modal-title" id="myModalLabel">#{msg['forgot-password']}</h1>
                                         </div>
-                                        <br></br><br></br>
-                                        <form action="" class="form">
-                                            <div class="form-group col-lg-12 " style="margin: 5px;">
-                                                <label for="nombre">Recupera tu cuenta, ingresa tu correo eectronico</label>
-                                                <input type="email" class="form-control" id="emailRe"
-                                                       placeholder="ejem@ejem.com"
-                                                       required=""
-                                                       pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}">
-                                                </input>
+                                        <div class="modal-body">
+                                            <div class="form-group col-lg-12">
+                                                <label for="emailRe">#{msg['password-recovery-desc']}</label>
+                                                <h:inputText type="email" class="form-control" id="emailRe"
+                                                       a:placeholder="ejem@ejem.com"
+                                                       required="true"
+                                                       a:pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}">
+                                                </h:inputText>
                                             </div>
-                                            <div class="form-group col-lg-12 " style="margin: 10px;">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div class="form-group col-lg-12 ">
                                                 <h6>
-                                                    <button type="submit" id="Olvidaste" class="btn btn-info"
-                                                            onclick="olvidasteContraseña()">
-                                                        <i class="fa fa-floppy-o" aria-hidden="true"></i>Enviar
-                                                    </button>
+                                                    <h:commandButton  id="Olvidaste" class="btn btn-info"
+                                                            onclick="olvidasteContraseña()" value="#{msg['send']}">
+                                                    </h:commandButton>
                                                 </h6>
                                             </div>
-                                        </form>
-
+                                        </div>
                                     </div>
-                                </div>
+                                </h:form>
                             </div>
                         </div>
 
