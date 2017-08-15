@@ -6,12 +6,14 @@
 package Controllers;
 
 import java.io.IOException;
+import javax.faces.context.ExternalContext;
 import javax.inject.Named;
 import java.io.Serializable;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -81,6 +83,15 @@ public class ControllerApp implements Serializable {
            
         }
         return name; 
+    }
+
+    public void recargar() {
+        try {
+            ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+            externalContext.redirect(((HttpServletRequest) externalContext.getRequest()).getRequestURI());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
 }
