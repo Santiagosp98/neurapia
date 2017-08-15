@@ -18,7 +18,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Objects;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.ConversationScoped;
@@ -28,7 +27,7 @@ import javax.inject.Inject;
 
 /**
  *
- * @author Bryan
+ * @author Santiago
  */
 @Named(value = "controllerUsuario")
 @ConversationScoped
@@ -231,7 +230,7 @@ public class ControllerUsuario extends ControllerApp {
             Date fechaDate = null;
             fechaDate = formato.parse(strFecha);
             usuario.setFechaRegistro(fechaDate);
-            if(uS.getCodRol().getIdRol()==3){
+            if (uS.getCodRol().getIdRol() == 3) {
                 if (usuario.getClaveUsuario().equals(this.confirmarClave)) {
                     rol.setIdRol(4);
                     usuario.setCodRol(rol);
@@ -239,13 +238,13 @@ public class ControllerUsuario extends ControllerApp {
                     usuarioFacade.create(usuario);
                     return "ConsultarUsuarios";
                 }
-            }else{
+            } else {
                 if (usuario.getClaveUsuario().equals(this.confirmarClave)) {
                     usuarioFacade.create(usuario);
                     return "ConsultarUsuarios";
                 }
             }
-            
+
 
         } else {
 
@@ -253,28 +252,25 @@ public class ControllerUsuario extends ControllerApp {
         return "";
     }
 
-    public String crearUsuarioindex() throws ParseException {
+    public void registrarUsuario() throws ParseException {
         if (usuario != null) {
-            System.out.println("indexxxxx");
-            Calendar datosFecha = new GregorianCalendar();
-            int anio = datosFecha.get(Calendar.YEAR);
-            int mes = datosFecha.get(Calendar.MONTH);
-            int dia = datosFecha.get(Calendar.DAY_OF_MONTH);
+            Calendar calendar = new GregorianCalendar();
+            int anio = calendar.get(Calendar.YEAR);
+            int mes = calendar.get(Calendar.MONTH);
+            int dia = calendar.get(Calendar.DAY_OF_MONTH);
             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-            String strFecha = anio + "-" + mes + "-" + dia;
-            Date fechaDate = null;
-            fechaDate = formato.parse(strFecha);
+            String fecha = anio + "-" + mes + "-" + dia;
+            Date fechaDate;
+            fechaDate = formato.parse(fecha);
             usuario.setFechaRegistro(fechaDate);
-            if (usuario.getClaveUsuario().equals(this.confirmarClave)) {
-                usuarioFacade.create(usuario);
-                return "index.html";
-            }
-
-        } else {
-            System.out.println("indexxxxx");
-
+            usuario.setEstadoUsuario("Activo");
+            Rol rol = new Rol();
+            rol.setIdRol(4);
+            usuario.setCodRol(rol);
+            usuarioFacade.create(usuario);
         }
-        return "";
+        usuario = null;
+        recargar();
     }
 
     /**
