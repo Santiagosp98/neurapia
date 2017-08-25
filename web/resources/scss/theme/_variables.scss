@@ -1,0 +1,78 @@
+//
+// Variables
+// --------------------------------------------------
+
+
+//== Scaffolding
+//
+//## Settings for some of the most global styles.
+
+
+//** Background color for `<body>`.
+$body-bg:               #f1f1f1 !default;
+
+
+//== Typography
+//
+//## Font, line-height, and color for body text, headings, and more.
+
+$font-family-sans-serif:  "Ubuntu", sans-serif !default;
+
+
+//== Buttons
+//
+//## For each of Bootstrap's buttons, define text, background and border color.
+
+$btn-primary-color:              #fff !default;
+$btn-primary-bg:                 #3DCCC2 !default;
+$btn-primary-border:             darken($btn-primary-bg, 5%) !default;
+
+
+//== Forms
+//
+//##
+
+//** `.form-group` margin
+$form-group-margin-bottom:       10px !default;
+
+//== Navbar
+//
+//##
+
+// Basics of a navbar
+$navbar-height:                    78px !default;
+$navbar-margin-bottom:             30px !default;
+
+$navbar-default-bg:                #fff !default;
+$navbar-default-border:            darken($navbar-default-bg, 9.41%) !default;
+
+// Navbar links
+$navbar-default-link-color:                #000 !default;
+$navbar-default-link-hover-color:          #3DCCC2 !default;
+$navbar-default-link-hover-bg:             #fff !default;
+$navbar-default-link-active-color:         #3DCCC2 !default;
+$navbar-default-link-active-bg:            #fff !default;
+
+//== Pagination
+//
+//##
+
+$pagination-color:                     #093242 !default;
+
+$pagination-active-color:              #fff !default;
+$pagination-active-bg:                 #093242 !default;
+$pagination-active-border:             #093242 !default;
+
+
+//== Panels
+//
+//##
+
+$panel-default-heading-bg:    #fff !default;
+
+//== Thumbnails
+//
+//##
+
+//** Thumbnail background color
+$thumbnail-bg:                #fff !default;

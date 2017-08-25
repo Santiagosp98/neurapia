@@ -1,0 +1,82 @@
+//Utilities
+
+/*Utilities*/
+
+/**Page breadcrumb**/
+.page-title {
+  text-align: center;
+  color: #000;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e8e8e8;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/**Shadow**/
+.shadow {
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.05);
+}
+
+/**Medical record basic data**/
+.basic-data {
+  padding: 0;
+}
+
+/**Paragraph color**/
+p {
+  color: #666;
+}
+
+/**Separator**/
+#ubicacionPag {
+  text-decoration: none;
+  list-style: none;
+  border-bottom: 1px solid #CBCACA;
+  float: right;
+  width: 100%;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+}
+
+/**Arrow box**/
+
+.arrow_box {
+  position: relative;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 30px;
+  margin-top: 15px;
+  transition: 0.5s all;
+}
+
+.arrow_box:after, .arrow_box:before {
+  top: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.arrow_box:after {
+  border: 10px rgba(61, 204, 194, 0);
+  border-top-color: #fff;
+  margin-left: -10px;
+}
+
+.arrow_box:before {
+  border: 11px rgba(0, 0, 0, 0);
+  border-top-color: #ddd;
+  margin-left: -11px;
+}
+
+/**Description**/
+.description {
+  text-align: center;
+  margin-top: 30px !important;
+}
+
+/*Utilities*/

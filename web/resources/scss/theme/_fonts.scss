@@ -1,0 +1,23 @@
+//
+// Fonts
+// --------------------------------------------------
+
+
+// @font-face
+// -------------------------
+/*! Fonts */
+@font-face {
+  @include font-face();
+}
+
+@font-face {
+  @include font-face($font-weight: 400, $url: "../fonts/Ubuntu-R.ttf");
+}
+
+@font-face {
+  @include font-face($font-weight: 500, $url: "../fonts/Ubuntu-M.ttf");
+}
+
+@font-face {
+  @include font-face($font-weight: 700, $url: "../fonts/Ubuntu-B.ttf");
+}

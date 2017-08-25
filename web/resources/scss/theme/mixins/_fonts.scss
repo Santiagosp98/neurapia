@@ -1,0 +1,14 @@
+//
+// Fonts
+// --------------------------------------------------
+
+
+// @font-face
+// -------------------------
+
+@mixin font-face($font-family: "Ubuntu", $font-style: normal, $font-weight: 300, $url: "../fonts/Ubuntu-L.ttf") {
+    font-family: $font-family;
+    font-style: $font-style;
+    font-weight: $font-weight;
+    src: url($url);
+}

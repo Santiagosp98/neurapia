@@ -1,0 +1,36 @@
+//header//
+
+/*Header*/
+
+.header {
+  height: 40px;
+  background-color: #151510;
+  border-bottom: 1px solid #3DCCC2;
+
+  ul {
+    margin-top: -10px;
+
+    li {
+      float: right;
+      list-style: none;
+      color: #bbb;
+      padding: 10px 30px;
+
+      span {
+        color: #3DCCC2;
+      }
+
+      form a {
+        color: grey;
+        font-weight: 400;
+      }
+    }
+
+  }
+
+  @media (max-width: 700px) {
+    display: none;
+  }
+}
+
+/*Header*/

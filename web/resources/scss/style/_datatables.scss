@@ -1,0 +1,22 @@
+//Datatables//
+
+/*jQuery DataTables*/
+
+@media (max-width: 576px) {
+  div.dataTables_info {
+    display: none;
+  }
+}
+
+/*
+div.dataTables_wrapper div.dataTables_filter {
+  display: inline-block;
+  float: right;
+}
+*/
+
+.dt-buttons {
+  margin-bottom: -45px;
+}
+
+/*jQuery DataTables*/

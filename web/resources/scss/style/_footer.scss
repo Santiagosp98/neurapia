@@ -1,0 +1,22 @@
+//Footer//
+
+/*Footer*/
+.footer {
+  margin: 0;
+  background-color: #151510 !important;
+  min-height: 45px;
+  width: 100%;
+  color: #888;
+
+  div span {
+    padding: 20px 20px 20px 20px;
+    float: right;
+  }
+
+  @media (min-height: 863px) {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+  }
+}
