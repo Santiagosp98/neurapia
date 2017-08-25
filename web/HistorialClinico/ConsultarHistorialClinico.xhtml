@@ -16,7 +16,7 @@
         <ui:composition template="/template/common/commonLayout.xhtml">
 
             <ui:define name="aside">
-                <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel-group shadow" id="accordion" role="tablist" aria-multiselectable="true">
                     <div class="panel panel-default">
                         <div class="panel-heading active" role="tab" id="headingTwo">
                             <h6 class="panel-title">
@@ -66,18 +66,16 @@
 
             <!-- Contenido de la pagina -->
             <ui:define name="content">
-                <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
+                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 shadow" id="right-container">
                     <!-- Titulo -->
-                    <h5 id="ubicacionPag">
+                    <h4 class="page-title">
                         <h:outputText value="#{msg['clinical-records-title']}"></h:outputText>
-                    </h5>
+                    </h4>
                     <div class="contenido">
                         <div class="contenido">
-                            <br/>
-                            <p style="text-align: center; margin-top: 50px">
+                            <p class="description">
                                 <h:outputText value="#{msg['clinical-records-description']}"></h:outputText>
                             </p>
-                            <br/>
                         </div>
                     </div>
 

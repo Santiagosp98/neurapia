@@ -14,7 +14,7 @@
     <h:body>
         <ui:composition template="/template/common/commonLayout.xhtml">
             <ui:define name="aside">
-                <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel-group shadow" id="accordion" role="tablist" aria-multiselectable="true">
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="headingTwo">
                             <h6 class="panel-title">
@@ -68,22 +68,20 @@
 
             <!-- Contenido de la pagina -->
             <ui:define name="content">
-                <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
+                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 shadow" id="right-container">
                     <!-- Titulo -->
-                    <h5 id="ubicacionPag">
+                    <h4 class="page-title">
                         <h:outputText value="#{msg['new-medical-appointment']}"/>
-                    </h5>
-                    <br/>
-                    <p style="text-align: center; margin-top: 50px">
+                    </h4>
+                    <p class="description">
                         <h:outputText value="#{msg['new-appointment-description']}"></h:outputText>
                     </p>
-                    <br/>
 
 
                     <h:form prependId="false" id="formRegistrarse" a:name="formRegistrarse">
 
-                        <div class="mensajeError col-lg-12 col-md-12 col-sm-12">
-                            <h:messages class="mensajeErrorForm" showSummary="true" infoClass="alert alert-sucess"
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <h:messages showSummary="true" infoClass="alert alert-sucess"
                                         errorClass="alert alert-danger" for="fecha"/>
                         </div>
 
@@ -136,7 +134,7 @@
                         </div>
 
                         <div class="col-lg-6 col-md-6 col-sm-6">
-                            <h:commandButton class="btn btn-info" action="#{controllerCitaMedica.crearCitaMedica()}"
+                            <h:commandButton class="btn btn-primary" action="#{controllerCitaMedica.crearCitaMedica()}"
                                              value="#{msg['save']}"/>
                         </div>
                     </h:form>

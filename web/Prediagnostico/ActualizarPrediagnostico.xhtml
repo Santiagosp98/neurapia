@@ -15,7 +15,7 @@
 
             <ui:define name="aside">
 
-                <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel-group shadow" id="accordion" role="tablist" aria-multiselectable="true">
 
                     <div class="panel panel-default">
 
@@ -49,9 +49,11 @@
             </ui:define>
 
             <ui:define name="content">
-                <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
+                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 shadow" id="right-container">
                     <!-- Titulo -->
-                    <h5 id="ubicacionPag">Actualización resultado de prediagnóstico</h5>
+                    <h4 class="page-title">
+                        Actualización resultado de prediagnóstico
+                    </h4>
 
                     <div class="contenido">
 
@@ -167,9 +169,9 @@
 
                         <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">  
                             <br></br>
-                            <h:commandButton class="btn btn-info" action="#{controllerPrediagnostico.guardarCambios()}" value="Guardar"/>  
+                            <h:commandButton class="btn btn-primary" action="#{controllerPrediagnostico.guardarCambios()}" value="Guardar"/>
                             &nbsp;
-                            <h:commandButton class="btn btn-info" action="#{controllerPrediagnostico.cancelarActualizar()}" value="Cancelar"/>  
+                            <h:commandButton class="btn btn-default" action="#{controllerPrediagnostico.cancelarActualizar()}" value="Cancelar"/>
                         </div> 
 
                     </h:form>

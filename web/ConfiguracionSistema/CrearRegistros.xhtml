@@ -14,7 +14,7 @@
         <ui:composition template="/template/common/commonLayout.xhtml">
 
             <ui:define name="aside">
-                <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel-group shadow" id="accordion" role="tablist" aria-multiselectable="true">
                     <div class="panel panel-default">
                         <div class="panel-heading active" role="tab" id="headingOne">
                             <h6 class="panel-title"><i class="fa fa-cogs" aria-hidden="true"></i>
@@ -47,11 +47,11 @@
             </ui:define>
 
             <ui:define name="content">
-                <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
+                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 shadow" id="right-container">
                     <!-- Titulo -->
-                    <h5 id="ubicacionPag">
+                    <h4 class="page-title">
                         <h:outputText value="#{msg['add-new-record']}"/>
-                    </h5>
+                    </h4>
                     <h:form prependId="false">
                         <h:messages for="nombreActividad" style="color: red; list-style:none; padding: 18px"/>
                         <div class="form-group col-lg-12 col-md-12 col-sm-12">
@@ -62,7 +62,7 @@
                                          title="NombreActividad"/>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
-                            <h:commandButton id="añadirAct" class="btn btn-info"
+                            <h:commandButton id="añadirAct" class="btn btn-primary"
                                              action="#{controllerActividad.crearActividad()}" value="#{msg['add']}">
                             </h:commandButton>
                         </div>
@@ -82,7 +82,7 @@
                                          title="NombreObjetivoTratamiento"/>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
-                            <h:commandButton id="añadirObjT" class="btn btn-info"
+                            <h:commandButton id="añadirObjT" class="btn btn-primary"
                                              action="#{controllerObjetivoTratamiento.crearobjetivoTratamiento()}"
                                              value="#{msg['add']}">
                             </h:commandButton>
@@ -102,7 +102,7 @@
                                          title="nombreDepartamento"/>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
-                            <h:commandButton id="añadirDep" class="btn btn-info"
+                            <h:commandButton id="añadirDep" class="btn btn-primary"
                                              action="#{controllerDepartamento.crearDepartamento()}"
                                              value="#{msg['add']}">
                             </h:commandButton>
@@ -121,7 +121,7 @@
                                          requiredMessage="El Campo NUEVA EPS no debe ser nulo" title="nombreEps"/>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
-                            <h:commandButton id="añadirEps" class="btn btn-info" action="#{controllerEps.crearEps()}"
+                            <h:commandButton id="añadirEps" class="btn btn-primary" action="#{controllerEps.crearEps()}"
                                              value="#{msg['add']}">
                             </h:commandButton>
                         </div>
@@ -140,7 +140,7 @@
                                          title="nombreEducacion"/>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
-                            <h:commandButton id="añadirEducacion" class="btn btn-info"
+                            <h:commandButton id="añadirEducacion" class="btn btn-primary"
                                              action="#{controllerEducacion.crearEducacion()}" value="#{msg['add']}">
                             </h:commandButton>
                         </div>
@@ -158,7 +158,7 @@
                                          title="nombreProceso"/>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
-                            <h:commandButton id="añadirProceso" class="btn btn-info"
+                            <h:commandButton id="añadirProceso" class="btn btn-primary"
                                              action="#{controllerProceso.crearProceso()}" value="#{msg['add']}">
                             </h:commandButton>
                         </div>
@@ -177,7 +177,7 @@
                                          title="nombreRespuesta"/>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
-                            <h:commandButton id="añadirRespuesta" class="btn btn-info"
+                            <h:commandButton id="añadirRespuesta" class="btn btn-primary"
                                              action="#{controllerRespuesta.crearRespuesta()}" value="#{msg['add']}">
                             </h:commandButton>
                         </div>

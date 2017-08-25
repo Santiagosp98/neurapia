@@ -13,7 +13,7 @@
         <ui:composition template="/template/common/commonLayout.xhtml">
 
             <ui:define name="aside">
-                <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel-group shadow" id="accordion" role="tablist" aria-multiselectable="true">
 
                     <div class="panel panel-default">
 
@@ -44,9 +44,11 @@
 
             <!-- Contenido de la pagina -->
             <ui:define name="content">
-                <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
+                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 shadow" id="right-container">
                     <!-- Titulo -->
-                    <h5 id="ubicacionPag">Añadir Pre-Diagnostico</h5>
+                    <h4 class="page-title">
+                        Añadir Pre-Diagnostico
+                    </h4>
 
                     <h:form prependId="false" id="formCuestionarioPreguntas" a:name="formCuestionarioPreguntas">
 
@@ -132,7 +134,7 @@
 
                         <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">
                             <br></br>
-                            <button  type="button" id="btnModalCrearPre" class="btnModalCrearPre btn btn-info"  value="Enviar">
+                            <button  type="button" id="btnModalCrearPre" class="btnModalCrearPre btn btn-primary"  value="Enviar">
                                Enviar
                             </button>
                         </div>  

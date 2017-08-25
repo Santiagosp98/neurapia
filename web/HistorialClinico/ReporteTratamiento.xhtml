@@ -12,7 +12,7 @@
 <f:view locale="#{lenguaje.locale}">
 <ui:composition template="/template/common/commonLayout.xhtml">
     <ui:define name="aside">
-        <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel-group shadow" id="accordion" role="tablist" aria-multiselectable="true">
             <div class="panel panel-default">
                 <div class="panel-heading active" role="tab" id="headingOne">
                     <h6 class="panel-title">
@@ -93,18 +93,18 @@
     </ui:define>
 
     <ui:define name="content">
-        <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
+        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 shadow" id="right-container">
             <!-- Titulo -->
-            <h5 id="ubicacionPag">
-                <h:outputText value="#{msg['treatment-report']}"></h:outputText>
-            </h5>
+            <h4 class="page-title">
+                <h:outputText value="#{msg['treatment-report']}"/>
+            </h4>
             <div class="contenido">
                 <div class="contenido">
                     <div class="contenido">
-                        <div class="datosDeHistorial col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                        <div class="basic-data col-lg-9 col-md-9 col-sm-9 col-xs-12">
                             <h2>Historial clínico N°: #{controllerHistorialClinico.historialClinico.idHistorialClinico}</h2>
                         </div>
-                        <div class="datosDeHistorial col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="basic-data col-lg-3 col-md-3 col-sm-3 col-xs-12">
                             <h2>
                                 Fecha de registro:
                                 <h:outputText value="#{controllerHistorialClinico.historialClinico.fechaCreacion}">
@@ -163,7 +163,7 @@
                             </div>
                         </ui:repeat>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
-                                <h:commandButton class="btn btn-info" actionListener="#{controllerRespuestaActividad.editarRespuestaActividad()}" value="Guardar"/>
+                                <h:commandButton class="btn btn-primary" actionListener="#{controllerRespuestaActividad.editarRespuestaActividad()}" value="Guardar"/>
                             </div>
                         </h:form>
                     </div>     
@@ -193,7 +193,7 @@
                             <h:inputTextarea rows="4" cols="30" id="descripcionRespuesta" class="form-control mitooltip" value="#{controllerRespuestaActividad.respuestaAct.descripcionRespuesta}" title="DescripcionRespuesta" />
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-                            <h:commandButton class="btn btn-info" action="#{controllerRespuestaActividad.crearRespuestaActividad()}" value="Añadir Actividad"/>
+                            <h:commandButton class="btn btn-primary" action="#{controllerRespuestaActividad.crearRespuestaActividad()}" value="Añadir Actividad"/>
                         </div>
                     </h:form>
                 </div>

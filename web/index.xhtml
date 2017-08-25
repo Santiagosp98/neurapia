@@ -17,6 +17,7 @@
         <link href="#{request.contextPath}/resources/css/font-awesome.css" rel="stylesheet"/>
         <link href="#{request.contextPath}/resources/css/font-awesome.min.css" rel="stylesheet"/>
         <link href="#{request.contextPath}/resources/css/estilos.css" rel="stylesheet"/>
+        <link href="#{request.contextPath}/resources/css/styles.css" rel="stylesheet"/>
         <link href="#{request.contextPath}/resources/css/export.css" rel="stylesheet"/>
         <link href="#{request.contextPath}/resources/css/sweetalert.css" rel="stylesheet"/>
         <h:outputStylesheet name="jquery/ui/jquery-ui.css" library="primefaces"/>
@@ -31,7 +32,7 @@
     </h:head>
     <h:body>
         <!--Header-->
-        <nav class="cabecera">
+        <nav class="header">
             <ul>
                 <li><span class="glyphicon glyphicon-map-marker"></span> Carrera 21 A # 124 - 55</li>
                 <li><span class="glyphicon glyphicon-phone-alt"></span> (57-1) 214 85 22</li>
@@ -82,14 +83,12 @@
         </nav>
         <!--Header-->
 
-        <section id="contenedorprincipal" class="container-fluid">
+        <section id="main" class="container-fluid">
 
             <aside class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
-                <div class="thumbnail sombraAside asideleft">
-                    <h4>
-                        <b>
-                            <h:outputText value="#{msg['signin']}"></h:outputText>
-                        </b>
+                <div class="thumbnail shadow asideleft">
+                    <h4 class="page-title">
+                        <h:outputText value="#{msg['signin']}"></h:outputText>
                     </h4>
 
                     <!-- Formulario de inicio de sesión -->
@@ -115,18 +114,18 @@
                                 </div>
                             </div>
                             <div>
-                                <ul id="registropreg">
-                                    <li class="preguntasRegistro">
+                                <ul id="questions">
+                                    <li>
                                         <h:commandLink value="#{msg['forgot-password']}"
                                                        onclick="$('#modal-recuperar').modal('show')"/>
                                     </li>
-                                    <li class="checkButtons preguntasRegistro">
+                                    <li>
                                         <h:commandLink value="#{msg['signup']}" onclick="$('#sign-up').modal('show')"/>
                                     </li>
                                 </ul>
                             </div>
-                            <div id="botonElimina">
-                                <h:commandButton class="btn btn-info " value="#{msg['enter']}"
+                            <div>
+                                <h:commandButton class="btn btn-primary " value="#{msg['enter']}"
                                                  action="#{controllerSession.iniciarSesion()}"/>
                             </div>
                         </h:form>
@@ -146,8 +145,8 @@
 
                                         <div class="modal-body">
 
-                                            <div class="mensajeError col-lg-12 col-md-12 col-sm-12">
-                                                <h:messages class="mensajeErrorForm" showDetail="true"
+                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                <h:messages showDetail="true"
                                                             showSummary="true" infoClass="alert alert-sucess"
                                                             errorClass="alert alert-danger"/>
                                             </div>
@@ -242,7 +241,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <div class="col-lg-12 col-md-12 col-sm-12">
-                                                <h:commandButton class="btn btn-info"
+                                                <h:commandButton class="btn btn-primary"
                                                                  action="#{controllerUsuario.registrarUsuario()}"
                                                                  value="#{msg['save']}">
                                                     <f:ajax execute="@form" render="@form"/>
@@ -269,17 +268,18 @@
                                             <div class="form-group col-lg-12">
                                                 <label for="emailRe">#{msg['password-recovery-desc']}</label>
                                                 <h:inputText type="email" class="form-control" id="emailRe"
-                                                       a:placeholder="ejem@ejem.com"
-                                                       required="true"
-                                                       a:pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}">
+                                                             a:placeholder="ejem@ejem.com"
+                                                             required="true"
+                                                             a:pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}">
                                                 </h:inputText>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
                                             <div class="form-group col-lg-12 ">
                                                 <h6>
-                                                    <h:commandButton  id="Olvidaste" class="btn btn-info"
-                                                            onclick="olvidasteContraseña()" value="#{msg['send']}">
+                                                    <h:commandButton id="Olvidaste" class="btn btn-primary"
+                                                                     onclick="olvidasteContraseña()"
+                                                                     value="#{msg['send']}">
                                                     </h:commandButton>
                                                 </h6>
                                             </div>
@@ -293,14 +293,12 @@
                 </div>
             </aside>
 
-            <div class="contenedorderecho col-xs-12 col-sm-8 col-md-9 col-lg-9 sombraAside">
+            <div class="col-xs-12 col-sm-8 col-md-9 col-lg-9 shadow" id="right-container">
                 <section>
                     <div class="imagenheader"></div>
                 </section>
-                <h4>
-                    <b>
-                        <h:outputText value="#{msg['prediagnosis']}"></h:outputText>
-                    </b>
+                <h4 class="page-title">
+                    <h:outputText value="#{msg['prediagnosis']}"></h:outputText>
                 </h4>
                 <h5>
                     <h:outputText value="#{msg['particular-pain']}"></h:outputText>
@@ -310,13 +308,13 @@
                         <h:outputText value="#{msg['perform-prediagnosis']}"></h:outputText>
                     </b>
                 </h1>
-                <div class="parrafoinicio">
+                <div id="home-paragraph">
                     <p>
                         <h:outputText value="#{msg['prediagnosis-paragraph']}"></h:outputText>
                     </p>
                     <br></br>
                     <center>
-                        <button type="submit" class="btn btn-info" onclick="window.location.href = 'error404.html'">
+                        <button type="submit" class="btn btn-primary" onclick="window.location.href = 'error404.html'">
                             <h:outputText value="#{msg['prediagnosis-button']}"></h:outputText>
                         </button>
                     </center>
@@ -332,7 +330,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading" role="tab" id="headingOne">
                                     <h6 class="panel-title">
-                                        <a class="menulateral" role="button" data-toggle="collapse"
+                                        <a role="button" data-toggle="collapse"
                                            data-parent="#accordion" href="#collapseOne" aria-expanded="false"
                                            aria-controls="collapseOne">
                                             <b>
@@ -360,7 +358,7 @@
 
                                 <div class="panel-heading" role="tab" id="headingTwo">
                                     <h6 class="panel-title">
-                                        <a class="menulateral" role="button" data-toggle="collapse"
+                                        <a role="button" data-toggle="collapse"
                                            data-parent="#accordion" href="#collapsTwo" aria-expanded="false"
                                            aria-controls="collapsTwo">
                                             <b>
@@ -384,7 +382,7 @@
 
                                 <div class="panel-heading" role="tab" id="headingTwo">
                                     <h6 class="panel-title">
-                                        <a class="menulateral" role="button" data-toggle="collapse"
+                                        <a role="button" data-toggle="collapse"
                                            data-parent="#accordion" href="#collapsThree"
                                            aria-expanded="false" aria-controls="collapsTwo">
                                             <b>
@@ -408,7 +406,7 @@
 
                                 <div class="panel-heading" role="tab" id="headingTwo">
                                     <h6 class="panel-title">
-                                        <a class="menulateral" role="button" data-toggle="collapse"
+                                        <a role="button" data-toggle="collapse"
                                            data-parent="#accordion" href="#collapsFour" aria-expanded="false"
                                            aria-controls="collapsTwo">
                                             <b>

@@ -10,7 +10,7 @@
     <f:view locale="#{lenguaje.locale}">
     <ui:composition template="/template/common/commonLayout.xhtml">
         <ui:define name="aside">
-            <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel-group shadow" id="accordion" role="tablist" aria-multiselectable="true">
                 <div class="panel panel-default">
                     <div class="panel-heading active" role="tab" id="headingOne">
                         <h6 class="panel-title">
@@ -98,9 +98,11 @@
         </ui:define>
 
         <ui:define name="content">
-            <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
+            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 shadow" id="right-container">
                 <!-- Titulo -->
-                <h5 id="ubicacionPag">Anamnesis</h5>
+                <h4 class="page-title">
+                    Anamnesis
+                </h4>
 
                 <div class="contenido">
 
@@ -109,18 +111,16 @@
 
                             <div class="contenido">
                                 <div class="contenido">
-                                    <br/>
-                                    <p style="text-align: center; margin-top: 50px">
+                                    <p class="description">
                                         <h:outputText value="#{msg['record-update-description']}"/>
                                     </p>
-                                    <br/>
                                 </div>
                             </div>
 
-                            <div class="datosDeHistorial col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                            <div class="basic-data col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                 <h2>#{msg['medical-record']} N°: #{controllerHistorialClinico.historialClinico.idHistorialClinico}</h2>
                             </div>
-                            <div class="datosDeHistorial col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                            <div class="basic-data col-lg-3 col-md-3 col-sm-3 col-xs-12">
 
                                 <h2>
                                     <h:outputText value="#{msg['register-date']}: "/>
@@ -257,7 +257,7 @@
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
                                     <br></br>
-                                    <h:commandButton class="btn btn-info"
+                                    <h:commandButton class="btn btn-primary"
                                                      actionListener="#{controllerHistorialClinico.editarAnamnesis()}"
                                                      value="#{msg['save']}"/>
                                     &nbsp;

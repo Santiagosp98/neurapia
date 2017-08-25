@@ -5,7 +5,7 @@
              xmlns:h="http://xmlns.jcp.org/jsf/html"
              xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-    <nav class="cabecera">
+    <nav class="header">
         <ul>
             <li><span class="glyphicon glyphicon-map-marker"></span> Carrera 21 A # 124 - 55</li>
             <li><span class="glyphicon glyphicon-phone-alt"></span> (57-1) 214 85 22</li>
@@ -71,7 +71,7 @@
                            aria-expanded="true">#{controllerSession.usuario.fullNameUsuario} <span
                                 class="caret"></span>
                         </a>
-                        <ul id="identificadorYcerrado" class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                             <li>
                                 <a href="ConsultarUsuarios.xhtml">#{controllerSession.usuario.codRol.nombreRol}</a>
                             </li>

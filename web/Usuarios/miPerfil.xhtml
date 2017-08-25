@@ -17,7 +17,7 @@
             <ui:composition template="/template/common/commonLayout.xhtml">
 
                 <ui:define name="aside">
-                    <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel-group shadow" id="accordion" role="tablist" aria-multiselectable="true">
                         <div class="panel panel-default">
                             <div class="panel-heading active" role="tab" id="headingOne">
                                 <h6 class="panel-title">
@@ -74,11 +74,11 @@
                 </ui:define>
                 <!-- Contenido de la pagina -->
                 <ui:define name="content">
-                    <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
+                    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 shadow" id="right-container">
                         <!-- Titulo -->
-                        <h5 id="ubicacionPag">
+                        <h4 class="page-title">
                             <h:outputText value="#{msg['my-profile']}"></h:outputText>
-                        </h5>
+                        </h4>
                         <div class="fixed-table-body">
 
                             <div class="form-group col xs-12 col-sm-12 col-md-3 col-lg-3" style="background-color: #eaeded; padding-bottom: 30px; border-radius: 5px;">
@@ -132,8 +132,8 @@
                             <h5 id="ubicacionPag" style="text-align: left"><b>Información básica</b></h5>
 
                             <h:form prependId="false" id="prueba" a:name="prueba">
-                                <div class="mensajeError col-lg-12 col-md-12 col-sm-12">
-                                    <h:messages class="mensajeErrorForm" showDetail="true" showSummary="true" infoClass="alert alert-sucess" errorClass="alert alert-danger"/>
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <h:messages showDetail="true" showSummary="true" infoClass="alert alert-sucess" errorClass="alert alert-danger"/>
                                 </div>
                                 <div class="form-group col-lg-6 col-md-6 col-sm-6">
                                     <h:outputLabel value="#{msg['document-type']}" for="tipodocumento" />

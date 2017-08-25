@@ -16,7 +16,7 @@
         <ui:composition template="/template/common/commonLayout.xhtml">
 
             <ui:define name="aside">
-                <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel-group shadow" id="accordion" role="tablist" aria-multiselectable="true">
 
                     <div class="panel panel-default">
 
@@ -72,11 +72,11 @@
 
             <!-- Contenido de la pagina -->
             <ui:define name="content">
-                <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
+                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 shadow" id="right-container">
                     <!-- Titulo -->
-                    <h5 id="ubicacionPag">
+                    <h4 class="page-title">
                         <h:outputText value="#{msg['add-clinical-record']}"/>
-                    </h5>
+                    </h4>
 
                     <ui:fragment rendered="#{not(controllerUsuario.usuario.idUsuario eq null)}">
                         <h:dataTable value="#{controllerUsuario.usuario}"
@@ -251,7 +251,7 @@
 
                         <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
                             <br></br>
-                            <h:commandButton class="btn btn-info"
+                            <h:commandButton class="btn btn-primary"
                                              action="#{controllerHistorialClinico.crearHistorialClinico()}"
                                              value="#{msg['save']}"/>
                             &nbsp;

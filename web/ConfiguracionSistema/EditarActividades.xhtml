@@ -15,7 +15,7 @@
         <ui:composition template="/template/common/commonLayout.xhtml">
 
             <ui:define name="aside">
-                <div class="panel-group sombraAside" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel-group shadow" id="accordion" role="tablist" aria-multiselectable="true">
                     <div class="panel panel-default">
                         <div class="panel-heading active" role="tab" id="headingOne">
                             <h6 class="panel-title"><i class="fa fa-cogs" aria-hidden="true"></i>
@@ -47,10 +47,10 @@
             </ui:define>
 
             <ui:define name="content">
-                <div class="contenedorderecho col-xs-12 col-sm-12 col-md-9 col-lg-9 sombraAside">
-                    <h5 id="ubicacionPag">
+                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 shadow" id="right-container">
+                    <h4 class="page-title">
                         <h:outputText value="#{msg['edit-activity']}"/>
-                    </h5>
+                    </h4>
                     <h:form prependId="false">
                         <h:messages for="nombreActividad" style="color: red; list-style:none; padding: 18px"/>
                         <div class="form-group col-lg-12 col-md-12 col-sm-12">
@@ -69,7 +69,7 @@
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
                             <br></br>
-                            <h:commandButton class="btn btn-info" action="#{controllerActividad.guardarCambios()}"
+                            <h:commandButton class="btn btn-primary" action="#{controllerActividad.guardarCambios()}"
                                              value="#{msg['save']}"/>
                             &nbsp;
                             <h:commandButton class="btn btn-default" action="#{controllerActividad.cancelar()}"
