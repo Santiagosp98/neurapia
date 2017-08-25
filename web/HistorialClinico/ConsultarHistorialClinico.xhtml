@@ -99,26 +99,6 @@
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="#{msg['register-date']}"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.fechaCreacion}">
-                                        <f:convertDateTime pattern="yyyy-MM-dd"/>
-                                    </h:outputText>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Rh"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.grupoSanguineo}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="#{msg['city']}"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.ciudadResidencia}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
                                         <h:outputText value="#{msg['phone-number']}"/>
                                     </f:facet>
                                     <h:outputText value="#{item.telefono}"/>
@@ -128,14 +108,6 @@
                                         <h:outputText value="Eps"/>
                                     </f:facet>
                                     <h:outputText value="#{item.codEps.nombreEps}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="#{msg['birth-date']}"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.fechaNacimiento}">
-                                        <f:convertDateTime pattern="yyy-MM-dd"/>
-                                    </h:outputText>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">

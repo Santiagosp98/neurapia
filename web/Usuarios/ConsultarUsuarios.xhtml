@@ -110,6 +110,13 @@
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
+                                            <h:outputText value="#{msg['email']}"/>
+
+                                        </f:facet>
+                                        <h:outputText value="#{item.correoElectronico}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
                                             <h:outputText value="#{msg['status']}"/>
 
                                         </f:facet>
@@ -121,22 +128,6 @@
 
                                         </f:facet>
                                         <h:outputText value="#{item.codRol.nombreRol}"/>
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="#{msg['date']}"/>
-
-                                        </f:facet>
-                                        <h:outputText value="#{item.fechaRegistro}">
-                                            <f:convertDateTime pattern="yyyy-MM-dd"/>
-                                        </h:outputText>
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="#{msg['email']}"/>
-
-                                        </f:facet>
-                                        <h:outputText value="#{item.correoElectronico}"/>
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">

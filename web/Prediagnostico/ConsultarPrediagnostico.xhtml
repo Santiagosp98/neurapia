@@ -74,21 +74,6 @@
 
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Cuestionario"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.codCuestionario.idCuestionario}"/>
-                                </h:column>
-
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Respuestas"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.codRespuestaPreg.idRespuestaPreg}">                                        
-                                    </h:outputText>
-                                </h:column>
-
-                                <h:column>
-                                    <f:facet name="header">
                                         <h:outputText value="Usuario"/>
                                     </f:facet>
                                     <h:outputText value="#{item.codUsuario.fullNameUsuario}">                                       
@@ -103,14 +88,6 @@
                                         <f:convertDateTime pattern="yyyy-MM-dd" />
                                     </h:outputText>
                                 </h:column>
-
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Resultado"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.resultadoPrediagnostico}"/>
-                                </h:column>
-
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Acciones"/>
