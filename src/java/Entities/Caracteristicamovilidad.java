@@ -34,7 +34,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Caracteristicamovilidad.findAll", query = "SELECT c FROM Caracteristicamovilidad c")
     , @NamedQuery(name = "Caracteristicamovilidad.findByIdCaracteristicaMovilidad", query = "SELECT c FROM Caracteristicamovilidad c WHERE c.idCaracteristicaMovilidad = :idCaracteristicaMovilidad")
-    , @NamedQuery(name = "Caracteristicamovilidad.findByTipoCaracteristica", query = "SELECT c FROM Caracteristicamovilidad c WHERE c.tipoCaracteristica = :tipoCaracteristica")})
+    , @NamedQuery(name = "Caracteristicamovilidad.findByTipoCaracteristica", query = "SELECT c FROM Caracteristicamovilidad c WHERE c.tipoCaracteristica = :tipoCaracteristica")
+    , @NamedQuery(name = "Caracteristicamovilidad.listarPorParteCuerpo", query = "SELECT c FROM Caracteristicamovilidad c WHERE c.codParteCuerpo.idParteCuerpo = :codParteCuerpo")})
 public class Caracteristicamovilidad implements Serializable {
 
     private static final long serialVersionUID = 1L;

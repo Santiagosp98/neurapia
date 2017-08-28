@@ -6,9 +6,12 @@
 package Facade;
 
 import Entities.Caracteristicamovilidad;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -28,5 +31,21 @@ public class CaracteristicamovilidadFacade extends AbstractFacade<Caracteristica
     public CaracteristicamovilidadFacade() {
         super(Caracteristicamovilidad.class);
     }
+
+    @Override
+    public List<Caracteristicamovilidad> listarPorParteCuerpo(int id) {
+        List lista = null;
+        try {
+            lista = new ArrayList();
+            TypedQuery<Caracteristicamovilidad> q = getEntityManager().createNamedQuery("Caracteristicamovilidad.listarPorParteCuerpo", Caracteristicamovilidad.class);
+            q.setParameter("codParteCuerpo", id);
+            lista = q.getResultList();
+            return lista;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return lista;
+    }
+
     
 }

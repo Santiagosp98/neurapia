@@ -67,7 +67,7 @@ public class ControllerApp implements Serializable {
          
     }
     
-    public String hostName() {
+/*    public String hostName() {
         
         String serverName = FacesContext.getCurrentInstance().getExternalContext().getRequestServerName();
         
@@ -83,6 +83,16 @@ public class ControllerApp implements Serializable {
            
         }
         return name; 
+    }*/
+
+        //generar una url completa para redireccionar y validar si es localhost o el dominio del sitio
+    public String hostName() {
+        
+        FacesContext fc = FacesContext.getCurrentInstance();
+        int port = fc.getExternalContext().getRequestServerPort();
+        String name =  fc.getExternalContext().getRequestScheme() + "://" + fc.getExternalContext().getRequestServerName() + ":" + port + fc.getExternalContext().getRequestContextPath() + "/";
+        return name;
+        
     }
 
     public void recargar() {

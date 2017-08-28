@@ -44,6 +44,11 @@ public class ControllerResultadoProceso extends Controllers.ControllerApp{
         return "ActualizarResultadoProceso";
     }
     
+    public void crearResultadoProceso(){
+        System.out.println("El resultado de proceso es: " + resultadoProceso);
+//        resultadoProcesoFacade.create(resultadoProceso);
+    }
+    
     public String ActualizarResultadoProceso(){
         resultadoProcesoFacade.edit(resultadoProceso);
         return cancelar();
@@ -76,5 +81,15 @@ public class ControllerResultadoProceso extends Controllers.ControllerApp{
      */
     public ControllerResultadoProceso() {
     }
+
+    public Resultadoproceso getResultadoProceso() {
+        return resultadoProceso;
+    }
+
+    public void setResultadoProceso(Resultadoproceso resultadoProceso) {
+        this.resultadoProceso = resultadoProceso;
+    }
+    
+    
         
 }

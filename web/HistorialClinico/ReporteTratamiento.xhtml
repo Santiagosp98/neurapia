@@ -138,29 +138,25 @@
                         
                         <h3>Actividades</h3>
                         <h:form prependId="false" id="tipoAct">
-                        <ui:repeat value="#{controllerHistorialClinico.listRespActobtenidos}" var="item">                           
-                                
-                            <c:forEach begin="1" end="#{controllerActividad.actividadFacade.count()}" var="i">
-                                <ui:fragment rendered="#{item.codTipoActividad.codActividad.idActividad eq i}">
-                                    <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                        <h:outputLabel  value="#{item.codTipoActividad.codActividad.nombreActividad}" for="codActividad_#{i}"/>
-                                        <h:selectOneMenu class="form-control mitooltip" id="codActividad_#{i}" value="#{item.codTipoActividad}" converter="tipoActividadConverter" title="CodRespuesta" required="true" requiredMessage="The CodRespuesta field is required.">                                      
-                                            <f:selectItems value="#{controllerTipoActividad.listadoTipoActividades()}" var="t" itemLabel="#{t.descripcionActividad}"/>
-                                        </h:selectOneMenu>
-                                    </div>
-                                </ui:fragment>
-                            </c:forEach>                                
+                            <ui:repeat value="#{controllerHistorialClinico.listRespActobtenidos}" var="item">                           
+                            
+                            <h:panelGroup class="form-group col-lg-6 col-md-6 col-sm-6" id="act1" layout="block">
+                                <h:outputLabel  value="#{item.codTipoActividad.codActividad.nombreActividad}" for="codActividad_#{item.idRespuestaActividad}"/>
+                                <h:selectOneMenu class="form-control mitooltip" value="#{item.codTipoActividad}" converter="tipoActividadConverter" title="CodRespuesta" required="true" requiredMessage="The CodRespuesta field is required.">                                      
+                                    <f:selectItems value="#{controllerTipoActividad.listadoTipoActividades()}" var="t" itemLabel="#{t.descripcionActividad}"/>
+                                </h:selectOneMenu>
+                            </h:panelGroup>                          
 
-                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                            <h:panelGroup class="form-group col-lg-6 col-md-6 col-sm-6" id="act2" layout="block">
                                 <h:outputLabel value="Fecha Actividad realizada:" for="fechaActividad" />
-                                <h:inputText class="form-control mitooltip" id="fechaActividad" value="#{item.fechaActividad}" title="FechaActividad" >
-                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                <h:inputText class="form-control mitooltip" value="#{item.fechaActividad}" title="FechaActividad" >
+                                    <f:convertDateTime pattern="MM/dd/yyyy" timeZone="America/Bogota" />
                                 </h:inputText>
-                            </div>                                  
-                            <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            </h:panelGroup>                                  
+                                <h:panelGroup class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" id="act3" layout="block">
                                 <h:outputLabel  value="#{item.codRespuesta.nombreRespuesta}" for="descripcionRespuesta" />
-                                <h:inputTextarea class="form-control mitooltip" rows="4" cols="30" id="descripcionRespuesta" value="#{item.descripcionRespuesta}" title="DescripcionRespuesta" />
-                            </div>
+                                <h:inputTextarea class="form-control mitooltip" rows="4" cols="30" value="#{item.descripcionRespuesta}" title="DescripcionRespuesta" />
+                            </h:panelGroup>
                         </ui:repeat>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
                                 <h:commandButton class="btn btn-primary" actionListener="#{controllerRespuestaActividad.editarRespuestaActividad()}" value="Guardar"/>
@@ -193,7 +189,9 @@
                             <h:inputTextarea rows="4" cols="30" id="descripcionRespuesta" class="form-control mitooltip" value="#{controllerRespuestaActividad.respuestaAct.descripcionRespuesta}" title="DescripcionRespuesta" />
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-                            <h:commandButton class="btn btn-primary" action="#{controllerRespuestaActividad.crearRespuestaActividad()}" value="Añadir Actividad"/>
+                            <h:commandButton class="btn btn-info" value="Añadir Actividad"  actionListener="#{controllerRespuestaActividad.crearRespuestaActividad()}">
+                                <f:ajax execute="@form" render=":tipoAct"/>
+                            </h:commandButton>
                         </div>
                     </h:form>
                 </div>

@@ -163,7 +163,55 @@
                             </li>
                         </ul>
                     </div>
+                    <p>Seleccione la parte del cuerpo que desea evaluar</p>
+                    <h:form prependId="false" class="form-group">
+                        <div class="">
+                            <h:outputLabel value="Parte del cuerpo" for="tipoActividad" />                    
+                            <h:selectOneMenu id="tipoActividad" class="form-control mitooltip" value="#{controllerCaracteristicaMovilidad.caractMovilidad.codParteCuerpo}" converter="parteCuerpoConverter">
+                                <f:selectItems value="#{controllerParteCuerpo.obtenerPartesCuerpo()}" var="pc" itemLabel="#{pc.nombreParteCuerpo}"/>
+                            </h:selectOneMenu>
+                            <h:commandButton class="btn btn-info" actionListener="#{controllerCaracteristicaMovilidad.listarPorParteCuerpo()}" value="Seleccionar"></h:commandButton>
+                        </div>
+                    </h:form>
+                    <ui:fragment rendered="#{!empty(controllerCaracteristicaMovilidad.caractMovilidad) and !empty(controllerCaracteristicaMovilidad.lista)}">
+                        <h:form prependId="false">
+                        
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <h:outputText value="Parte del cuerpo"/>
+                                        </th>
+                                        <ui:repeat value="#{controllerProceso.listaProceso}" var="pc">
+                                            <th>
+                                                <h:outputText value="#{pc.nombreProceso}"/>
+                                            </th>
+                                        </ui:repeat>
+                                    </tr>
+                                </thead>
+                                <c:forEach var="cm" items="#{controllerCaracteristicaMovilidad.lista}" begin="0" end="3">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <h:outputText value="#{cm.tipoCaracteristica}" /> 
+                                            </td>
+                                            <ui:repeat value="#{controllerProceso.listaProceso}" var="pc">
+                                                <td>
+                                                    <h:inputText style="width: 150px; border: none; " value="#{controllerResultadoProceso.resultadoProceso.resultadoProceso}" /> 
+                                                </td>
+                                            </ui:repeat>
+                                        </tr>
+                                    </tbody>
+                                </c:forEach>
+                            </table>
+                            <h:commandButton class="btn btn-info" value="Guardar" actionListener="#{controllerResultadoProceso.crearResultadoProceso()}">
+                                
+                            </h:commandButton>
+                        </h:form>
+                    </ui:fragment>
+                    
                     <c:forEach items="#{controllerHistorialClinico.mapa}" var="l" varStatus="vs">
+                        <h2>#{l.key}</h2>
                         <table class="table table-striped table-bordered">
                             <thead>
                             <tr>
@@ -192,7 +240,7 @@
                                 <td rowspan="#{controllerHistorialClinico.mapa.size()}">#{l.key}</td>
                             </tr>
                             <c:forEach begin="0" end="#{l.value.size() - 1}" step="4" var="i">
-
+                                    
                                 <tr>
                                     <td>#{l.value.get(i).codCaracteristicaMovilidad.tipoCaracteristica}</td>
                                     <td>#{l.value.get(i).resultadoProceso}</td>

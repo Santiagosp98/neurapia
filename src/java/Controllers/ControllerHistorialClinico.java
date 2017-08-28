@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -27,6 +28,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.ConversationScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.persistence.EntityManagerFactory;
 
 /**
  * @author jair3
@@ -278,7 +280,6 @@ public class ControllerHistorialClinico extends ControllerApp {
         listaUsuarios = usuarioFacade.findAll();
         
         respuestaAct = new Respuestaactividad();
-        listRespAct = resActFacade.findAll();
         listRespActobtenidos = new ArrayList();
     }
 
@@ -297,6 +298,7 @@ public class ControllerHistorialClinico extends ControllerApp {
 
     public String seleccionarHistorialclinico(Historialclinico historialClinico) {
         iniciarConversacion();
+        listRespAct = resActFacade.findAll();
         try {
             this.historialClinico = historialClinico;
             int id = historialClinico.getIdHistorialClinico();
@@ -321,7 +323,7 @@ public class ControllerHistorialClinico extends ControllerApp {
                 }
             }
             for (Respuestaactividad respuestaactividad : listRespAct) {
-                if (id == respuestaactividad.getIdHistorialclinico().getIdHistorialClinico()) {
+                if (id == respuestaactividad.getIdHistorialclinico().getIdHistorialClinico()) {                    
                     listRespActobtenidos.add(respuestaactividad);
                     System.out.println("Seleccionando resultados Actividad: " + respuestaactividad.getIdRespuestaActividad());
                 }
@@ -334,6 +336,11 @@ public class ControllerHistorialClinico extends ControllerApp {
         System.out.println("Seleccionando anamnesis: " + listAnamnesisObtenidos.size());
         System.out.println("Seleccionando dolor: " + dolor.getIdDolor());
         return "ActualizarHistorialClinico?faces-redirect=true";
+    }
+    
+    public void actualizarHistorialClinico(Integer idHistorialClinico){
+        this.historialClinico = historialClinicoFacade.find(idHistorialClinico);
+        seleccionarHistorialclinico(this.historialClinico);
     }
 
     public void editarHistorialClinico() {
@@ -439,5 +446,4 @@ public class ControllerHistorialClinico extends ControllerApp {
         }
         System.out.println("Map list: " + mapa);
     }
-
 }

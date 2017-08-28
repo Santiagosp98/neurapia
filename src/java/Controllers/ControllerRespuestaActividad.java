@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import ControllersConfiguracionSistema.ControllerActividad;
 import Entities.Historialclinico;
 import Entities.Respuestaactividad;
 import Facade.HistorialclinicoFacadeLocal;
@@ -28,6 +29,9 @@ public class ControllerRespuestaActividad extends ControllerApp {
     
     @Inject
     private ControllerHistorialClinico hc;
+    
+    @Inject
+    private ControllerActividad act;
     
     
     @EJB
@@ -102,15 +106,15 @@ public class ControllerRespuestaActividad extends ControllerApp {
         this.listRespActSeleccionadas = listRespActSeleccionadas;
     }
     
-    public String crearRespuestaActividad(){
-        iniciarConversacion();
+    public void crearRespuestaActividad(){
         System.out.println("Estamos creando");
         System.out.println(hc.getHistorialClinico().getIdHistorialClinico());
         respuestaAct.setIdHistorialclinico(hc.getHistorialClinico());
         respuestaAct.setFechaActividad(new Date());
         this.respActFac.create(respuestaAct);        
         System.out.println("Respuesta id creada: " + respuestaAct.getIdRespuestaActividad());
-        return "ReporteTratamiento.xhtml?faces-redirect=true";
+        //init();
+        hc.actualizarHistorialClinico(respuestaAct.getIdHistorialclinico().getIdHistorialClinico());
     }
     
     public void editarRespuestaActividad(){
