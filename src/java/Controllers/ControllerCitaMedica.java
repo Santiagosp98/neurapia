@@ -37,6 +37,9 @@ public class ControllerCitaMedica extends ControllerApp{
     @Inject
     private ControllerSession cs;
     
+    @Inject
+    private ControllerEmail ce;
+    
     @EJB
     CitamedicaFacadeLocal citaMedicaFacade;
     Citamedica citaMedica;
@@ -71,6 +74,8 @@ public class ControllerCitaMedica extends ControllerApp{
                 return listaCitas;
             }else if(uS.getCodRol().getNombreRol().equals("Fisioterapeuta")){
                 listarCitasporFisioterapeuta();
+            }else if(uS.getCodRol().getNombreRol().equals("Usuario")){
+                listarCitasporUsuario();
             }
         }else{
             System.out.println("Campo nulo en codRol");
@@ -158,9 +163,13 @@ public class ControllerCitaMedica extends ControllerApp{
     
     public String crearCitaMedica(){
         try {
-//          this.citaMedica.setCodFisioterapeuta(fisioterapeutaFacade.find(fisioterapeuta.getIdFisioterapeuta()));
-//          this.citaMedica.setCodUsuario(usuarioFacade.find(usuario.getIdUsuario()));
             this.citaMedica.setEstado(String.valueOf(citaMedica.getSeleccionEstado().get(1).toString()));
+            System.out.println("Correo fisioterapeuta: "+citaMedica.getCodFisioterapeuta().getCodUsuario().getCorreoElectronico());
+            System.out.println("Correo Usuario: "+citaMedica.getCodUsuario().getCorreoElectronico());
+            ce.setEmailDestinatario(citaMedica.getCodFisioterapeuta().getCodUsuario().getCorreoElectronico()+", "+citaMedica.getCodUsuario().getCorreoElectronico());
+            System.out.println("Correos a enviar: " + ce.getEmailDestinatario());
+            System.out.println("fecha "+citaMedica.getFecha()+ " hora: " + citaMedica.getHora() );
+            ce.enviarAsignacionDeCita(citaMedica);
             citaMedicaFacade.create(citaMedica);
             return "ConsultarCitasMedicas?faces-redirect=true";
         } catch (Exception e) {
