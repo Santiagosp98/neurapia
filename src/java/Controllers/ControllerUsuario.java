@@ -48,6 +48,7 @@ public class ControllerUsuario extends ControllerApp {
     @EJB
     private UsuarioFacadeLocal usuarioFacade; //Facade
     private Usuario usuario; //Entidades
+    private Usuario auxUsuario;
     private List<Usuario> listaUsuarios;
     private String confirmarClave;
     private String claveAnterior;
@@ -196,7 +197,8 @@ public class ControllerUsuario extends ControllerApp {
         Usuario uS = cs.getUsuario();
         System.out.println("editar Usuario");
         if (usuario != null) {
-
+            System.out.println("Clave: " + uS.getClaveUsuario());
+            System.out.println("Confirmar Clave: " + confirmarClave);
             if (uS.getClaveUsuario().equals(this.confirmarClave)) {
                 this.usuarioFacade.edit(uS);
                 return "miPerfil?faces-redrect=true";
@@ -218,6 +220,7 @@ public class ControllerUsuario extends ControllerApp {
     }
 
     public String crearUsuario() throws ParseException {
+        FacesContext fc = FacesContext.getCurrentInstance();
         if (usuario != null) {
             Usuario uS = cs.getUsuario();
 
@@ -230,21 +233,41 @@ public class ControllerUsuario extends ControllerApp {
             Date fechaDate = null;
             fechaDate = formato.parse(strFecha);
             usuario.setFechaRegistro(fechaDate);
-            if (uS.getCodRol().getIdRol() == 3) {
-                if (usuario.getClaveUsuario().equals(this.confirmarClave)) {
-                    rol.setIdRol(4);
-                    usuario.setCodRol(rol);
-                    usuario.setEstadoUsuario("Inactivo");
-                    usuarioFacade.create(usuario);
-                    return "ConsultarUsuarios";
+
+            System.out.println("Usuario documento: " + auxUsuario);
+            auxUsuario=null;
+            auxUsuario = usuarioFacade.buscarDocumento(usuario.getNumeroDocumento());
+            System.out.println("Usuario documento: " + auxUsuario);
+
+            if (auxUsuario == null) {
+                auxUsuario=null;
+                System.out.println("Usuario email: " + auxUsuario);
+                auxUsuario = usuarioFacade.restableceContrasena(usuario.getCorreoElectronico());
+
+                if (auxUsuario == null) {
+                    if (usuario.getClaveUsuario().equals(this.confirmarClave)) {
+                        if (uS.getCodRol().getIdRol() == 3) {
+                            rol.setIdRol(4);
+                            usuario.setCodRol(rol);
+                            usuario.setEstadoUsuario("Inactivo");
+                            usuarioFacade.create(usuario);
+                            return "ConsultarUsuarios";
+                        } else {
+                            usuarioFacade.create(usuario);
+                            return "ConsultarUsuarios";
+                        }
+                    } else {
+                        FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido crear el usuario", "Clave y confirmar clave diferentes");
+                        fc.addMessage(null, m);
+                    }
+                } else {
+                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido crear el usuario", "documento ya esta en la base de datos");
+                    fc.addMessage(null, m);
                 }
             } else {
-                if (usuario.getClaveUsuario().equals(this.confirmarClave)) {
-                    usuarioFacade.create(usuario);
-                    return "ConsultarUsuarios";
-                }
+                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido crear el usuario", "Correo ya esta en la base de datos");
+                fc.addMessage(null, m);
             }
-
 
         } else {
 
@@ -253,7 +276,10 @@ public class ControllerUsuario extends ControllerApp {
     }
 
     public void registrarUsuario() throws ParseException {
+        FacesContext fc = FacesContext.getCurrentInstance();
+
         if (usuario != null) {
+            System.out.println("Registrando :  ");
             Calendar calendar = new GregorianCalendar();
             int anio = calendar.get(Calendar.YEAR);
             int mes = calendar.get(Calendar.MONTH);
@@ -267,7 +293,13 @@ public class ControllerUsuario extends ControllerApp {
             Rol rol = new Rol();
             rol.setIdRol(4);
             usuario.setCodRol(rol);
-            usuarioFacade.create(usuario);
+            if (usuario.getClaveUsuario().equals(this.confirmarClave)) {
+                usuarioFacade.create(usuario);
+            } else {
+                System.out.println("No se creo");
+                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido crear el usuario", "Clave y confirmar clave diferentes");
+                fc.addMessage(null, m);
+            }
         }
         usuario = null;
         recargar();
