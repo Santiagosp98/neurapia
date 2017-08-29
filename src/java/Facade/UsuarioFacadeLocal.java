@@ -32,6 +32,9 @@ public interface UsuarioFacadeLocal {
     int count();
     
     Usuario iniciarSesion(String email, String clave);
+    Usuario restableceContrasena(String email);
+    Usuario buscarId(int id);
+    Usuario buscarDocumento(String documento);
     List<Usuario> listaUsuariosPorRol(Rol rol);
     List<Usuario> listaUsuariosPorRolDoble(Rol rol, Rol rol2);
 }
