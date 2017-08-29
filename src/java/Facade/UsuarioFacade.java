@@ -74,6 +74,48 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
         }
         return listaPorRolDoble;
     }
+
+    @Override
+    public Usuario restableceContrasena(String email) {
+        Usuario u = null;        
+        try {
+            TypedQuery<Usuario> q = getEntityManager().createNamedQuery("Usuario.findByCorreoElectronico", Usuario.class);
+            q.setParameter("email", email);
+            u = q.getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return u;
+    }
+
+    @Override
+    public Usuario buscarId(int id) {
+        Usuario u = null;        
+        try {
+            TypedQuery<Usuario> q = getEntityManager().createNamedQuery("Usuario.findByIdUsuario", Usuario.class);
+            q.setParameter("idUsuario", id);
+            u = q.getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return u;
+    }
+
+    @Override
+    public Usuario buscarDocumento(String documento) {
+        Usuario u = null;        
+        try {
+            TypedQuery<Usuario> q = getEntityManager().createNamedQuery("Usuario.findByTipoDocumento", Usuario.class);
+            q.setParameter("tipoDocumento", documento);
+            u = q.getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return u;
+    }
     
     
 }
