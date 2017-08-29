@@ -14,7 +14,9 @@
             <ui:define name="titulo">Consultar Uusuarios</ui:define>
             <!-- Aside Izq de la pagina -->
             <ui:composition template="/template/common/commonLayout.xhtml">
-
+                <ui:define name="validarPerimisoUsuario">
+                    <f:event type="preRenderView" listener="#{controllerSession.validarAccesoUsuario()}"/>
+                </ui:define>
                 <ui:define name="aside">
 
                     <div class="panel-group shadow" id="accordion" role="tablist" aria-multiselectable="true">
