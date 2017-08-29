@@ -393,10 +393,39 @@ function validacion(){
 			confirmButtonColor: "#3DCCC2",
 			confirmButtonText: "ok",
 			closeOnConfirm: false,
-			closeOnCancel: false,
+			closeOnCancel: false
 		});
 		
 		return false;
 	}
-	alert('Muy bien, hemos guardado tus datos personales')
+	alert('Muy bien, hemos guardado tus datos personales');
+}
+
+
+function miFuncion(data){
+//    alert(data.status);
+    if(data.status === 'success'){
+        swal({
+			title: "Muy bien",
+			text: "Hemos enviado una nueva clave a tu correo!",
+			type: "success",
+			showCancelButton: false,
+			confirmButtonColor: "#3DCCC2",
+			confirmButtonText: "ok !",
+			closeOnConfirm: false,
+			closeOnCancel: false
+		},
+		function(isConfirm){
+			if (isConfirm) {
+				window.location.href = 'index.xhtml';
+			}
+		});
+    }else if(data.status === 'begin' ){
+        swal({
+			title: "Comprobando datos",
+			text: "Estamos comprobando el correo ingresado",
+			imageUrl: "resources/imgs/load1.gif",
+                        showConfirmButton: false
+	});
+    }
 }
