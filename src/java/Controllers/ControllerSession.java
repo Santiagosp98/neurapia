@@ -109,35 +109,78 @@ public class ControllerSession extends ControllerApp {
     }
     
     public boolean inicioSesion(){
+        System.out.println("invalido");
         return(usuario != null);
     }
-//    public boolean NoPaciente(){
-//        if(usuario!= null){
-//            System.out.println(usuario.getCodRol().getNombreRol());
-//            return (usuario.getCodRol().getNombreRol().equals("Usuario"));
-//        }
-//        else{
-//            System.out.println(usuario.getCodRol().getNombreRol());
-//
-//            return false;
-//        }
-//    }
-//    public String redireccionSinPermiso(){
-//        return "Usuarios/miPerfil?faces-redirect=true";
-//    }
-//    
-//    public void validarPermiso(){
-//        if(!NoPaciente()){
-//            redireccionSinPermiso();
-//        }else{
-//            System.out.println("NO ingreso");
-//        }
-//        
-//    }
     
     public void validarSesion(){
         if (!inicioSesion()) {
             cerrarSesion();
+        }
+    }
+    public boolean accesoSuperAdmin(){
+        System.out.println("SuperAdmin");
+        System.out.println(usuario.getCodRol().getNombreRol());
+        if(usuario.getCodRol().getNombreRol().equals("Super Administrador") || usuario.getCodRol().getNombreRol().equals("Administrador")){
+            System.out.println(usuario.getCodRol().getIdRol());
+            return false;
+        }
+        return true;
+    }
+    public boolean accesoUsuario(){
+        System.out.println("Usuario");
+        System.out.println(usuario.getCodRol().getNombreRol());
+        if(usuario.getCodRol().getNombreRol().equals("Usuario")){
+            System.out.println("Ingreso igual usuario");
+            return false;
+        }
+        return true;
+
+    }
+    
+    public boolean accesoFisioterapeuta(){
+        System.out.println("Fisioterapeuta");
+        System.out.println(usuario.getCodRol().getNombreRol());
+        if(usuario.getCodRol().getNombreRol().equals("Fisioterapeuta")){
+            System.out.println("Ingreso igual a fisioterapeuta");
+            return false;
+        }
+        return true;
+    }
+    
+    public void validarAccesoFisioterapeuta(){
+        System.out.println("Validando");
+        if(accesoFisioterapeuta() == false){
+            System.out.println("Validado");
+            redireccionPaciente();
+        }
+    }
+    
+    public void validarAccesoUsuario(){
+        System.out.println("Validando");
+        if(accesoUsuario() == false){
+            System.out.println("Validado");
+            redireccionPaciente();
+        }
+    }
+    
+    public void validarAccesoSuperAdmin(){
+        System.out.println("Hola validando");
+        if(accesoSuperAdmin() == false){
+            System.out.println("Validado");
+            redireccionPaciente();
+        }
+    }
+    public void redireccionPaciente(){
+        try {
+            FacesContext fc = FacesContext.getCurrentInstance();
+            ExternalContext ec = fc.getExternalContext();
+            System.out.println(hostName() + "Usuarios/miPerfil.xhtml");
+            ec.redirect(hostName() + "Usuarios/miPerfil.xhtml");
+            
+        } catch (IOException ex) {
+            Logger.getLogger(ControllerSession.class.getName()).log(Level.SEVERE, null, ex);
+
         }
     }
 }
