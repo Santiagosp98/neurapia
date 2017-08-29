@@ -43,7 +43,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <ui:fragment rendered="#{controllerSession.usuario.codRol.nombreRol eq 'Fisioterapeuta'}">
+                            <ui:fragment rendered="#{controllerSession.usuario.codRol.nombreRol eq 'Fisioterapeuta' or controllerSession.usuario.codRol.nombreRol eq 'Usuario'}">
                                 <div class="panel-heading" role="tab" id="headingThree">
                                     <h6 class="panel-title"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>
                                         <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsThree" aria-expanded="true" aria-controls="collapseThree">
@@ -78,7 +78,7 @@
                         </h4>
                         <div class="fixed-table-body">
                             <h:form prependId="false">
-                                <h:dataTable value="#{controllerCitaMedica.listarCitasporFisioterapeutaEstado()}" var="item"
+                                <h:dataTable value="#{controllerCitaMedica.listarCitasporEstado()}" var="item"
                                              class="table table-striped table-bordered" id="citas-pendientes">
 
                                     <h:column>
