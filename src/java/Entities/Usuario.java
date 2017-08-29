@@ -48,7 +48,7 @@ import java.util.ArrayList;
     , @NamedQuery(name = "Usuario.findBySegundoApellido", query = "SELECT u FROM Usuario u WHERE u.segundoApellido = :segundoApellido")
     , @NamedQuery(name = "Usuario.findByEstadoUsuario", query = "SELECT u FROM Usuario u WHERE u.estadoUsuario = :estadoUsuario")
     , @NamedQuery(name = "Usuario.findByFechaRegistro", query = "SELECT u FROM Usuario u WHERE u.fechaRegistro = :fechaRegistro")
-    , @NamedQuery(name = "Usuario.findByCorreoElectronico", query = "SELECT u FROM Usuario u WHERE u.correoElectronico = :correoElectronico")
+    , @NamedQuery(name = "Usuario.findByCorreoElectronico", query = "SELECT u FROM Usuario u WHERE u.correoElectronico = :email")
     , @NamedQuery(name = "Usuario.listaporRol", query = "SELECT u FROM Usuario u WHERE u.codRol = :rol")
     , @NamedQuery(name = "Usuario.listaporRolDoble", query = "SELECT u FROM Usuario u WHERE u.codRol = :rol OR u.codRol = :rol2")
     , @NamedQuery(name = "Usuario.login", query = "SELECT u FROM Usuario u WHERE u.correoElectronico = :email AND u.claveUsuario = :claveUsuario")
