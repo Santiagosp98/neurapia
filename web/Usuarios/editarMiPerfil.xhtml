@@ -160,7 +160,7 @@
                         </div>-->
                         <div class="form-group col-lg-6 col-md-6 col-sm-6">
                             <h:outputLabel value="Clave Usuario nueva:" for="claveUsuario"/>
-                            <h:inputSecret id="claveUsuario" class="form-control mitooltip" tabindex="9" maxlength="25"  a:data-toggle="tooltip" a:data-placement="top"  title="ClaveUsuario" required="" requiredMessage="La clave es requerida.">
+                            <h:inputSecret id="claveUsuario" class="form-control mitooltip" tabindex="9" maxlength="25"  a:data-toggle="tooltip" a:data-placement="top"  title="ClaveUsuario" required="" requiredMessage="La clave es requerida." value="#{controllerSession.usuario.claveUsuario}">
                             </h:inputSecret>
                         </div>
 
