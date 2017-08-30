@@ -7,13 +7,16 @@ package Controllers;
 
 
 import Entities.Prediagnostico;
+import Entities.Usuario;
 import Facade.PrediagnosticoFacadeLocal;
+import Facade.UsuarioFacadeLocal;
 
 import javax.inject.Named;
 import javax.enterprise.context.ConversationScoped;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 
 /**
@@ -29,25 +32,42 @@ public class ControllerPrediagnostico extends ControllerApp {
      */
     public ControllerPrediagnostico() {
     }
-
+    
+    @Inject
+    private ControllerSession cs;
      
     @EJB
     private PrediagnosticoFacadeLocal prediagnosticoFacade;
     private Prediagnostico prediagnostico;
     private List<Prediagnostico> listaPrediagnistico;
+    private List<Prediagnostico> listaPrediagnisticoUsuario;
     private Prediagnostico prediagnosticoSeleccionado;
+    
+    @EJB
+    UsuarioFacadeLocal usuarioFacade;       
+    Usuario usuario;
+    List<Usuario> listaUsuarios;
 
 
     @PostConstruct
     public void init() {
         this.prediagnostico = new Prediagnostico();
+        this.usuario = new Usuario();
         this.listaPrediagnistico = prediagnosticoFacade.findAll();
+        this.listaPrediagnisticoUsuario = prediagnosticoFacade.prediagnosticoPorUsuario(usuario);
     }
 
     public List<Prediagnostico> consultarPrediagnostico() {
         this.listaPrediagnistico = prediagnosticoFacade.findAll();
         return listaPrediagnistico;
 
+    }
+    
+    public List<Prediagnostico> prediagnosticoPorUsuario(){   
+         System.out.println(listaPrediagnisticoUsuario.size());
+         listaPrediagnisticoUsuario = prediagnosticoFacade.prediagnosticoPorUsuario(cs.getUsuario());
+         System.out.println(listaPrediagnisticoUsuario.size());
+        return listaPrediagnisticoUsuario;
     }
 
     public String seleccionarPrediagnostico(Prediagnostico prediagnostico) {
@@ -67,6 +87,8 @@ public class ControllerPrediagnostico extends ControllerApp {
         finalizarConversacion();
         return "ConsultarPrediagnostico?faces-redirect=true";
     }
+    
+    
 
     public PrediagnosticoFacadeLocal getPrediagnosticoFacade() {
         return prediagnosticoFacade;
