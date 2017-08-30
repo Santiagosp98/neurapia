@@ -1,178 +1,290 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="#{lenguaje.lenguaje}"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <f:view locale="#{lenguaje.locale}">
+<f:view locale="#{lenguaje.locale}">
 
-        <ui:define name="titulo">Usuarios Mi Perfil</ui:define>
+    <ui:define name="titulo">Usuarios Mi Perfil</ui:define>
 
-        <h:body>
-            <ui:define name="titulo">Mi Perfil</ui:define>
-            <!-- Aside Izq de la pagina -->
-            <ui:composition template="/template/common/commonLayout.xhtml">
+    <h:body>
+        <ui:define name="titulo">Mi Perfil</ui:define>
+        <!-- Aside Izq de la pagina -->
+        <ui:composition template="/template/common/commonLayout.xhtml">
 
-                <ui:define name="aside">
-                    <div class="panel-group shadow" id="accordion" role="tablist" aria-multiselectable="true">
-                        <div class="panel panel-default">
-                            <div class="panel-heading active" role="tab" id="headingOne">
-                                <h6 class="panel-title">
-                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
-                                       aria-expanded="false" aria-controls="collapseOne">
-                                        <i class="fa fa-user" aria-hidden="true"></i>
-                                        <h:outputText value="#{msg['profile']}"></h:outputText>
+            <ui:define name="aside">
+                <div class="panel-group shadow" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading active" role="tab" id="headingOne">
+                            <h6 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                                   aria-expanded="false" aria-controls="collapseOne">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    <h:outputText value="#{msg['profile']}"></h:outputText>
+                                    <span class="caret"></span>
+                                </a>
+                            </h6>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
+                             aria-labelledby="headingOne">
+                            <div class="panel-body active">
+                                <a href="#{request.contextPath}/Usuarios/miPerfil.xhtml">
+                                    <h:outputText value="#{msg['my-profile']}"></h:outputText>
+                                </a>
+                            </div>
+                            <div class="panel-body">
+                                <a href="#{request.contextPath}/Usuarios/editarMiPerfil.xhtml">
+                                    <h:outputText value="#{msg['edit-profile']}"></h:outputText>
+                                </a>
+                            </div>
+                        </div>
+                        <ui:fragment rendered="#{controllerSession.usuario.codRol.nombreRol ne 'Usuario'}">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h6 class="panel-title"><i class="fa fa-users" aria-hidden="true"></i>
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsTwo"
+                                       aria-expanded="true" aria-controls="collapseOne">
+                                        <h:outputText value="#{msg['users-system']}"></h:outputText>
                                         <span class="caret"></span>
                                     </a>
                                 </h6>
                             </div>
-                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
+
+                            <div id="collapsTwo" class="panel-collapse collapse of" role="tabpanel"
                                  aria-labelledby="headingOne">
-                                <div class="panel-body active">
-                                    <a href="#{request.contextPath}/Usuarios/miPerfil.xhtml">
-                                        <h:outputText value="#{msg['my-profile']}"></h:outputText>
+                                <div class="panel-body">
+                                    <a href="#{request.contextPath}/Usuarios/ConsultarUsuarios.xhtml">
+                                        <h:outputText value="#{msg['check-users']}"></h:outputText>
                                     </a>
                                 </div>
                                 <div class="panel-body">
-                                    <a href="#{request.contextPath}/Usuarios/editarMiPerfil.xhtml">
-                                        <h:outputText value="#{msg['edit-profile']}"></h:outputText>
-                                    </a>
+                                    <h:form>
+                                        <a href="#{request.contextPath}/Usuarios/CrearUsuario.xhtml">
+                                            <h:outputText value="#{msg['add-user']}"></h:outputText>
+                                        </a>
+                                    </h:form>
                                 </div>
                             </div>
-                            <ui:fragment rendered="#{controllerSession.usuario.codRol.nombreRol ne 'Usuario'}">
-                                <div class="panel-heading" role="tab" id="headingOne">
-                                    <h6 class="panel-title"><i class="fa fa-users" aria-hidden="true"></i>
-                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsTwo"
-                                           aria-expanded="true" aria-controls="collapseOne">
-                                            <h:outputText value="#{msg['users-system']}"></h:outputText>                                    
-                                            <span class="caret"></span>
-                                        </a>
-                                    </h6>
-                                </div>
-
-                                <div id="collapsTwo" class="panel-collapse collapse of" role="tabpanel"
-                                     aria-labelledby="headingOne">
-                                    <div class="panel-body">
-                                        <a href="#{request.contextPath}/Usuarios/ConsultarUsuarios.xhtml">
-                                            <h:outputText value="#{msg['check-users']}"></h:outputText>                                
-                                        </a>
-                                    </div>
-                                    <div class="panel-body">
-                                        <h:form>
-                                            <a href="#{request.contextPath}/Usuarios/CrearUsuario.xhtml">
-                                                <h:outputText value="#{msg['add-user']}"></h:outputText>                                    
-                                            </a>
-                                        </h:form>
-                                    </div>
-                                </div>
-                            </ui:fragment>
-                        </div>
+                        </ui:fragment>
                     </div>
-                </ui:define>
-                <!-- Contenido de la pagina -->
-                <ui:define name="content">
-                    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 shadow" id="right-container">
-                        <!-- Titulo -->
-                        <h4 class="page-title">
-                            <h:outputText value="#{msg['my-profile']}"></h:outputText>
-                        </h4>
-                        <div class="fixed-table-body">
+                </div>
+            </ui:define>
+            <!-- Contenido de la pagina -->
+            <ui:define name="content">
+                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 shadow" id="right-container">
+                    <!-- Titulo -->
+                    <h4 class="page-title">
+                        <h:outputText value="#{msg['my-profile']}"></h:outputText>
+                    </h4>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 custom-col-lg-3">
+                            <div class="photo">
+                                <div style="background-image: url(#{request.contextPath}/resources/imgs/willFerrell.jpg);"
+                                     class="img-circle">
 
-                            <div class="form-group col xs-12 col-sm-12 col-md-3 col-lg-3" style="background-color: #eaeded; padding-bottom: 30px; border-radius: 5px;">
-                                <center id="foto" ><figure class="img-circle img-thumbnail" id="imagenUsuario" style="background-image: url(#{request.contextPath}/resources/imgs/willFerrell.jpg);">                      
-                                    </figure></center>
-                                <div style="">
-                                    <h3><b>#{controllerSession.usuario.fullNameUsuario}</b></h3>
-
-                                    <b><h:outputText
-                                            value="#{msg['user-type']}"></h:outputText>: </b><br/>#{controllerSession.usuario.codRol.nombreRol} <br/>
-                                    <b>Estado: </b><br/>#{controllerSession.usuario.estadoUsuario} <br/>
-                                    <b>Miembro desde : </b> <br/>#{controllerSession.usuario.fechaRegistro} <br/>
+                                </div>
+                            </div>
+                            <div class="basic-information">
+                                <h2 class="text-center">
+                                    <strong>
+                                        #{controllerSession.usuario.fullNameUsuario}
+                                    </strong>
+                                </h2>
+                                <div>
+                                    <table>
+                                        <tr>
+                                            <th>Tipo de usuario:</th>
+                                            <td>#{controllerSession.usuario.codRol.nombreRol}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Estado:</th>
+                                            <td>#{controllerSession.usuario.estadoUsuario}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Miembro desde:</th>
+                                            <td>
+                                                <h:outputText value="#{controllerSession.usuario.fechaRegistro}">
+                                                    <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                                </h:outputText>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group col xs-12 col-sm-12 col-md-8 col-lg-8">
-
-                            <div class="form-group col xs-12 col-sm-12 col-md-5 col-lg-5 arrow_box ">
-                                <a href="Cita Medica/Citas pendientes FisiAdministrador.html">
-                                    <h5>
-                                        <h:outputText value="#{msg['pending-appointments']}" escape="false"></h:outputText>
-                                        <br/>
-                                        <h:outputText value="#{msg['appointments']}"></h:outputText>
-                                        <h6>4 citas</h6></h5></a>
+                        <div class="col-lg-9 col-md-6 col-sm-6 col-xs-12 custom-col-lg-9">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                    <table class="table-info">
+                                        <tbody>
+                                        <tr>
+                                            <th>Usuarios registrados:</th>
+                                            <td><p class="feature">45</p></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Usuarios inhabilitados:</th>
+                                            <td>2</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total atendidos:</th>
+                                            <td>2</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                    <table class="table-info">
+                                        <tbody>
+                                        <tr>
+                                            <th>Fisioterapeutas registrados:</th>
+                                            <td>45</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total citas:</th>
+                                            <td>2</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total citas pendientes:</th>
+                                            <td>2</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                            <div class="form-group col xs-12 col-sm-12 col-md-5 col-lg-5 arrow_box col-lg-offset-2">
-                                <a href="Cita Medica/Historial de citas FisiAdministrador.html"><h5>
-                                        <h:outputText value="#{msg['accomplished-appointments']}"
-                                                      escape="false"></h:outputText> <br/><h6>73 citas</h6><h:outputText value="#{msg['appointments']}"></h:outputText></h5></a>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <th>
+                                                <h:outputText value="#{msg['user-status']}"/>
+                                            </th>
+                                            <td>#{controllerSession.usuario.estadoUsuario}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <h:outputText value="#{msg['last-session']}"/>
+                                            </th>
+                                            <td>12/06/2016</td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                <h:outputText value="#{msg['system-entries']}"/>
+                                            </th>
+                                            <td>56 <h:outputText value="#{msg['entries']}"/></td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
-                            <table class="table table-bordered">
-                                <tr>
-                                    <th>
-                                        <h:outputText value="#{msg['user-status']}"></h:outputText>
-                                    </th>
-                                    <td>#{controllerSession.usuario.estadoUsuario}</td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        <h:outputText value="#{msg['last-session']}"></h:outputText>
-                                    </th>
-                                    <td>12/06/2016</td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        <h:outputText value="#{msg['system-entries']}"></h:outputText>
-                                    </th>
-                                    <td>56 <h:outputText value="#{msg['entries']}"></h:outputText></td>
-                                </tr>
-                            </table>
-                            <h5 id="ubicacionPag" style="text-align: left"><b>Información básica</b></h5>
-
-                            <h:form prependId="false" id="prueba" a:name="prueba">
-                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <h:messages showDetail="true" showSummary="true" infoClass="alert alert-sucess" errorClass="alert alert-danger"/>
+                            <div class="row hide-on-sm hide-on-md">
+                                <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                                    <h5 class="custom-separator">Información basica</h5>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <table class="personal-info">
+                                                <tbody>
+                                                <tr>
+                                                    <th>#{msg['document-type']}</th>
+                                                    <td>#{controllerSession.usuario.tipoDocumento}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>#{msg['email']}</th>
+                                                    <td>#{controllerSession.usuario.correoElectronico}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>#{msg['city']}</th>
+                                                    <td>Bogotá</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>#{msg['address']}</th>
+                                                    <td>Calle falsa 123</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <table class="personal-info">
+                                                <tbody>
+                                                <tr>
+                                                    <th>#{msg['document']}</th>
+                                                    <td>#{controllerSession.usuario.numeroDocumento}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>#{msg['phone-number']}</th>
+                                                    <td>3133871759</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>#{msg['company']}</th>
+                                                    <td>T&amp;T interactiva</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>#{msg['birth-date-l']}</th>
+                                                    <td>1994-10-24</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                    <h:outputLabel value="#{msg['document-type']}" for="tipodocumento" />
-                                    #{controllerSession.usuario.tipoDocumento}
-
+                            </div>
+                        </div>
+                        <div class="col-sm-12 hide-on-xs hide-on-lg">
+                            <h5 class="custom-separator">Información basica</h5>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <table class="personal-info">
+                                        <tbody>
+                                        <tr>
+                                            <th>#{msg['document-type']}</th>
+                                            <td>#{controllerSession.usuario.tipoDocumento}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>#{msg['email']}</th>
+                                            <td>#{controllerSession.usuario.correoElectronico}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>#{msg['city']}</th>
+                                            <td>Bogotá</td>
+                                        </tr>
+                                        <tr>
+                                            <th>#{msg['address']}</th>
+                                            <td>Calle falsa 123</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                    <h:outputLabel value="#{msg['document-number']}" for="numeroDocumento"/>
-                                    #{controllerSession.usuario.numeroDocumento}
-
+                                <div class="col-sm-6">
+                                    <table class="personal-info">
+                                        <tbody>
+                                        <tr>
+                                            <th>#{msg['document']}</th>
+                                            <td>#{controllerSession.usuario.numeroDocumento}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>#{msg['phone-number']}</th>
+                                            <td>3133871759</td>
+                                        </tr>
+                                        <tr>
+                                            <th>#{msg['company']}</th>
+                                            <td>T&amp;T interactiva</td>
+                                        </tr>
+                                        <tr>
+                                            <th>#{msg['birth-date-l']}</th>
+                                            <td>1994-10-24</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                    <h:outputLabel value="#{msg['first-name']}" for="primerNombre"/>
-                                    #{controllerSession.usuario.primerNombre}
-                                </div>
-                                <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                    <h:outputLabel value="#{msg['middle-name']}" for="primerNombre"/>
-                                    #{controllerSession.usuario.segundoNombre}
-                                </div>
-                                <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                    <h:outputLabel value="#{msg['surname']}" for="primerNombre"/>
-                                    #{controllerSession.usuario.primerApellido}
-                                </div>
-                                <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                    <h:outputLabel value="#{controllerSession.usuario.segundoApellido}" for="primerNombre"/>
-                                    #{controllerSession.usuario.segundoApellido}
-                                </div>
-                                <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                    <h:outputLabel value="#{msg['email']}" for="correo"/>
-                                    #{controllerSession.usuario.correoElectronico}
-                                </div>
-
-                            </h:form>
-                        </div>  
+                            </div>
+                        </div>
                     </div>
-                </ui:define>
-            </ui:composition>
-        </h:body>
-    </f:view>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</f:view>
 </html>
 
 
