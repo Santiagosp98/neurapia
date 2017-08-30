@@ -36,7 +36,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Prediagnostico.findAll", query = "SELECT p FROM Prediagnostico p")
     , @NamedQuery(name = "Prediagnostico.findByIdPrediagnostico", query = "SELECT p FROM Prediagnostico p WHERE p.idPrediagnostico = :idPrediagnostico")
-    , @NamedQuery(name = "Prediagnostico.findByFecha", query = "SELECT p FROM Prediagnostico p WHERE p.fecha = :fecha")})
+    , @NamedQuery(name = "Prediagnostico.findByFecha", query = "SELECT p FROM Prediagnostico p WHERE p.fecha = :fecha")
+    ,@NamedQuery(name = "Prediagnostico.prediagnosticoPorUsuario", query = "SELECT p FROM Prediagnostico p WHERE p.codUsuario = :codUsuario")})
 public class Prediagnostico implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -148,5 +149,5 @@ public class Prediagnostico implements Serializable {
     public String toString() {
         return "Entities.Prediagnostico[ idPrediagnostico=" + idPrediagnostico + " ]";
     }
-    
+
 }
