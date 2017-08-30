@@ -6,9 +6,12 @@
 package Facade;
 
 import Entities.Prediagnostico;
+import Entities.Usuario;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -27,6 +30,17 @@ public class PrediagnosticoFacade extends AbstractFacade<Prediagnostico> impleme
 
     public PrediagnosticoFacade() {
         super(Prediagnostico.class);
+    }
+    
+   
+
+    @Override
+    public List<Prediagnostico> prediagnosticoPorUsuario(Usuario usuario) {
+         List<Prediagnostico> preUsuario = null;
+        TypedQuery<Prediagnostico> q = getEntityManager().createNamedQuery("Prediagnostico.prediagnosticoPorUsuario", Prediagnostico.class);
+        q.setParameter("codUsuario", usuario);
+        preUsuario = q.getResultList();
+        return preUsuario;    
     }
     
 }
