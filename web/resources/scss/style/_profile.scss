@@ -1,6 +1,106 @@
 //Profile
 
 /*Profile*/
+
+/**Profile photo**/
+.photo {
+  position: relative;
+  z-index: 1;
+  div {
+    background-size: cover;
+    height: 200px;
+    width: 200px;
+    z-index: 1;
+    margin: auto;
+  }
+}
+
+/**Profile basic information**/
+.basic-information {
+  background-color: #f1f1f1;
+  position: relative;
+  bottom: (240px / 2);
+  @media(min-width: 1250px) {
+    padding-bottom: 30px;
+  }
+  h2 {
+    border-bottom: 1px solid #fff;
+    padding-top: 120px;
+    padding-bottom: 10px;
+  }
+  div table {
+    margin: 20px auto auto;
+    td, tr {
+      padding: 10px;
+      @media(max-width: 320px) {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+.custom-col-lg-3 {
+  margin-bottom: -100px;
+  @media (min-width: 1250px) {
+    margin-bottom: -130px;
+  }
+  @media(max-width: 1627px) and (min-width: 1200px) {
+    width: 33.3333333333%;
+  }
+}
+
+.custom-col-lg-9 {
+  @media (max-width: 1627px) and (min-width: 1200px) {
+    width: 66.6666666667%;
+  }
+}
+
+/**Profile left panel info**/
+.table-info {
+  width: 100%;
+  border: 2px solid #ddd;
+  margin-bottom: 10px;
+  tbody tr {
+    td, th {
+      padding: 6px;
+      font-size: 14px;
+      @media (max-width: 320px) {
+        font-size: 12px;
+      }
+    }
+
+    th {
+      padding-left: 15px;
+    }
+
+    td {
+      text-align: center;
+      width: 50px;
+    }
+  }
+}
+
+.feature {
+  margin: 0 !important;
+  padding: 0 !important;
+  background-color: #a9a9a9;
+  color: #fff;
+  border-radius: 10px;
+}
+
+.personal-info {
+  width: 100%;
+  tbody tr {
+    td, th {
+      padding-top: 15px;
+      font-size: 14px;
+      @media(max-width: 1450px) {
+        font-size: 13px;
+      }
+    }
+  }
+}
+
 #imagenUsuario {
   margin-top: 21px;
   background-size: cover;
@@ -15,4 +115,5 @@
   width: 100%;
   padding: 0;
 }
+
 /*Profile*/

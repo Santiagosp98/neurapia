@@ -38,6 +38,12 @@ p {
   padding-bottom: 10px;
 }
 
+.custom-separator {
+  border-bottom: 1px solid #CBCACA;
+  padding-bottom: 10px;
+  text-align: left;
+}
+
 /**Arrow box**/
 
 .arrow_box {
@@ -77,6 +83,34 @@ p {
 .description {
   text-align: center;
   margin-top: 30px !important;
+}
+
+/**Hide on extra small devices**/
+.hide-on-xs {
+  @media(min-width: 0px) and (max-width: 767px) {
+    display: none;
+  }
+}
+
+/**Hide on small devices**/
+.hide-on-sm {
+  @media (min-width: 768px) and (max-width: 1023px) {
+    display: none;
+  }
+}
+
+/**Hide on medium devices**/
+.hide-on-md {
+  @media (min-width: 1024px) and (max-width: 1199px) {
+    display: none;
+  }
+}
+
+/**Hide on large devices**/
+.hide-on-lg {
+  @media (min-width: 1200px){
+    display: none;
+  }
 }
 
 /*Utilities*/
