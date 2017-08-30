@@ -57,52 +57,146 @@
                 </div>     
             </ui:define>
 
+
             <ui:define name="content">
                 <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 shadow" id="right-container">
                     <!-- Titulo -->
                     <h4 class="page-title">Pre-Diagnosticos</h4>
                     <div class="fixed-table-body">
-                        <h:form prependId="false">
-                            <h:dataTable value="#{controllerPrediagnostico.consultarPrediagnostico()}" var="item" class="table table-striped table-bordered" id="consultar-prediagnostico">
 
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Código"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.idPrediagnostico}"/>
-                                </h:column>
+                        <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol eq '4'}">
+                            <h:form prependId="false">
+                                <h:dataTable value="#{controllerPrediagnostico.prediagnosticoPorUsuario()}" var="item" class="table table-striped table-bordered" id="consultar-prediagnostico-usuario">
 
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Usuario"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.codUsuario.fullNameUsuario}">                                       
-                                    </h:outputText>
-                                </h:column>                                  
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Código"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.idPrediagnostico}"/>
+                                    </h:column>
 
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Fecha"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.fecha}">
-                                        <f:convertDateTime pattern="yyyy-MM-dd" />
-                                    </h:outputText>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Acciones"/>
-                                    </f:facet>
-                                    &nbsp;
-                                    <h:commandLink action="#{controllerPrediagnostico.seleccionarPrediagnostico(item)}" value=""><span id="botonEdita" class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                                    </h:commandLink>
-                                    &nbsp;
-                                    <h:commandLink id="btnModalPrediag" class="btnModalPrediag" value=""><span id="botonEliminaPrediag"  class="fa fa-times" aria-hidden="true"></span>
-                                        <f:ajax event="click" listener="#{controllerPrediagnosticoEliminar.prepararEliminarPrediagnostico(item)}" 
-                                                render=":contenido-modal-eliminar-prediagnostico"/>
-                                    </h:commandLink>
-                                </h:column>
-                            </h:dataTable>
-                        </h:form>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Cuestionario"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.codCuestionario.idCuestionario}"/>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Respuestas"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.codRespuestaPreg.idRespuestaPreg}">                                        
+                                        </h:outputText>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Usuario"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.codUsuario.fullNameUsuario}">                                       
+                                        </h:outputText>
+                                    </h:column>                                  
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Fecha"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.fecha}">
+                                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                                        </h:outputText>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Resultado"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.resultadoPrediagnostico}"/>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Acciones"/>
+                                        </f:facet>
+                                        &nbsp;
+                                        <h:commandLink action="#{controllerPrediagnostico.seleccionarPrediagnostico(item)}" value=""><span id="botonEdita" class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                        </h:commandLink>
+                                        &nbsp;
+                                        <h:commandLink id="btnModalPrediag" class="btnModalPrediag" value=""><span id="botonEliminaPrediag"  class="fa fa-times" aria-hidden="true"></span>
+                                            <f:ajax event="click" listener="#{controllerPrediagnosticoEliminar.prepararEliminarPrediagnostico(item)}" 
+                                                    render=":contenido-modal-eliminar-prediagnostico"/>
+                                        </h:commandLink>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:form>
+                        </ui:fragment>
+                        
+                        <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol ne '4'}">
+                            <h:form prependId="false">
+                                <h:dataTable value="#{controllerPrediagnostico.consultarPrediagnostico()}" var="item" class="table table-striped table-bordered" id="consultar-prediagnostico">
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Código"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.idPrediagnostico}"/>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Cuestionario"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.codCuestionario.idCuestionario}"/>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Respuestas"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.codRespuestaPreg.idRespuestaPreg}">                                        
+                                        </h:outputText>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Usuario"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.codUsuario.fullNameUsuario}">                                       
+                                        </h:outputText>
+                                    </h:column>                                  
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Fecha"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.fecha}">
+                                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                                        </h:outputText>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Resultado"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.resultadoPrediagnostico}"/>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Acciones"/>
+                                        </f:facet>
+                                        &nbsp;
+                                        <h:commandLink action="#{controllerPrediagnostico.seleccionarPrediagnostico(item)}" value=""><span id="botonEdita" class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                        </h:commandLink>
+                                        &nbsp;
+                                        <h:commandLink id="btnModalPrediag" class="btnModalPrediag" value=""><span id="botonEliminaPrediag"  class="fa fa-times" aria-hidden="true"></span>
+                                            <f:ajax event="click" listener="#{controllerPrediagnosticoEliminar.prepararEliminarPrediagnostico(item)}" 
+                                                    render=":contenido-modal-eliminar-prediagnostico"/>
+                                        </h:commandLink>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:form>
+                        </ui:fragment>
                     </div>
                 </div>
 
