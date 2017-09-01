@@ -122,15 +122,15 @@
                                         <tbody>
                                         <tr>
                                             <th>Usuarios registrados:</th>
-                                            <td><p class="feature">45</p></td>
+                                            <td><p class="feature">#{controllerUsuario.cantidadUsuarios}</p></td>
                                         </tr>
                                         <tr>
                                             <th>Usuarios inhabilitados:</th>
-                                            <td>2</td>
+                                            <td>#{controllerUsuario.usuariosInhabilitados}</td>
                                         </tr>
                                         <tr>
                                             <th>Total atendidos:</th>
-                                            <td>2</td>
+                                            <td>#{controllerCitaMedica.citasRealizadas}</td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -140,15 +140,15 @@
                                         <tbody>
                                         <tr>
                                             <th>Fisioterapeutas registrados:</th>
-                                            <td>45</td>
+                                            <td>#{controllerUsuario.fisioterapeutasRegistrados}</td>
                                         </tr>
                                         <tr>
                                             <th>Total citas:</th>
-                                            <td>2</td>
+                                            <td>#{controllerCitaMedica.totalCitasMedicas}</td>
                                         </tr>
                                         <tr>
                                             <th>Total citas pendientes:</th>
-                                            <td>2</td>
+                                            <td>#{controllerCitaMedica.citasPendientes}</td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -167,13 +167,17 @@
                                             <th>
                                                 <h:outputText value="#{msg['last-session']}"/>
                                             </th>
-                                            <td>12/06/2016</td>
+                                            <td>
+                                                <h:outputText value="#{controllerSession.usuario.ultimaSesion}">
+                                                    <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" timeZone="America/Bogota"/>
+                                                </h:outputText>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <th>
                                                 <h:outputText value="#{msg['system-entries']}"/>
                                             </th>
-                                            <td>56 <h:outputText value="#{msg['entries']}"/></td>
+                                            <td>#{controllerSession.usuario.ingresos} <h:outputText value="#{msg['entries']}"/></td>
                                         </tr>
                                     </table>
                                 </div>
