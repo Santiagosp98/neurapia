@@ -7,15 +7,15 @@ package Facade;
 
 import Entities.Rol;
 import Entities.Usuario;
-import java.util.ArrayList;
+
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Typed;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 /**
- *
  * @author jair3
  */
 @Stateless
@@ -35,7 +35,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
 
     @Override
     public Usuario iniciarSesion(String email, String clave) {
-        Usuario u = null;        
+        Usuario u = null;
         try {
             TypedQuery<Usuario> q = getEntityManager().createNamedQuery("Usuario.login", Usuario.class);
             q.setParameter("email", email);
@@ -44,14 +44,14 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         return u;
     }
-    
+
     @Override
-    public List<Usuario> listaUsuariosPorRol(Rol rol){
+    public List<Usuario> listaUsuariosPorRol(Rol rol) {
         List<Usuario> listaPorRol = null;
-        try {            
+        try {
             TypedQuery<Usuario> q = getEntityManager().createNamedQuery("Usuario.listaporRol", Usuario.class);
             q.setParameter("rol", rol);
             listaPorRol = q.getResultList();
@@ -60,11 +60,11 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
         }
         return listaPorRol;
     }
-    
+
     @Override
-    public List<Usuario> listaUsuariosPorRolDoble(Rol rol, Rol rol2){
+    public List<Usuario> listaUsuariosPorRolDoble(Rol rol, Rol rol2) {
         List<Usuario> listaPorRolDoble = null;
-        try {            
+        try {
             TypedQuery<Usuario> q = getEntityManager().createNamedQuery("Usuario.listaporRolDoble", Usuario.class);
             q.setParameter("rol", rol);
             q.setParameter("rol2", rol2);
@@ -77,7 +77,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
 
     @Override
     public Usuario restableceContrasena(String email) {
-        Usuario u = null;        
+        Usuario u = null;
         try {
             TypedQuery<Usuario> q = getEntityManager().createNamedQuery("Usuario.findByCorreoElectronico", Usuario.class);
             q.setParameter("email", email);
@@ -85,13 +85,13 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         return u;
     }
 
     @Override
     public Usuario buscarId(int id) {
-        Usuario u = null;        
+        Usuario u = null;
         try {
             TypedQuery<Usuario> q = getEntityManager().createNamedQuery("Usuario.findByIdUsuario", Usuario.class);
             q.setParameter("idUsuario", id);
@@ -99,13 +99,13 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         return u;
     }
 
     @Override
     public Usuario buscarDocumento(String documento) {
-        Usuario u = null;        
+        Usuario u = null;
         try {
             TypedQuery<Usuario> q = getEntityManager().createNamedQuery("Usuario.findByTipoDocumento", Usuario.class);
             q.setParameter("tipoDocumento", documento);
@@ -113,9 +113,38 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         return u;
     }
-    
-    
+
+    @Override
+    public int cantidadUsuariosPorEstado(String estado) {
+        int cantidad = 0;
+
+        try {
+            TypedQuery<Long> query = getEntityManager().createNamedQuery("Usuario.countCantidadUsuariosPorEstado", Long.class);
+            query.setParameter("estadoUsuario", estado);
+            cantidad = query.getSingleResult().intValue();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return cantidad;
+    }
+
+    @Override
+    public int countCantidadUsuariosPorRol(int id) {
+        int cantidad = 0;
+
+        try {
+            TypedQuery<Long> query = getEntityManager().createNamedQuery("Usuario.countCantidadUsuariosPorRol", Long.class);
+            query.setParameter("idRol", id);
+            cantidad = query.getSingleResult().intValue();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return cantidad;
+    }
+
 }
