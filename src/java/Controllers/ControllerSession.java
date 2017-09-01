@@ -10,6 +10,9 @@ import Facade.UsuarioFacadeLocal;
 import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -74,6 +77,10 @@ public class ControllerSession extends ControllerApp {
             if (usuario != null) {
                 if(usuario.getEstadoUsuario().equals("Activo")){
                     System.out.println("El usuario ingresado es: " + usuario.getPrimerNombre());
+                    usuario.setIngresos(usuario.getIngresos() + 1);
+                    Calendar calendar = Calendar.getInstance();
+                    usuario.setUltimaSesion(calendar.getTime());
+                    usuarioFacade.edit(usuario);
                     return "Usuarios/miPerfil?faces-redirect=true";     
                 }else{
                     FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Lo sentimos tu usuario esta inactivo", "Hable con el administrador para activar");
@@ -171,6 +178,7 @@ public class ControllerSession extends ControllerApp {
             redireccionPaciente();
         }
     }
+
     public void redireccionPaciente(){
         try {
             FacesContext fc = FacesContext.getCurrentInstance();
