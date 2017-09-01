@@ -1,10 +1,13 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="#{lenguaje.locale}"
+      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<f:view locale="#{lenguaje.locale}">
     <h:head>
         <title>Registros</title>
         <!-- En esta sesión  el administrador tendra la capacidad de agregar los registros a cada tabla de la base de datos -->
@@ -13,31 +16,31 @@
         <ui:composition template="/template/common/commonLayout.xhtml">
 
             <ui:define name="aside">
+
                 <div class="panel-group shadow" id="accordion" role="tablist" aria-multiselectable="true">
 
                     <div class="panel panel-default">
-
                         <div class="panel-heading active" role="tab" id="headingOne">
                             <h6 class="panel-title"><i class="fa fa-users" aria-hidden="true"></i>
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsTwo" aria-expanded="true" aria-controls="collapseOne">
-                                    Mis Pre-Diagnosticos<span class="caret"></span> 
+                                    <h:outputText value="#{msg['my-prediagnostics']}"/>
+                                    <span class="caret"></span>
                                 </a>
                             </h6>
                         </div>
 
                         <div id="collapsTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                            <div class="panel-body active">
-                                <a href="ConsultarPrediagnostico.xhtml">Historial de Prediagnostico</a>
+                            <div class="panel-body">
+                                <a href="ConsultarPrediagnostico.xhtml">#{msg['prediagnosis-historial']}</a>
                             </div>
-                            <div class="panel-body" >
+                            <div class="panel-body active" >
                                 <h:form>
-                                    <h:commandLink action="#{controllerUsuario.seleccionarCrear()}" value="Consultar resultados de Prediagnostico" />
+                                    <a href="CrearPrediagnostico.xhtml">#{msg['create-prediagnosis']}</a>
                                 </h:form>
                             </div>
                         </div>
 
                     </div>
-
                 </div>
             </ui:define>
 
@@ -47,14 +50,14 @@
                 <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 shadow" id="right-container">
                     <!-- Titulo -->
                     <h4 class="page-title">
-                        Añadir Pre-Diagnostico
+                        #{msg['add-prediagnosis']}
                     </h4>
 
                     <h:form prependId="false" id="formCuestionarioPreguntas" a:name="formCuestionarioPreguntas">
 
                         <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
                             <br></br>
-                            <label for="pregunta1">1. ¿En qué parte de su cuerpo presenta la molestia?</label>  
+                            <label for="pregunta1">1. #{msg['add-prediagnosis-question1']}</label>
                             <h:messages for="pregunta1" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
                             <h:inputTextarea class="form-control" rows="4" id="pregunta1" value="#{controllerRespuestaPreg.respuestapreg.resp1}" 
                                              required="true" requiredMessage="El Campo no debe ser nulo" title="pregunta1" ></h:inputTextarea>
@@ -62,7 +65,7 @@
 
                         <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">    
                             <br></br>
-                            <label for="pregunta2">2. ¿Describa la molestia?</label>       
+                            <label for="pregunta2">2. #{msg['add-prediagnosis-question2']}</label>
                             <h:messages for="pregunta2" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
                             <h:inputTextarea class="form-control" rows="4" id="pregunta2" value="#{controllerRespuestaPreg.respuestapreg.resp2}"
                                              required="true" requiredMessage="El Campo no debe ser nulo" title="pregunta2" ></h:inputTextarea>
@@ -70,7 +73,7 @@
 
                         <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">     
                             <br></br>
-                            <label for="pregunta3">3. ¿Aproximadamente cuando empezó la molestia?</label>        
+                            <label for="pregunta3">3. #{msg['add-prediagnosis-question3']}</label>
                             <h:messages for="pregunta3" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
                             <h:inputTextarea class="form-control" rows="4" id="pregunta3" value="#{controllerRespuestaPreg.respuestapreg.resp3}" 
                                              required="true" requiredMessage="El Campo no debe ser nulo" title="pregunta3" ></h:inputTextarea>
@@ -78,7 +81,7 @@
 
                         <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">    
                             <br></br>
-                            <label for="pregunta4">4. ¿Atribuye la molestia a alguna actividad que haya realizado?</label>    
+                            <label for="pregunta4">4. #{msg['add-prediagnosis-question4']}</label>
                             <h:messages for="pregunta4" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
                             <h:inputTextarea class="form-control" rows="4" id="pregunta4" value="#{controllerRespuestaPreg.respuestapreg.resp4}"
                                              required="true" requiredMessage="El Campo no debe ser nulo" title="pregunta4" ></h:inputTextarea>
@@ -86,7 +89,7 @@
 
                         <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
                             <br></br>
-                            <label for="pregunta5">5. ¿Qué actividad desarrolla diariamente?</label>         
+                            <label for="pregunta5">5. #{msg['add-prediagnosis-question5']}</label>
                             <h:messages for="pregunta5" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
                             <h:inputTextarea class="form-control" rows="4" id="pregunta5" value="#{controllerRespuestaPreg.respuestapreg.resp5}"
                                              required="true" requiredMessage="El Campo no debe ser nulo" title="pregunta5" ></h:inputTextarea>
@@ -94,7 +97,7 @@
 
                         <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
                             <br></br>
-                            <label for="pregunta6">6. ¿Toma algún medicamento para calmar la molestia?</label>  
+                            <label for="pregunta6">6. #{msg['add-prediagnosis-question6']}</label>
                             <h:messages for="pregunta6" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
                             <h:inputTextarea class="form-control" rows="4" id="pregunta6" value="#{controllerRespuestaPreg.respuestapreg.resp6}"
                                              required="true" requiredMessage="El Campo no debe ser nulo" title="pregunta6" ></h:inputTextarea>
@@ -102,7 +105,7 @@
 
                         <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
                             <br></br>
-                            <label for="pregunta7">7. ¿Padece o ha padecido de alguna enfermedad, cuál?</label>   
+                            <label for="pregunta7">7. #{msg['add-prediagnosis-question7']}</label>
                             <h:messages for="pregunta7" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
                             <h:inputTextarea class="form-control" rows="4" id="pregunta7" value="#{controllerRespuestaPreg.respuestapreg.resp7}"
                                              required="true" requiredMessage="El Campo no debe ser nulo" title="pregunta7" ></h:inputTextarea>
@@ -110,7 +113,7 @@
 
                         <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
                             <br></br>
-                            <label for="pregunta8">8. ¿Cada cuánto realiza actividad física?</label>        
+                            <label for="pregunta8">8. #{msg['add-prediagnosis-question8']}?</label>
                             <h:messages for="pregunta8" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
                             <h:inputTextarea class="form-control" rows="4" id="pregunta8" value="#{controllerRespuestaPreg.respuestapreg.resp8}"
                                              required="true" requiredMessage="El Campo no debe ser nulo" title="pregunta8" ></h:inputTextarea>
@@ -118,7 +121,7 @@
 
                         <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
                             <br></br>
-                            <label for="pregunta9">9. ¿Tiene dificultad para realizar actividad física?</label>  
+                            <label for="pregunta9">9. #{msg['add-prediagnosis-question9']}</label>
                             <h:messages for="pregunta9" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
                             <h:inputTextarea class="form-control" rows="4" id="pregunta9" value="#{controllerRespuestaPreg.respuestapreg.resp9}"
                                              required="true" requiredMessage="El Campo no debe ser nulo" title="pregunta9" ></h:inputTextarea>
@@ -126,7 +129,7 @@
 
                         <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
                             <br></br>
-                            <label for="pregunta10">10. ¿Le han realizado alguna operación medica?</label>     
+                            <label for="pregunta10">10. #{msg['add-prediagnosis-question10']}</label>
                             <h:messages for="pregunta10" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
                             <h:inputTextarea class="form-control" rows="4" id="pregunta10" value="#{controllerRespuestaPreg.respuestapreg.resp10}"
                                              required="true" requiredMessage="El Campo no debe ser nulo" title="pregunta10" ></h:inputTextarea>
@@ -134,8 +137,8 @@
 
                         <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">
                             <br></br>
-                            <button  type="button" id="btnModalCrearPre" class="btnModalCrearPre btn btn-primary"  value="Enviar">
-                               Enviar
+                            <button  type="button" id="btnModalCrearPre" class="btnModalCrearPre btn btn-primary">
+                                #{msg['send']}
                             </button>
                         </div>  
 
@@ -146,16 +149,17 @@
                                     <h:panelGroup id="contenido-modal-crear-prediag" layout="block"  class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title">Confirmación de Prediagnostico</h4>
+                                            <h4 class="modal-title">#{msg['prediagnosis-creation-title']}</h4>
                                         </div>
                                         <div class="modal-body">
-                                            <p align="justify">Cordial saludo <strong> #{controllerSession.usuario.fullNameUsuario}</strong>,<br></br> <br></br>Gracias por completar 
-                                                nuestro cuestionario de pre-diagnóstico, este será enviado a uno de nuestros profesionales fisioterapeutas,
-                                                quien lo analizará y dará una respuesta según la información que usted registro en un tiempo máximo de 1 semana, 
-                                                usted podrá consultar el resultado de este en el módulo de Prediagnóstico.</p>
+                                            <p align="justify">
+                                                #{msg['greetings']}<strong> #{controllerSession.usuario.fullNameUsuario}</strong>,
+                                                <br></br> <br></br>
+                                                #{msg['prediagnosis-creation-paragraph']}
+                                            </p>
                                         </div>
                                         <div class="modal-footer">
-                                            <h:commandButton class="btn btn-primary" value="Aceptar"  action="#{controllerRespuestaPreg.crearRespuestapreg()}"
+                                            <h:commandButton class="btn btn-primary" value="#{msg['accept']}"  action="#{controllerRespuestaPreg.crearRespuestapreg()}"
                                                              >
                                             </h:commandButton>
                                                                                     
@@ -187,5 +191,6 @@
 
         </ui:composition>
     </h:body>
+</f:view>
 </html>
 

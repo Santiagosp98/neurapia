@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="#{lenguaje.lenguaje}"
+      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:define name="titulo">Prediagnostico consultar Prediagnostico</ui:define>
-
+    <f:view locale="#{lenguaje.locale}">
     <h:body>
         <ui:define name="titulo">Consultar Prediagnosticos</ui:define>
         <!-- Aside Izq de la pagina -->
@@ -18,52 +18,46 @@
                 <div class="panel-group shadow" id="accordion" role="tablist" aria-multiselectable="true">
 
                     <div class="panel panel-default">
-
-
                         <div class="panel-heading active" role="tab" id="headingOne">
                             <h6 class="panel-title"><i class="fa fa-users" aria-hidden="true"></i>
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsTwo" aria-expanded="true" aria-controls="collapseOne">
-                                    Mis Pre-Diagnosticos<span class="caret"></span> 
+                                    <h:outputText value="#{msg['my-prediagnostics']}"/>
+                                    <span class="caret"></span>
                                 </a>
                             </h6>
                         </div>
 
                         <div id="collapsTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                             <div class="panel-body active">
-                                <a href="ConsultarPrediagnostico.xhtml">Hstorial de Prediagnostico</a>
+                                <a href="ConsultarPrediagnostico.xhtml">#{msg['prediagnosis-historial']}</a>
                             </div>
                             <div class="panel-body" >
                                 <h:form>
-                                    <a href="CrearPrediagnostico.xhtml">Crear Prediagnostico</a>
-                                </h:form>                                
-                            </div>
-                            <div class="panel-body" >
-                                <h:form>
-                                    <h:commandLink action="#{controllerUsuario.seleccionarCrear()}" value="Consultar resultados de Prediagnostico" />
+                                    <a href="CrearPrediagnostico.xhtml">#{msg['create-prediagnosis']}</a>
                                 </h:form>
                             </div>
                         </div>
 
                     </div>
-                </div>     
+                </div>
             </ui:define>
 
             <ui:define name="content">
                 <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 shadow" id="right-container">
                     <!-- Titulo -->
                     <h4 class="page-title">
-                        Actualización resultado de prediagnóstico
+                        #{msg['update-prediagnosis-result']}
                     </h4>
 
                     <div class="contenido">
 
                         <div class="datosDePrediagnostico col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                            <h2>Prediagnostico N°: #{controllerPrediagnostico.prediagnostico.idPrediagnostico}</h2>
+                            <h2>#{msg['prediagnosis']} N°: #{controllerPrediagnostico.prediagnostico.idPrediagnostico}</h2>
                         </div>
                         <div class="datosDePrediagnostico col-lg-3 col-md-3 col-sm-3 col-xs-12">
 
                             <h2>
-                                Fecha de registro:
+                                #{msg['register-date']}
                                 <h:outputText value="#{controllerPrediagnostico.prediagnostico.fecha}">
                                     <f:convertDateTime pattern="yyyy-MM-dd" />
                                 </h:outputText>
@@ -74,23 +68,23 @@
 
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="Nombre Paciente"/>
+                                    <h:outputText value="#{msg['patient']}"/>
                                 </f:facet>
                                 <h:outputText value="#{controllerPrediagnostico.prediagnostico.codUsuario.fullNameUsuario}"/>
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="Número Documento"/>
+                                    <h:outputText value="#{msg['document-number']}"/>
                                 </f:facet>
                                 <h:outputText value="#{controllerPrediagnostico.prediagnostico.codUsuario.numeroDocumento}"/>
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="Codigo Paciente"/>
+                                    <h:outputText value="#{msg['status']}"/>
                                 </f:facet>
-                                <h:outputText value="#{controllerPrediagnostico.prediagnostico.codUsuario.idUsuario}"/>
+                                <h:outputText value="#{controllerPrediagnostico.prediagnostico.codUsuario.estadoUsuario}"/>
                             </h:column>
 
                         </h:dataTable>
@@ -98,92 +92,93 @@
                     </div>
                     <h:form prependId="false" id="Predgiagnostico">
 
-                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">
                             <br></br>
-                            <label for="Preg1">#{controllerPrediagnostico.prediagnostico.codCuestionario.preg1}</label>                            
+                            <label for="Preg1">#{msg['add-prediagnosis-question1']}</label>
                             <h:inputTextarea class="form-control" rows="4" id="Preg1" value="#{controllerPrediagnostico.prediagnostico.codRespuestaPreg.resp1}" disabled="true"></h:inputTextarea>
                         </div>
 
-                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">    
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">
                             <br></br>
-                            <label for="Preg2">#{controllerPrediagnostico.prediagnostico.codCuestionario.preg2}</label>                            
+                            <label for="Preg2">#{msg['add-prediagnosis-question2']}</label>
                             <h:inputTextarea class="form-control" rows="4" id="Preg2" value="#{controllerPrediagnostico.prediagnostico.codRespuestaPreg.resp2}" disabled="true"></h:inputTextarea>
                         </div>
 
-                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">     
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">
                             <br></br>
-                            <label for="Preg3">#{controllerPrediagnostico.prediagnostico.codCuestionario.preg3}</label>                            
+                            <label for="Preg3">#{msg['add-prediagnosis-question3']}</label>
                             <h:inputTextarea class="form-control" rows="4" id="Preg3" value="#{controllerPrediagnostico.prediagnostico.codRespuestaPreg.resp3}" disabled="true"></h:inputTextarea>
                         </div>
 
-                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">    
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">
                             <br></br>
-                            <label for="Preg4">#{controllerPrediagnostico.prediagnostico.codCuestionario.preg4}</label>                            
+                            <label for="Preg4">#{msg['add-prediagnosis-question4']}</label>
                             <h:inputTextarea class="form-control" rows="4" id="Preg4" value="#{controllerPrediagnostico.prediagnostico.codRespuestaPreg.resp4}" disabled="true"></h:inputTextarea>
                         </div>
 
-                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">
                             <br></br>
-                            <label for="Preg5">#{controllerPrediagnostico.prediagnostico.codCuestionario.preg5}</label>                            
+                            <label for="Preg5">#{msg['add-prediagnosis-question5']}</label>
                             <h:inputTextarea class="form-control" rows="4" id="Preg5" value="#{controllerPrediagnostico.prediagnostico.codRespuestaPreg.resp5}" disabled="true"></h:inputTextarea>
                         </div>
 
-                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">
                             <br></br>
-                            <label for="Preg6">#{controllerPrediagnostico.prediagnostico.codCuestionario.preg6}</label>                            
+                            <label for="Preg6">#{msg['add-prediagnosis-question6']}</label>
                             <h:inputTextarea class="form-control" rows="4" id="Preg6" value="#{controllerPrediagnostico.prediagnostico.codRespuestaPreg.resp6}" disabled="true"></h:inputTextarea>
                         </div>
 
-                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">
                             <br></br>
-                            <label for="Preg7">#{controllerPrediagnostico.prediagnostico.codCuestionario.preg7}</label>                            
+                            <label for="Preg7">#{msg['add-prediagnosis-question7']}</label>
                             <h:inputTextarea class="form-control" rows="4" id="Preg7" value="#{controllerPrediagnostico.prediagnostico.codRespuestaPreg.resp7}" disabled="true"></h:inputTextarea>
                         </div>
 
-                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">
                             <br></br>
-                            <label for="Preg8">#{controllerPrediagnostico.prediagnostico.codCuestionario.preg8}</label>                            
+                            <label for="Preg8">#{msg['add-prediagnosis-question8']}</label>
                             <h:inputTextarea class="form-control" rows="4" id="Preg8" value="#{controllerPrediagnostico.prediagnostico.codRespuestaPreg.resp8}" disabled="true"></h:inputTextarea>
                         </div>
 
-                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">
                             <br></br>
-                            <label for="Preg9">#{controllerPrediagnostico.prediagnostico.codCuestionario.preg9}</label>                            
+                            <label for="Preg9">#{msg['add-prediagnosis-question9']}</label>
                             <h:inputTextarea class="form-control" rows="4" id="Preg9" value="#{controllerPrediagnostico.prediagnostico.codRespuestaPreg.resp9}" disabled="true"></h:inputTextarea>
                         </div>
 
-                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">
                             <br></br>
-                            <label for="Preg10">#{controllerPrediagnostico.prediagnostico.codCuestionario.preg10}</label>                            
+                            <label for="Preg10">#{msg['add-prediagnosis-question10']}</label>
                             <h:inputTextarea class="form-control" rows="4" id="Preg10" value="#{controllerPrediagnostico.prediagnostico.codRespuestaPreg.resp10}" disabled="true"></h:inputTextarea>
                         </div>
 
-                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px"> 
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">
 
                             <br></br>
                             <h:messages for="resultado" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
-                            <label for="resultado">Resultado</label>     
-                            <h:inputTextarea class="form-control" rows="4" id="resultado" value="#{controllerPrediagnostico.prediagnostico.resultadoPrediagnostico}" 
+                            <label for="resultado">#{msg['result']}</label>
+                            <h:inputTextarea class="form-control" rows="4" id="resultado" value="#{controllerPrediagnostico.prediagnostico.resultadoPrediagnostico}"
                                              required="true" requiredMessage="El Campo Resultado no debe ser nulo" title="resultado" ></h:inputTextarea>
                         </div>
 
-                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">  
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">
                             <br></br>
-                            <h:commandButton class="btn btn-primary" action="#{controllerPrediagnostico.guardarCambios()}" value="Guardar"/>
+                            <h:commandButton class="btn btn-primary" action="#{controllerPrediagnostico.guardarCambios()}" value="#{msg['save']}"/>
                             &nbsp;
-                            <h:commandButton class="btn btn-default" action="#{controllerPrediagnostico.cancelarActualizar()}" value="Cancelar"/>
-                        </div> 
+                            <h:commandButton class="btn btn-default" action="#{controllerPrediagnostico.cancelarActualizar()}" value="#{msg['cancel']}"/>
+                        </div>
 
                     </h:form>
                 </div>
 
 
-            </ui:define>                   
+            </ui:define>
 
         </ui:composition>
 
     </h:body>
-
+    </f:view>
 </html>
+
 
 

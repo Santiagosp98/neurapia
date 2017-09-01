@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="#{lenguaje.lenguaje}"
+      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-
+<f:view locale="#{lenguaje.locale}">
     <ui:define name="titulo">Usuarios consultar Usuarios</ui:define>
 
     <h:body>
@@ -18,38 +19,23 @@
                 <div class="panel-group shadow" id="accordion" role="tablist" aria-multiselectable="true">
 
                     <div class="panel panel-default">
-
-
-                        <div id="collapseOne" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingOne">
-                            <div class="panel-body">
-                                <a href="#">Mi perfil</a> 
-                            </div>
-                            <div class="panel-body">
-                                <a href="#">Editar mi perfil</a> 
-                            </div>
-                        </div>
-
                         <div class="panel-heading active" role="tab" id="headingOne">
                             <h6 class="panel-title"><i class="fa fa-users" aria-hidden="true"></i>
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsTwo" aria-expanded="true" aria-controls="collapseOne">
-                                    Mis Pre-Diagnosticos<span class="caret"></span> 
+                                    <h:outputText value="#{msg['my-prediagnostics']}"/>
+                                    <span class="caret"></span>
                                 </a>
                             </h6>
                         </div>
 
                         <div id="collapsTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                             <div class="panel-body active">
-                                <a href="ConsultarPrediagnostico.xhtml">Hstorial de Prediagnostico</a>
+                                <a href="ConsultarPrediagnostico.xhtml">#{msg['prediagnosis-historial']}</a>
                             </div>
                             <div class="panel-body" >
                                 <h:form>
-                                    <a href="CrearPrediagnostico.xhtml">Crear Prediagnostico</a>
+                                    <a href="CrearPrediagnostico.xhtml">#{msg['create-prediagnosis']}</a>
                                 </h:form>                                
-                            </div>
-                            <div class="panel-body" >
-                                <h:form>
-                                    <h:commandLink action="#{controllerUsuario.seleccionarCrear()}" value="Consultar resultados de Prediagnostico" />
-                                </h:form>
                             </div>
                         </div>
 
@@ -61,7 +47,7 @@
             <ui:define name="content">
                 <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 shadow" id="right-container">
                     <!-- Titulo -->
-                    <h4 class="page-title">Pre-Diagnosticos</h4>
+                    <h4 class="page-title">#{msg['prediagnostics']}</h4>
                     <div class="fixed-table-body">
 
                         <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol eq '4'}">
@@ -70,21 +56,21 @@
 
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Código"/>
+                                            <h:outputText value="#{msg['code']}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.idPrediagnostico}"/>
                                     </h:column>
 
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Cuestionario"/>
+                                            <h:outputText value="#{msg['questionnaire']}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.codCuestionario.idCuestionario}"/>
                                     </h:column>
 
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Respuestas"/>
+                                            <h:outputText value="#{msg['answers']}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.codRespuestaPreg.idRespuestaPreg}">                                        
                                         </h:outputText>
@@ -92,7 +78,7 @@
 
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Usuario"/>
+                                            <h:outputText value="#{msg['user']}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.codUsuario.fullNameUsuario}">                                       
                                         </h:outputText>
@@ -100,7 +86,7 @@
 
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Fecha"/>
+                                            <h:outputText value="#{msg['date']}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.fecha}">
                                             <f:convertDateTime pattern="yyyy-MM-dd" />
@@ -109,14 +95,14 @@
 
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Resultado"/>
+                                            <h:outputText value="#{msg['result']}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.resultadoPrediagnostico}"/>
                                     </h:column>
 
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Acciones"/>
+                                            <h:outputText value="#{msg['actions']}"/>
                                         </f:facet>
                                         &nbsp;
                                         <h:commandLink action="#{controllerPrediagnostico.seleccionarPrediagnostico(item)}" value=""><span id="botonEdita" class="fa fa-pencil-square-o" aria-hidden="true"></span>
@@ -137,21 +123,21 @@
 
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Código"/>
+                                            <h:outputText value="#{msg['code']}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.idPrediagnostico}"/>
                                     </h:column>
 
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Cuestionario"/>
+                                            <h:outputText value="#{msg['questionnaire']}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.codCuestionario.idCuestionario}"/>
                                     </h:column>
 
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Respuestas"/>
+                                            <h:outputText value="#{msg['answers']}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.codRespuestaPreg.idRespuestaPreg}">                                        
                                         </h:outputText>
@@ -159,7 +145,7 @@
 
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Usuario"/>
+                                            <h:outputText value="#{msg['user']}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.codUsuario.fullNameUsuario}">                                       
                                         </h:outputText>
@@ -167,7 +153,7 @@
 
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Fecha"/>
+                                            <h:outputText value="#{msg['date']}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.fecha}">
                                             <f:convertDateTime pattern="yyyy-MM-dd" />
@@ -176,14 +162,14 @@
 
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Resultado"/>
+                                            <h:outputText value="#{msg['result']}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.resultadoPrediagnostico}"/>
                                     </h:column>
 
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="Acciones"/>
+                                            <h:outputText value="#{msg['actions']}"/>
                                         </f:facet>
                                         &nbsp;
                                         <h:commandLink action="#{controllerPrediagnostico.seleccionarPrediagnostico(item)}" value=""><span id="botonEdita" class="fa fa-pencil-square-o" aria-hidden="true"></span>
@@ -207,16 +193,16 @@
                             <h:panelGroup id="contenido-modal-eliminar-prediagnostico" layout="block"  class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Confirmación eliminar PREDIAGNOSTICO</h4>
+                                    <h4 class="modal-title">#{msg['delete-prediagnosis-title']}</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <p>¿Está seguro que desea eliminar el PREDIAGNOSTICO N° "#{controllerPrediagnosticoEliminar.seleccionarEliminarPrediagnostico.idPrediagnostico}" ?</p>
+                                    <p>#{msg['delete-prediagnosis-text']} <strong>"#{controllerPrediagnosticoEliminar.seleccionarEliminarPrediagnostico.idPrediagnostico}"</strong>?</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <h:commandButton class="btn btn-primary" value="Eliminar"
+                                    <h:commandButton class="btn btn-primary" value="#{msg['delete']}"
                                                      action="#{controllerPrediagnosticoEliminar.eliminarPrediagnostico()}">
                                     </h:commandButton>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>                                            
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">#{msg['cancel']}</button>
                                 </div>
                             </h:panelGroup>
                         </h:form>
@@ -234,7 +220,7 @@
 
                         $("#consultar-prediagnostico").DataTable({
                             language: {
-                                url: "#{resource['js/spanish.lang']}"
+                                url: "#{resource[msg['datatables-lang']]}"
                             },
                             dom: "Bfrtip",
                             buttons: [
@@ -267,6 +253,8 @@
         </ui:composition>
 
     </h:body>
+
+</f:view>
 
 </html>
 
