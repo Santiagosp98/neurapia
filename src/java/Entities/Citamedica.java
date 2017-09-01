@@ -28,22 +28,23 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
  * @author jair3
  */
 @Entity
 @Table(name = "citamedica")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Citamedica.findAll", query = "SELECT c FROM Citamedica c")
-    , @NamedQuery(name = "Citamedica.findByIdCitaMedica", query = "SELECT c FROM Citamedica c WHERE c.idCitaMedica = :idCitaMedica")
-    , @NamedQuery(name = "Citamedica.findByHora", query = "SELECT c FROM Citamedica c WHERE c.hora = :hora")
-    , @NamedQuery(name = "Citamedica.findByFecha", query = "SELECT c FROM Citamedica c WHERE c.fecha = :fecha")
-    , @NamedQuery(name = "Citamedica.findByEstado", query = "SELECT c FROM Citamedica c WHERE c.estado = :estado")
-    , @NamedQuery(name = "Citamedica.citasPorUsuario", query = "SELECT c FROM Citamedica c WHERE c.codUsuario = :codUsuario")
-    , @NamedQuery(name = "Citamedica.citasPorFisioterapeuta", query = "SELECT c FROM Citamedica c WHERE c.codFisioterapeuta = :codFisioterapeuta")
-    , @NamedQuery(name = "Citamedica.citasPorFisioterapeutaEstado", query = "SELECT c FROM Citamedica c WHERE c.codFisioterapeuta = :codFisioterapeuta AND c.estado = :estado")
-    , @NamedQuery(name = "Citamedica.findByNumeroConsultorio", query = "SELECT c FROM Citamedica c WHERE c.numeroConsultorio = :numeroConsultorio")})
+        @NamedQuery(name = "Citamedica.findAll", query = "SELECT c FROM Citamedica c")
+        , @NamedQuery(name = "Citamedica.findByIdCitaMedica", query = "SELECT c FROM Citamedica c WHERE c.idCitaMedica = :idCitaMedica")
+        , @NamedQuery(name = "Citamedica.findByHora", query = "SELECT c FROM Citamedica c WHERE c.hora = :hora")
+        , @NamedQuery(name = "Citamedica.findByFecha", query = "SELECT c FROM Citamedica c WHERE c.fecha = :fecha")
+        , @NamedQuery(name = "Citamedica.findByEstado", query = "SELECT c FROM Citamedica c WHERE c.estado = :estado")
+        , @NamedQuery(name = "Citamedica.citasPorUsuario", query = "SELECT c FROM Citamedica c WHERE c.codUsuario = :codUsuario")
+        , @NamedQuery(name = "Citamedica.citasPorFisioterapeuta", query = "SELECT c FROM Citamedica c WHERE c.codFisioterapeuta = :codFisioterapeuta")
+        , @NamedQuery(name = "Citamedica.citasPorFisioterapeutaEstado", query = "SELECT c FROM Citamedica c WHERE c.codFisioterapeuta = :codFisioterapeuta AND c.estado = :estado")
+        , @NamedQuery(name = "Citamedica.findByNumeroConsultorio", query = "SELECT c FROM Citamedica c WHERE c.numeroConsultorio = :numeroConsultorio")
+        , @NamedQuery(name = "Citamedica.countByEstado", query = "SELECT COUNT(c) FROM Citamedica c WHERE c.estado = :estado")
+})
 public class Citamedica implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -96,10 +97,10 @@ public class Citamedica implements Serializable {
     }
 
     public Date getFecha() {
-        if(fecha != null){
-           SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-           format.format(fecha);
-           return fecha;
+        if (fecha != null) {
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            format.format(fecha);
+            return fecha;
         }
         return null;
     }
@@ -131,10 +132,11 @@ public class Citamedica implements Serializable {
     public void setCodFisioterapeuta(Fisioterapeuta codFisioterapeuta) {
         this.codFisioterapeuta = codFisioterapeuta;
     }
+
     /*Edicion de entidad*/
     public String getFullNameFisioterapeuta() {
-      String nombreCompleto =  this.codFisioterapeuta.getCodUsuario().getPrimerNombre() + " " + this.codFisioterapeuta.getCodUsuario().getPrimerApellido();
-      return nombreCompleto;
+        String nombreCompleto = this.codFisioterapeuta.getCodUsuario().getPrimerNombre() + " " + this.codFisioterapeuta.getCodUsuario().getPrimerApellido();
+        return nombreCompleto;
     }
 
     public String getEstado() {
@@ -144,23 +146,23 @@ public class Citamedica implements Serializable {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    
-    public ArrayList getSeleccionEstado(){
+
+    public ArrayList getSeleccionEstado() {
         ArrayList listaRol = new ArrayList();
         listaRol.add("Cancelada");
         listaRol.add("Pendiente");
         listaRol.add("Realizada");
         return listaRol;
     }
-    
-    public String getFullNameUsuario(){
-        if(this.codUsuario != null){
-            String nombreCompleto =  this.codUsuario.getPrimerNombre() + " " + this.codUsuario.getPrimerApellido();
+
+    public String getFullNameUsuario() {
+        if (this.codUsuario != null) {
+            String nombreCompleto = this.codUsuario.getPrimerNombre() + " " + this.codUsuario.getPrimerApellido();
             return nombreCompleto;
         }
         return "";
     }
-    
+
     /*Fin Edicion de entidad*/
     @Override
     public int hashCode() {
@@ -181,10 +183,10 @@ public class Citamedica implements Serializable {
         }
         return true;
     }
-    
+
     @Override
     public String toString() {
         return "Entities.Citamedica[ idCitaMedica=" + idCitaMedica + " ]";
     }
-    
+
 }
