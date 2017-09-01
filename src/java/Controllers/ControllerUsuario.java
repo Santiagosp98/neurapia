@@ -53,6 +53,9 @@ public class ControllerUsuario extends ControllerApp {
     private String confirmarClave;
     private String claveAnterior;
     private String estado;
+    private int cantidadUsuarios;
+    private int usuariosInhabilitados;
+    private int fisioterapeutasRegistrados;
 
     @EJB
     private RolFacadeLocal rolFacade;
@@ -67,6 +70,9 @@ public class ControllerUsuario extends ControllerApp {
         listaRol = rolFacade.findAll();
         rol = new Rol();
         rol2 = new Rol();
+        cantidadUsuarios = usuarioFacade.count();
+        usuariosInhabilitados = usuarioFacade.cantidadUsuariosPorEstado("Inactivo");
+        fisioterapeutasRegistrados = usuarioFacade.countCantidadUsuariosPorRol(3);
     }
 
     public List<Usuario> consultarUsuarios() {
@@ -347,6 +353,30 @@ public class ControllerUsuario extends ControllerApp {
 
     public void setConfirmarClave(String confirmarClave) {
         this.confirmarClave = confirmarClave;
+    }
+
+    public int getCantidadUsuarios() {
+        return cantidadUsuarios;
+    }
+
+    public void setCantidadUsuarios(int cantidadUsuarios) {
+        this.cantidadUsuarios = cantidadUsuarios;
+    }
+
+    public long getUsuariosInhabilitados() {
+        return usuariosInhabilitados;
+    }
+
+    public void setUsuariosInhabilitados(int usuariosInhabilitados) {
+        this.usuariosInhabilitados = usuariosInhabilitados;
+    }
+
+    public int getFisioterapeutasRegistrados() {
+        return fisioterapeutasRegistrados;
+    }
+
+    public void setFisioterapeutasRegistrados(int fisioterapeutasRegistrados) {
+        this.fisioterapeutasRegistrados = fisioterapeutasRegistrados;
     }
 
     public String prepararCrearHistorial(Usuario usuario) {

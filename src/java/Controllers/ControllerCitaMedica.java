@@ -45,6 +45,9 @@ public class ControllerCitaMedica extends ControllerApp{
     Citamedica citaMedica;
     List<Citamedica> listaCitas;
     List<Citamedica> listaCitas1;
+    private int totalCitasMedicas;
+    private int citasPendientes;
+    private int citasRealizadas;
     
     @EJB
     FisioterapeutaFacadeLocal fisioterapeutaFacade;
@@ -63,6 +66,9 @@ public class ControllerCitaMedica extends ControllerApp{
        this.usuario = new Usuario();
        this.listaCitas = citaMedicaFacade.findAll();
        this.listaFisioterapeutas = fisioterapeutaFacade.findAll();
+       this.totalCitasMedicas = citaMedicaFacade.count();
+       this.citasPendientes = citaMedicaFacade.countCitasMedicasPorEstado("Pendiente");
+       this.citasRealizadas = citaMedicaFacade.countCitasMedicasPorEstado("Realizada");
     }
     
     public List<Citamedica> consultarCitaMedica(){
@@ -250,5 +256,27 @@ public class ControllerCitaMedica extends ControllerApp{
         this.listaUsuarios = listaUsuarios;
     }
 
-    
+    public int getTotalCitasMedicas() {
+        return totalCitasMedicas;
+    }
+
+    public void setTotalCitasMedicas(int totalCitasMedicas) {
+        this.totalCitasMedicas = totalCitasMedicas;
+    }
+
+    public int getCitasPendientes() {
+        return citasPendientes;
+    }
+
+    public void setCitasPendientes(int citasPendientes) {
+        this.citasPendientes = citasPendientes;
+    }
+
+    public int getCitasRealizadas() {
+        return citasRealizadas;
+    }
+
+    public void setCitasRealizadas(int citasRealizadas) {
+        this.citasRealizadas = citasRealizadas;
+    }
 }
