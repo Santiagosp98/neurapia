@@ -31,28 +31,30 @@ import javax.xml.bind.annotation.XmlTransient;
 import java.util.ArrayList;
 
 /**
- *
  * @author jair3
  */
 @Entity
 @Table(name = "usuario")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
-    , @NamedQuery(name = "Usuario.findByIdUsuario", query = "SELECT u FROM Usuario u WHERE u.idUsuario = :idUsuario")
-    , @NamedQuery(name = "Usuario.findByTipoDocumento", query = "SELECT u FROM Usuario u WHERE u.tipoDocumento = :tipoDocumento")
-    , @NamedQuery(name = "Usuario.findByNumeroDocumento", query = "SELECT u FROM Usuario u WHERE u.numeroDocumento = :numeroDocumento")
-    , @NamedQuery(name = "Usuario.findByPrimerNombre", query = "SELECT u FROM Usuario u WHERE u.primerNombre = :primerNombre")
-    , @NamedQuery(name = "Usuario.findBySegundoNombre", query = "SELECT u FROM Usuario u WHERE u.segundoNombre = :segundoNombre")
-    , @NamedQuery(name = "Usuario.findByPrimerApellido", query = "SELECT u FROM Usuario u WHERE u.primerApellido = :primerApellido")
-    , @NamedQuery(name = "Usuario.findBySegundoApellido", query = "SELECT u FROM Usuario u WHERE u.segundoApellido = :segundoApellido")
-    , @NamedQuery(name = "Usuario.findByEstadoUsuario", query = "SELECT u FROM Usuario u WHERE u.estadoUsuario = :estadoUsuario")
-    , @NamedQuery(name = "Usuario.findByFechaRegistro", query = "SELECT u FROM Usuario u WHERE u.fechaRegistro = :fechaRegistro")
-    , @NamedQuery(name = "Usuario.findByCorreoElectronico", query = "SELECT u FROM Usuario u WHERE u.correoElectronico = :email")
-    , @NamedQuery(name = "Usuario.listaporRol", query = "SELECT u FROM Usuario u WHERE u.codRol = :rol")
-    , @NamedQuery(name = "Usuario.listaporRolDoble", query = "SELECT u FROM Usuario u WHERE u.codRol = :rol OR u.codRol = :rol2")
-    , @NamedQuery(name = "Usuario.login", query = "SELECT u FROM Usuario u WHERE u.correoElectronico = :email AND u.claveUsuario = :claveUsuario")
-    , @NamedQuery(name = "Usuario.findByClaveUsuario", query = "SELECT u FROM Usuario u WHERE u.claveUsuario = :claveUsuario")})
+        @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
+        , @NamedQuery(name = "Usuario.findByIdUsuario", query = "SELECT u FROM Usuario u WHERE u.idUsuario = :idUsuario")
+        , @NamedQuery(name = "Usuario.findByTipoDocumento", query = "SELECT u FROM Usuario u WHERE u.tipoDocumento = :tipoDocumento")
+        , @NamedQuery(name = "Usuario.findByNumeroDocumento", query = "SELECT u FROM Usuario u WHERE u.numeroDocumento = :numeroDocumento")
+        , @NamedQuery(name = "Usuario.findByPrimerNombre", query = "SELECT u FROM Usuario u WHERE u.primerNombre = :primerNombre")
+        , @NamedQuery(name = "Usuario.findBySegundoNombre", query = "SELECT u FROM Usuario u WHERE u.segundoNombre = :segundoNombre")
+        , @NamedQuery(name = "Usuario.findByPrimerApellido", query = "SELECT u FROM Usuario u WHERE u.primerApellido = :primerApellido")
+        , @NamedQuery(name = "Usuario.findBySegundoApellido", query = "SELECT u FROM Usuario u WHERE u.segundoApellido = :segundoApellido")
+        , @NamedQuery(name = "Usuario.findByEstadoUsuario", query = "SELECT u FROM Usuario u WHERE u.estadoUsuario = :estadoUsuario")
+        , @NamedQuery(name = "Usuario.findByFechaRegistro", query = "SELECT u FROM Usuario u WHERE u.fechaRegistro = :fechaRegistro")
+        , @NamedQuery(name = "Usuario.findByCorreoElectronico", query = "SELECT u FROM Usuario u WHERE u.correoElectronico = :email")
+        , @NamedQuery(name = "Usuario.listaporRol", query = "SELECT u FROM Usuario u WHERE u.codRol = :rol")
+        , @NamedQuery(name = "Usuario.listaporRolDoble", query = "SELECT u FROM Usuario u WHERE u.codRol = :rol OR u.codRol = :rol2")
+        , @NamedQuery(name = "Usuario.login", query = "SELECT u FROM Usuario u WHERE u.correoElectronico = :email AND u.claveUsuario = :claveUsuario")
+        , @NamedQuery(name = "Usuario.findByClaveUsuario", query = "SELECT u FROM Usuario u WHERE u.claveUsuario = :claveUsuario")
+        , @NamedQuery(name = "Usuario.countCantidadUsuariosPorEstado", query = "SELECT Count(u) FROM Usuario u WHERE u.estadoUsuario = :estadoUsuario")
+        , @NamedQuery(name = "Usuario.countCantidadUsuariosPorRol", query = "SELECT COUNT(u) FROM Usuario u WHERE u.codRol.idRol = :idRol")
+})
 public class Usuario implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "codUsuario", fetch = FetchType.LAZY)
@@ -100,6 +102,10 @@ public class Usuario implements Serializable {
     @Size(max = 45)
     @Column(name = "claveUsuario")
     private String claveUsuario;
+    @Column(name = "ingresos")
+    private int ingresos;
+    @Column(name = "ultimaSesion")
+    private Date ultimaSesion;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "codUsuario", fetch = FetchType.LAZY)
     private List<Historialclinico> historialclinicoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cudUsuario", fetch = FetchType.LAZY)
@@ -214,6 +220,22 @@ public class Usuario implements Serializable {
         this.claveUsuario = claveUsuario;
     }
 
+    public int getIngresos() {
+        return ingresos;
+    }
+
+    public void setIngresos(int ingresos) {
+        this.ingresos = ingresos;
+    }
+
+    public Date getUltimaSesion() {
+        return ultimaSesion;
+    }
+
+    public void setUltimaSesion(Date ultimaSesion) {
+        this.ultimaSesion = ultimaSesion;
+    }
+
     @XmlTransient
     public List<Historialclinico> getHistorialclinicoList() {
         return historialclinicoList;
@@ -258,31 +280,32 @@ public class Usuario implements Serializable {
         this.codRol = codRol;
     }
 
-    
+
     /*Edicion entidad Usuario*/
-    public String getFullNameUsuario(){
+    public String getFullNameUsuario() {
         if (this.primerApellido == null || this.primerNombre == null) {
             return "";
         }
         String nombreCompleto = this.primerNombre + " " + this.primerApellido;
         return nombreCompleto;
     }
-    
-    public ArrayList getSeleccionEstados(){
+
+    public ArrayList getSeleccionEstados() {
         ArrayList lista = new ArrayList();
         lista.add("Activo");
         lista.add("Inactivo");
         return lista;
     }
-    public ArrayList getSeleccionDocumento(){
+
+    public ArrayList getSeleccionDocumento() {
         ArrayList lista = new ArrayList();
         lista.add("TI");
         lista.add("CC");
         lista.add("CE");
         return lista;
     }
-    
-    public ArrayList getSeleccionRol(){
+
+    public ArrayList getSeleccionRol() {
         ArrayList listaRol = new ArrayList();
         listaRol.add("Super Administrador");
         listaRol.add("Administrador");
@@ -291,7 +314,7 @@ public class Usuario implements Serializable {
         return listaRol;
     }
     /*Edicion entidad Usuario*/
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -325,5 +348,5 @@ public class Usuario implements Serializable {
     public void setPrediagnosticoList(List<Prediagnostico> prediagnosticoList) {
         this.prediagnosticoList = prediagnosticoList;
     }
-    
+
 }
