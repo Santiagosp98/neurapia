@@ -46,6 +46,11 @@ public class ControllerApp implements Serializable {
         finalizarConversacion();
         return "";
     }
+    
+    public String cancelarConfiguracionSistema(){
+        finalizarConversacion();
+        return "ConsultarDatosSistema.xhtml";
+    }
 
     public Conversation getConversacion() {
         return conversacion;
