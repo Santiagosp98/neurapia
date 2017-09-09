@@ -38,7 +38,9 @@ public interface UsuarioFacadeLocal {
     Usuario buscarId(int id);
 
     Usuario buscarDocumento(String documento);
-
+    
+    Usuario buscarDocumentoEEmail(String documento, String correo);
+    
     List<Usuario> listaUsuariosPorRol(Rol rol);
 
     List<Usuario> listaUsuariosPorRolDoble(Rol rol, Rol rol2);
