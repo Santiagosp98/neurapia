@@ -102,7 +102,7 @@
 
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
                                 <h:outputLabel value="#{msg['document-number']}:" for="numero-documento"/>
-                                <h:inputText a:placeholder="#{msg['document-number']}" class="form-control mitooltip"
+                                <h:inputText a:placeholder="#{msg['document-number']}" a:type="number" class="form-control mitooltip"
                                              tabindex="2" id="numero-documento"
                                              value="#{controllerUsuario.usuario.numeroDocumento}" title="PrimerNombre"
                                              required="true" requiredMessage="The IdUsuario field is required.">
@@ -111,15 +111,15 @@
 
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
                                 <h:outputLabel value="#{msg['first-name']}:" for="primer-nombre"/>
-                                <h:inputText a:placeholder="#{msg['first-name']}" class="form-control mitooltip"
+                                <h:inputText a:placeholder="#{msg['first-name']}" a:type="text" class="form-control mitooltip"
                                              tabindex="3" id="primer-nombre" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+"
-                                             value="#{controllerUsuario.usuario.primerNombre}" title="PrimerNombre"
+                                             value="#{controllerUsuario.usuario.primerNombre}" title="Ingrese un campo con letras para el primer nombre"
                                              required="true" requiredMessage="The IdUsuario field is required.">
                                 </h:inputText>
                             </div>
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
                                 <h:outputLabel value="#{msg['middle-name']}:" for="segundo-nombre"/>
-                                <h:inputText a:placeholder="#{msg['middle-name']}" class="form-control mitooltip"
+                                <h:inputText a:placeholder="#{msg['middle-name']}" a:type="text" class="form-control mitooltip"
                                              tabindex="4" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" id="segundo-nombre"
                                              value="#{controllerUsuario.usuario.segundoNombre}" title="SegundoNombre"
                                              required="false">
@@ -127,7 +127,7 @@
                             </div>
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
                                 <h:outputLabel value="#{msg['surname']}:" for="primer-apellido"/>
-                                <h:inputText a:placeholder="#{msg['surname']}" class="form-control mitooltip" tabindex="5"
+                                <h:inputText a:placeholder="#{msg['surname']}" a:type="text" class="form-control mitooltip" tabindex="5"
                                              a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" id="primer-apellido"
                                              value="#{controllerUsuario.usuario.primerApellido}" title="PrimerApellido"
                                              required="true" requiredMessage="El Primer Apellido es requerido.">
@@ -136,7 +136,7 @@
 
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
                                 <h:outputLabel value="#{msg['second-surname']}:" for="segundo-apellido"/>
-                                <h:inputText a:placeholder="#{msg['second-surname']}" class="form-control mitooltip"
+                                <h:inputText a:placeholder="#{msg['second-surname']}" a:type="text" class="form-control mitooltip"
                                              tabindex="6" a:pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+" id="segundo-apellido"
                                              value="#{controllerUsuario.usuario.segundoApellido}" title="SegundoApellido"
                                              required="true" requiredMessage="El Segundo Apellido es requerido.">
@@ -165,9 +165,9 @@
 
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
                                 <h:outputLabel value="#{msg['email']}:" for="correo"/>
-                                <h:inputText id="correo" tabindex="8" class="form-control" a:placeholder="ejem@ejem.com"
+                                <h:inputText id="correo" tabindex="8" a:type="email" class="form-control" a:placeholder="ejem@ejem.com"
                                              a:pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
-                                             value="#{controllerUsuario.usuario.correoElectronico}" required="true"
+                                             value="#{controllerUsuario.usuario.correoElectronico}" required="true" title="Digite un formato de correo correcto"
                                              requiredMessage="El correo es requerido.">
                                 </h:inputText>
                             </div>
