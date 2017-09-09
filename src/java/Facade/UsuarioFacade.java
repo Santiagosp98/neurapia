@@ -146,5 +146,18 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
 
         return cantidad;
     }
+    public Usuario buscarDocumentoEEmail(String documento, String correo) {
+        Usuario u = null;        
+        try {
+            TypedQuery<Usuario> q = getEntityManager().createNamedQuery("Usuario.DocumentoOEmail", Usuario.class);
+            q.setParameter("numeroDocumento", documento);
+            q.setParameter("email", correo);
+            u = q.getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return u;
+    }
 
 }
