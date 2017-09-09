@@ -116,7 +116,7 @@ public class ControllerSession extends ControllerApp {
     }
     
     public boolean inicioSesion(){
-        System.out.println("invalido");
+        System.out.println("Validando");
         return(usuario != null);
     }
     
