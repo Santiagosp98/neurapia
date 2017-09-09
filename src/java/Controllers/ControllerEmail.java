@@ -122,14 +122,21 @@ public class ControllerEmail implements Serializable {
     public void enviarAsignacionDeCita(Citamedica cita){
         if (emailDestinatario != null && !emailDestinatario.equals("")) {
             System.out.println("Vamos a enviar asignacion de cita");
-            System.out.println("Fecha "+cita.getFecha().getDate()+ " hora " + cita.getHora().getHours()
-            + cita.getFecha() + cita.getHora());
+            java.util.Date fecha1 = cita.getFecha();
+            java.util.Date fecha2 = cita.getHora();
+            long lnMilisegundos = fecha1.getTime();
+            long hora = fecha2.getTime();
+            java.sql.Date sqlDate = new java.sql.Date(lnMilisegundos);
+            java.sql.Time sqlTime = new java.sql.Time(hora);
+            
+            System.out.println(" Fecha con util date: "+ sqlDate + " hora con date: "+ sqlTime
+            +" fecha total: "+ cita.getFecha() + " Hora total: " + cita.getHora());
             ControllerEmail email = new ControllerEmail("neurapiaj3s@gmail.com", "neurapia12345", emailDestinatario);
             email.enviarSimple("Asignacion de cita Neurapia", "Se ha asignado una cita medica con los siguientes datos:" + 
                     "\nNombre del fisioterapeuta que atendera la cita: "+cita.getFullNameFisioterapeuta()
                     +"\nNombre del paciente de la cita: " + cita.getFullNameUsuario()
-                    +"\nFecha de la cita: " + cita.getFecha().getDate() + cita.getFecha().toString()
-                    +"\nHora de la cita: " + cita.getHora()
+                    +"\nFecha de la cita: " + sqlDate
+                    +"\nHora de la cita: " + sqlTime
                     +"\nConsultorio: " + cita.getNumeroConsultorio());
         }else{
             System.out.println("Email es nulo");
