@@ -203,15 +203,8 @@ public class ControllerUsuario extends ControllerApp {
         Usuario uS = cs.getUsuario();
         System.out.println("editar Usuario");
         if (usuario != null) {
-            System.out.println("Clave: " + uS.getClaveUsuario());
-            System.out.println("Confirmar Clave: " + confirmarClave);
-            if (uS.getClaveUsuario().equals(this.confirmarClave)) {
-                this.usuarioFacade.edit(uS);
-                return "miPerfil?faces-redrect=true";
-            } else {
-                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido actualizar el usuario", "Clave y confirmar clave diferentes");
-                fc.addMessage(null, m);
-            }
+            this.usuarioFacade.edit(uS);
+            return "miPerfil?faces-redrect=true";
 
         } else {
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido actualizar el usuario", "Intentelo de nuevo");
@@ -241,35 +234,28 @@ public class ControllerUsuario extends ControllerApp {
             usuario.setFechaRegistro(fechaDate);
 
             System.out.println("Usuario documento: " + auxUsuario);
-            auxUsuario=null;
-            auxUsuario = usuarioFacade.buscarDocumento(usuario.getNumeroDocumento());
+            auxUsuario = null;
+            auxUsuario = usuarioFacade.buscarDocumentoEEmail(usuario.getNumeroDocumento(), usuario.getCorreoElectronico());
             System.out.println("Usuario documento: " + auxUsuario);
+            System.out.println("Usuario correo: " + auxUsuario);
 
             if (auxUsuario == null) {
-                auxUsuario=null;
-                System.out.println("Usuario email: " + auxUsuario);
-                auxUsuario = usuarioFacade.restableceContrasena(usuario.getCorreoElectronico());
-
-                if (auxUsuario == null) {
-                    if (usuario.getClaveUsuario().equals(this.confirmarClave)) {
-                        if (uS.getCodRol().getIdRol() == 3) {
-                            rol.setIdRol(4);
-                            usuario.setCodRol(rol);
-                            usuario.setEstadoUsuario("Inactivo");
-                            usuarioFacade.create(usuario);
-                            return "ConsultarUsuarios";
-                        } else {
-                            usuarioFacade.create(usuario);
-                            return "ConsultarUsuarios";
-                        }
+                if (usuario.getClaveUsuario().equals(this.confirmarClave)) {
+                    if (uS.getCodRol().getIdRol() == 3) {
+                        rol.setIdRol(4);
+                        usuario.setCodRol(rol);
+                        usuario.setEstadoUsuario("Inactivo");
+                        usuarioFacade.create(usuario);
+                        return "ConsultarUsuarios";
                     } else {
-                        FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido crear el usuario", "Clave y confirmar clave diferentes");
-                        fc.addMessage(null, m);
+                        usuarioFacade.create(usuario);
+                        return "ConsultarUsuarios";
                     }
                 } else {
-                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido crear el usuario", "documento ya esta en la base de datos");
+                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido crear el usuario", "Clave y confirmar clave diferentes");
                     fc.addMessage(null, m);
                 }
+
             } else {
                 FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido crear el usuario", "Correo ya esta en la base de datos");
                 fc.addMessage(null, m);
