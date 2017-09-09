@@ -48,4 +48,6 @@ public interface UsuarioFacadeLocal {
     int cantidadUsuariosPorEstado(String estado);
 
     int countCantidadUsuariosPorRol(int id);
+
+    Usuario buscarEmail(String email);
 }
