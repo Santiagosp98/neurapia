@@ -10,6 +10,7 @@ import Entities.Rol;
 import Entities.Usuario;
 import Facade.RolFacadeLocal;
 import Facade.UsuarioFacadeLocal;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,6 +19,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.regex.Pattern;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.ConversationScoped;
@@ -26,7 +28,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 /**
- *
  * @author Santiago
  */
 @Named(value = "controllerUsuario")
@@ -221,51 +222,100 @@ public class ControllerUsuario extends ControllerApp {
     public String crearUsuario() throws ParseException {
         FacesContext fc = FacesContext.getCurrentInstance();
         if (usuario != null) {
-            Usuario uS = cs.getUsuario();
+            Usuario usuarioEnSesion = cs.getUsuario();
 
-            Calendar datosFecha = new GregorianCalendar();
-            int anio = datosFecha.get(Calendar.YEAR);
-            int mes = datosFecha.get(Calendar.MONTH);
-            int dia = datosFecha.get(Calendar.DAY_OF_MONTH);
-            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-            String strFecha = anio + "-" + mes + "-" + dia;
-            Date fechaDate = null;
-            fechaDate = formato.parse(strFecha);
-            usuario.setFechaRegistro(fechaDate);
+            Calendar calendar = Calendar.getInstance();
+            usuario.setFechaRegistro(calendar.getTime());
 
-            System.out.println("Usuario documento: " + auxUsuario);
-            auxUsuario = null;
-            auxUsuario = usuarioFacade.buscarDocumentoEEmail(usuario.getNumeroDocumento(), usuario.getCorreoElectronico());
-            System.out.println("Usuario documento: " + auxUsuario);
-            System.out.println("Usuario correo: " + auxUsuario);
+            System.out.println(usuario.getNumeroDocumento());
 
-            if (auxUsuario == null) {
-                if (usuario.getClaveUsuario().equals(this.confirmarClave)) {
-                    if (uS.getCodRol().getIdRol() == 3) {
+            Pattern regexp = Pattern.compile("\\d+");
+
+            if (!regexp.matcher(usuario.getNumeroDocumento()).matches()) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Numero de documento' solo admite carácteres numéricos.", "");
+                fc.addMessage(null, message);
+                return "";
+            }
+
+            regexp = Pattern.compile("^[a-zA-ZáéíóúÁÉÍÓÚ]+$");
+
+            if (!regexp.matcher(usuario.getPrimerNombre()).matches()) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Primer nombre' no admite carácteres que no pertenezcan al alfabeto.", "");
+                fc.addMessage(null, message);
+                return "";
+            }
+
+            regexp = Pattern.compile("^[a-zA-ZáéíóúÁÉÍÓÚ]*$");
+
+            if (!regexp.matcher(usuario.getSegundoNombre()).matches()) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Segundo nombre' no admite carácteres que no pertenezcan al alfabeto.", "");
+                fc.addMessage(null, message);
+                return "";
+            }
+
+            regexp = Pattern.compile("^[a-zA-ZáéíóúÁÉÍÓÚ]+$");
+
+            if (!regexp.matcher(usuario.getPrimerApellido()).matches()) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Primer apellido' no admite carácteres que no pertenezcan al alfabeto.", "");
+                fc.addMessage(null, message);
+                return "";
+            }
+
+            regexp = Pattern.compile("^[a-zA-ZáéíóúÁÉÍÓÚ]*$");
+
+            if (!regexp.matcher(usuario.getSegundoApellido()).matches()) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Segundo apellido' no admite carácteres que no pertenezcan al alfabeto.", "");
+                fc.addMessage(null, message);
+                return "";
+            }
+
+            regexp = Pattern.compile("[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}");
+
+            if (!regexp.matcher(usuario.getCorreoElectronico()).matches()) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Introduzca una dirección de email válida.", "");
+                fc.addMessage(null, message);
+                return "";
+            }
+
+            if (usuario.getClaveUsuario().length() < 8) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La contraseña debe contener mínimo 8 carácteres.", "");
+                fc.addMessage(null, message);
+                return "";
+            }
+
+            if (!usuario.getClaveUsuario().equals(confirmarClave)) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Las contraseñas no coinciden.", "");
+                fc.addMessage(null, message);
+                return "";
+            }
+
+            if (usuarioFacade.buscarDocumento(usuario.getNumeroDocumento()) == null) {
+                if (usuarioFacade.buscarEmail(usuario.getCorreoElectronico()) == null) {
+                    if (usuarioEnSesion.getCodRol().getIdRol().equals(3)) {
                         rol.setIdRol(4);
                         usuario.setCodRol(rol);
                         usuario.setEstadoUsuario("Inactivo");
                         usuarioFacade.create(usuario);
-                        return "ConsultarUsuarios";
+                        return "ConsultarUsuarios.xhtml?faces-redirect=true";
                     } else {
                         usuarioFacade.create(usuario);
-                        return "ConsultarUsuarios";
+                        return "ConsultarUsuarios.xhtml?faces-redirect=true";
                     }
                 } else {
-                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido crear el usuario", "Clave y confirmar clave diferentes");
-                    fc.addMessage(null, m);
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El email ingresado ya está registrado.", "");
+                    fc.addMessage(null, message);
+                    return "";
                 }
-
             } else {
-                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido crear el usuario", "Correo ya esta en la base de datos");
-                fc.addMessage(null, m);
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El número de documento ingresado ya está registrado.", "");
+                fc.addMessage(null, message);
+                return "";
             }
-
-        } else {
-
         }
+
         return "";
     }
+
 
     public void registrarUsuario() throws ParseException {
         FacesContext fc = FacesContext.getCurrentInstance();
