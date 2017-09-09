@@ -6,7 +6,9 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:hf="http://highfaces.org">
+    
     <f:view locale="#{lenguaje.locale}">
         <ui:define name="titulo">Usuarios consultar Usuarios</ui:define>
 
@@ -94,6 +96,10 @@
                         <div class="fixed-table-body">
                             <h:form prependId="false">
                                 <h:messages showSummary="true" showDetail="true"/>
+                                <div>
+                                    <h:commandButton class="btn btn-primary" value="Exportar a pdf" actionListener="#{controllerReporteUsuario.exportPDF()}"/>
+                                </div>
+                                
                                 <h:dataTable value="#{controllerUsuario.consultarUsuarios()}" var="item"
                                              class="table table-striped table-bordered" id="lista-usuarios">
                                     <h:column>
@@ -162,6 +168,8 @@
                                     </h:column>
                                 </h:dataTable>
                             </h:form>
+                            <img src="#{controllerJFreeChart.grafico}"/>
+                            
                         </div>
                     </div>
 
@@ -233,10 +241,11 @@
                             });
                         });
                     </script>
+                    
                 </ui:define>
 
             </ui:composition>
-
+            
         </h:body>
     </f:view>
 
