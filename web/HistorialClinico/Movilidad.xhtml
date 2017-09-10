@@ -207,12 +207,12 @@
                             </tr>
                             </thead>
 
-                            <c:forEach items="#{controllerHistorialClinico.mapa}" var="l" varStatus="vs"> 
+                            <c:forEach items="#{controllerResultadoProceso.mapa}" var="l" varStatus="vs"> 
                                 <tbody>
                                     <tr>
                                     <c:forEach begin="0" end="#{l.value.size() - 1}" step="4" var="i">                                    
 
-                                            <td rowspan="#{controllerHistorialClinico.mapa.size()}">#{l.key}</td>
+                                            <td rowspan="#{controllerResultadoProceso.mapa.size()}">#{l.key}</td>
                                             <td>#{l.value.get(i).codCaracteristicaMovilidad.tipoCaracteristica}</td>
                                             <c:forEach begin="0" end="#{l.value.size() - 1}" var="j">
                                                 <td>#{l.value.get(i+j).resultadoProceso }</td>    
