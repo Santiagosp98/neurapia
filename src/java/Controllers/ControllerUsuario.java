@@ -73,6 +73,9 @@ public class ControllerUsuario extends ControllerApp {
         cantidadUsuarios = usuarioFacade.count();
         usuariosInhabilitados = usuarioFacade.cantidadUsuariosPorEstado("Inactivo");
         fisioterapeutasRegistrados = usuarioFacade.countCantidadUsuariosPorRol(3);
+        if (cs.getUsuario() != null) {
+            claveAnterior = usuarioFacade.buscarEmail(cs.getUsuario().getCorreoElectronico()).getClaveUsuario();
+        }
     }
 
     public List<Usuario> consultarUsuarios() {
@@ -242,18 +245,61 @@ public class ControllerUsuario extends ControllerApp {
         return "";
     }
 
-    public String editarMiUsuario() {
+    public String editarPerfil() {
         FacesContext fc = FacesContext.getCurrentInstance();
-        Usuario uS = cs.getUsuario();
-        System.out.println("editar Usuario");
+        Usuario usuarioEnSesion = cs.getUsuario();
         if (usuario != null) {
-            this.usuarioFacade.edit(uS);
-            return "miPerfil?faces-redrect=true";
+            Pattern regexp;
+            regexp = Pattern.compile("^[a-zA-ZáéíóúÁÉÍÓÚ]+$");
 
-        } else {
-            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No se ha podido actualizar el usuario", "Intentelo de nuevo");
-            fc.addMessage(null, m);
+            if (!regexp.matcher(usuarioEnSesion.getPrimerNombre()).matches()) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Primer nombre' no admite carácteres que no pertenezcan al alfabeto.", "");
+                fc.addMessage(null, message);
+                return "";
+            }
+
+            regexp = Pattern.compile("^[a-zA-ZáéíóúÁÉÍÓÚ]*$");
+
+            if (!regexp.matcher(usuarioEnSesion.getSegundoNombre()).matches()) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Segundo nombre' no admite carácteres que no pertenezcan al alfabeto.", "");
+                fc.addMessage(null, message);
+                return "";
+            }
+
+            regexp = Pattern.compile("^[a-zA-ZáéíóúÁÉÍÓÚ]+$");
+
+            if (!regexp.matcher(usuarioEnSesion.getPrimerApellido()).matches()) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Primer apellido' no admite carácteres que no pertenezcan al alfabeto.", "");
+                fc.addMessage(null, message);
+                return "";
+            }
+
+            regexp = Pattern.compile("^[a-zA-ZáéíóúÁÉÍÓÚ]*$");
+
+            if (!regexp.matcher(usuarioEnSesion.getSegundoApellido()).matches()) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Segundo apellido' no admite carácteres que no pertenezcan al alfabeto.", "");
+                fc.addMessage(null, message);
+                return "";
+            }
+
+            regexp = Pattern.compile("[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}");
+
+            if (!regexp.matcher(usuarioEnSesion.getCorreoElectronico()).matches()) {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Introduzca una dirección de email válida.", "");
+                fc.addMessage(null, message);
+                return "";
+            }
+
+            if (usuarioFacade.buscarEmail(usuarioEnSesion.getCorreoElectronico()) == null || usuarioFacade.buscarEmail(usuarioEnSesion.getCorreoElectronico()).equals(usuarioEnSesion)) {
+                this.usuarioFacade.edit(usuarioEnSesion);
+                return "miPerfil.xhtml?faces-redirect=true";
+            } else {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El correo ingresado ya está registrado en el sistema", "");
+                fc.addMessage(null, message);
+                return "";
+            }
         }
+
         return "";
     }
 
@@ -456,6 +502,14 @@ public class ControllerUsuario extends ControllerApp {
         this.fisioterapeutasRegistrados = fisioterapeutasRegistrados;
     }
 
+    public String getClaveAnterior() {
+        return claveAnterior;
+    }
+
+    public void setClaveAnterior(String claveAnterior) {
+        this.claveAnterior = claveAnterior;
+    }
+
     public String prepararCrearHistorial(Usuario usuario) {
         iniciarConversacion();
         this.usuario = usuario;
@@ -466,6 +520,37 @@ public class ControllerUsuario extends ControllerApp {
             }
         }
         return "CrearUsuario.xhtml?faces-redirect=true";
+    }
+
+    public String cambiarContrasena() {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+
+        Usuario usuarioEnSesion = cs.getUsuario();
+
+        if (usuario != null) {
+            if (claveAnterior.equals(usuarioEnSesion.getClaveUsuario())) {
+                if (usuarioEnSesion.getClaveUsuario().length() < 8) {
+                    if (confirmarClave.equals(usuarioEnSesion.getClaveUsuario())) {
+                        usuarioFacade.edit(usuarioEnSesion);
+                    } else {
+                        FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "Las contraseñas no coinciden.", "");
+                        facesContext.addMessage(null, m);
+                        return "";
+                    }
+                } else {
+                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "La contraseña debe contener mínimo 8 carácteres.", "");
+                    facesContext.addMessage(null, m);
+                    return "";
+                }
+            } else {
+                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "Contraseña incorrecta.", "");
+                facesContext.addMessage(null, m);
+                return "";
+            }
+
+        }
+
+        return "miPerfil.xhtml";
     }
 
 }
