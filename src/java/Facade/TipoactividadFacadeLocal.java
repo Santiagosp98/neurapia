@@ -6,7 +6,6 @@
 package Facade;
 
 import Entities.Tipoactividad;
-import static Entities.Tipoactividad_.codActividad;
 import java.util.List;
 import javax.ejb.Local;
 
