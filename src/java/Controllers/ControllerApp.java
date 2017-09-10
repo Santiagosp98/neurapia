@@ -109,4 +109,8 @@ public class ControllerApp implements Serializable {
         }
     }
     
+    public String redirecMovilidad(){
+        return "Movilidad?faces-redirect=true";
+    }
+    
 }

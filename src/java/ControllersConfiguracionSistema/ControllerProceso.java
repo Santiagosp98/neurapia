@@ -37,7 +37,7 @@ public class ControllerProceso extends  Controllers.ControllerApp {
     @PostConstruct
     public void init(){
         proceso = new Proceso();
-        listaProceso=procesoFacade.findAll();
+        listaProceso = procesoFacade.findAll();
     }
             
     

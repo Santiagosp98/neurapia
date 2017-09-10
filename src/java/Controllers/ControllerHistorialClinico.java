@@ -11,11 +11,13 @@ import Entities.Historialclinico;
 import Entities.Usuario;
 import Entities.Dolor;
 import Entities.Respuestaactividad;
+import Entities.Resultadoobjetivo;
 import Entities.Resultadoproceso;
 import Facade.AnamnesisFacadeLocal;
 import Facade.DolorFacadeLocal;
 import Facade.HistorialclinicoFacadeLocal;
 import Facade.RespuestaactividadFacadeLocal;
+import Facade.ResultadoobjetivoFacadeLocal;
 import Facade.ResultadoprocesoFacadeLocal;
 import Facade.UsuarioFacadeLocal;
 
@@ -45,14 +47,8 @@ public class ControllerHistorialClinico extends ControllerApp {
 
     @Inject
     ControllerUsuario controllerUsuario;
-
-    public ControllerUsuario getControllerUsuario() {
-        return controllerUsuario;
-    }
-
-    public void setControllerUsuario(ControllerUsuario controllerUsuario) {
-        this.controllerUsuario = controllerUsuario;
-    }
+    
+    @Inject ControllersConfiguracionSistema.ControllerResultadoObjetivo resObjcontroller;
 
     @EJB
     private HistorialclinicoFacadeLocal historialClinicoFacade;
@@ -64,14 +60,12 @@ public class ControllerHistorialClinico extends ControllerApp {
     private UsuarioFacadeLocal usuarioFacade;
     private Usuario usuario;
     private List<Usuario> listaUsuarios;
-
-    public List<Usuario> getListaUsuarios() {
-        return listaUsuarios;
-    }
-
-    public void setListaUsuarios(List<Usuario> listaUsuarios) {
-        this.listaUsuarios = listaUsuarios;
-    }
+    
+    @EJB
+    private ResultadoobjetivoFacadeLocal rofl;
+    private Resultadoobjetivo resObjetivo;
+    private List<Resultadoobjetivo> listaResObj;
+    private List<Resultadoobjetivo> listobjetivosbtenidos;
 
     @EJB
     private AnamnesisFacadeLocal anamnesisFacade;
@@ -97,9 +91,52 @@ public class ControllerHistorialClinico extends ControllerApp {
     private List<Resultadoproceso> listaresultadoProceso;
     private List<Resultadoproceso> resultadosOBtenidos;
     private Map<String, List<Resultadoproceso>> mapa;
+    
+    @PostConstruct
+    public void init() {
+        historialClinico = new Historialclinico();
+        listaHistorialClinico = historialClinicoFacade.findAll();
+        usuario = new Usuario();
+        
+        dolor = new Dolor();
+        
+        resultadoProceso = new Resultadoproceso();
+        resultadosOBtenidos = new ArrayList();
+        
+        anamnesis = new Anamnesis();
+        listAnamnesis = anamnesisFacade.findAll();
+        listAnamnesisObtenidos = new ArrayList();
+        
+        listaDolor = dolorFacade.findAll();
+        listaresultadoProceso = resultadoProcesoFacade.findAll();
+        listaUsuarios = usuarioFacade.findAll();
+        
+        respuestaAct = new Respuestaactividad();
+        listRespActobtenidos = new ArrayList();
+        
+        resObjetivo = new Resultadoobjetivo();
+        listaResObj = rofl.findAll();
+        listobjetivosbtenidos = new ArrayList();
+    }
+    
+    public ControllerUsuario getControllerUsuario() {
+        return controllerUsuario;
+    }
 
+    public void setControllerUsuario(ControllerUsuario controllerUsuario) {
+        this.controllerUsuario = controllerUsuario;
+    }
+    
+    public List<Usuario> getListaUsuarios() {
+        return listaUsuarios;
+    }
+    
     public HistorialclinicoFacadeLocal getHistorialClinicoFacade() {
         return historialClinicoFacade;
+    }
+
+    public void setListaUsuarios(List<Usuario> listaUsuarios) {
+        this.listaUsuarios = listaUsuarios;
     }
 
     public void setHistorialClinicoFacade(HistorialclinicoFacadeLocal historialClinicoFacade) {
@@ -257,36 +294,43 @@ public class ControllerHistorialClinico extends ControllerApp {
     public void setListaDolorObtenidos(List<Dolor> listaDolorObtenidos) {
         this.listaDolorObtenidos = listaDolorObtenidos;
     }
-    
-    
-    
-    @PostConstruct
-    public void init() {
-        historialClinico = new Historialclinico();
-        listaHistorialClinico = historialClinicoFacade.findAll();
-        usuario = new Usuario();
-        
-        dolor = new Dolor();
-        
-        resultadoProceso = new Resultadoproceso();
-        resultadosOBtenidos = new ArrayList();
-        
-        anamnesis = new Anamnesis();
-        listAnamnesis = anamnesisFacade.findAll();
-        listAnamnesisObtenidos = new ArrayList();
-        
-        listaDolor = dolorFacade.findAll();
-        listaresultadoProceso = resultadoProcesoFacade.findAll();
-        listaUsuarios = usuarioFacade.findAll();
-        
-        respuestaAct = new Respuestaactividad();
-        listRespActobtenidos = new ArrayList();
+
+    public ResultadoobjetivoFacadeLocal getRofl() {
+        return rofl;
     }
 
+    public void setRofl(ResultadoobjetivoFacadeLocal rofl) {
+        this.rofl = rofl;
+    }
+
+    public Resultadoobjetivo getResObjetivo() {
+        return resObjetivo;
+    }
+
+    public void setResObjetivo(Resultadoobjetivo resObjetivo) {
+        this.resObjetivo = resObjetivo;
+    }
+
+    public List<Resultadoobjetivo> getListaResObj() {
+        return listaResObj;
+    }
+
+    public void setListaResObj(List<Resultadoobjetivo> listaResObj) {
+        this.listaResObj = listaResObj;
+    }
+    
     public List<Historialclinico> consultarHistorialClinico() {
         this.listaHistorialClinico = historialClinicoFacade.findAll();
         return listaHistorialClinico;
     }
+
+    public List<Resultadoobjetivo> getListobjetivosbtenidos() {
+        return listobjetivosbtenidos;
+    }
+
+    public void setListobjetivosbtenidos(List<Resultadoobjetivo> listobjetivosbtenidos) {
+        this.listobjetivosbtenidos = listobjetivosbtenidos;
+    }    
 
     public Map<String, List<Resultadoproceso>> getMapa() {
         return mapa;
@@ -327,11 +371,22 @@ public class ControllerHistorialClinico extends ControllerApp {
                     listRespActobtenidos.add(respuestaactividad);
                     System.out.println("Seleccionando resultados Actividad: " + respuestaactividad.getIdRespuestaActividad());
                 }
-            }            
+            }
+            for (Resultadoobjetivo resobjetivo : listaResObj) {
+                if (id == resobjetivo.getCodHistorialClinico().getIdHistorialClinico()) { 
+                    listobjetivosbtenidos.add(resobjetivo);
+                    System.out.println("Seleccionando resultados objetivos obtenidos: " + resobjetivo.getIdResultadoObjetivo());
+                }else{
+                    System.out.println("No existen resultados");
+                }
+            }
+            
+            
         } catch (Exception e) {
             System.out.println("Excepcion: " + e);
         }
         inicializarListaOrdenada();
+        resObjcontroller.agregarlistaOrdenada();
         System.out.println("Nombre paciente:" + historialClinico.getCodUsuario().getPrimerNombre());
         System.out.println("Seleccionando anamnesis: " + listAnamnesisObtenidos.size());
         System.out.println("Seleccionando dolor: " + dolor.getIdDolor());
@@ -384,29 +439,7 @@ public class ControllerHistorialClinico extends ControllerApp {
     public String selectReporteTratamiento() {
         return "ReporteTratamiento";
     }
-
-    public String crearHistorialClinico() throws ParseException {
-        iniciarConversacion();
-        if (controllerUsuario.getUsuario() != null) {
-            historialClinico.setCodUsuario(controllerUsuario.getUsuario());
-        }
-        if (this.usuario != null) {
-            System.out.println("Estamos creando un hsitorial clinico");           
-            historialClinico.setFechaCreacion(new Date());
-            this.historialClinicoFacade.create(historialClinico);
-            iniciarConversacion();
-            return "Anamnesis?faces-redirect=true";
-        }
-        System.out.println("no se pudo crear");
-        return "ConsultarUsuarios?faces-redirect=true";
-    }
-
-    public void eliminarHistorialClinico(Historialclinico historialclinico) {
-        this.historialClinico = historialclinico;
-        historialClinicoFacade.remove(historialclinico);
-        this.consultarHistorialClinico();
-    }
-
+    
     public HistorialclinicoFacadeLocal getHistorialClinicoFacadeLocal() {
         return historialClinicoFacade;
     }
@@ -431,19 +464,58 @@ public class ControllerHistorialClinico extends ControllerApp {
         this.listaHistorialClinico = listaHistorialClinico;
     }
 
+    public String crearHistorialClinico() throws ParseException {
+        iniciarConversacion();
+        if (controllerUsuario.getUsuario() != null) {
+            historialClinico.setCodUsuario(controllerUsuario.getUsuario());
+        }
+        if (this.usuario != null) {
+            System.out.println("Estamos creando un hsitorial clinico");           
+            historialClinico.setFechaCreacion(new Date());
+            this.historialClinicoFacade.create(historialClinico);
+            iniciarConversacion();
+            return "Anamnesis?faces-redirect=true";
+        }
+        System.out.println("no se pudo crear");
+        return "ConsultarUsuarios?faces-redirect=true";
+    }
+
+    public void eliminarHistorialClinico(Historialclinico historialclinico) {
+        this.historialClinico = historialclinico;
+        historialClinicoFacade.remove(historialclinico);
+        this.consultarHistorialClinico();
+    }
+
     public void inicializarListaOrdenada() {
         mapa = new HashMap<>();
-        String nomTemp = "";
-        for (Resultadoproceso r : resultadosOBtenidos) {
-            System.out.println("Probando lista ordenada");
-            if (nomTemp.equals("") || !r.getCodCaracteristicaMovilidad().getCodParteCuerpo().getNombreParteCuerpo().equals(nomTemp)) {
-                nomTemp = r.getCodCaracteristicaMovilidad().getCodParteCuerpo().getNombreParteCuerpo();
-                if(!mapa.containsKey(nomTemp)) {
-                    mapa.put(nomTemp, new ArrayList<Resultadoproceso>());
+        String nomTemp = "";        
+        String proceso = "";
+        try {   
+            for (Resultadoproceso r : resultadosOBtenidos) {
+                int cont = 0;
+                if (nomTemp.equals("") || !r.getCodCaracteristicaMovilidad().getCodParteCuerpo().getNombreParteCuerpo().equals(nomTemp) || mapa.containsKey(nomTemp)) {                    
+                    nomTemp = r.getCodCaracteristicaMovilidad().getCodParteCuerpo().getNombreParteCuerpo();                    
+                    if (!mapa.containsKey(nomTemp)) {
+                        mapa.put(nomTemp, new ArrayList<>()); 
+                    }                    
                 }
+                proceso = r.getCodProceso().getNombreProceso();  
+                System.out.println("Add al mapa: " + r.getIdResultadoProceso() + " Key: " + nomTemp + " Proceso: " + proceso + " res: " + r.getResultadoProceso());
+                if (mapa.get(nomTemp).isEmpty() || !mapa.get(nomTemp).get(cont).getCodProceso().getNombreProceso().equals(proceso)) {
+                    System.out.println("mapa vacio");
+                     mapa.get(nomTemp).add(r); 
+                }else if (mapa.get(nomTemp).get(cont).getCodProceso().getNombreProceso().equals(proceso)) {
+                    System.out.println("nuevo mapa:");
+                    mapa.put(nomTemp, new ArrayList<>()); 
+                    mapa.get(nomTemp).add(r);
+                }
+                               
+                cont ++;
             }
-            mapa.get(nomTemp).add(r);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-        System.out.println("Map list: " + mapa);
     }
+
 }

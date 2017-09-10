@@ -104,7 +104,7 @@ public class Usuario implements Serializable {
     @Size(max = 45)
     @Column(name = "claveUsuario")
     private String claveUsuario;
-    @Column(name = "ingresos")
+        @Column(name = "ingresos")
     private int ingresos;
     @Column(name = "ultimaSesion")
     private Date ultimaSesion;

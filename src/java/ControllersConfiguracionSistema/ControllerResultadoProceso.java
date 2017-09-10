@@ -10,8 +10,8 @@ import Facade.ResultadoprocesoFacadeLocal;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -23,6 +23,14 @@ import javax.inject.Named;
 public class ControllerResultadoProceso extends Controllers.ControllerApp{
     
     private List<Resultadoproceso> listaResultadoProceso;
+    private List listaIdCaracteristicas;
+    private List listaProcesos;
+    private List resultadosObtenidos;
+    
+    private List<List<String>> datos;
+    
+    @Inject 
+    Controllers.ControllerHistorialClinico hc;
     
     @EJB
     private ResultadoprocesoFacadeLocal resultadoProcesoFacade;
@@ -30,7 +38,8 @@ public class ControllerResultadoProceso extends Controllers.ControllerApp{
    
     @PostConstruct
     public void init(){
-        resultadoProceso = new Resultadoproceso();        
+        resultadoProceso = new Resultadoproceso();
+
     }
 
     public List<Resultadoproceso> getListaResultadoProceso() {
@@ -45,8 +54,9 @@ public class ControllerResultadoProceso extends Controllers.ControllerApp{
     }
     
     public void crearResultadoProceso(){
-        System.out.println("El resultado de proceso es: " + resultadoProceso);
-//        resultadoProcesoFacade.create(resultadoProceso);
+        System.out.println("Hc número: " + hc.getHistorialClinico().getIdHistorialClinico());
+        resultadoProceso.setCodHistorialClinico(hc.getHistorialClinico());
+        resultadoProcesoFacade.create(resultadoProceso);
     }
     
     public String ActualizarResultadoProceso(){
@@ -89,7 +99,4 @@ public class ControllerResultadoProceso extends Controllers.ControllerApp{
     public void setResultadoProceso(Resultadoproceso resultadoProceso) {
         this.resultadoProceso = resultadoProceso;
     }
-    
-    
-        
-}
+}   
