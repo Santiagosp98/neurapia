@@ -12,6 +12,7 @@ import javax.enterprise.context.ConversationScoped;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 /**
  *
@@ -21,10 +22,17 @@ import javax.ejb.EJB;
 @ConversationScoped
 public class ControllerAnamnesis extends ControllerApp{
 
+    @Inject
+    Controllers.ControllerHistorialClinico hc;
+    
+    @Inject
+    ControllerDolor dc;
+    
     @EJB
     private AnamnesisFacadeLocal anamnesisFacade;
     private Anamnesis anamnesis;
     private List<Anamnesis> listaAnamnesis;
+    private List<Anamnesis> listaAnamnesisObtenidas;
     
     public ControllerAnamnesis() {
         
@@ -36,15 +44,32 @@ public class ControllerAnamnesis extends ControllerApp{
         listaAnamnesis = anamnesisFacade.findAll();
     }
     
-    public List consultarAnamnesis(){
-        listaAnamnesis = anamnesisFacade.findAll();
-        return listaAnamnesis;
+    public List<Anamnesis> listaAnamnesisObtenidas(){
+        listaAnamnesisObtenidas = anamnesisFacade.seleccionarPorHistorialClinico(hc.getHistorialClinico().getIdHistorialClinico());
+        for (Anamnesis a : listaAnamnesisObtenidas) {
+            anamnesis = a;
+            System.out.println("anamnesis Obtenidas: " + anamnesis.getIdAnamnesis());
+        }
+        return listaAnamnesisObtenidas;        
     }
     
-    public String editarAnamnesis(){
+    public void editarAnamnesis() {
         System.out.println("Estamos actualizando la anamnesis");
-        anamnesisFacade.edit(anamnesis);        
-        return "Movilidad";
+        this.anamnesisFacade.edit(anamnesis);
+        dc.editarDolor();
+    }
+    
+    public List<Anamnesis> getListaAnamnesisObtenidas() {
+        return listaAnamnesisObtenidas;
+    }
+
+    public void setListaAnamnesisObtenidas(List<Anamnesis> listaAnamnesisObtenidas) {
+        this.listaAnamnesisObtenidas = listaAnamnesisObtenidas;
+    }
+    
+    public List<Anamnesis> consultarAnamnesis(){
+        listaAnamnesis = anamnesisFacade.findAll();
+        return listaAnamnesis;
     }
     
     public AnamnesisFacadeLocal getAnamnesisFacade() {

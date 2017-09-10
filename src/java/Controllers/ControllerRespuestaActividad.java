@@ -17,6 +17,8 @@ import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 /**
@@ -33,7 +35,6 @@ public class ControllerRespuestaActividad extends ControllerApp {
     @Inject
     private ControllerActividad act;
     
-    
     @EJB
     RespuestaactividadFacadeLocal respActFac;
     Respuestaactividad respuestaAct;    
@@ -44,8 +45,6 @@ public class ControllerRespuestaActividad extends ControllerApp {
     HistorialclinicoFacadeLocal hcf;
     List<Historialclinico> listaHc;
     List<Historialclinico> listaHcSeleccionado;
-    
-    
     
     public ControllerRespuestaActividad() {
     }
@@ -59,10 +58,8 @@ public class ControllerRespuestaActividad extends ControllerApp {
         this.listaHc = hcf.findAll();
         this.listaHcSeleccionado = new ArrayList();
         iniciarConversacion();
-        
     }
     
-
     public List consultarListaRespAct(){
         this.listRespAct = respActFac.findAll();
         System.out.println("Entrando en la consulta de Respuesa Actividad");
@@ -72,7 +69,6 @@ public class ControllerRespuestaActividad extends ControllerApp {
     public String redireccionaraReporteTratamiento(){
         return "ReporteTratamiento";
     }
-
     
     public Respuestaactividad getRespuestaAct() {
         return respuestaAct;
@@ -106,6 +102,15 @@ public class ControllerRespuestaActividad extends ControllerApp {
         this.listRespActSeleccionadas = listRespActSeleccionadas;
     }
     
+    public List<Respuestaactividad> listarRespuestasActividad(){
+        int id = hc.getHistorialClinico().getIdHistorialClinico();
+        listRespActSeleccionadas = respActFac.respuestasActividadObtenidas(id);
+        for (Respuestaactividad ra : listRespActSeleccionadas) {
+            System.out.println("Respuestas Actividad: " + ra.getIdRespuestaActividad());
+        }
+        return listRespActSeleccionadas;
+    }
+    
     public void crearRespuestaActividad(){
         System.out.println("Estamos creando");
         System.out.println(hc.getHistorialClinico().getIdHistorialClinico());
@@ -118,13 +123,23 @@ public class ControllerRespuestaActividad extends ControllerApp {
     }
     
     public void editarRespuestaActividad(){
+        FacesContext fc = FacesContext.getCurrentInstance();
         iniciarConversacion();
-        for (Respuestaactividad respuestaObtenida : hc.getListRespActobtenidos()) {
-            this.respuestaAct =  respuestaObtenida;
-            System.out.println(respuestaAct.getCodTipoActividad());
-            System.out.println("Respuestas de actividad a editar: " + respuestaAct.getIdRespuestaActividad());
-            System.out.println("codActividad a modificar: " + respuestaAct.getCodTipoActividad().getCodActividad().getIdActividad());
-            respActFac.edit(this.respuestaAct);
+        try {
+            for (Respuestaactividad respuestaObtenida : listRespActSeleccionadas) {
+                this.respuestaAct = respuestaObtenida;
+                System.out.println(respuestaAct.getCodTipoActividad());
+                System.out.println("Respuestas de actividad a editar: " + respuestaAct.getIdRespuestaActividad());
+                System.out.println("codActividad a modificar: " + respuestaAct.getCodTipoActividad().getCodActividad().getIdActividad());
+                respActFac.edit(this.respuestaAct);
+            }
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Edicion Satisfactoriamente realizada.", "");
+                fc.addMessage(null, message);
+        } catch (Exception e) {
+            System.out.println("Error al editar resp act: " + e.getMessage());
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La edición de la respuesta de actividad no ha sido realizada.", "");
+                fc.addMessage(null, message);
         }
+        
     }
 }

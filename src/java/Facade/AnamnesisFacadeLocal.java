@@ -6,6 +6,7 @@
 package Facade;
 
 import Entities.Anamnesis;
+import Entities.Dolor;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -27,6 +28,10 @@ public interface AnamnesisFacadeLocal {
     List<Anamnesis> findAll();
 
     List<Anamnesis> findRange(int[] range);
+    
+    List<Anamnesis>  seleccionarPorHistorialClinico(int idHistorialClinico);
+    
+    List<Dolor>  seleccionarPorDolor(int idDolor);
 
     int count();
     

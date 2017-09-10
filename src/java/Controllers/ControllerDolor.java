@@ -12,6 +12,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.ConversationScoped;
+import javax.inject.Inject;
 
 /**
  *
@@ -24,6 +25,9 @@ public class ControllerDolor extends ControllerApp {
     /**
      * Creates a new instance of ControllerDolor
      */
+    
+    @Inject ControllerAnamnesis ac;
+    
     @EJB
     private DolorFacadeLocal dolorFacade;
     private Dolor dolor;
@@ -38,6 +42,12 @@ public class ControllerDolor extends ControllerApp {
         this.listaDolor = dolorFacade.findAll();
     }
     
+    public void editarDolor() {
+        dolor = ac.getAnamnesis().getCodDolor();
+        System.out.println("Estamos editando Dolor");
+        this.dolorFacade.edit(dolor);
+    }
+    
     public List<Dolor> consultarDolor(){
         return listaDolor;
     }
@@ -46,8 +56,6 @@ public class ControllerDolor extends ControllerApp {
         return dolorFacade;
     }
     
-    
-
     public void setDolorFacade(DolorFacadeLocal dolorFacade) {
         this.dolorFacade = dolorFacade;
     }
