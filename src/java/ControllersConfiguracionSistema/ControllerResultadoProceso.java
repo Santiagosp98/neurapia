@@ -79,33 +79,12 @@ public class ControllerResultadoProceso extends Controllers.ControllerApp{
     }
     
     public List<Resultadoproceso> listaResultadosProcesosObtenidos(){
-        int id = hc.getHistorialClinico().getIdHistorialClinico();
+        int id = hc.getHistorialClinico().getIdHistorialClinico(); //debemos modificarlo por codAnamnesis
         resultadosObtenidos = resultadoProcesoFacade.listarResultadosProcesosObtenidos(id);
         for (Resultadoproceso r : resultadosObtenidos) {
             System.out.println("Resultados proceso Obtenido: " + r.getIdResultadoProceso());
         }
         return resultadosObtenidos;
-    }
-    
-    public Map<String, List<Resultadoproceso>> getMapa() {
-        return mapa;
-    }
-
-    public void setMapa(Map<String, List<Resultadoproceso>> mapa) {
-        this.mapa = mapa;
-    }
-
-    public List<Resultadoproceso> getResultadosObtenidos() {
-        return resultadosObtenidos;
-    }
-
-    public void setResultadosObtenidos(List<Resultadoproceso> resultadosObtenidos) {
-        this.resultadosObtenidos = resultadosObtenidos;
-    }
-
-    public List<Resultadoproceso> getListaResultadoProceso() {
-        listaResultadoProceso = resultadoProcesoFacade.findAll();
-        return listaResultadoProceso;
     }
     
     public String selccionarResultadoProceso(Resultadoproceso resultadoproceso){
@@ -115,14 +94,26 @@ public class ControllerResultadoProceso extends Controllers.ControllerApp{
     }
     
     public void crearResultadoProceso(){
-        System.out.println("Hc número: " + hc.getHistorialClinico().getIdHistorialClinico());
-        resultadoProceso.setCodHistorialClinico(hc.getHistorialClinico());
-        resultadoProcesoFacade.create(resultadoProceso);
-    }
-    
+        try {
+            if (resultadoProceso != null) {
+                resultadoProceso.setCodHistorialClinico(hc.getHistorialClinico()); //debemos modificarlo por anamnesis.getAnamnesis();
+                resultadoProcesoFacade.create(resultadoProceso);                
+            }
+        } catch (Exception e) {
+            System.out.println("Error crear Resultado Proceso: " + e.getMessage());
+        }        
+    }   
+        
     public String ActualizarResultadoProceso(){
-        resultadoProcesoFacade.edit(resultadoProceso);
-        return cancelar();
+        try {
+            if (resultadoProceso != null) {
+                resultadoProcesoFacade.edit(resultadoProceso);
+                return "Movilidad.xhtml?faces-redirect=true";
+            }
+        } catch (Exception e) {
+            System.out.println("Error al actualizar Resultado Proceso: " + e.getMessage());
+        }
+        return  "";
     }
     
     public void seleccionarEliminarLocal(ResultadoprocesoFacadeLocal resultadoprocesoFacade ){
@@ -131,9 +122,14 @@ public class ControllerResultadoProceso extends Controllers.ControllerApp{
     }
     
     public String EliminarResultadoProceso(){
-        resultadoProcesoFacade.remove(resultadoProceso);
-        finalizarConversacion();
-        return "ConsultarResultadoProceso";        
+        try {
+            resultadoProcesoFacade.remove(resultadoProceso);
+            finalizarConversacion();
+            return "ConsultarResultadoProceso";            
+        } catch (Exception e) {
+            System.out.println("Error al Eliminar el Resultado Proceso: " + e.getMessage());
+        }
+        return "";
     }
     
     public void setListaResultadoProceso(List<Resultadoproceso> listaResultadoProceso) {
@@ -159,5 +155,26 @@ public class ControllerResultadoProceso extends Controllers.ControllerApp{
 
     public void setResultadoProceso(Resultadoproceso resultadoProceso) {
         this.resultadoProceso = resultadoProceso;
+    }
+        
+    public Map<String, List<Resultadoproceso>> getMapa() {
+        return mapa;
+    }
+
+    public void setMapa(Map<String, List<Resultadoproceso>> mapa) {
+        this.mapa = mapa;
+    }
+
+    public List<Resultadoproceso> getResultadosObtenidos() {
+        return resultadosObtenidos;
+    }
+
+    public void setResultadosObtenidos(List<Resultadoproceso> resultadosObtenidos) {
+        this.resultadosObtenidos = resultadosObtenidos;
+    }
+
+    public List<Resultadoproceso> getListaResultadoProceso() {
+        listaResultadoProceso = resultadoProcesoFacade.findAll();
+        return listaResultadoProceso;
     }
 }   

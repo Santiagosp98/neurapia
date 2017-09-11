@@ -7,21 +7,10 @@
 package Controllers;
 
 import ControllersConfiguracionSistema.ControllerResultadoProceso;
-import Entities.Anamnesis;
 import Entities.Historialclinico;
 import Entities.Usuario;
-import Entities.Dolor;
-import Entities.Respuestaactividad;
-import Entities.Resultadoobjetivo;
-import Entities.Resultadoproceso;
-import Facade.AnamnesisFacadeLocal;
-import Facade.DolorFacadeLocal;
 import Facade.HistorialclinicoFacadeLocal;
-import Facade.RespuestaactividadFacadeLocal;
-import Facade.ResultadoobjetivoFacadeLocal;
-import Facade.ResultadoprocesoFacadeLocal;
 import Facade.UsuarioFacadeLocal;
-
 import java.text.ParseException;
 import java.util.*;
 import javax.inject.Inject;
@@ -142,7 +131,7 @@ public class ControllerHistorialClinico extends ControllerApp {
             return "ConsultarUsuarios?faces-redirect=true";
         } catch (Exception e) {
             System.out.println("Error al crear el hc: " + e.getMessage() + " " + e.getCause());
-             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El Historial Clínico no ha podido ser añadido al sistema.", "");
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El Historial Clínico no ha podido ser añadido al sistema.", "");
                 fc.addMessage(null, message);
         }
         return "";
@@ -176,14 +165,6 @@ public class ControllerHistorialClinico extends ControllerApp {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-    }
-    
-    public HistorialclinicoFacadeLocal getHistorialClinicoFacadeLocal() {
-        return historialClinicoFacade;
-    }
-
-    public void setHistorialClinicoFacadeLocal(HistorialclinicoFacadeLocal historialClinicoFacade) {
-        this.historialClinicoFacade = historialClinicoFacade;
     }
 
     public Historialclinico getHistorialClinico() {

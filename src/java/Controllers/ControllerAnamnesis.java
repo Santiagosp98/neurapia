@@ -40,8 +40,28 @@ public class ControllerAnamnesis extends ControllerApp{
     
     @PostConstruct
     public void init(){
-        anamnesis = new Anamnesis();
+        this.anamnesis = new Anamnesis();
         listaAnamnesis = anamnesisFacade.findAll();
+    }
+    public String redireccionarCrearAnamnesis(){
+        iniciarConversacion();
+        this.anamnesis = new Anamnesis();
+        return "CrearAnamnesis.xhtml?faces-redirect=true";
+    }
+    public void crearAnamnesis(){
+        try {
+            if (this.anamnesis != null) {                
+                System.out.println("Estamos creando nueva anamnesis");                
+                anamnesis.setCodDolor(dc.crearDolor());                
+                anamnesis.setCodHistorialClinico(hc.getHistorialClinico());              
+                anamnesisFacade.create(anamnesis);
+                selectAnamnesis();
+            } else {
+                System.out.println("Error al crear una nueva anamnesis");
+            }
+        } catch (Exception e) {
+            System.out.println("Error al crear nueva anamnesis: " + e.getMessage());
+        }
     }
     
     public List<Anamnesis> listaAnamnesisObtenidas(){

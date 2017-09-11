@@ -42,6 +42,16 @@ public class ControllerDolor extends ControllerApp {
         this.listaDolor = dolorFacade.findAll();
     }
     
+    public Dolor crearDolor(){
+        if (dolor != null) {
+            System.out.println("Estamos creando el dolor con localizacion: " + dolor.getLocalizacion());
+            dolorFacade.create(dolor);
+            return dolor;
+        }
+        System.out.println("Dolor no creado");
+        return dolor;
+    }
+    
     public void editarDolor() {
         dolor = ac.getAnamnesis().getCodDolor();
         System.out.println("Estamos editando Dolor");
