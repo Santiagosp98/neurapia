@@ -8,6 +8,7 @@ package Facade;
 import Entities.Citamedica;
 import Entities.Fisioterapeuta;
 import Entities.Usuario;
+import java.util.Date;
 
 import java.util.List;
 import javax.ejb.Stateless;
@@ -84,6 +85,21 @@ public class CitamedicaFacade extends AbstractFacade<Citamedica> implements Cita
         }
 
         return cantidad;
+    }
+
+    @Override
+    public Citamedica buscarFisioFechaYHora(Fisioterapeuta codFisioterapeuta, Date fecha, Date hora) {
+        Citamedica c= null;
+        try {
+            TypedQuery<Citamedica> q = getEntityManager().createNamedQuery("Citamedica.citaPorFisioFechaHora", Citamedica.class);
+            q.setParameter("codFisioterapeuta", codFisioterapeuta);
+            q.setParameter("fecha", fecha);
+            q.setParameter("hora", hora);
+            c = q.getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return c;
     }
 
 }
