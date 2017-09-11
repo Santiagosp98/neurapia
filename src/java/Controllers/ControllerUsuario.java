@@ -376,6 +376,8 @@ public class ControllerUsuario extends ControllerApp {
                 return "";
             }
 
+            
+            
             if (usuarioFacade.buscarDocumento(usuario.getNumeroDocumento()) == null) {
                 if (usuarioFacade.buscarEmail(usuario.getCorreoElectronico()) == null) {
                     if (usuarioEnSesion.getCodRol().getIdRol().equals(3)) {
@@ -392,7 +394,9 @@ public class ControllerUsuario extends ControllerApp {
                     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El email ingresado ya está registrado.", "");
                     fc.addMessage(null, message);
                     return "";
+
                 }
+
             } else {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El número de documento ingresado ya está registrado.", "");
                 fc.addMessage(null, message);

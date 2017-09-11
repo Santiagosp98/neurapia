@@ -41,6 +41,7 @@ import javax.xml.bind.annotation.XmlRootElement;
         , @NamedQuery(name = "Citamedica.findByEstado", query = "SELECT c FROM Citamedica c WHERE c.estado = :estado")
         , @NamedQuery(name = "Citamedica.citasPorUsuario", query = "SELECT c FROM Citamedica c WHERE c.codUsuario = :codUsuario")
         , @NamedQuery(name = "Citamedica.citasPorFisioterapeuta", query = "SELECT c FROM Citamedica c WHERE c.codFisioterapeuta = :codFisioterapeuta")
+        , @NamedQuery(name = "Citamedica.citaPorFisioFechaHora", query = "SELECT c FROM Citamedica c WHERE c.codFisioterapeuta = :codFisioterapeuta AND c.fecha =:fecha AND c.hora =:hora")
         , @NamedQuery(name = "Citamedica.citasPorFisioterapeutaEstado", query = "SELECT c FROM Citamedica c WHERE c.codFisioterapeuta = :codFisioterapeuta AND c.estado = :estado")
         , @NamedQuery(name = "Citamedica.findByNumeroConsultorio", query = "SELECT c FROM Citamedica c WHERE c.numeroConsultorio = :numeroConsultorio")
         , @NamedQuery(name = "Citamedica.countByEstado", query = "SELECT COUNT(c) FROM Citamedica c WHERE c.estado = :estado")
@@ -162,6 +163,15 @@ public class Citamedica implements Serializable {
         }
         return "";
     }
+    
+    public ArrayList getSeleccionConsultorio() {
+        ArrayList lista = new ArrayList();
+        lista.add("123");
+        lista.add("122");
+        lista.add("121");
+        return lista;
+    }
+    
 
     /*Fin Edicion de entidad*/
     @Override
