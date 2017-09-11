@@ -10,6 +10,7 @@ import Entities.Fisioterapeuta;
 import Entities.Usuario;
 import java.util.List;
 import javax.ejb.Local;
+import java.util.Date;
 
 /**
  *
@@ -37,6 +38,8 @@ public interface CitamedicaFacadeLocal {
     List<Citamedica> citasPorFisioterapeuta(Fisioterapeuta codFisioterapeuta);
 
     List<Citamedica> citasPorFisioterapeutaEstado(Fisioterapeuta codFisioterapeuta, String estado);
+    
+    Citamedica buscarFisioFechaYHora (Fisioterapeuta codFisioterapeuta, Date fecha, Date hora);
 
     int count();
 
