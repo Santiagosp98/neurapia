@@ -6,6 +6,7 @@
 package Entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -35,6 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Fisioterapeuta.findAll", query = "SELECT f FROM Fisioterapeuta f")
     , @NamedQuery(name = "Fisioterapeuta.findByIdFisioterapeuta", query = "SELECT f FROM Fisioterapeuta f WHERE f.idFisioterapeuta = :idFisioterapeuta")
+    , @NamedQuery(name = "Fisioterapeuta.buscarPorCodUsuario", query = "SELECT f FROM Fisioterapeuta f WHERE f.codUsuario = :codUsuario")
     , @NamedQuery(name = "Fisioterapeuta.findByTarjetaProfesional", query = "SELECT f FROM Fisioterapeuta f WHERE f.tarjetaProfesional = :tarjetaProfesional")
     , @NamedQuery(name = "Fisioterapeuta.findByEspecializacion", query = "SELECT f FROM Fisioterapeuta f WHERE f.especializacion = :especializacion")
     , @NamedQuery(name = "Fisioterapeuta.findByCorreoEmpresarial", query = "SELECT f FROM Fisioterapeuta f WHERE f.correoEmpresarial = :correoEmpresarial")
