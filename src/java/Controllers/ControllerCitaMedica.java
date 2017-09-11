@@ -55,6 +55,7 @@ public class ControllerCitaMedica extends ControllerApp {
     private String fechaCitaDia;
     private String fechaCitaMes;
     private String fechaCitaAño;
+    private String fechaHora;
 
     @EJB
     private FisioterapeutaFacadeLocal fisioterapeutaFacade;
@@ -185,13 +186,35 @@ public class ControllerCitaMedica extends ControllerApp {
             System.out.println("Año actual " + c1.get(Calendar.YEAR) + " " + c1.get(Calendar.MONTH) + " " + c1.get(Calendar.DAY_OF_MONTH));
             if (Integer.parseInt(fechaCitaAño) >= c1.get(Calendar.YEAR)) {
                 if (Integer.parseInt(fechaCitaAño) > c1.get(Calendar.YEAR) || Integer.parseInt(fechaCitaMes) >= (c1.get(Calendar.MONTH) + 1)) {
-                    if ( Integer.parseInt(fechaCitaAño) > c1.get(Calendar.YEAR) ||Integer.parseInt(fechaCitaMes) != (c1.get(Calendar.MONTH) + 1) || Integer.parseInt(fechaCitaDia) > c1.get(Calendar.DAY_OF_MONTH)) {
+                    if (Integer.parseInt(fechaCitaAño) > c1.get(Calendar.YEAR) || Integer.parseInt(fechaCitaMes) != (c1.get(Calendar.MONTH) + 1) || Integer.parseInt(fechaCitaDia) > c1.get(Calendar.DAY_OF_MONTH)) {
                         if (validacionFecha <= 12 && validacionFecha > 0) {
                             if ((validacionFecha % 2 == 1 && validacionFecha <= 7) || (validacionFecha % 2 == 0 && validacionFecha > 7)) {
                                 validacionFecha = Integer.parseInt(fechaCitaDia);
                                 if (validacionFecha <= 31 && validacionFecha > 0) {
-                                    crearCitaContenido();
-                                    return "ConsultarCitasMedicas?faces-redirect=true";
+                                    Calendar c2 = Calendar.getInstance();
+                                    System.out.println("Hora actual: " + c2.get(Calendar.HOUR));
+                                    if (Integer.parseInt(fechaHora) <= 20) {
+                                        System.out.println("fecha menor a 20");
+                                        if (Integer.parseInt(fechaHora) >= 8) {
+                                            System.out.println("creado cita contenido");
+                                            if (crearCitaContenido() == true) {
+                                                return "ConsultarCitasMedicas?faces-redirect=true";
+                                            } else {
+                                                System.out.println("No se creo");
+                                                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
+                                                        "El fisioterapeuta que selecciono ya esta ocupado en la fecha y hora digitada");
+                                                fc.addMessage(null, m);
+                                            }
+                                        } else {
+                                            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
+                                                    "Solo atendemos desde las 8 horas del dia ");
+                                            fc.addMessage(null, m);
+                                        }
+                                    } else {
+                                        FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
+                                                "Atendemos hasta las 20 horas del dia");
+                                        fc.addMessage(null, m);
+                                    }
                                 } else {
                                     FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
                                             "El dia tiene que ser mayor de 0 y menor o igual que 31 para el mes digitado");
@@ -202,7 +225,30 @@ public class ControllerCitaMedica extends ControllerApp {
                                     validacionFecha = Integer.parseInt(fechaCitaDia);
                                     if (Integer.parseInt(fechaCitaAño) % 4 == 0) {
                                         if (validacionFecha <= 29 && validacionFecha > 0) {
-                                            crearCitaContenido();
+                                            Calendar c2 = Calendar.getInstance();
+                                            System.out.println("Hora actual: " + c2.get(Calendar.HOUR));
+                                            if (Integer.parseInt(fechaHora) <= 20) {
+                                                System.out.println("fecha menor a 20");
+                                                if (Integer.parseInt(fechaHora) >= 8) {
+                                                    System.out.println("creado cita contenido");
+                                                    if (crearCitaContenido() == true) {
+                                                        return "ConsultarCitasMedicas?faces-redirect=true";
+                                                    } else {
+                                                        System.out.println("No se creo");
+                                                        FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
+                                                                "El fisioterapeuta que selecciono ya esta ocupado en la fecha y hora digitada");
+                                                        fc.addMessage(null, m);
+                                                    }
+                                                } else {
+                                                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
+                                                            "Solo atendemos desde las 8 horas del dia ");
+                                                    fc.addMessage(null, m);
+                                                }
+                                            } else {
+                                                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
+                                                        "Atendemos hasta las 20 horas del dia");
+                                                fc.addMessage(null, m);
+                                            }
                                         } else {
                                             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
                                                     "El dia tiene que ser mayor de 0 y menor o igual que 29 para el mes febrero y año biciesto");
@@ -211,7 +257,30 @@ public class ControllerCitaMedica extends ControllerApp {
                                         }
                                     } else {
                                         if (validacionFecha <= 28 && validacionFecha > 0) {
-                                            crearCitaContenido();
+                                            Calendar c2 = Calendar.getInstance();
+                                            System.out.println("Hora actual: " + c2.get(Calendar.HOUR));
+                                            if (Integer.parseInt(fechaHora) <= 20) {
+                                                System.out.println("fecha menor a 20");
+                                                if (Integer.parseInt(fechaHora) >= 8) {
+                                                    System.out.println("creado cita contenido");
+                                                    if (crearCitaContenido() == true) {
+                                                        return "ConsultarCitasMedicas?faces-redirect=true";
+                                                    } else {
+                                                        System.out.println("No se creo");
+                                                        FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
+                                                                "El fisioterapeuta que selecciono ya esta ocupado en la fecha y hora digitada");
+                                                        fc.addMessage(null, m);
+                                                    }
+                                                } else {
+                                                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
+                                                            "Solo atendemos desde las 8 horas del dia ");
+                                                    fc.addMessage(null, m);
+                                                }
+                                            } else {
+                                                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
+                                                        "Atendemos hasta las 20 horas del dia");
+                                                fc.addMessage(null, m);
+                                            }
                                         } else {
                                             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
                                                     "El dia tiene que ser mayor de 0 y menor o igual que 28 para el mes febrero y año no biciesto");
@@ -221,8 +290,30 @@ public class ControllerCitaMedica extends ControllerApp {
                                 } else {
                                     validacionFecha = Integer.parseInt(fechaCitaDia);
                                     if (validacionFecha <= 30 && validacionFecha > 0) {
-                                        crearCitaContenido();
-                                        return "ConsultarCitasMedicas?faces-redirect=true";
+                                        Calendar c2 = Calendar.getInstance();
+                                        System.out.println("Hora actual: " + c2.get(Calendar.HOUR));
+                                        if (Integer.parseInt(fechaHora) <= 20) {
+                                            System.out.println("fecha menor a 20");
+                                            if (Integer.parseInt(fechaHora) >= 8) {
+                                                System.out.println("creado cita contenido");
+                                                if (crearCitaContenido() == true) {
+                                                    return "ConsultarCitasMedicas?faces-redirect=true";
+                                                } else {
+                                                    System.out.println("No se creo");
+                                                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
+                                                            "El fisioterapeuta que selecciono ya esta ocupado en la fecha y hora digitada");
+                                                    fc.addMessage(null, m);
+                                                }
+                                            } else {
+                                                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
+                                                        "Solo atendemos desde las 8 horas del dia ");
+                                                fc.addMessage(null, m);
+                                            }
+                                        } else {
+                                            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
+                                                    "Atendemos hasta las 20 horas del dia");
+                                            fc.addMessage(null, m);
+                                        }
                                     } else {
                                         FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
                                                 "El dia tiene que ser mayor de 0 y menor o igual que 30 para el mes digitado");
@@ -260,25 +351,50 @@ public class ControllerCitaMedica extends ControllerApp {
         return "";
     }
 
-    private void crearCitaContenido() {
+    private boolean crearCitaContenido() {
         try {
+            FacesContext fc = FacesContext.getCurrentInstance();
+            Fisioterapeuta f = null;
+            Usuario uS = cs.getUsuario();
+            System.out.println("rol :" + uS.getCodRol().getIdRol());
+            if (uS.getCodRol().getIdRol() == 3) {
+                f = fisioterapeutaFacade.buscarPorCodUsuario(uS);
+                System.out.println("Fisioterapeuta: " + f.getFullnameFisioterapeuta());
+                citaMedica.setCodFisioterapeuta(f);
+            } else if (uS.getCodRol().getIdRol() == 4) {
+                System.out.println("Usuario: " + uS);
+                citaMedica.setCodUsuario(uS);
+            }
             System.out.println("Correo fisioterapeuta: " + citaMedica.getCodFisioterapeuta().getCodUsuario().getCorreoElectronico());
             System.out.println("Correo Usuario: " + citaMedica.getCodUsuario().getCorreoElectronico());
             ce.setEmailDestinatario(citaMedica.getCodFisioterapeuta().getCodUsuario().getCorreoElectronico() + ", " + citaMedica.getCodUsuario().getCorreoElectronico());
             System.out.println("Correos a enviar: " + ce.getEmailDestinatario());
             String armarFecha;
+            String armarHora;
+            DateFormat formaHora = new SimpleDateFormat("HH:mm:ss");
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            armarHora = fechaHora + ":00:00";
+            System.out.println("hora: " + armarHora);
+            citaMedica.setHora(formaHora.parse(armarHora));
             armarFecha = fechaCitaAño + "-" + fechaCitaMes + "-" + fechaCitaDia;
             System.out.println(armarFecha);
             citaMedica.setFecha(format.parse(armarFecha));
             System.out.println("fecha " + citaMedica.getFecha());
-            ce.enviarAsignacionDeCita(citaMedica);
-            citaMedicaFacade.create(citaMedica);
+            Citamedica cm = null;
+            cm = citaMedicaFacade.buscarFisioFechaYHora(citaMedica.getCodFisioterapeuta(), format.parse(armarFecha), formaHora.parse(armarHora));
+            System.out.println("Cita buscada : " + cm);
+            if (cm == null) {
+                ce.enviarAsignacionDeCita(citaMedica);
+                citaMedicaFacade.create(citaMedica);
+                return true;
+            } else {
+                return false;
+            }
         } catch (Exception e) {
             System.out.println(e);
+            return false;
 
         }
-
     }
 
     public CitamedicaFacadeLocal getCitaMedicaFacade() {
@@ -399,6 +515,14 @@ public class ControllerCitaMedica extends ControllerApp {
 
     public void setFechaCitaAño(String fechaCitaAño) {
         this.fechaCitaAño = fechaCitaAño;
+    }
+
+    public String getFechaHora() {
+        return fechaHora;
+    }
+
+    public void setFechaHora(String fechaHora) {
+        this.fechaHora = fechaHora;
     }
 
 }
