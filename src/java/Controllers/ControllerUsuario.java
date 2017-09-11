@@ -51,6 +51,7 @@ public class ControllerUsuario extends ControllerApp {
     private Usuario usuario; //Entidades
     private List<Usuario> listaUsuarios;
     private String confirmarClave;
+    private String contrasenaAntigua;
     private String claveAnterior;
     private String estado;
     private int cantidadUsuarios;
@@ -74,7 +75,7 @@ public class ControllerUsuario extends ControllerApp {
         usuariosInhabilitados = usuarioFacade.cantidadUsuariosPorEstado("Inactivo");
         fisioterapeutasRegistrados = usuarioFacade.countCantidadUsuariosPorRol(3);
         if (cs.getUsuario() != null) {
-            claveAnterior = usuarioFacade.buscarEmail(cs.getUsuario().getCorreoElectronico()).getClaveUsuario();
+            contrasenaAntigua = usuarioFacade.buscarEmail(cs.getUsuario().getCorreoElectronico()).getClaveUsuario();
         }
     }
 
@@ -514,6 +515,8 @@ public class ControllerUsuario extends ControllerApp {
         this.claveAnterior = claveAnterior;
     }
 
+
+
     public String prepararCrearHistorial(Usuario usuario) {
         iniciarConversacion();
         this.usuario = usuario;
@@ -532,8 +535,9 @@ public class ControllerUsuario extends ControllerApp {
         Usuario usuarioEnSesion = cs.getUsuario();
 
         if (usuario != null) {
-            if (claveAnterior.equals(usuarioEnSesion.getClaveUsuario())) {
-                if (usuarioEnSesion.getClaveUsuario().length() < 8) {
+            if (contrasenaAntigua.equals(claveAnterior)) {
+                System.out.println(usuarioEnSesion.getClaveUsuario());
+                if (usuarioEnSesion.getClaveUsuario().length() > 7) {
                     if (confirmarClave.equals(usuarioEnSesion.getClaveUsuario())) {
                         usuarioFacade.edit(usuarioEnSesion);
                     } else {
