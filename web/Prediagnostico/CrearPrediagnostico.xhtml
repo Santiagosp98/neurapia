@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="#{lenguaje.locale}"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -22,18 +23,20 @@
                     <div class="panel panel-default">
                         <div class="panel-heading active" role="tab" id="headingOne">
                             <h6 class="panel-title"><i class="fa fa-users" aria-hidden="true"></i>
-                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsTwo" aria-expanded="true" aria-controls="collapseOne">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsTwo"
+                                   aria-expanded="true" aria-controls="collapseOne">
                                     <h:outputText value="#{msg['my-prediagnostics']}"/>
                                     <span class="caret"></span>
                                 </a>
                             </h6>
                         </div>
 
-                        <div id="collapsTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                        <div id="collapsTwo" class="panel-collapse collapse in" role="tabpanel"
+                             aria-labelledby="headingOne">
                             <div class="panel-body">
                                 <a href="ConsultarPrediagnostico.xhtml">#{msg['prediagnosis-historial']}</a>
                             </div>
-                            <div class="panel-body active" >
+                            <div class="panel-body active">
                                 <h:form>
                                     <a href="CrearPrediagnostico.xhtml">#{msg['create-prediagnosis']}</a>
                                 </h:form>
@@ -53,116 +56,157 @@
                         #{msg['add-prediagnosis']}
                     </h4>
 
-                    <h:form prependId="false" id="formCuestionarioPreguntas" a:name="formCuestionarioPreguntas">
-
-                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
-                            <br></br>
-                            <label for="pregunta1">1. #{msg['add-prediagnosis-question1']}</label>
-                            <h:messages for="pregunta1" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
-                            <h:inputTextarea class="form-control" rows="4" id="pregunta1" value="#{controllerRespuestaPreg.respuestapreg.resp1}" 
-                                             required="true" requiredMessage="El Campo no debe ser nulo" title="pregunta1" ></h:inputTextarea>
-                        </div>
-
-                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">    
-                            <br></br>
-                            <label for="pregunta2">2. #{msg['add-prediagnosis-question2']}</label>
-                            <h:messages for="pregunta2" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
-                            <h:inputTextarea class="form-control" rows="4" id="pregunta2" value="#{controllerRespuestaPreg.respuestapreg.resp2}"
-                                             required="true" requiredMessage="El Campo no debe ser nulo" title="pregunta2" ></h:inputTextarea>
-                        </div>
-
-                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">     
-                            <br></br>
-                            <label for="pregunta3">3. #{msg['add-prediagnosis-question3']}</label>
-                            <h:messages for="pregunta3" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
-                            <h:inputTextarea class="form-control" rows="4" id="pregunta3" value="#{controllerRespuestaPreg.respuestapreg.resp3}" 
-                                             required="true" requiredMessage="El Campo no debe ser nulo" title="pregunta3" ></h:inputTextarea>
-                        </div>
-
-                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">    
-                            <br></br>
-                            <label for="pregunta4">4. #{msg['add-prediagnosis-question4']}</label>
-                            <h:messages for="pregunta4" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
-                            <h:inputTextarea class="form-control" rows="4" id="pregunta4" value="#{controllerRespuestaPreg.respuestapreg.resp4}"
-                                             required="true" requiredMessage="El Campo no debe ser nulo" title="pregunta4" ></h:inputTextarea>
-                        </div>
-
-                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
-                            <br></br>
-                            <label for="pregunta5">5. #{msg['add-prediagnosis-question5']}</label>
-                            <h:messages for="pregunta5" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
-                            <h:inputTextarea class="form-control" rows="4" id="pregunta5" value="#{controllerRespuestaPreg.respuestapreg.resp5}"
-                                             required="true" requiredMessage="El Campo no debe ser nulo" title="pregunta5" ></h:inputTextarea>
-                        </div>
-
-                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
-                            <br></br>
-                            <label for="pregunta6">6. #{msg['add-prediagnosis-question6']}</label>
-                            <h:messages for="pregunta6" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
-                            <h:inputTextarea class="form-control" rows="4" id="pregunta6" value="#{controllerRespuestaPreg.respuestapreg.resp6}"
-                                             required="true" requiredMessage="El Campo no debe ser nulo" title="pregunta6" ></h:inputTextarea>
-                        </div>
-
-                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
-                            <br></br>
-                            <label for="pregunta7">7. #{msg['add-prediagnosis-question7']}</label>
-                            <h:messages for="pregunta7" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
-                            <h:inputTextarea class="form-control" rows="4" id="pregunta7" value="#{controllerRespuestaPreg.respuestapreg.resp7}"
-                                             required="true" requiredMessage="El Campo no debe ser nulo" title="pregunta7" ></h:inputTextarea>
-                        </div>
-
-                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
-                            <br></br>
-                            <label for="pregunta8">8. #{msg['add-prediagnosis-question8']}?</label>
-                            <h:messages for="pregunta8" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
-                            <h:inputTextarea class="form-control" rows="4" id="pregunta8" value="#{controllerRespuestaPreg.respuestapreg.resp8}"
-                                             required="true" requiredMessage="El Campo no debe ser nulo" title="pregunta8" ></h:inputTextarea>
-                        </div>
-
-                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
-                            <br></br>
-                            <label for="pregunta9">9. #{msg['add-prediagnosis-question9']}</label>
-                            <h:messages for="pregunta9" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
-                            <h:inputTextarea class="form-control" rows="4" id="pregunta9" value="#{controllerRespuestaPreg.respuestapreg.resp9}"
-                                             required="true" requiredMessage="El Campo no debe ser nulo" title="pregunta9" ></h:inputTextarea>
-                        </div>
-
-                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">      
-                            <br></br>
-                            <label for="pregunta10">10. #{msg['add-prediagnosis-question10']}</label>
-                            <h:messages for="pregunta10" style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
-                            <h:inputTextarea class="form-control" rows="4" id="pregunta10" value="#{controllerRespuestaPreg.respuestapreg.resp10}"
-                                             required="true" requiredMessage="El Campo no debe ser nulo" title="pregunta10" ></h:inputTextarea>
-                        </div>  
+                    <h:form prependId="false" id="cuestionario-prediagnostico" a:name="formCuestionarioPreguntas">
 
                         <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">
                             <br></br>
-                            <button  type="button" id="btnModalCrearPre" class="btnModalCrearPre btn btn-primary">
+                            <label for="pregunta1">1. #{msg['add-prediagnosis-question1']}</label>
+                            <h:messages for="pregunta1"
+                                        style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
+                            <h:inputTextarea class="form-control" rows="4" id="pregunta1"
+                                             value="#{controllerRespuestaPreg.respuestapreg.resp1}"
+                                             required="true" requiredMessage="El campo es obligatorio." name="pregunta1"
+                                             a:maxlength="255"
+                                             validatorMessage="Se ha excedido el número de carácteres permitidos(255)"/>
+                        </div>
+
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">
+                            <br></br>
+                            <label for="pregunta2">2. #{msg['add-prediagnosis-question2']}</label>
+                            <h:messages for="pregunta2"
+                                        style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
+                            <h:inputTextarea class="form-control" rows="4" id="pregunta2"
+                                             value="#{controllerRespuestaPreg.respuestapreg.resp2}"
+                                             required="true" requiredMessage="El campo es obligatorio." name="pregunta2"
+                                             a:maxlength="255"
+                                             validatorMessage="Se ha excedido el número de carácteres permitidos(255)"/>
+                        </div>
+
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">
+                            <br></br>
+                            <label for="pregunta3">3. #{msg['add-prediagnosis-question3']}</label>
+                            <h:messages for="pregunta3"
+                                        style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
+                            <h:inputTextarea class="form-control" rows="4" id="pregunta3"
+                                             value="#{controllerRespuestaPreg.respuestapreg.resp3}"
+                                             required="true" requiredMessage="El campo es obligatorio" name="pregunta3"
+                                             a:maxlength="255"
+                                             validatorMessage="Se ha excedido el número de carácteres permitidos(255)"/>
+                        </div>
+
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">
+                            <br></br>
+                            <label for="pregunta4">4. #{msg['add-prediagnosis-question4']}</label>
+                            <h:messages for="pregunta4"
+                                        style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
+                            <h:inputTextarea class="form-control" rows="4" id="pregunta4"
+                                             value="#{controllerRespuestaPreg.respuestapreg.resp4}"
+                                             required="true" requiredMessage="El campo es obligatorio." name="pregunta4"
+                                             a:maxlength="255"
+                                             validatorMessage="Se ha excedido el número de carácteres permitidos(255)"/>
+                        </div>
+
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">
+                            <br></br>
+                            <label for="pregunta5">5. #{msg['add-prediagnosis-question5']}</label>
+                            <h:messages for="pregunta5"
+                                        style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
+                            <h:inputTextarea class="form-control" rows="4" id="pregunta5"
+                                             value="#{controllerRespuestaPreg.respuestapreg.resp5}"
+                                             required="true" requiredMessage="El campo es obligatorio." name="pregunta5"
+                                             a:maxlength="255"
+                                             validatorMessage="Se ha excedido el número de carácteres permitidos(255)"/>
+                        </div>
+
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">
+                            <br></br>
+                            <label for="pregunta6">6. #{msg['add-prediagnosis-question6']}</label>
+                            <h:messages for="pregunta6"
+                                        style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
+                            <h:inputTextarea class="form-control" rows="4" id="pregunta6"
+                                             value="#{controllerRespuestaPreg.respuestapreg.resp6}"
+                                             required="true" requiredMessage="El campo es obligatorio." name="pregunta6"
+                                             a:maxlength="255"
+                                             validatorMessage="Se ha excedido el número de carácteres permitidos(255)"/>
+                        </div>
+
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">
+                            <br></br>
+                            <label for="pregunta7">7. #{msg['add-prediagnosis-question7']}</label>
+                            <h:messages for="pregunta7"
+                                        style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
+                            <h:inputTextarea class="form-control" rows="4" id="pregunta7"
+                                             value="#{controllerRespuestaPreg.respuestapreg.resp7}"
+                                             required="true" requiredMessage="El campo es obligatorio." name="pregunta7"
+                                             a:maxlength="255"
+                                             validatorMessage="Se ha excedido el número de carácteres permitidos(255)"/>
+                        </div>
+
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">
+                            <br></br>
+                            <label for="pregunta8">8. #{msg['add-prediagnosis-question8']}?</label>
+                            <h:messages for="pregunta8"
+                                        style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
+                            <h:inputTextarea class="form-control" rows="4" id="pregunta8"
+                                             value="#{controllerRespuestaPreg.respuestapreg.resp8}"
+                                             required="true" requiredMessage="El campo es obligatorio." name="pregunta8"
+                                             a:maxlength="255"
+                                             validatorMessage="Se ha excedido el número de carácteres permitidos(255)"/>
+                        </div>
+
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">
+                            <br></br>
+                            <label for="pregunta9">9. #{msg['add-prediagnosis-question9']}</label>
+                            <h:messages for="pregunta9"
+                                        style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
+                            <h:inputTextarea class="form-control" rows="4" id="pregunta9"
+                                             value="#{controllerRespuestaPreg.respuestapreg.resp9}"
+                                             required="true" requiredMessage="El campo es obligatorio" name="pregunta9"
+                                             a:maxlength="255"
+                                             validatorMessage="Se ha excedido el número de carácteres permitidos(255)"/>
+                        </div>
+
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">
+                            <br></br>
+                            <label for="pregunta10">10. #{msg['add-prediagnosis-question10']}</label>
+                            <h:messages for="pregunta10"
+                                        style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
+                            <h:inputTextarea class="form-control" rows="4" id="pregunta10"
+                                             value="#{controllerRespuestaPreg.respuestapreg.resp10}"
+                                             required="true" requiredMessage="El campo es obligatorio."
+                                             name="pregunta10" a:maxlength="255"
+                                             validatorMessage="Se ha excedido el número de carácteres permitidos(255)"/>
+                        </div>
+
+                        <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">
+                            <br></br>
+                            <button type="button" id="btnModalCrearPre" class="btnModalCrearPre btn btn-primary">
                                 #{msg['send']}
                             </button>
-                        </div>  
+                        </div>
 
                         <div id="myModalCrearPre" class="modal fade " role="dialog">
                             <div class="modal-dialog">
                                 <!-- Modal content-->
                                 <h:form id="form-crear-prediag" prependId="false">
-                                    <h:panelGroup id="contenido-modal-crear-prediag" layout="block"  class="modal-content">
+                                    <h:panelGroup id="contenido-modal-crear-prediag" layout="block"
+                                                  class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                             <h4 class="modal-title">#{msg['prediagnosis-creation-title']}</h4>
                                         </div>
                                         <div class="modal-body">
                                             <p align="justify">
-                                                #{msg['greetings']}<strong> #{controllerSession.usuario.fullNameUsuario}</strong>,
+                                                #{msg['greetings']}
+                                                <strong> #{controllerSession.usuario.fullNameUsuario}</strong>,
                                                 <br></br> <br></br>
                                                 #{msg['prediagnosis-creation-paragraph']}
                                             </p>
                                         </div>
                                         <div class="modal-footer">
-                                            <h:commandButton class="btn btn-primary" value="#{msg['accept']}"  action="#{controllerRespuestaPreg.crearRespuestapreg()}"
-                                                             >
+                                            <h:commandButton class="btn btn-primary" value="#{msg['accept']}"
+                                                             action="#{controllerRespuestaPreg.crearRespuestapreg()}">
                                             </h:commandButton>
-                                                                                    
                                         </div>
                                     </h:panelGroup>
                                 </h:form>
@@ -171,12 +215,12 @@
                     </h:form>
 
                 </div>
-                                
+
             </ui:define>
-            
+
             <ui:define name="ultimosScripts">
-                <script>
-                    $().ready(function () {                       
+                <script type="text/javascript">
+                    $().ready(function () {
                         $("#btnModal").click(function () {
                             $("#myModal").modal("show");
                         });
@@ -184,7 +228,117 @@
                         $(".btnModalCrearPre").click(function () {
                             $("#myModalCrearPre").modal("show");
                         });
-                      
+
+                        $.validator.addMethod("alphabet", function (value, element, pattern) {
+                            return pattern.test(value);
+                        });
+
+                        $('#cuestionario-prediagnostico').validate({
+                            rules: {
+                                'pregunta1': {
+                                    required: true,
+                                    alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]+$/,
+                                    maxlength: 45
+                                },
+                                'pregunta2': {
+                                    required: true,
+                                    alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]+$/,
+                                    maxlength: 45
+                                },
+                                'pregunta3': {
+                                    required: true,
+                                    alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]+$/,
+                                    maxlength: 45
+                                },
+                                'pregunta4': {
+                                    required: true,
+                                    alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]+$/,
+                                    maxlength: 45
+                                },
+                                'pregunta5': {
+                                    required: true,
+                                    alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]+$/,
+                                    maxlength: 45
+                                },
+                                'pregunta6': {
+                                    required: true,
+                                    alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]+$/,
+                                    maxlength: 45
+                                },
+                                'pregunta7': {
+                                    required: true,
+                                    alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]+$/,
+                                    maxlength: 45
+                                },
+                                'pregunta8': {
+                                    required: true,
+                                    alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]+$/,
+                                    maxlength: 45
+                                },
+                                'pregunta9': {
+                                    required: true,
+                                    alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]+$/,
+                                    maxlength: 45
+                                },
+                                'pregunta10': {
+                                    required: true,
+                                    alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]+$/,
+                                    maxlength: 45
+                                },
+                            },
+                            messages: {
+                                'pregunta1': {
+                                    required: 'El campo es obligatorio.',
+                                    alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
+                                    maxlength: 'Se ha excedido el número de carácteres permitidos(255).'
+                                },
+                                'pregunta2': {
+                                    required: 'El campo es obligatorio.',
+                                    alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
+                                    maxlength: 'Se ha excedido el número de carácteres permitidos(255).'
+                                },
+                                'pregunta3': {
+                                    required: 'El campo es obligatorio.',
+                                    alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
+                                    maxlength: 'Se ha excedido el número de carácteres permitidos(255).'
+                                },
+                                'pregunta4': {
+                                    required: 'El campo es obligatorio.',
+                                    alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
+                                    maxlength: 'Se ha excedido el número de carácteres permitidos(255).'
+                                },
+                                'pregunta5': {
+                                    required: 'El campo es obligatorio.',
+                                    alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
+                                    maxlength: 'Se ha excedido el número de carácteres permitidos(255).'
+                                },
+                                'pregunta6': {
+                                    required: 'El campo es obligatorio.',
+                                    alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
+                                    maxlength: 'Se ha excedido el número de carácteres permitidos(255).'
+                                },
+                                'pregunta7': {
+                                    required: 'El campo es obligatorio.',
+                                    alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
+                                    maxlength: 'Se ha excedido el número de carácteres permitidos(255).'
+                                },
+                                'pregunta8': {
+                                    required: 'El campo es obligatorio.',
+                                    alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
+                                    maxlength: 'Se ha excedido el número de carácteres permitidos(255).'
+                                },
+                                'pregunta9': {
+                                    required: 'El campo es obligatorio.',
+                                    alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
+                                    maxlength: 'Se ha excedido el número de carácteres permitidos(255).'
+                                },
+                                'pregunta10': {
+                                    required: 'El campo es obligatorio.',
+                                    alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
+                                    maxlength: 'Se ha excedido el número de carácteres permitidos(255).'
+                                },
+                            }
+                        })
                     });
                 </script>
             </ui:define>
