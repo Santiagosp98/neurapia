@@ -6,6 +6,7 @@
 package Facade;
 
 import Entities.Fisioterapeuta;
+import Entities.Usuario;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -27,7 +28,9 @@ public interface FisioterapeutaFacadeLocal {
     List<Fisioterapeuta> findAll();
 
     List<Fisioterapeuta> findRange(int[] range);
-
+    
     int count();
+    
+    Fisioterapeuta buscarPorCodUsuario(Usuario codUsuario);
     
 }
