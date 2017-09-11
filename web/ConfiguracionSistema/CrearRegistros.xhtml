@@ -52,14 +52,15 @@
                     <h4 class="page-title">
                         <h:outputText value="#{msg['add-new-record']}"/>
                     </h4>
-                    <h:form prependId="false">
-                        <h:messages for="nombreActividad" style="color: red; list-style:none; padding: 18px"/>
+                    <h:form prependId="false" id="actividad">
+                        <h:messages for="nombre-actividad" style="color: red; list-style:none; padding: 18px"/>
                         <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                            <h:outputLabel value="#{msg['new-activity']}" for="nombreActividad"/>
-                            <h:inputText id="nombreActividad" class="form-control mitooltip"
+                            <h:outputLabel value="#{msg['new-activity']}" for="nombre-actividad"/>
+                            <h:inputText id="nombre-actividad" class="form-control mitooltip"
                                          value="#{controllerActividad.actividad.nombreActividad}" required="true"
-                                         requiredMessage="El Campo NUEVA ACTIVIDAD no debe ser nulo"
-                                         title="NombreActividad"/>
+                                         requiredMessage="El Campo 'Nueva actividad' es obligatorio." maxlength="45"
+                                         name="nombre-actividad"
+                                         validatorMessage="Se ha excedido el número de carácteres permitidos(45) para el campo 'Nueva actividad.'"/>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
                             <h:commandButton id="añadirAct" class="btn btn-primary"
@@ -71,15 +72,15 @@
                     <hr class="col-lg-12 col-md-12 col-sm-12 col-sm-12"
                         style="background-color: #f1f1f1; width: 100%; height: 20px; margin-left: -15px"/>
 
-                    <h:form prependId="false">
-                        <h:messages for="nombreObjetivoTratamiento" style="color: red; list-style:none; padding: 18px"/>
+                    <h:form prependId="false" id="objetivo">
+                        <h:messages for="objetivo-tratamiento" style="color: red; list-style:none; padding: 18px"/>
                         <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                            <h:outputLabel value="#{msg['new-treatment-objective']}" for="nombreObjetivoTratamiento"/>
-                            <h:inputText id="nombreObjetivoTratamiento" class="form-control mitooltip"
+                            <h:outputLabel value="#{msg['new-treatment-objective']}" for="objetivo-tratamiento"/>
+                            <h:inputText id="objetivo-tratamiento" class="form-control mitooltip"
                                          value="#{controllerObjetivoTratamiento.objetivoTratamiento.nombreObjetivo}"
-                                         required="true"
-                                         requiredMessage="El Campo NUEVO OBJETIVO TRATAMIENTO no debe ser nulo"
-                                         title="NombreObjetivoTratamiento"/>
+                                         required="true" name="objetivo-tratamiento" maxlength="45"
+                                         requiredMessage="El campo 'Nuevo objetivo de tratamiento' es obligatorio."
+                                         validatorMessage="Se ha excedido el número de carácteres permitidos(45) para el campo 'Nueva objetivo de tratamiento.'"/>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
                             <h:commandButton id="añadirObjT" class="btn btn-primary"
@@ -92,14 +93,15 @@
                     <hr class="col-lg-12 col-md-12 col-sm-12 col-sm-12"
                         style="background-color: #f1f1f1; width: 100%; height: 20px; margin-left: -15px"/>
 
-                    <h:form prependId="false">
-                        <h:messages for="nombreDepartamento" style="color: red; list-style:none; padding: 18px"/>
+                    <h:form prependId="false" id="departamento">
+                        <h:messages for="nombre-departamento" style="color: red; list-style:none; padding: 18px"/>
                         <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                            <h:outputLabel value="#{msg['new-department']}" for="nombreDepartamento"/>
-                            <h:inputText id="nombreDepartamento" class="form-control mitooltip"
+                            <h:outputLabel value="#{msg['new-department']}" for="nombre-departamento"/>
+                            <h:inputText id="nombre-departamento" class="form-control mitooltip"
+                                         name="nombre-departamento"
                                          value="#{controllerDepartamento.departamento.nombreCiudad}" required="true"
-                                         requiredMessage="El Campo NUEVO DEPARTAMENTO no debe ser nulo"
-                                         title="nombreDepartamento"/>
+                                         requiredMessage="El campo 'Nuevo departamento' es obligatorio." maxlength="45"
+                                         validatorMessage="Se ha excedido el número de carácteres permitidos(45) para el campo 'Nuevo departamento.'"/>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
                             <h:commandButton id="añadirDep" class="btn btn-primary"
@@ -112,13 +114,15 @@
                     <hr class="col-lg-12 col-md-12 col-sm-12 col-sm-12"
                         style="background-color: #f1f1f1; width: 100%; height: 20px; margin-left: -15px"/>
 
-                    <h:form prependId="false">
-                        <h:messages for="nombreEps" style="color: red; list-style:none; padding: 18px"></h:messages>
+                    <h:form prependId="false" id="eps">
+                        <h:messages for="nombre-eps" style="color: red; list-style:none; padding: 18px"></h:messages>
                         <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                            <h:outputLabel value="#{msg['new-eps']}" for="nombreEps"/>
-                            <h:inputText id="nombreEps" class="form-control mitooltip"
+                            <h:outputLabel value="#{msg['new-eps']}" for="nombre-eps"/>
+                            <h:inputText id="nombre-eps" class="form-control mitooltip"
                                          value="#{controllerEps.eps.nombreEps}" required="true"
-                                         requiredMessage="El Campo NUEVA EPS no debe ser nulo" title="nombreEps"/>
+                                         requiredMessage="El campo 'Nueva eps' es obligatorio." maxlength="45"
+                                         name="nueva-eps"
+                                         validatorMessage="Se ha excedido el número de carácteres permitidos(45) para el campo 'Nueva EPS.'"/>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
                             <h:commandButton id="añadirEps" class="btn btn-primary" action="#{controllerEps.crearEps()}"
@@ -130,14 +134,16 @@
                     <hr class="col-lg-12 col-md-12 col-sm-12 col-sm-12"
                         style="background-color: #f1f1f1; width: 100%; height: 20px; margin-left: -15px"/>
 
-                    <h:form prependId="false">
-                        <h:messages for="tipoEducacion" style="color: red; list-style:none; padding: 18px"></h:messages>
+                    <h:form prependId="false" id="estudio">
+                        <h:messages for="nombre-estudio"
+                                    style="color: red; list-style:none; padding: 18px"></h:messages>
                         <div class="form-group col-lg-12 col-md-12 col-sm-12">
                             <h:outputLabel value="#{msg['new-degree']}" for="tipoEducacion"/>
-                            <h:inputText id="tipoEducacion" class="form-control mitooltip"
+                            <h:inputText id="nombre-estudio" class="form-control mitooltip"
                                          value="#{controllerEducacion.educacion.tipoEducacion}" required="true"
-                                         requiredMessage="El Campo NUEVO TIPO EDUCACION no debe ser nulo"
-                                         title="nombreEducacion"/>
+                                         requiredMessage="El campo 'Nuevo estudio' es obligatorio."
+                                         name="nombre-estudio" maxlength="45"
+                                         validatorMessage="Se ha excedido el número de carácteres permitidos(45) para el campo 'Nuevo estudio.'"/>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
                             <h:commandButton id="añadirEducacion" class="btn btn-primary"
@@ -148,14 +154,15 @@
 
                     <hr class="col-lg-12 col-md-12 col-sm-12 col-sm-12"
                         style="background-color: #f1f1f1; width: 100%; height: 20px; margin-left: -15px"/>
-                    <h:form prependId="false">
-                        <h:messages for="nombreProceso" style="color: red; list-style:none; padding: 18px"></h:messages>
+                    <h:form prependId="false" id="proceso">
+                        <h:messages for="nombre-proceso"
+                                    style="color: red; list-style:none; padding: 18px"></h:messages>
                         <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                            <h:outputLabel value="#{msg['new-process']}" for="nombreProceso"/>
-                            <h:inputText id="nombreProceso" class="form-control mitooltip"
+                            <h:outputLabel value="#{msg['new-process']}" for="nombre-proceso"/>
+                            <h:inputText id="nombre-proceso" name="nombre-proceso" class="form-control mitooltip"
                                          value="#{controllerProceso.proceso.nombreProceso}" required="true"
-                                         requiredMessage="El Campo NUEVO PROCESO no debe ser nulo"
-                                         title="nombreProceso"/>
+                                         requiredMessage="El Campo 'Nuevo proceso' es obligatorio." maxlength="45"
+                                         validatorMessage="Se ha excedido el número de carácteres permitidos(45) para el campo 'Nuevo proceso.'"/>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
                             <h:commandButton id="añadirProceso" class="btn btn-primary"
@@ -166,15 +173,15 @@
 
                     <hr class="col-lg-12 col-md-12 col-sm-12 col-sm-12"
                         style="background-color: #f1f1f1; width: 100%; height: 20px; margin-left: -15px"/>
-                    <h:form prependId="false">
-                        <h:messages for="nombreRespuesta"
+                    <h:form prependId="false" id="respuesta">
+                        <h:messages for="nombre-respuesta"
                                     style="color: red; list-style:none; padding: 18px"></h:messages>
                         <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                            <h:outputLabel value="#{msg['new-response']}" for="nombreRespuesta"/>
-                            <h:inputText id="nombreRespuesta" class="form-control mitooltip"
+                            <h:outputLabel value="#{msg['new-response']}" for="nombre-respuesta"/>
+                            <h:inputText id="nombre-respuesta" name="nombre-respuesta" class="form-control mitooltip"
                                          value="#{controllerRespuesta.respuesta.nombreRespuesta}" required="true"
-                                         requiredMessage="El Campo NUEVA RESPUESTA no debe ser nulo"
-                                         title="nombreRespuesta"/>
+                                         requiredMessage="El campo 'Nueva respuesta' es obligatorio." maxlength="45"
+                                         validatorMessage="Se ha excedido el número de carácteres permitidos(45) para el campo 'Nueva respuesta.'"/>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
                             <h:commandButton id="añadirRespuesta" class="btn btn-primary"
@@ -183,6 +190,134 @@
                         </div>
                     </h:form>
                 </div>
+            </ui:define>
+            <ui:define name="ultimosScripts">
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $.validator.addMethod("alphabet", function (value, element, pattern) {
+                            return pattern.test(value);
+                        });
+
+                        $('#actividad').validate({
+                            rules: {
+                                'nombre-actividad': {
+                                    required: true,
+                                    maxlength: 45,
+                                    alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]*$/,
+                                }
+                            },
+                            messages: {
+                                'nombre-actividad': {
+                                    required: 'El campo es obligatorio.',
+                                    maxlength: 'Se ha excedido el número de carácteres permitidos(45).',
+                                    alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.'
+                                }
+                            }
+                        })
+
+                        $('#objetivo').validate({
+                            rules: {
+                                'objetivo-tratamiento': {
+                                    required: true,
+                                    maxlength: 45,
+                                    alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]*$/,
+                                }
+                            },
+                            messages: {
+                                'objetivo-tratamiento': {
+                                    required: 'El campo es obligatorio.',
+                                    maxlength: 'Se ha excedido el número de carácteres permitidos(45).',
+                                    alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.'
+                                }
+                            }
+                        })
+
+                        $('#departamento').validate({
+                            rules: {
+                                'nombre-departamento': {
+                                    required: true,
+                                    maxlength: 45,
+                                    alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]*$/,
+                                }
+                            },
+                            messages: {
+                                'nombre-departamento': {
+                                    required: 'El campo es obligatorio.',
+                                    maxlength: 'Se ha excedido el número de carácteres permitidos(45).',
+                                    alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.'
+                                }
+                            }
+                        })
+
+                        $('#eps').validate({
+                            rules: {
+                                'nombre-eps': {
+                                    required: true,
+                                    maxlength: 45,
+                                    alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]*$/,
+                                }
+                            },
+                            messages: {
+                                'nombre-eps': {
+                                    required: 'El campo es obligatorio.',
+                                    maxlength: 'Se ha excedido el número de carácteres permitidos(45).',
+                                    alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.'
+                                }
+                            }
+                        })
+
+                        $('#estudio').validate({
+                            rules: {
+                                'nombre-estudio': {
+                                    required: true,
+                                    maxlength: 45,
+                                    alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]*$/,
+                                }
+                            },
+                            messages: {
+                                'nombre-estudio': {
+                                    required: 'El campo es obligatorio.',
+                                    maxlength: 'Se ha excedido el número de carácteres permitidos(45).',
+                                    alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.'
+                                }
+                            }
+                        })
+
+                        $('#proceso').validate({
+                            rules: {
+                                'nombre-proceso': {
+                                    required: true,
+                                    maxlength: 45,
+                                    alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]*$/,
+                                }
+                            },
+                            messages: {
+                                'nombre-proceso': {
+                                    required: 'El campo es obligatorio.',
+                                    maxlength: 'Se ha excedido el número de carácteres permitidos(45).',
+                                    alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.'
+                                }
+                            }
+                        })
+
+                        $('#respuesta').validate({
+                            rules: {
+                                'nombre-respuesta': {
+                                    required: true,
+                                    maxlength: 45,
+                                    alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]*$/,
+                                }
+                            },
+                            messages: {
+                                'nombre-respuesta': {
+                                    required: 'El campo es obligatorio.',
+                                    maxlength: 'Se ha excedido el número de carácteres permitidos(45).',
+                                    alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.'
+                                }
+                            }
+                        })
+                    })
+                </script>
             </ui:define>
         </ui:composition>
     </h:body>
