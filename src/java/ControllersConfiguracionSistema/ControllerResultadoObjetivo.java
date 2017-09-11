@@ -56,7 +56,6 @@ public class ControllerResultadoObjetivo extends Controllers.ControllerApp {
     }
     
     public void agregarlistaOrdenada(){
-        listaSeleccionados = hc.getListobjetivosbtenidos();
         mapa = new HashMap<>();
         String nomTemp = ""; 
         try {
@@ -73,6 +72,13 @@ public class ControllerResultadoObjetivo extends Controllers.ControllerApp {
         } catch (Exception e) {
             System.out.println("El error es: " + e);
         }
+    }
+    
+    public List<Resultadoobjetivo> listaResultadosObjetivo(){
+        int id = hc.getHistorialClinico().getIdHistorialClinico();
+        listaSeleccionados = rofl.listarResultadosObjetivosObtenidos(id);
+        agregarlistaOrdenada();
+        return listaSeleccionados;
     }
 
     public ResultadoobjetivoFacadeLocal getRofl() {

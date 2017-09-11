@@ -136,9 +136,9 @@
                             </h:column>                            
                         </h:dataTable>
                         <h:form prependId="false" id="tipoAct">
-                            <ui:fragment rendered="#{! empty(controllerHistorialClinico.listRespActobtenidos)}">
+                            <ui:fragment rendered="#{! empty(controllerRespuestaActividad.listRespActSeleccionadas)}">
                             <h3>Actividades</h3>
-                            <ui:repeat value="#{controllerHistorialClinico.listRespActobtenidos}" var="item">
+                            <ui:repeat value="#{controllerRespuestaActividad.listRespActSeleccionadas}" var="item">
                                 <h:panelGroup class="form-group col-lg-6 col-md-6 col-sm-6" id="act1" layout="block">
                                     <h:outputLabel  value="#{item.codTipoActividad.codActividad.nombreActividad}" for="codActividad_#{item.idRespuestaActividad}"/>
                                     <h:selectOneMenu class="form-control mitooltip" value="#{item.codTipoActividad}" converter="tipoActividadConverter" title="CodRespuesta" required="true" requiredMessage="The CodRespuesta field is required.">                                      

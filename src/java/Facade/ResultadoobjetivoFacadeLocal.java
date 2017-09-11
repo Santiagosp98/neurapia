@@ -27,6 +27,8 @@ public interface ResultadoobjetivoFacadeLocal {
     List<Resultadoobjetivo> findAll();
 
     List<Resultadoobjetivo> findRange(int[] range);
+    
+    List<Resultadoobjetivo> listarResultadosObjetivosObtenidos(int id);
 
     int count();
     

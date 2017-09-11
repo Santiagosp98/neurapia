@@ -27,6 +27,8 @@ public interface ResultadoprocesoFacadeLocal {
     List<Resultadoproceso> findAll();
 
     List<Resultadoproceso> findRange(int[] range);
+    
+    List<Resultadoproceso> listarResultadosProcesosObtenidos(int id);
 
     int count();
     

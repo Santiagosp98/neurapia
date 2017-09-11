@@ -6,9 +6,12 @@
 package Facade;
 
 import Entities.Resultadoobjetivo;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -27,6 +30,20 @@ public class ResultadoobjetivoFacade extends AbstractFacade<Resultadoobjetivo> i
 
     public ResultadoobjetivoFacade() {
         super(Resultadoobjetivo.class);
+    }
+
+    @Override
+    public List<Resultadoobjetivo> listarResultadosObjetivosObtenidos(int id) {
+        List<Resultadoobjetivo> listaResultados = new ArrayList();
+        try {
+            TypedQuery<Resultadoobjetivo> q = getEntityManager().createNamedQuery("Resultadoobjetivo.resultadosObjetivo", Resultadoobjetivo.class);
+            q.setParameter("id", id);
+            listaResultados = q.getResultList();
+            return listaResultados;
+        } catch (Exception e) {
+            System.out.println("Error query Res objetivo: " + e.getMessage());
+        }
+        return listaResultados;
     }
     
 }

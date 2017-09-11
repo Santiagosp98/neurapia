@@ -27,6 +27,8 @@ public interface RespuestaactividadFacadeLocal {
     List<Respuestaactividad> findAll();
 
     List<Respuestaactividad> findRange(int[] range);
+    
+    List<Respuestaactividad> respuestasActividadObtenidas(int id);
 
     int count();
     

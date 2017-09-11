@@ -113,4 +113,24 @@ public class ControllerApp implements Serializable {
         return "Movilidad?faces-redirect=true";
     }
     
+    public String selectAnamnesis() {
+        return "Anamnesis?faces-redirect=true";
+    }
+
+    public String selectMovilidad() {
+        return "Movilidad?faces-redirect=true";
+    }
+
+    public String selectInformacionBasica() {
+        return "ActualizarHistorialClinico?faces-redirect=true";
+    }
+
+    public String selectObjetivoTratamiento() {
+        return "Objetivos?faces-redirect=true";
+    }
+
+    public String selectReporteTratamiento() {
+        return "ReporteTratamiento?faces-redirect=true";
+    }
+    
 }
