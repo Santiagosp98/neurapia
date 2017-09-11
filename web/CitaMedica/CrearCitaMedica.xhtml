@@ -29,42 +29,42 @@
                                     </a>
                                 </h6>
                             </div>
-                            
-                                <div id="collapseTwo" class="panel-collapse collapse of" role="tabpanel"
-                                     aria-labelledby="headingTwo">
-                                    <div class="panel-body">
-                                        <a href="ConsultarCitasMedicas.xhtml">
-                                            <h:outputText value="#{msg['appointment-history']}"/>
-                                        </a>
-                                    </div>
-                                    <div class="panel-body">
-                                        <a href="ConsultarCitasMedicasPendientes.xhtml">
-                                            <h:outputText value="#{msg['pending-appointments-b']}"/>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="panel-heading active" role="tab" id="headingThree">
-                                    <h6 class="panel-title">
-                                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsThree"
-                                           aria-expanded="true" aria-controls="collapseThree">
-                                            <h:outputText value="#{msg['assign-appointment']}"/>
-                                            <span class="caret"></span>
 
-                                        </a>
-                                    </h6>
+                            <div id="collapseTwo" class="panel-collapse collapse of" role="tabpanel"
+                                 aria-labelledby="headingTwo">
+                                <div class="panel-body">
+                                    <a href="ConsultarCitasMedicas.xhtml">
+                                        <h:outputText value="#{msg['appointment-history']}"/>
+                                    </a>
                                 </div>
-
-                                <div id="collapsThree" class="panel-collapse collapse in" role="tabpanel"
-                                     aria-labelledby="headingThree">
-                                    <div class="panel-body active">
-                                        <a href="CrearCitaMedica.xhtml">
-                                            <h:outputText value="#{msg['new-medical-appointment']}"/>
-                                        </a>
-                                    </div>
+                                <div class="panel-body">
+                                    <a href="ConsultarCitasMedicasPendientes.xhtml">
+                                        <h:outputText value="#{msg['pending-appointments-b']}"/>
+                                    </a>
                                 </div>
+                            </div>
+                            <div class="panel-heading active" role="tab" id="headingThree">
+                                <h6 class="panel-title">
+                                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsThree"
+                                       aria-expanded="true" aria-controls="collapseThree">
+                                        <h:outputText value="#{msg['assign-appointment']}"/>
+                                        <span class="caret"></span>
 
-                            
+                                    </a>
+                                </h6>
+                            </div>
+
+                            <div id="collapsThree" class="panel-collapse collapse in" role="tabpanel"
+                                 aria-labelledby="headingThree">
+                                <div class="panel-body active">
+                                    <a href="CrearCitaMedica.xhtml">
+                                        <h:outputText value="#{msg['new-medical-appointment']}"/>
+                                    </a>
+                                </div>
+                            </div>
+
+
 
                         </div>
                     </div>
@@ -87,61 +87,61 @@
                                             errorClass="alert alert-danger" />
                             </div>
 
+                            <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol eq 3}">
 
-                            <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                <h:outputLabel value="#{msg['user']}:" for="usuario"/>
-                                <h:selectOneMenu id="usuario" class="form-control mitooltip"
-                                                 value="#{controllerCitaMedica.citaMedica.codUsuario}"
-                                                 converter="usuarioConverter" required="true"
-                                                 requiredMessage="El usuario es requerido">
-                                    <f:selectItems value="#{controllerUsuario.listarPacientes()}" var="u"
-                                                   itemLabel="#{u.fullNameUsuario}"/>
-                                </h:selectOneMenu>
-                            </div>
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                    <h:outputLabel value="#{msg['user']}:" for="usuario"/>
+                                    <h:selectOneMenu id="usuario" class="form-control mitooltip"
+                                                     value="#{controllerCitaMedica.citaMedica.codUsuario}"
+                                                     converter="usuarioConverter" required="true"
+                                                     requiredMessage="El usuario es requerido">
+                                        <f:selectItems value="#{controllerUsuario.listarPacientes()}" var="u"
+                                                       itemLabel="#{u.fullNameUsuario}"/>
+                                    </h:selectOneMenu>
+                                </div>
+                            </ui:fragment>
 
-
-                            <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                <h:outputLabel value="#{msg['physiotherapist']}:" for="Fisioterapeuta"/>
-                                <h:selectOneMenu id="Fisioterapeuta" class="form-control mitooltip"
-                                                 value="#{controllerCitaMedica.citaMedica.codFisioterapeuta}"
-                                                 converter="fisioterapeutaConverter" required="true"
-                                                 requiredMessage="El fisioterapeuta es requerido.">
-                                    <f:selectItems value="#{controllerFisioterapeuta.listaFisioterapeuta}" var="f"
-                                                   itemLabel="#{f.fullnameFisioterapeuta}"/>
-                                </h:selectOneMenu>
-                            </div>
-
-                            <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                            <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol eq 4}">
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                    <h:outputLabel value="#{msg['physiotherapist']}:" for="Fisioterapeuta"/>
+                                    <h:selectOneMenu id="Fisioterapeuta" class="form-control mitooltip"
+                                                     value="#{controllerCitaMedica.citaMedica.codFisioterapeuta}"
+                                                     converter="fisioterapeutaConverter" required="true"
+                                                     requiredMessage="El fisioterapeuta es requerido.">
+                                        <f:selectItems value="#{controllerFisioterapeuta.listaFisioterapeuta}" var="f"
+                                                       itemLabel="#{f.fullnameFisioterapeuta}"/>
+                                    </h:selectOneMenu>
+                                </div>
+                            </ui:fragment>    
+                            <div class="form-group col-lg-6 col-md-12 col-sm-12">
                                 <h:outputLabel value="#{msg['hour']}:" for="hora"/>
-                                <h:inputText id="hora" class="form-control mitooltip" a:placeholder="HH:mm:ss"
-                                             value="#{controllerCitaMedica.citaMedica.hora}" required="true"
-                                             requiredMessage="La hora es requerida">
-                                    <f:convertDateTime pattern="HH:mm:ss" timeZone="America/Bogota"/>
-                                </h:inputText>
+                                <h:inputText id="hora" class="form-control mitooltip" a:placeholder="HH"
+                                             value="#{controllerCitaMedica.fechaHora}" required="true"
+                                             requiredMessage="La hora es requerida"/>
                             </div>
-                            
-<!--                            <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                                <h:outputLabel value="#{msg['date']}:" for="fecha"/>
-                                <h:inputText id="fecha" styleClass="calendarDate" a:placeholder="yyyy-MM-dd"
-                                             class="form-control mitooltip" value="#{controllerCitaMedica.citaMedica.fecha}"
-                                             required="true" requiredMessage="La fecha es requerida">
-                                    <f:convertDateTime pattern="yyyy-MM-dd" timeZone="America/Bogota"/>
-                                </h:inputText>
-                            </div>-->
-                            
-                            <div class="form-group col-lg-4 col-md-12 col-sm-12">
+
+                            <!--                            <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                                            <h:outputLabel value="#{msg['date']}:" for="fecha"/>
+                                                            <h:inputText id="fecha" styleClass="calendarDate" a:placeholder="yyyy-MM-dd"
+                                                                         class="form-control mitooltip" value="#{controllerCitaMedica.citaMedica.fecha}"
+                                                                         required="true" requiredMessage="La fecha es requerida">
+                                                                <f:convertDateTime pattern="yyyy-MM-dd" timeZone="America/Bogota"/>
+                                                            </h:inputText>
+                                                        </div>-->
+
+                            <div class="form-group col-lg-6 col-md-12 col-sm-12">
                                 <h:outputLabel value="Dia" for="dia"/>
                                 <h:inputText id="dia" a:placeholder="dd" class="form-control mitooltip" 
                                              value="#{controllerCitaMedica.fechaCitaDia}" required="true"
                                              requiredMessage="El dia es requerido"/>
                             </div>
-                            <div class="form-group col-lg-4 col-md-12 col-sm-12">
+                            <div class="form-group col-lg-6 col-md-12 col-sm-12">
                                 <h:outputLabel value="Mes" for="mes"/>
                                 <h:inputText id="mes" a:placeholder="mm" class="form-control mitooltip" 
                                              value="#{controllerCitaMedica.fechaCitaMes}" required="true"
                                              requiredMessage="El dia es requerido"/>
                             </div>
-                            <div class="form-group col-lg-4 col-md-12 col-sm-12">
+                            <div class="form-group col-lg-6 col-md-12 col-sm-12">
                                 <h:outputLabel value="Año" for="año"/>
                                 <h:inputText id="año" a:placeholder="yyyy" class="form-control mitooltip" 
                                              value="#{controllerCitaMedica.fechaCitaAño}" required="true"
@@ -149,9 +149,12 @@
                             </div>
                             <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                 <h:outputLabel value="#{msg['doctors-office']}:" for="numeroConsultorio"/>
-                                <h:inputText id="numeroConsultorio" class="form-control mitooltip" a:placeholder="000"
-                                             value="#{controllerCitaMedica.citaMedica.numeroConsultorio}" required="true"
-                                             requiredMessage="El consultorio es requerido"/>
+                                <h:selectOneMenu id="numeroConsultorio" class="form-control mitooltip" 
+                                                 value="#{controllerCitaMedica.citaMedica.numeroConsultorio}">
+                                                 <f:selectItems class="form-control mitooltip"
+                                                                value="#{controllerCitaMedica.citaMedica.seleccionConsultorio}"/>
+                                </h:selectOneMenu>
+                                
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <h:commandButton class="btn btn-primary" action="#{controllerCitaMedica.crearCitaMedica()}"
