@@ -96,7 +96,7 @@
                                             <h:outputText value="#{msg['date']}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.fecha}">
-                                            <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                            <f:convertDateTime pattern="yyyy-MM-dd"  timeZone="America/Bogota"/>
                                         </h:outputText>
                                     </h:column>
 
@@ -105,7 +105,7 @@
                                             <h:outputText value="#{msg['hour']}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.hora}">
-                                            <f:convertDateTime pattern="HH:mm:ss"/>
+                                            <f:convertDateTime pattern="HH:mm:ss"  timeZone="America/Bogota"/>
                                         </h:outputText>
                                     </h:column>
 
