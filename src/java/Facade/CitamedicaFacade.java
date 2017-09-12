@@ -102,4 +102,46 @@ public class CitamedicaFacade extends AbstractFacade<Citamedica> implements Cita
         return c;
     }
 
+    @Override
+    public List<Citamedica> citasPorUsuarioEstado(Usuario codUsuario, String estado) {
+        List<Citamedica> cita = null;
+        TypedQuery<Citamedica> q = getEntityManager().createNamedQuery("Citamedica.citasPorUsuarioEstado", Citamedica.class);
+        q.setParameter("codUsuario", codUsuario);
+        q.setParameter("estado", estado);
+        cita = q.getResultList();
+        return cita;
+    }
+
+    @Override
+    public List<Citamedica> citasPorUsuarioDobleEstado(Usuario codUsuario, String estado, String estado2) {
+        List<Citamedica> cita = null;
+        TypedQuery<Citamedica> q = getEntityManager().createNamedQuery("Citamedica.citasPorUsuarioDobleEstado", Citamedica.class);
+        q.setParameter("codUsuario", codUsuario);
+        q.setParameter("estado", estado);
+        q.setParameter("estado2", estado2);
+        cita = q.getResultList();
+        return cita;
+    }
+
+    @Override
+    public List<Citamedica> citasPorFisioterapeutaDobleEstado(Fisioterapeuta codFisioterapeuta, String estado, String estado2) {
+        List<Citamedica> cita = null;
+        TypedQuery<Citamedica> q = getEntityManager().createNamedQuery("Citamedica.citasPorFisioterapeutaDobleEstado", Citamedica.class);
+        q.setParameter("codFisioterapeuta", codFisioterapeuta);
+        q.setParameter("estado", estado);
+        q.setParameter("estado2", estado2);
+        cita = q.getResultList();
+        return cita;
+    }
+
+    @Override
+    public List<Citamedica> citasPorDobleEstado(String estado, String estado2) {
+        List<Citamedica> cita = null;
+        TypedQuery<Citamedica> q = getEntityManager().createNamedQuery("Citamedica.citasPorDobleEstado", Citamedica.class);
+        q.setParameter("estado", estado);
+        q.setParameter("estado2", estado2);
+        cita = q.getResultList();
+        return cita;
+    }
+
 }
