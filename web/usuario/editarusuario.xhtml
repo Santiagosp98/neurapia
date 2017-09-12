@@ -1,0 +1,255 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="#{lenguaje.lenguaje}"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<f:view locale="#{lenguaje.locale}">
+    <h:head>
+        <title>Crear usuario</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/template/common/commonLayout.xhtml">
+            <ui:define name="validarPerimisoUsuario">
+                <f:event type="preRenderView" listener="#{controllerSession.validarAccesoUsuario()}"/>
+            </ui:define>
+            <ui:define name="aside">
+                <div class="panel-group shadow" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h6 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                                   aria-expanded="false" aria-controls="collapseOne"><i class="fa fa-user"
+                                                                                        aria-hidden="true"></i>
+                                    <h:outputText value="#{msg['profile']}"></h:outputText>
+                                    <span class="caret"></span>
+                                </a>
+                            </h6>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse of" role="tabpanel"
+                             aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <a href="#{request.contextPath}/usuario/perfil.xhtml">
+                                    <h:outputText value="#{msg['my-profile']}"></h:outputText>
+                                </a>
+                            </div>
+                            <div class="panel-body">
+                                <a href="#{request.contextPath}/usuario/editarperfil.xhtml">
+                                    <h:outputText value="#{msg['edit-profile']}"></h:outputText>
+                                </a>
+                            </div>
+                        </div>
+                        <ui:fragment rendered="#{controllerSession.usuario.codRol.nombreRol ne 'Usuario'}">
+                            <div class="panel-heading active" role="tab" id="headingOne">
+                                <h6 class="panel-title"><i class="fa fa-users" aria-hidden="true"></i>
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsTwo"
+                                       aria-expanded="true" aria-controls="collapseOne">
+                                        <h:outputText value="#{msg['users-system']}"></h:outputText>
+                                        <span class="caret"></span>
+                                    </a>
+                                </h6>
+                            </div>
+                            <div id="collapsTwo" class="panel-collapse collapse in" role="tabpanel"
+                                 aria-labelledby="headingOne">
+                                <div class="panel-body active">
+                                    <a href="#{request.contextPath}/usuario/consultarusuarios.xhtml">
+                                        <h:outputText value="#{msg['check-users']}"></h:outputText>
+                                    </a>
+                                </div>
+                                <div class="panel-body">
+                                    <a href="#{request.contextPath}/usuario/crearusuario.xhtml">
+                                        <h:outputText value="#{msg['add-user']}"></h:outputText>
+                                    </a>
+                                </div>
+                            </div>
+                        </ui:fragment>
+                    </div>
+                </div>
+            </ui:define>
+            <ui:define name="content">
+                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 shadow" id="right-container">
+                    <h4 class="page-title">
+                        <h:outputText value="#{msg['edit-user']}"/>
+                    </h4>
+                    <div class="contenido"></div>
+                    <h:form prependId="false" id="editar-usuario" a:name="editar-usuario">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <h:messages showDetail="false" showSummary="true"
+                                        infoClass="alert alert-sucess" errorClass="alert alert-danger"/>
+                        </div>
+                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                            <h:outputLabel value="#{msg['document-type']}:" for="tipo-documento"/>
+                            <h:selectOneMenu id="tipo-documento" class="form-control mitooltip"
+                                             value="#{controllerUsuario.usuario.tipoDocumento}" tabindex="1">
+                                <f:selectItems class="form-control mitooltip"
+                                               value="#{controllerUsuario.usuario.seleccionDocumento}"/>
+                            </h:selectOneMenu>
+                        </div>
+                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                            <h:outputLabel value="#{msg['document-number']}:" for="numero-documento"/>
+                            <h:inputText a:placeholder="#{msg['document-number']}" class="form-control mitooltip"
+                                         tabindex="2" id="numero-documento" maxlength="20"
+                                         validatorMessage="Se ha excedido el número de carácteres permitidos(20) para el campo 'Numero de documento'."
+                                         value="#{controllerUsuario.usuario.numeroDocumento}"
+                                         required="true"
+                                         requiredMessage="El campo 'Numero de documento' es obligatorio."
+                                         name="numero-documento">
+                            </h:inputText>
+                        </div>
+                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                            <h:outputLabel value="#{msg['first-name']}:" for="primer-nombre"/>
+                            <h:inputText a:placeholder="#{msg['first-name']}" class="form-control mitooltip"
+                                         tabindex="3" id="primer-nombre"
+                                         value="#{controllerUsuario.usuario.primerNombre}" name="primer-nombre"
+                                         required="true" requiredMessage="El campo 'Primer nombre' es obligatorio."
+                                         maxlength="45"
+                                         validatorMessage="Se ha excedido el número de carácteres permitidos(45) para el campo 'Primer nombre'">
+                            </h:inputText>
+                        </div>
+                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                            <h:outputLabel value="#{msg['middle-name']}:" for="segundo-nombre"/>
+                            <h:inputText a:placeholder="#{msg['middle-name']}" class="form-control mitooltip"
+                                         tabindex="4" id="segundo-nombre"
+                                         value="#{controllerUsuario.usuario.segundoNombre}" name="segundo-nombre"
+                                         required="false" maxlength="45"
+                                         validatorMessage="Se ha excedido el número de carácteres permitidos(45) para el campo 'Segundo nombre'">
+                            </h:inputText>
+                        </div>
+                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                            <h:outputLabel value="#{msg['surname']}:" for="primer-apellido"/>
+                            <h:inputText a:placeholder="#{msg['surname']}" class="form-control mitooltip" tabindex="5"
+                                         id="primer-apellido"
+                                         value="#{controllerUsuario.usuario.primerApellido}" name="primer-apellido"
+                                         required="true" requiredMessage="El campo 'Primer apellido' es obligatorio."
+                                         maxlength="45"
+                                         validatorMessage="Se ha excedido el número de carácteres permitidos(45) para el campo 'Primer apellido'">
+                            </h:inputText>
+                        </div>
+
+                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                            <h:outputLabel value="#{msg['second-surname']}:" for="segundo-apellido"/>
+                            <h:inputText a:placeholder="#{msg['second-surname']}" class="form-control mitooltip"
+                                         tabindex="6" id="segundo-apellido"
+                                         value="#{controllerUsuario.usuario.segundoApellido}" name="segundo-apellido"
+                                         required="false" maxlength="45"
+                                         validatorMessage="Se ha excedido el número de carácteres permitidos(45) para el campo 'Segundo apellido'">
+                            </h:inputText>
+                        </div>
+                        <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol ne 3}">
+                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                <h:outputLabel value="#{msg['user-status']}:" for="estado-usuario"/>
+                                <h:selectOneMenu id="estado-usuario" class="form-control mitooltip" tabindex="7"
+                                                 value="#{controllerUsuario.usuario.estadoUsuario}">
+                                    <f:selectItems class="form-control mitooltip"
+                                                   value="#{controllerUsuario.usuario.seleccionEstados}"/>
+                                </h:selectOneMenu>
+                            </div>
+                            <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                                <h:outputLabel value="#{msg['role']}:" for="rol"/>
+                                <h:selectOneMenu id="rol" class="form-control mitooltip" tabindex="7"
+                                                 value="#{controllerUsuario.usuario.codRol}" converter="rolConverter">
+                                    <f:selectItems class="form-control mitooltip" value="#{controllerRol.listaRol}"
+                                                   var="u"
+                                                   itemLabel="#{u.nombreRol}"/>
+                                </h:selectOneMenu>
+                            </div>
+                        </ui:fragment>
+                        <div class="form-group col-lg-6 col-md-6 col-sm-6">
+                            <h:outputLabel value="#{msg['email']}:" for="correo"/>
+                            <h:inputText id="correo" tabindex="8" class="form-control" a:placeholder="ejem@ejem.com"
+                                         value="#{controllerUsuario.usuario.correoElectronico}" required="true"
+                                         name="correo" maxlength="45" requiredMessage="El campo 'correo' es obligatorio."
+                                         validatorMessage="Se ha excedido el número de carácteres permitidos(45) para el campo 'Correo'">
+                            </h:inputText>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <br></br>
+                            <h:commandButton class="btn btn-primary" action="#{controllerUsuario.editarUsuario()}"
+                                             value="#{msg['save']}"/>
+                        </div>
+                    </h:form>
+                </div>
+            </ui:define>
+            <ui:define name="ultimosScripts">
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $.validator.addMethod("alphabet", function (value, element, pattern) {
+                            return pattern.test(value);
+                        });
+
+                        $.validator.addMethod("email", function (value, element, pattern) {
+                            return pattern.test(value);
+                        });
+
+                        $('#editar-usuario').validate({
+                            rules: {
+                                'numero-documento': {
+                                    required: true,
+                                    number: true,
+                                    maxlength: 20
+                                },
+                                'primer-nombre': {
+                                    required: true,
+                                    alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]+$/,
+                                    maxlength: 45
+                                },
+                                'segundo-nombre': {
+                                    alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]*$/,
+                                    maxlength: 45
+                                },
+                                'primer-apellido': {
+                                    required: true,
+                                    alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]+$/,
+                                    maxlength: 45
+                                },
+                                'segundo-apellido': {
+                                    alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]*$/,
+                                    maxlength: 45
+                                },
+                                correo: {
+                                    required: true,
+                                    email: /[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}/,
+                                    maxlength: 45
+                                }
+                            }, messages: {
+                                'numero-documento': {
+                                    required: 'El campo es obligatorio.',
+                                    number: 'Sólo se permiten carácteres numéricos.',
+                                    maxlength: 'Se ha excedido el número de carácteres permitidos(20).'
+                                },
+                                'primer-nombre': {
+                                    required: 'El campo es obligatorio.',
+                                    alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
+                                    maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                                },
+                                'segundo-nombre': {
+                                    alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
+                                    maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                                },
+                                'primer-apellido': {
+                                    required: 'El campo es obligatorio.',
+                                    alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
+                                    maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                                },
+                                'segundo-apellido': {
+                                    alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
+                                    maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                                },
+                                correo: {
+                                    required: 'El campo es obligatorio.',
+                                    email: 'Introduzca una dirección de email válida.',
+                                    maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                                }
+                            }
+                        })
+                    })
+                </script>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</f:view>
+</html>
+

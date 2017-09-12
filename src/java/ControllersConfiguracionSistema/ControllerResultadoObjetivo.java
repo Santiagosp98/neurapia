@@ -63,7 +63,7 @@ public class ControllerResultadoObjetivo extends Controllers.ControllerApp {
                 if (nomTemp.equals("") || !r.getCodObjetivoTratamiento().getNombreObjetivo().equals(nomTemp)) {
                     nomTemp = r.getCodObjetivoTratamiento().getNombreObjetivo();
                     if (!mapa.containsKey(nomTemp)) {                        
-                        mapa.put(nomTemp, new ArrayList<>());
+                        mapa.put(nomTemp, new ArrayList<Resultadoobjetivo>());
                     }                    
                 }
                 System.out.println("Agregando al mapa: " + r.getIdResultadoObjetivo() + " key: " + nomTemp);

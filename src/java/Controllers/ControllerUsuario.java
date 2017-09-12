@@ -163,12 +163,12 @@ public class ControllerUsuario extends ControllerApp {
         FacesContext fc = FacesContext.getCurrentInstance();
         iniciarConversacion();
         this.usuario = usuario;
-        if (!usuario.getCodRol().equals(1)) {
+        if (!usuario.getCodRol().getIdRol().equals(1)) {
             estado = usuario.getEstadoUsuario();
             System.out.println(estado);
-            return "ActualizarUsuario?faces-redrect=true";
+            return "editarusuario?faces-redirect=true";
         } else {
-
+            finalizarConversacion();
             FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No puede modificar un Super administrador", "No tiene permisos para esta acción");
             fc.addMessage(null, m);
         }
@@ -231,7 +231,7 @@ public class ControllerUsuario extends ControllerApp {
                 if (usuarioFacade.buscarEmail(usuario.getCorreoElectronico()) == null || usuarioFacade.buscarEmail(usuario.getCorreoElectronico()).equals(usuario)) {
                     usuarioFacade.edit(usuario);
                     finalizarConversacion();
-                    return "ConsultarUsuarios?faces-redirect=true";
+                    return "consultarusuarios?faces-redirect=true";
                 } else if (!(usuarioFacade.buscarEmail(usuario.getCorreoElectronico()) == null)) {
                     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El correo ingresado ya está registrado.", "");
                     fc.addMessage(null, message);
@@ -293,7 +293,7 @@ public class ControllerUsuario extends ControllerApp {
 
             if (usuarioFacade.buscarEmail(usuarioEnSesion.getCorreoElectronico()) == null || usuarioFacade.buscarEmail(usuarioEnSesion.getCorreoElectronico()).equals(usuarioEnSesion)) {
                 this.usuarioFacade.edit(usuarioEnSesion);
-                return "miPerfil.xhtml?faces-redirect=true";
+                return "perfil.xhtml?faces-redirect=true";
             } else {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El correo ingresado ya está registrado en el sistema", "");
                 fc.addMessage(null, message);
@@ -386,10 +386,10 @@ public class ControllerUsuario extends ControllerApp {
                         usuario.setCodRol(rol);
                         usuario.setEstadoUsuario("Inactivo");
                         usuarioFacade.create(usuario);
-                        return "ConsultarUsuarios.xhtml?faces-redirect=true";
+                        return "consultarusuarios.xhtml?faces-redirect=true";
                     } else {
                         usuarioFacade.create(usuario);
-                        return "ConsultarUsuarios.xhtml?faces-redirect=true";
+                        return "consultarusuarios.xhtml?faces-redirect=true";
                     }
                 } else {
                     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El email ingresado ya está registrado.", "");
@@ -523,10 +523,10 @@ public class ControllerUsuario extends ControllerApp {
         for (Historialclinico historialClinico : hc.getListaHistorialClinico()) {
             if (historialClinico.getCodUsuario().getIdUsuario().equals(usuario.getIdUsuario())) {
                 hc.seleccionarHistorialclinico(historialClinico);
-                return "ActualizarHistorial";
+                return "informacionbasica.xhtml?faces-redirect=true";
             }
         }
-        return "CrearUsuario.xhtml?faces-redirect=true";
+        return "nuevohistorialclinico.xhtml?faces-redirect=true";
     }
 
     public String cambiarContrasena() {
@@ -558,7 +558,7 @@ public class ControllerUsuario extends ControllerApp {
 
         }
 
-        return "miPerfil.xhtml";
+        return "perfil.xhtml?faces-redirect=true";
     }
 
 }

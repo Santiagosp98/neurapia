@@ -81,7 +81,7 @@ public class ControllerSession extends ControllerApp {
                     Calendar calendar = Calendar.getInstance();
                     usuario.setUltimaSesion(calendar.getTime());
                     usuarioFacade.edit(usuario);
-                    return "Usuarios/miPerfil?faces-redirect=true";     
+                    return "usuario/perfil.xhtml?faces-redirect=true";
                 }else{
                     FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Lo sentimos tu usuario esta inactivo", "Hable con el administrador para activar");
                     fc.addMessage(null, m);
@@ -183,8 +183,8 @@ public class ControllerSession extends ControllerApp {
         try {
             FacesContext fc = FacesContext.getCurrentInstance();
             ExternalContext ec = fc.getExternalContext();
-            System.out.println(hostName() + "Usuarios/miPerfil.xhtml");
-            ec.redirect(hostName() + "Usuarios/miPerfil.xhtml");
+            System.out.println(hostName() + "usuario/perfil.xhtml");
+            ec.redirect(hostName() + "usuario/perfil.xhtml");
             
         } catch (IOException ex) {
             Logger.getLogger(ControllerSession.class.getName()).log(Level.SEVERE, null, ex);

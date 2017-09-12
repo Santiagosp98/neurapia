@@ -5,17 +5,17 @@
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
     
 <navigation-rule>
-    <from-view-id>/Usuarios/ConsultarUsuarios.xhtml</from-view-id>
+    <from-view-id>/usuario/consultarusuarios.xhtml</from-view-id>
     <navigation-case>
-        <from-outcome>CrearUsuario.xhtml?faces-redirect=true</from-outcome>
-        <to-view-id>/HistorialClinico/CrearHistorialClinico.xhtml</to-view-id>
+        <from-outcome>nuevohistorialclinico.xhtml?faces-redirect=true</from-outcome>
+        <to-view-id>/historialclinico/nuevohistorialclinico.xhtml?faces-redirect=true</to-view-id>
     </navigation-case>
 </navigation-rule>
     <navigation-rule>
-        <from-view-id>/Usuarios/ConsultarUsuarios.xhtml</from-view-id>
+        <from-view-id>/usuario/consultarusuarios.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>ActualizarHistorial</from-outcome>
-            <to-view-id>/HistorialClinico/ActualizarHistorialClinico.xhtml</to-view-id>
+            <from-outcome>informacionbasica.xhtml?faces-redirect=true</from-outcome>
+            <to-view-id>/historialclinico/informacionbasica.xhtml?faces-redirect=true</to-view-id>
         </navigation-case>
     </navigation-rule>
 

@@ -54,7 +54,7 @@ public class ControllerEducacion extends Controllers.ControllerApp {
     public String crearEducacion() {
         if (educacion.getTipoEducacion() != null && !educacion.getTipoEducacion().equals("")) {
             this.educacionFacade.create(educacion);
-            return "ConsultarDatosSistema?faces-redirect=true";
+            return "registrosenelsistema.xhtml?faces-redirect=true";
         } else {
 
         }
@@ -64,7 +64,7 @@ public class ControllerEducacion extends Controllers.ControllerApp {
     public String prepararEditar(Educacion edu) {
         iniciarConversacion();
         educacionSeleccionada = edu;
-        return "EditarEducacion?faces-redirect=true";
+        return "editareducacion.xhtml?faces-redirect=true";
     }
 
     public String guardarCambios() {

@@ -50,7 +50,7 @@ public class ControllerActividad extends ControllerApp {
     public String crearActividad() {
         if (actividad.getNombreActividad() != null && !actividad.getNombreActividad().equals("")) {
             this.actividadFacade.create(actividad);
-            return "ConsultarDatosSistema?faces-redirect=true";
+            return "registrosenelsistema.xhtml?faces-redirect=true";
         } else {
         }
         return "";
@@ -59,14 +59,14 @@ public class ControllerActividad extends ControllerApp {
     public String prepararEditar(Actividad act) {
         iniciarConversacion();
         actividadSeleccionada = act;
-        return "EditarActividades?faces-redirect=true";
+        return "editaractividad.xhtml?faces-redirect=true";
     }
 
     public String guardarCambios() {
         if (actividadSeleccionada.getNombreActividad() != null && !actividadSeleccionada.getNombreActividad().equals("")) {
             actividadFacade.edit(actividadSeleccionada);
             finalizarConversacion();
-            return "ConsultarDatosSistema?faces-redirect=true";
+            return "registrosenelsistema.xhtml?faces-redirect=true";
         } else {
 
         }

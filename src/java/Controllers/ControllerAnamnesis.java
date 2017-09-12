@@ -46,7 +46,7 @@ public class ControllerAnamnesis extends ControllerApp{
     public String redireccionarCrearAnamnesis(){
         iniciarConversacion();
         this.anamnesis = new Anamnesis();
-        return "CrearAnamnesis.xhtml?faces-redirect=true";
+        return "crearanamnesis.xhtml?faces-redirect=true";
     }
     public void crearAnamnesis(){
         try {

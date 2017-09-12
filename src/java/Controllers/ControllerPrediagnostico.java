@@ -73,19 +73,19 @@ public class ControllerPrediagnostico extends ControllerApp {
     public String seleccionarPrediagnostico(Prediagnostico prediagnostico) {
         iniciarConversacion();
         this.prediagnostico = prediagnostico;
-        return "ActualizarPrediagnostico?faces-redirect=true";
+        return "actualizarprediagnostico?faces-redirect=true";
     }
 
     public String guardarCambios() {
         prediagnosticoFacade.edit(prediagnostico);
         finalizarConversacion();
-        return "ConsultarPrediagnostico?faces-redirect=true";
+        return "consultarprediagnostico.xhtml?faces-redirect=true";
     }
   
 
     public String cancelarActualizar() {
         finalizarConversacion();
-        return "ConsultarPrediagnostico?faces-redirect=true";
+        return "consultarprediagnostico.xhtml?faces-redirect=true";
     }
     
     

@@ -49,7 +49,7 @@ public class ControllerApp implements Serializable {
     
     public String cancelarConfiguracionSistema(){
         finalizarConversacion();
-        return "ConsultarDatosSistema.xhtml";
+        return "registrosenelsistema.xhtml?faces-redirect=true";
     }
 
     public Conversation getConversacion() {
@@ -110,27 +110,27 @@ public class ControllerApp implements Serializable {
     }
     
     public String redirecMovilidad(){
-        return "Movilidad?faces-redirect=true";
+        return "movilidad.xhtml?faces-redirect=true";
     }
     
     public String selectAnamnesis() {
-        return "Anamnesis?faces-redirect=true";
+        return "anamnesis.xhtml?faces-redirect=true";
     }
 
     public String selectMovilidad() {
-        return "Movilidad?faces-redirect=true";
+        return "movilidad.xhtml?faces-redirect=true";
     }
 
     public String selectInformacionBasica() {
-        return "ActualizarHistorialClinico?faces-redirect=true";
+        return "informacionbasica.xhtml?faces-redirect=true";
     }
 
     public String selectObjetivoTratamiento() {
-        return "Objetivos?faces-redirect=true";
+        return "objetivos.xhtml?faces-redirect=true";
     }
 
     public String selectReporteTratamiento() {
-        return "ReporteTratamiento?faces-redirect=true";
+        return "reportetratamiento.xhtml?faces-redirect=true";
     }
     
 }

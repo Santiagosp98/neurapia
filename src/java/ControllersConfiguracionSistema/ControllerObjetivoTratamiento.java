@@ -57,7 +57,7 @@ public class ControllerObjetivoTratamiento extends Controllers.ControllerApp {
     public String crearobjetivoTratamiento() {
         if (objetivoTratamiento.getNombreObjetivo() != null && !objetivoTratamiento.getNombreObjetivo().equals("")) {
             this.objetivoTratamientoFacade.create(objetivoTratamiento);
-            return "ConsultarDatosSistema?faces-redirect=true";
+            return "registrosenelsistema.xhtml?faces-redirect=true";
         } else {
 
         }
@@ -67,14 +67,14 @@ public class ControllerObjetivoTratamiento extends Controllers.ControllerApp {
     public String prepararEditarobjetivoTratamiento(Objetivotratamiento objt) {
         iniciarConversacion();
         objetivoTratamientoSeleccionado = objt;
-        return "EditarObjetivoTratamiento?faces-redirect=true";
+        return "editarobjetivo.xhtml?faces-redirect=true";
     }
 
     public String guardarCambios() {
         if (objetivoTratamientoSeleccionado.getNombreObjetivo() != null && !objetivoTratamientoSeleccionado.getNombreObjetivo().equals("")) {
             objetivoTratamientoFacade.edit(objetivoTratamientoSeleccionado);
             finalizarConversacion();
-            return "ConsultarDatosSistema?faces-redirect=true";
+            return "registrosenelsistema.xhtml?faces-redirect=true";
         } else {
 
         }

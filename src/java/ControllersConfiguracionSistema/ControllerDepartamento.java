@@ -50,7 +50,7 @@ public class ControllerDepartamento extends Controllers.ControllerApp {
         FacesContext fcDep = FacesContext.getCurrentInstance();
         if (departamento.getNombreCiudad()!= null && !departamento.getNombreCiudad().equals("")) {
             this.departamentoFacade.create(departamento);
-        return "ConsultarDatosSistema?faces-redirect=true";
+        return "registrosenelsistema.xhtml?faces-redirect=true";
         }else{
             FacesMessage mAct = new FacesMessage(FacesMessage.SEVERITY_WARN, 
                     "El campo 'NUEVA DEPARTAMENTO' no debe ser nulo,", "Por favor ingreselo nuevamente");
@@ -62,7 +62,7 @@ public class ControllerDepartamento extends Controllers.ControllerApp {
     public String prepararEditar(Departamento dep) {
         iniciarConversacion();
         departamentoSeleccionado = dep;
-        return "EditarDepartamento?faces-redirect=true";
+        return "editardepartamento.xhtml?faces-redirect=true";
     }
 
     public String guardarCambios() {
@@ -70,7 +70,7 @@ public class ControllerDepartamento extends Controllers.ControllerApp {
         if (departamentoSeleccionado.getNombreCiudad() != null && !departamentoSeleccionado.getNombreCiudad().equals("")) {
             departamentoFacade.edit(departamentoSeleccionado);
             finalizarConversacion();
-            return "ConsultarDatosSistema?faces-redirect=true";
+            return "registrosenelsistema.xhtml?faces-redirect=true";
         } else {
             FacesMessage mDep = new FacesMessage(FacesMessage.SEVERITY_WARN,
                     "El campo 'DEPARTAMENTO' no debe ser nulo,", "Por favor ingreselo nuevamente");

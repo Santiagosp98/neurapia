@@ -58,7 +58,7 @@ public class ControllerResultadoProceso extends Controllers.ControllerApp{
                 if (nomTemp.equals("") || !r.getCodCaracteristicaMovilidad().getCodParteCuerpo().getNombreParteCuerpo().equals(nomTemp) || mapa.containsKey(nomTemp)) {                    
                     nomTemp = r.getCodCaracteristicaMovilidad().getCodParteCuerpo().getNombreParteCuerpo();                    
                     if (!mapa.containsKey(nomTemp)) {
-                        mapa.put(nomTemp, new ArrayList<>()); 
+                        mapa.put(nomTemp, new ArrayList<Resultadoproceso>());
                     }                    
                 }
                 proceso = r.getCodProceso().getNombreProceso();  
@@ -68,7 +68,7 @@ public class ControllerResultadoProceso extends Controllers.ControllerApp{
                      mapa.get(nomTemp).add(r); 
                 }else if (mapa.get(nomTemp).get(cont).getCodProceso().getNombreProceso().equals(proceso)) {
                     System.out.println("nuevo mapa:");
-                    mapa.put(nomTemp, new ArrayList<>()); 
+                    mapa.put(nomTemp, new ArrayList<Resultadoproceso>());
                     mapa.get(nomTemp).add(r);
                 }                               
                 cont ++;
@@ -108,7 +108,7 @@ public class ControllerResultadoProceso extends Controllers.ControllerApp{
         try {
             if (resultadoProceso != null) {
                 resultadoProcesoFacade.edit(resultadoProceso);
-                return "Movilidad.xhtml?faces-redirect=true";
+                return "movilidad.xhtml?faces-redirect=true";
             }
         } catch (Exception e) {
             System.out.println("Error al actualizar Resultado Proceso: " + e.getMessage());

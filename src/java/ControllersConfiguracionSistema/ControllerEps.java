@@ -51,7 +51,7 @@ public class ControllerEps extends Controllers.ControllerApp {
     public String crearEps() {
         if (eps.getNombreEps() != null && !eps.getNombreEps().equals("")) {
             this.epsFacade.create(eps);
-            return "ConsultarDatosSistema?faces-redirect=true";
+            return "registrosenelsistema.xhtml?faces-redirect=true";
         } else {
 
         }
@@ -61,7 +61,7 @@ public class ControllerEps extends Controllers.ControllerApp {
     public String prepararEditar(Eps ep) {
         iniciarConversacion();
         epsSeleccionada = ep;
-        return "EditarEps?faces-redirect=true";
+        return "editareps.xhtml?faces-redirect=true";
     }
 
     public String guardarCambios() {  
@@ -69,7 +69,7 @@ public class ControllerEps extends Controllers.ControllerApp {
         if (epsSeleccionada.getNombreEps() != null || !epsSeleccionada.getNombreEps().equals("")) {
             epsFacade.edit(epsSeleccionada);
             finalizarConversacion();
-            return "ConsultarDatosSistema?faces-redirect=true";
+            return "registrosenelsistema.xhtml?faces-redirect=true";
         } else {
             FacesMessage m1 = new FacesMessage(FacesMessage.SEVERITY_INFO,"campo no debe ser vacio",null);
             fc1.addMessage("prueba", m1);

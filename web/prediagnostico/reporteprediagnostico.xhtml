@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+      <ui:define name="titulo">Usuarios consultar Usuarios</ui:define>
+
+    <h:body>
+        <ui:define name="titulo">Reporte Prediagnostico</ui:define>
+        <!-- Aside Izq de la pagina -->
+        <ui:composition template="/template/common/commonLayout.xhtml">
+
+            <ui:define name="aside">
+
+                <div class="panel-group shadow" id="accordion" role="tablist" aria-multiselectable="true">
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading active" role="tab" id="headingOne">
+                            <h6 class="panel-title"><i class="fa fa-users" aria-hidden="true"></i>
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Mis Pre-Diagnosticos<span class="caret"></span> 
+                                </a>
+                            </h6>
+                        </div>
+
+                        <div id="collapsOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body active">
+                                <a href="#{request.contextPath}/prediagnostico/consultarprediagnostico.xhtml">Hstorial de Prediagnostico</a>
+                            </div>
+                            <div class="panel-body" >
+                                <h:form>
+                                    <a href="#{request.contextPath}/prediagnostico/crearprediagnostico.xhtml">Crear Prediagnostico</a>
+                                </h:form>                                
+                            </div>
+                            <div class="panel-body" >
+                                <h:form>
+                                    <h:commandLink action="#{controllerUsuario.seleccionarCrear()}" value="Consultar resultados de Prediagnostico" />
+                                </h:form>
+                            </div>
+                        </div>
+
+                        <div class="panel-heading " role="tab" id="headingOne">
+                            <h6 class="panel-title"><i class="fa fa-folder-open" aria-hidden="true"></i>
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsTwo" aria-expanded="true" aria-controls="collapseOne">
+                                    Reportes<span class="caret"></span> 
+                                </a>
+                            </h6>
+                        </div>
+
+                        <div id="collapsTwo" class="panel-collapse collapse of" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body active">
+                                <a href="ReportePrediagnostico.reporteprediagnostico.xhtml">Reportes de Prediagnostico</a>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>     
+            </ui:define>
+
+
+            <ui:define name="content">
+                <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 shadow" id="right-container">
+                    <!-- Titulo -->
+                    <h4 class="page-title">Reportes Pre-Diagnosticos</h4>
+                    <p:chart type="bar" model="#{primeFacesController.barModel}" style="width: 300px"/>
+                    <p:chart type="bar" model="#{primeFacesController.horizontalBarModel}" style="width: 300px"/>
+
+                </div>
+            </ui:define>
+
+
+            <!-- Contenido de la pagina -->
+
+
+
+        </ui:composition>
+
+    </h:body>
+
+</html>
+
+

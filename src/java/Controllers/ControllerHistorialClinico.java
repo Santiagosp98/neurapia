@@ -75,7 +75,7 @@ public class ControllerHistorialClinico extends ControllerApp {
             ra.listarRespuestasActividad();
             rp.inicializarListaOrdenada();
             ro.listaResultadosObjetivo();
-            return "ActualizarHistorialClinico?faces-redirect=true";
+            return "informacionbasica.xhtml?faces-redirect=true";
         } catch (Exception e) {
             System.out.println("Error al seleccionar el hc: " + e.getMessage() + " " + e.getCause());
         }
@@ -123,7 +123,7 @@ public class ControllerHistorialClinico extends ControllerApp {
                 iniciarConversacion();
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Nuevo Historial Clínico añadido.", "");
                     fc.addMessage(null, message);
-                return "Anamnesis?faces-redirect=true";
+                return "anamnesis?faces-redirect=true";
             }
             System.out.println("no se pudo crear");
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El Historial Clínico no ha podido ser añadido al sistema.", "");
@@ -131,8 +131,6 @@ public class ControllerHistorialClinico extends ControllerApp {
             return "ConsultarUsuarios?faces-redirect=true";
         } catch (Exception e) {
             System.out.println("Error al crear el hc: " + e.getMessage() + " " + e.getCause());
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El Historial Clínico no ha podido ser añadido al sistema.", "");
-                fc.addMessage(null, message);
         }
         return "";
     }

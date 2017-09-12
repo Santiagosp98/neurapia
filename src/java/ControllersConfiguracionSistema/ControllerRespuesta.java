@@ -53,7 +53,7 @@ public class ControllerRespuesta extends Controllers.ControllerApp {
     public String crearRespuesta() {
         if (respuesta.getNombreRespuesta() != null && !respuesta.getNombreRespuesta().equals("")) {
             this.respuestaFacade.create(respuesta);
-            return "ConsultarDatosSistema?faces-redirect=true";
+            return "registrosenelsistema.xhtml?faces-redirect=true";
         } else {
         }
         return "";
@@ -62,14 +62,14 @@ public class ControllerRespuesta extends Controllers.ControllerApp {
     public String prepararEditar(Respuesta resp) {
         iniciarConversacion();
         respuestaSeleccionada = resp;
-        return "EditarRespuesta?faces-redirect=true";
+        return "editarrespuesta.xhtml?faces-redirect=true";
     }
 
     public String guardarCambios() {
         if (respuestaSeleccionada.getNombreRespuesta()!= null && !respuestaSeleccionada.getNombreRespuesta().equals("")) {
             respuestaFacade.edit(respuestaSeleccionada);
             finalizarConversacion();
-            return "ConsultarDatosSistema?faces-redirect=true";
+            return "registrosenelsistema.xhtml?faces-redirect=true";
         } else {
 
         }

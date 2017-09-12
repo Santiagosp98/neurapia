@@ -165,7 +165,7 @@ public class ControllerCitaMedica extends ControllerApp {
     public String seleccionarCita(Citamedica citamedica) {
         iniciarConversacion();
         this.citaMedica = citamedica;
-        return "ActualizarCitasMedicas?faces-redirect=true";
+        return "actualizarcitamedica?faces-redirect=true";
     }
 
     public String actualizarCita() {
@@ -174,7 +174,7 @@ public class ControllerCitaMedica extends ControllerApp {
             citaMedicaFacade.edit(citaMedica);
             System.out.println(citaMedica.getCodFisioterapeuta().getIdFisioterapeuta());
             finalizarConversacion();
-            return "ConsultarCitasMedicas?faces-redirect=true";
+            return "historialdecitas.xhtml?faces-redirect=true";
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -256,7 +256,7 @@ public class ControllerCitaMedica extends ControllerApp {
                                         if (Integer.parseInt(fechaHora) >= 8) {
                                             System.out.println("creado cita contenido");
                                             if (crearCitaContenido() == true) {
-                                                return "ConsultarCitasMedicas?faces-redirect=true";
+                                                return "historialdecitas.xhtml?faces-redirect=true";
                                             } else {
                                                 System.out.println("No se creo");
                                                 FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
@@ -322,7 +322,7 @@ public class ControllerCitaMedica extends ControllerApp {
                                                 if (Integer.parseInt(fechaHora) >= 8) {
                                                     System.out.println("creado cita contenido");
                                                     if (crearCitaContenido() == true) {
-                                                        return "ConsultarCitasMedicas?faces-redirect=true";
+                                                        return "historialdecitas?faces-redirect=true";
                                                     } else {
                                                         System.out.println("No se creo");
                                                         FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",

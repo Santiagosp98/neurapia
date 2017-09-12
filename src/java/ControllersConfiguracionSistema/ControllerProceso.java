@@ -49,7 +49,7 @@ public class ControllerProceso extends  Controllers.ControllerApp {
      public String crearProceso() {
         if (proceso.getNombreProceso()!= null && !proceso.getNombreProceso().equals("")) {
             this.procesoFacade.create(proceso);
-            return "ConsultarDatosSistema?faces-redirect=true";
+            return "registrosenelsistema.xhtml?faces-redirect=true";
         } else {
         }
         return "";
@@ -58,14 +58,14 @@ public class ControllerProceso extends  Controllers.ControllerApp {
     public String prepararEditar(Proceso proc) {
         iniciarConversacion();
         procesoSeleccionado = proc;
-        return "EditarProceso?faces-redirect=true";
+        return "editarproceso.xhtml?faces-redirect=true";
     }
 
     public String guardarCambios() {
         if (procesoSeleccionado.getNombreProceso()!= null && !procesoSeleccionado.getNombreProceso().equals("")) {
             procesoFacade.edit(procesoSeleccionado);
             finalizarConversacion();
-            return "ConsultarDatosSistema?faces-redirect=true";
+            return "registrosenelsistema.xhtml?faces-redirect=true";
         } else {
 
         }
