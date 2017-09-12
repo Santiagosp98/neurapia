@@ -130,18 +130,6 @@
                                         <h:outputText value="#{item.estado}"/>
                                     </h:column>
 
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="#{msg['actions']}"/>
-                                        </f:facet>
-                                        &nbsp;
-
-                                        <h:commandLink action="#{controllerCitaMedica.seleccionarCita(item)}" value="" class="mitooltip" a:data-toggle="tooltip" a:data-placement="top" title="Editar cita"><span id="botonEdita" class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                                        </h:commandLink>
-                                        &nbsp;
-                                        <h:commandLink action="#{controllerCitaMedica.eliminarCita(item)}" value="" class="mitooltip" a:data-toggle="tooltip" a:data-placement="top" title="Eliminar cita"><span id="botonElimina"  class="fa fa-times" aria-hidden="true"></span>
-                                        </h:commandLink>
-                                    </h:column>
                                 </h:dataTable>
                             </h:form>
                         </div>
