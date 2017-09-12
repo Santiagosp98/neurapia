@@ -33,11 +33,21 @@ public interface CitamedicaFacadeLocal {
     
     List<Citamedica> citasPendientes(String estado);
     
+    List<Citamedica> citasPorDobleEstado(String estado, String estado2);
+    
     List<Citamedica> citasPorUsuario(Usuario codUsuario);
+    
+    List<Citamedica> citasPorUsuarioEstado(Usuario codUsuario, String estado);
+    
+    List<Citamedica> citasPorUsuarioDobleEstado(Usuario codUsuario, String estado, String estado2);
     
     List<Citamedica> citasPorFisioterapeuta(Fisioterapeuta codFisioterapeuta);
 
     List<Citamedica> citasPorFisioterapeutaEstado(Fisioterapeuta codFisioterapeuta, String estado);
+    
+    List<Citamedica> citasPorFisioterapeutaDobleEstado(Fisioterapeuta codFisioterapeuta, String estado, String estado2);
+    
+    
     
     Citamedica buscarFisioFechaYHora (Fisioterapeuta codFisioterapeuta, Date fecha, Date hora);
 
