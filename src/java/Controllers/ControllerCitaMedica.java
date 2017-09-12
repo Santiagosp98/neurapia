@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.inject.Named;
 import java.util.List;
+import java.util.regex.Pattern;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.ConversationScoped;
@@ -180,6 +181,36 @@ public class ControllerCitaMedica extends ControllerApp {
     public String crearCitaMedica() {
         try {
             FacesContext fc = FacesContext.getCurrentInstance();
+
+            Pattern regexp;
+
+            regexp = Pattern.compile("\\d+");
+
+            if (!regexp.matcher(fechaHora).matches()){
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Hora' solo admite carácteres numéricos.", "");
+                fc.addMessage(null, message);
+                return "";
+            }
+
+            if (!regexp.matcher(fechaCitaDia).matches()){
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Día' solo admite carácteres numéricos.", "");
+                fc.addMessage(null, message);
+                return "";
+            }
+
+            if (!regexp.matcher(fechaCitaMes).matches()){
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Mes' solo admite carácteres numéricos.", "");
+                fc.addMessage(null, message);
+                return "";
+            }
+
+            if (!regexp.matcher(fechaCitaAño).matches()){
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Año' solo admite carácteres numéricos.", "");
+                fc.addMessage(null, message);
+                return "";
+            }
+
+
             this.citaMedica.setEstado(String.valueOf(citaMedica.getSeleccionEstado().get(1).toString()));
             int validacionFecha = Integer.parseInt(fechaCitaMes);
             Calendar c1 = Calendar.getInstance();
