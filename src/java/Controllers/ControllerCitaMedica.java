@@ -85,7 +85,7 @@ public class ControllerCitaMedica extends ControllerApp {
         System.out.println("rol: " + uS.getCodRol().getNombreRol());
         if (uS.getCodRol() != null) {
             if (uS.getCodRol().getNombreRol().equals("Super Administrador") || uS.getCodRol().getNombreRol().equals("Administrador")) {
-                this.listaCitas = citaMedicaFacade.findAll();
+                this.listaCitas = citaMedicaFacade.citasPorDobleEstado("Cancelada", "Realizada");
                 return listaCitas;
             } else if (uS.getCodRol().getNombreRol().equals("Fisioterapeuta")) {
                 listarCitasporFisioterapeuta();
@@ -100,14 +100,24 @@ public class ControllerCitaMedica extends ControllerApp {
     }
 
     public List<Citamedica> listarCitasporEstado() {
-        this.listaCitas = citaMedicaFacade.citasPendientes("Pendiente");
+        Usuario uS = cs.getUsuario();
+        System.out.println("Rol: " + uS.getCodRol().getNombreRol());
+        if (uS.getCodRol().getIdRol().equals(1) || uS.getCodRol().getIdRol().equals(2)) {
+            this.listaCitas = citaMedicaFacade.citasPendientes("Pendiente");
+        } else if (uS.getCodRol().getIdRol().equals(3)) {
+            fisioterapeuta = fisioterapeutaFacade.buscarPorCodUsuario(uS);
+            this.listaCitas = citaMedicaFacade.citasPorFisioterapeutaEstado(fisioterapeuta, "Pendiente");
+        } else if (uS.getCodRol().getIdRol().equals(4)) {
+            this.listaCitas = citaMedicaFacade.citasPorUsuarioEstado(uS, "Pendiente");
+        }
+
         return listaCitas;
     }
 
     //Consultas de el usuario desde rol usuario
     public List<Citamedica> listarCitasporUsuario() {
         System.out.println(listaCitas.size());
-        listaCitas = citaMedicaFacade.citasPorUsuario(cs.getUsuario());
+        listaCitas = citaMedicaFacade.citasPorUsuarioDobleEstado(cs.getUsuario(), "Cancelada", "Realizada");
         System.out.println(listaCitas.size());
         return listaCitas;
     }
@@ -122,7 +132,7 @@ public class ControllerCitaMedica extends ControllerApp {
                     System.out.println("Estoy listando por fisoterapeuta");
                     fisioterapeuta.setIdFisioterapeuta(ft.getIdFisioterapeuta());
                     System.out.println(fisioterapeuta.getCodUsuario());
-                    listaCitas = citaMedicaFacade.citasPorFisioterapeuta(fisioterapeuta);
+                    listaCitas = citaMedicaFacade.citasPorFisioterapeutaDobleEstado(fisioterapeuta, "Cancelada", "Realizada");
                 }
             }
         } catch (Exception e) {
@@ -176,6 +186,23 @@ public class ControllerCitaMedica extends ControllerApp {
     public String eliminarCita(Citamedica citamedica) {
         this.citaMedicaFacade.remove(citamedica);
         return "ConsultarCitasMedicas?faces-redirect=true";
+    }
+
+    public String cancelarCita(Citamedica citamedica) {
+        try {
+            if (citamedica != null) {
+                citamedica.setEstado("Cancelada");
+                System.out.println("Estado: " + citamedica.getEstado());
+                this.citaMedicaFacade.edit(citamedica);
+                return "ConsultarCitasMedicas?faces-redirect=true";
+            }else{
+                System.out.println("citamedica: " + citamedica);
+                return "";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
     public String crearCitaMedica() {
