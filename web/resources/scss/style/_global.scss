@@ -4,12 +4,19 @@
 
 html {
   height: 100%;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
 }
 
 body {
   width: 100%;
   position: relative;
   min-height: 100%;
+  margin: 0;
+  padding-bottom: 6rem;
 }
 
 label h2 {
