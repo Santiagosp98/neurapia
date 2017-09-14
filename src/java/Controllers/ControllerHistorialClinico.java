@@ -116,19 +116,28 @@ public class ControllerHistorialClinico extends ControllerApp {
             if (controllerUsuario.getUsuario() != null) {
                 historialClinico.setCodUsuario(controllerUsuario.getUsuario());
             }
-            if (this.usuario != null) {
-                System.out.println("Estamos creando un hsitorial clinico");                
-                historialClinico.setFechaCreacion(new Date());
-                this.historialClinicoFacade.create(historialClinico);
-                iniciarConversacion();
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Nuevo Historial Clínico añadido.", "");
+            for (Historialclinico historialclinico : listaHistorialClinico) {
+                if (this.historialClinico.getCodUsuario() == historialclinico.getCodUsuario()) {
+                    if (this.usuario != null && this.historialClinico != null) {
+                        System.out.println("Estamos creando un hsitorial clinico");                
+                        historialClinico.setFechaCreacion(new Date());
+                        this.historialClinicoFacade.create(historialClinico);
+                        iniciarConversacion();
+                        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Nuevo Historial Clínico añadido.", "");
+                            fc.addMessage(null, message);
+                        return "anamnesis?faces-redirect=true";
+                    }
+                    System.out.println("no se pudo crear");
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El Historial Clínico no ha podido ser añadido al sistema.", "");
+                        fc.addMessage(null, message);
+                    return "ConsultarUsuarios?faces-redirect=true";
+                }else{
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "El paciente ya cuenta con un Historial Clínico.", "");
                     fc.addMessage(null, message);
-                return "anamnesis?faces-redirect=true";
+                    System.out.println("Historial Existente, no se puede crear mas de un historial por paciente");
+                    return "";
+                }
             }
-            System.out.println("no se pudo crear");
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El Historial Clínico no ha podido ser añadido al sistema.", "");
-                fc.addMessage(null, message);
-            return "ConsultarUsuarios?faces-redirect=true";
         } catch (Exception e) {
             System.out.println("Error al crear el hc: " + e.getMessage() + " " + e.getCause());
         }

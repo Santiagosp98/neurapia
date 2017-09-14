@@ -50,13 +50,14 @@ public class ControllerAnamnesis extends ControllerApp{
     }
     public void crearAnamnesis(){
         try {
-            if (this.anamnesis != null) {                
-                System.out.println("Estamos creando nueva anamnesis");                
+            if (this.anamnesis != null && hc.getHistorialClinico() != null && dc.crearDolor() != null) {                
+                System.out.println("Estamos creando nueva anamnesis");
+                System.out.println("id HC numero: " + hc.getHistorialClinico().getIdHistorialClinico());
                 anamnesis.setCodDolor(dc.crearDolor());                
                 anamnesis.setCodHistorialClinico(hc.getHistorialClinico());              
                 anamnesisFacade.create(anamnesis);
                 selectAnamnesis();
-            } else {
+            } else{
                 System.out.println("Error al crear una nueva anamnesis");
             }
         } catch (Exception e) {

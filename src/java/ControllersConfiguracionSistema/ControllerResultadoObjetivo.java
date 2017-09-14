@@ -51,8 +51,16 @@ public class ControllerResultadoObjetivo extends Controllers.ControllerApp {
     }
     
     public void crearResultadoObjetivo(){
-        resObjetivo.setCodHistorialClinico(hc.getHistorialClinico());
-        rofl.create(resObjetivo);
+        if (resObjetivo != null) {
+            System.out.println("Estamos creando un resultado Objetivo");
+            resObjetivo.setCodHistorialClinico(hc.getHistorialClinico());
+            System.out.println("Observacion general: " + resObjetivo.getCodObjetivoTratamiento().getNombreObjetivo());
+            System.out.println("Proceso: " + resObjetivo.getCodProceso().getNombreProceso());
+            System.out.println("Valor: " + resObjetivo.getValor());
+            System.out.println("hc numero: " + resObjetivo.getCodHistorialClinico());
+//            rofl.create(resObjetivo);
+        }
+        
     }
     
     public void agregarlistaOrdenada(){

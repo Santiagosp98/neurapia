@@ -158,11 +158,21 @@
                                 </h:column>
 
                             </h:dataTable>
-
-                            <h:form prependId="false">
-
-                                <br> </br>
-                                <h3>Anamnesis</h3>
+                            
+                            <h:form>   
+                                <h4>Agregar Un nuevo Historial Clínico</h4>
+                                <ui:fragment rendered="#{controllerAnamnesis.anamnesis.codHistorialClinico == null}">
+                                    <p>Este historial Clínico no cuenta actualmente con ningún diagnostico 
+                                    realizado al paciente</p><hr></hr>
+                                </ui:fragment>
+                                <p>La anamnesis es un diagnostico inicial por medio del cual se evalua el estado del paciente. Agrega un nuevo proceso de anamnesis al historial clínico actual</p>
+                                <h:commandButton class="btn btn-primary" action="#{controllerAnamnesis.redireccionarCrearAnamnesis()}" value="#{msg['create']}">
+                            </h:commandButton>    
+                            </h:form>                            
+                            
+                            <ui:fragment rendered="#{controllerAnamnesis.anamnesis.codHistorialClinico != null}">
+                            
+                            <h:form prependId="false"><h3>Anamnesis</h3>
                     
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                     <h:outputLabel value="#{msg['initial-assessment']}:" for="anamnesis"/>
@@ -186,16 +196,17 @@
                                 <h3>Dolor</h3>
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                     <h:outputLabel value="#{msg['location']}:" for="localizacion"/>
-                                    <h:inputText id="localizacion" class="form-control mitooltip"
-                                                 value="#{controllerAnamnesis.anamnesis.codDolor.localizacion}"
-                                                 title="localizacion"/>
+                                    <h:selectOneMenu id="localizacion" class="form-control mitooltip" value="#{controllerAnamnesis.anamnesis.codDolor.localizacion}">
+                                        <f:selectItems value="#{controllerParteCuerpo.listaPartesCuerpo}" itemValue="#{pc.nombreParteCuerpo}" var="pc" itemLabel="#{pc.nombreParteCuerpo}"/>
+                                    </h:selectOneMenu>
+                                    
                                 </div>
                                 <div class="form-group col-lg-3 col-md-3 col-sm-3">
                                     <h:outputLabel value="#{msg['pain-scale']}:" for="escalaNumerica"/>
                                     <h:selectOneMenu id="escalaNumerica" class="form-control mitooltip"
                                                      value="#{controllerAnamnesis.anamnesis.codDolor.escalaNumerica}"
                                                      title="dolorpalmacion">
-                                        <f:selectItems value="#{controllerAnamnesis.anamnesis.codDolor.seleccionEscalaNumerica}"/>
+                                        <f:selectItems value="#{controllerDolor.dolor.seleccionEscalaNumerica}"/>
                                     </h:selectOneMenu>
                                 </div>
                                 <div class="form-group col-lg-3 col-md-3 col-sm-3">
@@ -203,7 +214,7 @@
                                     <h:selectOneMenu id="frecuencia" class="form-control mitooltip"
                                                      value="#{controllerAnamnesis.anamnesis.codDolor.frecuencia}"
                                                      title="dolorpalmacion">
-                                        <f:selectItems value="#{controllerAnamnesis.anamnesis.codDolor.seleccionFrecuencia}"/>
+                                        <f:selectItems value="#{controllerDolor.dolor.seleccionFrecuencia}"/>
                                     </h:selectOneMenu>
                                 </div>
                                 <div class="form-group col-lg-3 col-md-3 col-sm-3">
@@ -211,7 +222,7 @@
                                     <h:selectOneMenu id="evaluacionInicial" class="form-control mitooltip"
                                                      value="#{controllerAnamnesis.anamnesis.codDolor.evaluacionInicial}"
                                                      title="dolorpalmacion">
-                                        <f:selectItems value="#{controllerAnamnesis.anamnesis.codDolor.seleccionEvaluacionInicial}"/>
+                                        <f:selectItems value="#{controllerDolor.dolor.seleccionEvaluacionInicial}"/>
                                     </h:selectOneMenu>
                                 </div>
                                 <div class="form-group col-lg-3 col-md-3 col-sm-3">
@@ -219,7 +230,7 @@
                                     <h:selectOneMenu id="caracteristica" class="form-control mitooltip"
                                                      value="#{controllerAnamnesis.anamnesis.codDolor.caracteristica}"
                                                      title="dolorpalmacion">
-                                        <f:selectItems value="#{controllerAnamnesis.anamnesis.codDolor.seleccionCaracteristica}"/>
+                                        <f:selectItems value="#{controllerDolor.dolor.seleccionCaracteristica}"/>
                                     </h:selectOneMenu>
                                 </div>
                                 <div class="form-group col-lg-3 col-md-3 col-sm-3">
@@ -227,7 +238,7 @@
                                     <h:selectOneMenu id="dolorpalmacion" class="form-control mitooltip"
                                                      value="#{controllerAnamnesis.anamnesis.codDolor.dolorPalmacion}"
                                                      title="dolorpalmacion">
-                                        <f:selectItems value="#{controllerAnamnesis.anamnesis.codDolor.seleccionSiNo}"/>
+                                        <f:selectItems value="#{controllerDolor.dolor.seleccionSiNo}"/>
                                     </h:selectOneMenu>
                                 </div>
                                 <div class="form-group col-lg-3 col-md-3 col-sm-3">
@@ -235,7 +246,7 @@
                                     <h:selectOneMenu id="vertigo" class="form-control mitooltip"
                                                      value="#{controllerAnamnesis.anamnesis.codDolor.vertigo}"
                                                      title="dolorpalmacion">
-                                        <f:selectItems value="#{controllerAnamnesis.anamnesis.codDolor.seleccionSiNo}"
+                                        <f:selectItems value="#{controllerDolor.dolor.seleccionSiNo}"
                                                        class="radioBoton"/>
                                     </h:selectOneMenu>
                                 </div>
@@ -244,7 +255,7 @@
                                     <h:selectOneMenu id="espasmos" class="form-control mitooltip"
                                                      value="#{controllerAnamnesis.anamnesis.codDolor.espasmos}"
                                                      title="dolorpalmacion">
-                                        <f:selectItems value="#{controllerAnamnesis.anamnesis.codDolor.seleccionSiNo}"/>
+                                        <f:selectItems value="#{controllerDolor.dolor.seleccionSiNo}"/>
                                     </h:selectOneMenu>
                                 </div>
                                 <div class="form-group col-lg-3 col-md-3 col-sm-3">
@@ -252,13 +263,13 @@
                                     <h:selectOneMenu id="presenciaCefalea" class="form-control mitooltip"
                                                      value="#{controllerAnamnesis.anamnesis.codDolor.presenciaCefalea}"
                                                      title="dolorpalmacion">
-                                        <f:selectItems value="#{controllerAnamnesis.anamnesis.codDolor.seleccionSiNo}"/>
+                                        <f:selectItems value="#{controllerDolor.dolor.seleccionSiNo}"/>
                                     </h:selectOneMenu>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
                                     <br></br>
                                     <h:commandButton class="btn btn-primary"
-                                                     actionListener="#{controllerAnamnesis.editarAnamnesis()}"
+                                                     actionListener="#{controllerAnamnesis.crearAnamnesis()}"
                                                      value="#{msg['save']}"/>
                                     &nbsp;
                                     <h:commandButton class="btn btn-default"
@@ -270,6 +281,7 @@
                                                      value="#{msg['next']}"/>
                                 </div>
                             </h:form>
+                            </ui:fragment>
                         </div>
                     </div>
                 </div>

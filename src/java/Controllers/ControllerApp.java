@@ -133,4 +133,8 @@ public class ControllerApp implements Serializable {
         return "reportetratamiento.xhtml?faces-redirect=true";
     }
     
+    public String selectListarOBjetivos(){
+        return "listarobjetivos.xhtml?faces-redirect=true";
+    }
+    
 }

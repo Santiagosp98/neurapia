@@ -93,15 +93,17 @@ public class ControllerResultadoProceso extends Controllers.ControllerApp{
         return "ActualizarResultadoProceso";
     }
     
-    public void crearResultadoProceso(){
+    public String crearResultadoProceso(){
         try {
             if (resultadoProceso != null) {
                 resultadoProceso.setCodHistorialClinico(hc.getHistorialClinico()); //debemos modificarlo por anamnesis.getAnamnesis();
-                resultadoProcesoFacade.create(resultadoProceso);                
+                resultadoProcesoFacade.create(resultadoProceso);      
+                return "movilidad.xhtml?faces-redirect=true";
             }
         } catch (Exception e) {
             System.out.println("Error crear Resultado Proceso: " + e.getMessage());
         }        
+        return "movilidad.xhtml?faces-redirect=true";
     }   
         
     public String ActualizarResultadoProceso(){

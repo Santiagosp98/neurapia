@@ -53,6 +53,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Historialclinico.findByPais", query = "SELECT h FROM Historialclinico h WHERE h.pais = :pais")
     , @NamedQuery(name = "Historialclinico.findByEstudio", query = "SELECT h FROM Historialclinico h WHERE h.estudio = :estudio")
     , @NamedQuery(name = "Historialclinico.findByOcupacion", query = "SELECT h FROM Historialclinico h WHERE h.ocupacion = :ocupacion")
+    , @NamedQuery(name = "Historialclinico.listaUsuarios", query = "SELECT u.primerNombre, u.primerNombre FROM Historialclinico h LEFT JOIN h.codUsuario u WHERE h.codUsuario is null AND u.codRol = 4")
     , @NamedQuery(name = "Historialclinico.findByTelefono", query = "SELECT h FROM Historialclinico h WHERE h.telefono = :telefono")})
 public class Historialclinico implements Serializable {
 

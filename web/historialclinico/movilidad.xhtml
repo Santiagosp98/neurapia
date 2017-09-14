@@ -179,13 +179,15 @@
                                 <h:inputText id="result" class="form-control mitooltip" value="#{controllerResultadoProceso.resultadoProceso.resultadoProceso}"/>
                             </h:panelGroup>
                             
-                            <h:commandButton class="btn btn-primary" actionListener="#{controllerResultadoProceso.crearResultadoProceso()}" value="Guardar">
+                            <h:commandButton class="btn btn-primary" action="#{controllerResultadoProceso.crearResultadoProceso()}" value="Guardar">
+                                <f:ajax execute="@form" rendered=":examinadas"></f:ajax>
                             </h:commandButton>
                         </div>
                     </h:form>
                     <hr/>
-                    <h2>Caracteristicas examinadas</h2>                                           
-                        <table class="table">
+                                                              
+                    <table class="table" >
+                        <h2>Caracteristicas examinadas</h2> 
                             <thead>
                             <tr>
                                 <th>
@@ -224,6 +226,10 @@
                                 </tbody>
                             </c:forEach>  
                         </table>
+                    <h:form>
+                        <h:commandButton class="btn btn-default" value="#{msg['back']}" action="#{controllerHistorialClinico.selectAnamnesis()}"></h:commandButton>
+                        <h:commandButton class="btn btn-default" value="#{msg['next']}" action="#{controllerHistorialClinico.selectObjetivoTratamiento()}"></h:commandButton>
+                    </h:form>
                 </div>
             </div>
         </ui:define>
