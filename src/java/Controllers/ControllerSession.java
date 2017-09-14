@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import Entities.Permiso;
 import Entities.Usuario;
 import Facade.UsuarioFacadeLocal;
 import java.io.IOException;
@@ -20,6 +21,7 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -116,15 +118,40 @@ public class ControllerSession extends ControllerApp {
     }
     
     public boolean inicioSesion(){
+        System.out.println( "Host name: " + hostName());
         System.out.println("Validando");
         return(usuario != null);
     }
     
-    public void validarSesion(){
-        if (!inicioSesion()) {
-            cerrarSesion();
+    public void validarSesion() throws IOException{
+        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        if (inicioSesion()) {            
+            if (true) {
+                HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+                String url = req.getRequestURL().toString();
+                if (!consultarPermiso(url)) {
+                    ec.redirect(hostName() + "usuario/perfil.xhtml?faces-redirect=true");
+                }
+            }else{
+                cerrarSesion();
+            }
         }
     }
+    
+    public boolean consultarPermiso(String url){
+        if (url.endsWith("historialclinico")) {
+            System.out.println("Tiene permiso");
+            return true;        
+        }
+        for (Permiso p : usuario.getCodRol().getPermisoList()) {
+            if ( p.getUrl() != null && url.endsWith(p.getUrl())) {
+                System.out.println("No tiene permiso");
+                return false;
+            }
+        }
+        return true;        
+    }
+    
     public boolean accesoSuperAdmin(){
         System.out.println("SuperAdmin");
         System.out.println(usuario.getCodRol().getNombreRol());

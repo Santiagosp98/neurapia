@@ -3,6 +3,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:fragment xmlns="http://www.w3.org/1999/xhtml"
              xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
              xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <nav class="header">
@@ -55,9 +56,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#{request.contextPath}/historialclinico/consultarhistorialesclinicos.xhtml">
+                        <h:link rendered="#{controllerSession.usuario.codRol.idRol.intValue() != 4}" a:href="#{request.contextPath}/historialclinico/consultarhistorialesclinicos.xhtml">
                             <h:outputText value="#{msg['medical-history']}"></h:outputText>
-                        </a>
+                        </h:link>
                     </li>
                     <li>
                         <a href="#{request.contextPath}/prediagnostico/consultarprediagnostico.xhtml">
