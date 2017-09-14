@@ -23,7 +23,12 @@
                             <h6 class="panel-title"><i class="fa fa-users" aria-hidden="true"></i>
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsTwo"
                                    aria-expanded="true" aria-controls="collapseOne">
-                                    <h:outputText value="#{msg['my-prediagnostics']}"/>
+                                    <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol ne 4}">
+                                        Pre-diagnósticos
+                                    </ui:fragment>
+                                    <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol eq 4}">
+                                        <h:outputText value="#{msg['my-prediagnostics']}"/>
+                                    </ui:fragment>
                                     <span class="caret"></span>
                                 </a>
                             </h6>
@@ -34,11 +39,13 @@
                             <div class="panel-body active">
                                 <a href="#{request.contextPath}/prediagnostico/consultarprediagnostico.xhtml">#{msg['prediagnosis-historial']}</a>
                             </div>
-                            <div class="panel-body">
-                                <h:form>
-                                    <a href="#{request.contextPath}/prediagnostico/crearprediagnostico.xhtml>">#{msg['create-prediagnosis']}</a>
-                                </h:form>
-                            </div>
+                            <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol eq 4}">
+                                <div class="panel-body">
+                                    <h:form>
+                                        <a href="#{request.contextPath}/prediagnostico/crearprediagnostico.xhtml>">#{msg['create-prediagnosis']}</a>
+                                    </h:form>
+                                </div>
+                            </ui:fragment>
                         </div>
 
                     </div>
@@ -49,7 +56,12 @@
                 <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 shadow" id="right-container">
                     <!-- Titulo -->
                     <h4 class="page-title">
-                        #{msg['update-prediagnosis-result']}
+                        <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol eq 3}">
+                            #{msg['update-prediagnosis-result']}
+                        </ui:fragment>
+                        <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol ne 3}">
+                            Consultar resultado de pre-diagnóstico
+                        </ui:fragment>
                     </h4>
 
                     <div class="contenido">
@@ -181,26 +193,43 @@
                         </div>
 
                         <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">
-
-                            <br></br>
-                            <h:messages for="resultado"
-                                        style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
-                            <label for="resultado">#{msg['result']}</label>
-                            <h:inputTextarea class="form-control" rows="4" id="resultado" name="resultado"
-                                             value="#{controllerPrediagnostico.prediagnostico.resultadoPrediagnostico}"
-                                             required="true" requiredMessage="El campo es obligatorio." a:maxlength="500"
-                                             validatorMessage="Se ha excedido el número de carácteres permitidos(500)"/>
+                            <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol eq 3}">
+                                <br></br>
+                                <h:messages for="resultado"
+                                            style="color: red; list-style:none; margin-bottom: 0px; padding-left: 0px"/>
+                                <label for="resultado">#{msg['result']}</label>
+                                <h:inputTextarea class="form-control" rows="4" id="resultado" name="resultado"
+                                                 value="#{controllerPrediagnostico.prediagnostico.resultadoPrediagnostico}"
+                                                 required="true" requiredMessage="El campo es obligatorio."
+                                                 a:maxlength="500"
+                                                 validatorMessage="Se ha excedido el número de carácteres permitidos(500)"/>
+                            </ui:fragment>
+                            <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol ne 3}">
+                                <label for="resultado">#{msg['result']}</label>
+                                <h:inputTextarea class="form-control" rows="4" id="resultado2" name="resultado"
+                                                 value="#{controllerPrediagnostico.prediagnostico.resultadoPrediagnostico}"
+                                                 required="true" requiredMessage="El campo es obligatorio."
+                                                 a:maxlength="500" disabled="true"
+                                                 validatorMessage="Se ha excedido el número de carácteres permitidos(500)"/>
+                            </ui:fragment>
                         </div>
 
                         <div class="form-group col-lg-11 col-md-11 col-sm-11" style="margin-left: 40px">
                             <br></br>
-                            <h:commandButton class="btn btn-primary"
-                                             action="#{controllerPrediagnostico.guardarCambios()}"
-                                             value="#{msg['save']}"/>
-                            &nbsp;
-                            <h:commandButton class="btn btn-default"
-                                             action="#{controllerPrediagnostico.cancelarActualizar()}"
-                                             value="#{msg['cancel']}"/>
+                            <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol eq 3}">
+                                <h:commandButton class="btn btn-primary"
+                                                 action="#{controllerPrediagnostico.guardarCambios()}"
+                                                 value="#{msg['save']}"/>
+                                &nbsp;
+                                <h:commandButton class="btn btn-default"
+                                                 action="#{controllerPrediagnostico.cancelarActualizar()}"
+                                                 value="#{msg['cancel']}"/>
+                            </ui:fragment>
+                            <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol ne 3}">
+                                <h:commandButton class="btn btn-default"
+                                                 action="#{controllerPrediagnostico.cancelarActualizar()}"
+                                                 value="#{msg['back']}"/>
+                            </ui:fragment>
                         </div>
 
                     </h:form>
