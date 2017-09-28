@@ -24,7 +24,7 @@
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsTwo"
                                    aria-expanded="true" aria-controls="collapseOne">
                                     <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol ne 4}">
-                                        Pre-diagnósticos
+                                        #{msg['prediagnosis']}
                                     </ui:fragment>
                                     <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol eq 4}">
                                         <h:outputText value="#{msg['my-prediagnostics']}"/>
@@ -42,7 +42,7 @@
                             <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol eq 4}">
                                 <div class="panel-body">
                                     <h:form>
-                                        <a href="#{request.contextPath}/prediagnostico/crearprediagnostico.xhtml>">#{msg['create-prediagnosis']}</a>
+                                        <a href="#{request.contextPath}/prediagnostico/crearprediagnostico.xhtml">#{msg['create-prediagnosis']}</a>
                                     </h:form>
                                 </div>
                             </ui:fragment>
@@ -60,7 +60,7 @@
                             #{msg['update-prediagnosis-result']}
                         </ui:fragment>
                         <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol ne 3}">
-                            Consultar resultado de pre-diagnóstico
+                            #{msg['consult-prediagnosis']}
                         </ui:fragment>
                     </h4>
 

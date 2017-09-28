@@ -140,11 +140,11 @@
                                         </f:facet>
                                         &nbsp;
                                         <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol ne 4}">
-                                            <h:commandLink action="#{controllerCitaMedica.seleccionarCita(item)}" value="" class="mitooltip" a:data-toggle="tooltip" a:data-placement="top" title="Editar cita"><span id="botonEdita" class="fa fa-pencil-square-o" aria-hidden="true"></span>
+                                            <h:commandLink action="#{controllerCitaMedica.seleccionarCita(item)}" value="" class="mitooltip" a:data-toggle="tooltip" a:data-placement="top" title="#{msg['edit']}"><span id="botonEdita" class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                             </h:commandLink>
                                         </ui:fragment>
                                         &nbsp;
-                                        <h:commandLink action="#{controllerCitaMedica.cancelarCita(item)}" value="" class="mitooltip" a:data-toggle="tooltip" a:data-placement="top" title="Cancelar cita"><span id="botonElimina"  class="fa fa-times" aria-hidden="true"></span>
+                                        <h:commandLink action="#{controllerCitaMedica.cancelarCita(item)}" value="" class="mitooltip" a:data-toggle="tooltip" a:data-placement="top" title="#{msg['cancel-appointment']}"><span id="botonElimina"  class="fa fa-times" aria-hidden="true"></span>
                                         </h:commandLink>
                                     </h:column>
                                 </h:dataTable>

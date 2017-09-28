@@ -144,12 +144,12 @@
                                         &nbsp;
                                         <h:commandLink action="#{controllerUsuario.seleccionarUsuario(item)}" value=""
                                                        class="mitooltip" a:data-toggle="tooltip" a:data-placement="top"
-                                                       title="Editar"><span
+                                                       title="#{msg['edit']}"><span
                                                 id="botonEdita" class="fa fa-pencil-square-o" aria-hidden="true"></span>
                                         </h:commandLink>
                                         &nbsp;
                                         <h:commandLink id="botonElimina" class="btnModal mitooltip" value=""
-                                                       a:data-toggle="tooltip" a:data-placement="top" title="Eliminar"><span
+                                                       a:data-toggle="tooltip" a:data-placement="top" title="#{msg['delete']}"><span
                                                 id="botonElimina"
                                                 class="fa fa-times"
                                                 aria-hidden="true"></span>
@@ -161,7 +161,7 @@
                                         <h:commandLink rendered="#{item.codRol.idRol eq 4}"
                                                        action="#{controllerUsuario.prepararCrearHistorial(item)}"
                                                        class="mitooltip" a:data-toggle="tooltip" a:data-placement="top"
-                                                       title="Historial clinico">
+                                                       title="#{msg['medical-record']}">
 
                                             <span class="fa fa-stethoscope" aria-hidden="true"></span>
                                         </h:commandLink>

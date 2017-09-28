@@ -115,12 +115,12 @@
                                     </f:facet>
                                     &nbsp;
                                     <h:commandLink
-                                            action="#{controllerHistorialClinico.seleccionarHistorialclinico(item)}"
-                                            value=""><span id="botonEdita" class="fa fa-pencil-square-o"
+                                            action="#{controllerHistorialClinico.seleccionarHistorialclinico(item)}" class="mitooltip" a:data-toggle="tooltip" a:data-placement="top" title="#{msg['edit']}">
+                                        <span id="botonEdita" class="fa fa-pencil-square-o"
                                                            aria-hidden="true"></span>
                                     </h:commandLink>
                                     &nbsp;
-                                    <h:commandLink action="#{controllerHistorialClinico.eliminarHistorialClinico(item)}"
+                                    <h:commandLink action="#{controllerHistorialClinico.eliminarHistorialClinico(item)}" class="mitooltip" a:data-toggle="tooltip" a:data-placement="top" title="#{msg['delete']}"
                                                    value=""><span id="botonElimina" class="fa fa-times"
                                                                   aria-hidden="true"></span>
 
@@ -164,6 +164,8 @@
                                 }
                             ]
                         });
+
+                        $('.mitooltip').tooltip();
                     });
                 </script>
             </ui:define>

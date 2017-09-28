@@ -248,40 +248,40 @@
                                     }
                                 }, messages: {
                                     'numero-documento': {
-                                        required: 'El campo es obligatorio.',
-                                        number: 'Sólo se permiten carácteres numéricos.',
-                                        maxlength: 'Se ha excedido el número de carácteres permitidos(20).'
+                                        required: '#{msg["required"]}',
+                                        number: '#{msg["numeric"]}',
+                                        maxlength: '#{msg["max-length"]}(20).'
                                     },
                                     'primer-nombre': {
-                                        required: 'El campo es obligatorio.',
-                                        alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
-                                        maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                                        required: '#{msg["required"]}',
+                                        alphabet: '#{msg["alphabet"]}',
+                                        maxlength: '#{msg["max-length"]}(45).'
                                     },
                                     'segundo-nombre': {
-                                        alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
-                                        maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                                        alphabet: '#{msg["alphabet"]}',
+                                        maxlength: '#{msg["max-length"]}(45).'
                                     },
                                     'primer-apellido': {
-                                        required: 'El campo es obligatorio.',
-                                        alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
-                                        maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                                        required: '#{msg["required"]}',
+                                        alphabet: '#{msg["alphabet"]}',
+                                        maxlength: '#{msg["max-length"]}(45).'
                                     },
                                     'segundo-apellido': {
-                                        alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
-                                        maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                                        alphabet: '#{msg["alphabet"]}',
+                                        maxlength: '#{msg["max-length"]}(45).'
                                     },
                                     correo: {
-                                        required: 'El campo es obligatorio.',
+                                        required: '#{msg["required"]}',
                                         email: 'Introduzca una dirección de email válida.',
-                                        maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                                        maxlength: '#{msg["max-length"]}(45).'
                                     },
                                     'clave-usuario': {
-                                        required: 'El campo es obligatorio.',
+                                        required: '#{msg["required"]}',
                                         minlength: 'La contraseña debe contener mínimo 8 carácteres.',
-                                        maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                                        maxlength: '#{msg["max-length"]}(45).'
                                     },
                                     'confirmar-clave': {
-                                        required: 'El campo es obligatorio.',
+                                        required: '#{msg["required"]}',
                                         equalTo: 'Las contraseñas no coinciden.'
                                     }
                                 }

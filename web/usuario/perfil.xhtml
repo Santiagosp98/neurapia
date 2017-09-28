@@ -82,7 +82,7 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 custom-col-lg-3">
                             <div class="photo">
-                                <div style="background-image: url(#{request.contextPath}/resources/imgs/Neurapia.jpg);"
+                                <div style="background-image: url(#{request.contextPath}/#{msg['default-photo']});"
                                      class="img-circle">
 
                                 </div>
@@ -96,15 +96,15 @@
                                 <div>
                                     <table>
                                         <tr>
-                                            <th>Tipo de usuario:</th>
+                                            <th>#{msg['user-type']}</th>
                                             <td>#{controllerSession.usuario.codRol.nombreRol}</td>
                                         </tr>
                                         <tr>
-                                            <th>Estado:</th>
+                                            <th>#{msg['status']}:</th>
                                             <td>#{controllerSession.usuario.estadoUsuario}</td>
                                         </tr>
                                         <tr>
-                                            <th>Miembro desde:</th>
+                                            <th>#{msg['member-since']}:</th>
                                             <td>
                                                 <h:outputText value="#{controllerSession.usuario.fechaRegistro}">
                                                     <f:convertDateTime pattern="yyyy-MM-dd"/>
@@ -121,15 +121,15 @@
                                     <table class="table-info">
                                         <tbody>
                                         <tr>
-                                            <th>Usuarios registrados:</th>
+                                            <th>#{msg['registered-users']}:</th>
                                             <td><p class="feature">#{controllerUsuario.cantidadUsuarios}</p></td>
                                         </tr>
                                         <tr>
-                                            <th>Usuarios inhabilitados:</th>
+                                            <th>#{msg['disabled-users']}:</th>
                                             <td>#{controllerUsuario.usuariosInhabilitados}</td>
                                         </tr>
                                         <tr>
-                                            <th>Total atendidos:</th>
+                                            <th>#{msg['total-served']}:</th>
                                             <td>#{controllerCitaMedica.citasRealizadas}</td>
                                         </tr>
                                         </tbody>
@@ -139,15 +139,15 @@
                                     <table class="table-info">
                                         <tbody>
                                         <tr>
-                                            <th>Fisioterapeutas registrados:</th>
+                                            <th>#{msg['registered-physiotherapists']}:</th>
                                             <td>#{controllerUsuario.fisioterapeutasRegistrados}</td>
                                         </tr>
                                         <tr>
-                                            <th>Total citas:</th>
+                                            <th>#{msg['total-appointments']}:</th>
                                             <td>#{controllerCitaMedica.totalCitasMedicas}</td>
                                         </tr>
                                         <tr>
-                                            <th>Total citas pendientes:</th>
+                                            <th>#{msg['total-pending-appointments']}:</th>
                                             <td>#{controllerCitaMedica.citasPendientes}</td>
                                         </tr>
                                         </tbody>
@@ -184,7 +184,7 @@
                             </div>
                             <div class="row hide-on-sm hide-on-md">
                                 <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
-                                    <h5 class="custom-separator">Información basica</h5>
+                                    <h5 class="custom-separator">#{msg['basic-information']}</h5>
                                     <div class="row">
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                             <table class="personal-info">
