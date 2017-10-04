@@ -476,7 +476,7 @@ public class ControllerUsuario extends ControllerApp {
             if (!regexp.matcher(usuario.getCorreoElectronico()).matches()) {
                 UIComponent root = fc.getViewRoot();
                 UIComponent component = root.findComponent("registro:correo");
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Introduzca una dirección de email válidassdd.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Introduzca una dirección de email válida.", "");
                 fc.addMessage(component.getClientId(fc), message);
                 return;
             }
