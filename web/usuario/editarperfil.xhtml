@@ -211,8 +211,18 @@
                                 <div class="modal-body">
 
                                     <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <h:messages showDetail="true"
-                                                    showSummary="true" styleClass="alert alert-danger" globalOnly="false" style="list-style: none"/>
+                                        <h:message showDetail="false" for="contrasena-anterior"
+                                                   showSummary="true" errorClass="alert alert-danger" globalOnly="false"
+                                                   style="display: block"
+                                                   infoClass="alert alert-success"/>
+                                        <h:message showDetail="false" for="nueva-contrasena"
+                                                   showSummary="true" errorClass="alert alert-danger" globalOnly="false"
+                                                   style="display: block"
+                                                   infoClass="alert alert-success"/>
+                                        <h:message showDetail="false" for="confirmar-contrasena"
+                                                   showSummary="true" errorClass="alert alert-danger" globalOnly="false"
+                                                   style="display: block"
+                                                   infoClass="alert alert-success"/>
                                     </div>
 
                                     <div class="form-group col-lg-12">
@@ -248,7 +258,8 @@
                                 <div class="modal-footer">
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <h:commandButton class="btn btn-primary" type="submit" value="#{msg['save']}"
-                                                         action="#{controllerUsuario.cambiarContrasena()}">
+                                                         action="#{controllerUsuario.cambiarContrasena()}" onclick="return form.valid()">
+                                            <f:ajax render="@form" execute="@form"/>
                                         </h:commandButton>
                                     </div>
                                 </div>
@@ -262,129 +273,129 @@
 
         <ui:define name="ultimosScripts">
             <script type="text/javascript">
-                $(document).ready(function () {
-                    $("#lista-usuarios").DataTable({
-                        language: {
-                            url: "#{resource['js/spanish.lang']}"
+                $("#lista-usuarios").DataTable({
+                    language: {
+                        url: "#{resource['js/spanish.lang']}"
+                    },
+                    dom: "Bfrtip",
+                    buttons: [
+                        {
+                            extend: "csv",
+                            className: "btn-sm"
                         },
-                        dom: "Bfrtip",
-                        buttons: [
-                            {
-                                extend: "csv",
-                                className: "btn-sm"
-                            },
-                            {
-                                extend: "excel",
-                                className: "btn-sm"
-                            },
-                            {
-                                extend: "pdfHtml5",
-                                className: "btn-sm"
-                            }
-                        ]
-                    });
-
-                    $(".btnModal").click(function () {
-                        console.log("imprime");
-                        $("#myModal").modal("show");
-                    });
-
-                    $.validator.addMethod("alphabet", function (value, element, pattern) {
-                        return pattern.test(value);
-                    });
-
-                    $.validator.addMethod("email", function (value, element, pattern) {
-                        return pattern.test(value);
-                    });
-
-                    $('#editar-perfil').validate({
-                        rules: {
-                            'primer-nombre': {
-                                required: true,
-                                alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]+$/,
-                                maxlength: 45
-                            },
-                            'segundo-nombre': {
-                                alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]*$/,
-                                maxlength: 45
-                            },
-                            'primer-apellido': {
-                                required: true,
-                                alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]+$/,
-                                maxlength: 45
-                            },
-                            'segundo-apellido': {
-                                alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]*$/,
-                                maxlength: 45
-                            },
-                            correo: {
-                                required: true,
-                                email: /[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}/,
-                                maxlength: 45
-                            },
-                        }, messages: {
-                            'numero-documento': {
-                                required: 'El campo es obligatorio.',
-                                number: 'Sólo se permiten carácteres numéricos.',
-                                maxlength: 'Se ha excedido el número de carácteres permitidos(20).'
-                            },
-                            'primer-nombre': {
-                                required: 'El campo es obligatorio.',
-                                alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
-                                maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
-                            },
-                            'segundo-nombre': {
-                                alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
-                                maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
-                            },
-                            'primer-apellido': {
-                                required: 'El campo es obligatorio.',
-                                alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
-                                maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
-                            },
-                            'segundo-apellido': {
-                                alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
-                                maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
-                            },
-                            correo: {
-                                required: 'El campo es obligatorio.',
-                                email: 'Introduzca una dirección de email válida.',
-                                maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
-                            },
-                        }
-                    })
-
-                    $('#cambiar-contrasena').validate({
-                        rules: {
-                            'contrasena-anterior': {
-                                required: true
-                            },
-                            'nueva-contrasena': {
-                                required: true,
-                                minlength: 8,
-                                maxlength: 45
-                            },
-                            'confirmar-contrasena': {
-                                required: 'true',
-                                equalTo: '#nueva-contrasena'
-                            }
+                        {
+                            extend: "excel",
+                            className: "btn-sm"
                         },
-                        messages: {
-                            'contrasena-anterior': {
-                                required: 'El campo es obligatorio.'
-                            },
-                            'nueva-contrasena': {
-                                required: 'El campo es obligatorio.',
-                                minlength: 'La contraseña debe contener mínimo 8 carácteres.',
-                                maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
-                            },
-                            'confirmar-contrasena': {
-                                required: 'El campo es obligatorio.',
-                                equalTo: 'Las contraseñas no coinciden.'
-                            }
+                        {
+                            extend: "pdfHtml5",
+                            className: "btn-sm"
                         }
-                    })
+                    ]
                 });
+
+                $(".btnModal").click(function () {
+                    console.log("imprime");
+                    $("#myModal").modal("show");
+                });
+
+                $.validator.addMethod("alphabet", function (value, element, pattern) {
+                    return pattern.test(value);
+                });
+
+                $.validator.addMethod("email", function (value, element, pattern) {
+                    return pattern.test(value);
+                });
+
+                $('#editar-perfil').validate({
+                    rules: {
+                        'primer-nombre': {
+                            required: true,
+                            alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]+$/,
+                            maxlength: 45
+                        },
+                        'segundo-nombre': {
+                            alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]*$/,
+                            maxlength: 45
+                        },
+                        'primer-apellido': {
+                            required: true,
+                            alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]+$/,
+                            maxlength: 45
+                        },
+                        'segundo-apellido': {
+                            alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]*$/,
+                            maxlength: 45
+                        },
+                        correo: {
+                            required: true,
+                            email: /[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}/,
+                            maxlength: 45
+                        },
+                    }, messages: {
+                        'numero-documento': {
+                            required: 'El campo es obligatorio.',
+                            number: 'Sólo se permiten carácteres numéricos.',
+                            maxlength: 'Se ha excedido el número de carácteres permitidos(20).'
+                        },
+                        'primer-nombre': {
+                            required: 'El campo es obligatorio.',
+                            alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
+                            maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                        },
+                        'segundo-nombre': {
+                            alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
+                            maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                        },
+                        'primer-apellido': {
+                            required: 'El campo es obligatorio.',
+                            alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
+                            maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                        },
+                        'segundo-apellido': {
+                            alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
+                            maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                        },
+                        correo: {
+                            required: 'El campo es obligatorio.',
+                            email: 'Introduzca una dirección de email válida.',
+                            maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                        },
+                    }
+                })
+
+                var form = $('#cambiar-contrasena');
+
+                form.validate({
+                    rules: {
+                        'contrasena-anterior': {
+                            required: true
+                        },
+                        'nueva-contrasena': {
+                            required: true,
+                            minlength: 8,
+                            maxlength: 45
+                        },
+                        'confirmar-contrasena': {
+                            required: 'true',
+                            equalTo: '#nueva-contrasena'
+                        }
+                    },
+                    messages: {
+                        'contrasena-anterior': {
+                            required: 'El campo es obligatorio.'
+                        },
+                        'nueva-contrasena': {
+                            required: 'El campo es obligatorio.',
+                            minlength: 'La contraseña debe contener mínimo 8 carácteres.',
+                            maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                        },
+                        'confirmar-contrasena': {
+                            required: 'El campo es obligatorio.',
+                            equalTo: 'Las contraseñas no coinciden.'
+                        }
+                    }
+                })
             </script>
         </ui:define>
 
