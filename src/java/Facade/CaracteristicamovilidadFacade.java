@@ -33,12 +33,12 @@ public class CaracteristicamovilidadFacade extends AbstractFacade<Caracteristica
     }
 
     @Override
-    public List<Caracteristicamovilidad> listarPorParteCuerpo(int id) {
+    public List<Caracteristicamovilidad> listarPorParteCuerpo(String name) {
         List lista = null;
         try {
             lista = new ArrayList();
             TypedQuery<Caracteristicamovilidad> q = getEntityManager().createNamedQuery("Caracteristicamovilidad.listarPorParteCuerpo", Caracteristicamovilidad.class);
-            q.setParameter("codParteCuerpo", id);
+            q.setParameter("nombreParteCuerpo", name);
             lista = q.getResultList();
             return lista;
         } catch (Exception e) {

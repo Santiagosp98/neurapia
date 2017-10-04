@@ -30,6 +30,6 @@ public interface CaracteristicamovilidadFacadeLocal {
 
     int count();
     
-    List<Caracteristicamovilidad> listarPorParteCuerpo(int id);
+    List<Caracteristicamovilidad> listarPorParteCuerpo(String nombreParteCuerpo);
     
 }

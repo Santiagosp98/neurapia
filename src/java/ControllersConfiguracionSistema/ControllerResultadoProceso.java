@@ -41,36 +41,30 @@ public class ControllerResultadoProceso extends Controllers.ControllerApp{
     private List<Resultadoproceso> resultadosObtenidos;
     
     private Map<String, List<Resultadoproceso>> mapa;
+    private Map<String, Map> mapa1;
    
     @PostConstruct
     public void init(){
         resultadoProceso = new Resultadoproceso();
         resultadosObtenidos = new ArrayList();
     }
-    
+
     public void inicializarListaOrdenada() {
         mapa = new HashMap<>();
         String nomTemp = "";        
-        String proceso = "";
+        String parteCuerpo = "";
         try {   
             for (Resultadoproceso r : resultadosObtenidos) {
                 int cont = 0;
-                if (nomTemp.equals("") || !r.getCodCaracteristicaMovilidad().getCodParteCuerpo().getNombreParteCuerpo().equals(nomTemp) || mapa.containsKey(nomTemp)) {                    
-                    nomTemp = r.getCodCaracteristicaMovilidad().getCodParteCuerpo().getNombreParteCuerpo();                    
+                if (nomTemp.equals("") || !r.getCodCaracteristicaMovilidad().getTipoCaracteristica().equals(nomTemp) || mapa.containsKey(nomTemp)) {                    
+                    nomTemp = r.getCodCaracteristicaMovilidad().getTipoCaracteristica();                    
                     if (!mapa.containsKey(nomTemp)) {
                         mapa.put(nomTemp, new ArrayList<Resultadoproceso>());
                     }                    
                 }
-                proceso = r.getCodProceso().getNombreProceso();  
-                System.out.println("Add al mapa: " + r.getIdResultadoProceso() + " Key: " + nomTemp + " Proceso: " + proceso + " res: " + r.getResultadoProceso());
-                if (mapa.get(nomTemp).isEmpty() || !mapa.get(nomTemp).get(cont).getCodProceso().getNombreProceso().equals(proceso)) {
-                    System.out.println("mapa vacio");
-                     mapa.get(nomTemp).add(r); 
-                }else if (mapa.get(nomTemp).get(cont).getCodProceso().getNombreProceso().equals(proceso)) {
-                    System.out.println("nuevo mapa:");
-                    mapa.put(nomTemp, new ArrayList<Resultadoproceso>());
-                    mapa.get(nomTemp).add(r);
-                }                               
+                parteCuerpo = r.getCodCaracteristicaMovilidad().getCodParteCuerpo().getNombreParteCuerpo();
+                mapa.get(nomTemp).add(r);
+                System.out.println("tamaño mapa: " + mapa.get(nomTemp).size() + " key: " + nomTemp);
                 cont ++;
             }
         } catch (Exception e) {
@@ -97,7 +91,9 @@ public class ControllerResultadoProceso extends Controllers.ControllerApp{
         try {
             if (resultadoProceso != null) {
                 resultadoProceso.setCodHistorialClinico(hc.getHistorialClinico()); //debemos modificarlo por anamnesis.getAnamnesis();
-                resultadoProcesoFacade.create(resultadoProceso);      
+                resultadoProcesoFacade.create(resultadoProceso); 
+                listaResultadosProcesosObtenidos();
+                inicializarListaOrdenada();
                 return "movilidad.xhtml?faces-redirect=true";
             }
         } catch (Exception e) {

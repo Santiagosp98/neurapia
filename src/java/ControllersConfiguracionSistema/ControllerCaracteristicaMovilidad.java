@@ -6,17 +6,18 @@
 package ControllersConfiguracionSistema;
 
 import Controllers.ControllerApp;
+import Controllers.ControllerDolor;
 import Entities.Caracteristicamovilidad;
 import Entities.Partecuerpo;
 import Facade.CaracteristicamovilidadFacadeLocal;
 import Facade.PartecuerpoFacadeLocal;
 import javax.inject.Named;
 import javax.enterprise.context.ConversationScoped;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 
 /**
  *
@@ -38,6 +39,8 @@ public class ControllerCaracteristicaMovilidad extends ControllerApp {
     private List<Caracteristicamovilidad> listCarmov;
     private List<Caracteristicamovilidad> lista;
     
+    @Inject ControllerDolor cd;
+    
     @EJB
     private PartecuerpoFacadeLocal pcfl;
     private Partecuerpo parteCuerpo;
@@ -52,17 +55,19 @@ public class ControllerCaracteristicaMovilidad extends ControllerApp {
     }
     
     public List<Caracteristicamovilidad> listarPorParteCuerpo(){
+        System.out.println("Dolor: " + cd.getDolor());
         try {         
-            if (caractMovilidad.getCodParteCuerpo().getIdParteCuerpo() != null) {
-                System.out.println("id parte del cuerpo seleccionada: " + caractMovilidad.getCodParteCuerpo().getIdParteCuerpo());
-                lista = cmfl.listarPorParteCuerpo(caractMovilidad.getCodParteCuerpo().getIdParteCuerpo());
+            if (cd.getDolor() != null) {                
+                lista = cmfl.listarPorParteCuerpo(cd.getDolor().getLocalizacion());
                 for (Caracteristicamovilidad caracteristicamovilidad : lista) {
                     System.out.println("caracteristicas Seleccionada: " + caracteristicamovilidad.getTipoCaracteristica());
                 }
                 return lista;                
-            }            
+            }  else{
+                System.out.println("La lista es nula");
+            }          
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage());            
         }
         return lista;
     }

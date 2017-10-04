@@ -170,38 +170,120 @@
                                 <h:commandButton class="btn btn-primary" action="#{controllerAnamnesis.redireccionarCrearAnamnesis()}" value="#{msg['Nueva Anamnesis']}">
                             </h:commandButton>    
                             </h:form>   
-                            <br></br>
-                            <hr></hr>
+                            
+                            
                             <ui:fragment rendered="#{controllerAnamnesis.anamnesis.codHistorialClinico != null}">
-                                <h:form>
-                                        <h4><h:outputText value="Listado de diagnosticos"/></h4>
-                                        <h:dataTable class="table table-bordered" value="#{controllerAnamnesis.listaAnamnesisObtenidas()}" var="item">                                          
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Anamnesis"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.anamnesis}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Diagnostico"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.diagnostico}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="MotivoConsulta"/>
-                                                </f:facet>
-                                                <h:outputText value="#{item.motivoConsulta}"/>
-                                            </h:column>
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Acciones"/>
-                                                </f:facet>
-                                                <h:commandButton class="btn btn-primary" value="Seleccionar" action="#{controllerAnamnesis.seleccionarAnamnesis(item)}"></h:commandButton>
-                                            </h:column>
-                                        </h:dataTable>
-                                    </h:form>
+                            
+                            <h:form prependId="false"><h3>Anamnesis</h3>
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                    <h:outputLabel value="#{msg['initial-assessment']}:" for="anamnesis"/>
+                                    <h:inputTextarea class="form-control mitooltip" rows="4" cols="30" id="anamnesis"
+                                                     value="#{controllerAnamnesis.anamnesis.anamnesis}"
+                                                     title="Anamnesis"/>
+                                </div>
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                    <h:outputLabel value="#{msg['diagnosis']}:" for="diagnostico"/>
+                                    <h:inputText class="form-control mitooltip" id="diagnostico"
+                                                 value="#{controllerAnamnesis.anamnesis.diagnostico}"
+                                                 title="Diagnostico"/>
+                                </div>
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                    <h:outputLabel value="#{msg['consultation-reason']}:" for="motivoConsulta"/>
+                                    <h:inputText id="motivoConsulta" class="form-control mitooltip"
+                                                 value="#{controllerAnamnesis.anamnesis.motivoConsulta}"
+                                                 title="MotivoConsulta"/>
+                                </div>
+                                <br></br>&nbsp;<br></br>
+                                <h3>Dolor</h3>
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                    <h:outputLabel value="#{msg['location']}:" for="localizacion"/>
+                                    <h:selectOneMenu id="localizacion" class="form-control mitooltip" value="#{controllerDolor.dolor.localizacion}">
+                                        <f:selectItems value="#{controllerParteCuerpo.listaPartesCuerpo}" itemValue="#{pc.nombreParteCuerpo}" var="pc" itemLabel="#{pc.nombreParteCuerpo}"/>
+                                    </h:selectOneMenu>
+                                    
+                                </div>
+                                <div class="form-group col-lg-3 col-md-3 col-sm-3">
+                                    <h:outputLabel value="#{msg['pain-scale']}:" for="escalaNumerica"/>
+                                    <h:selectOneMenu id="escalaNumerica" class="form-control mitooltip"
+                                                     value="#{controllerDolor.dolor.escalaNumerica}"
+                                                     title="dolorpalmacion">
+                                        <f:selectItems value="#{controllerDolor.dolor.seleccionEscalaNumerica}"/>
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group col-lg-3 col-md-3 col-sm-3">
+                                    <h:outputLabel value="#{msg['frequency']}" for="frecuencia"/>
+                                    <h:selectOneMenu id="frecuencia" class="form-control mitooltip"
+                                                     value="#{controllerDolor.dolor.frecuencia}"
+                                                     title="dolorpalmacion">
+                                        <f:selectItems value="#{controllerDolor.dolor.seleccionFrecuencia}"/>
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group col-lg-3 col-md-3 col-sm-3">
+                                    <h:outputLabel value="#{msg['initial-evaluation']}" for="evaluacionInicial"/>
+                                    <h:selectOneMenu id="evaluacionInicial" class="form-control mitooltip"
+                                                     value="#{controllerDolor.dolor.evaluacionInicial}"
+                                                     title="dolorpalmacion">
+                                        <f:selectItems value="#{controllerDolor.dolor.seleccionEvaluacionInicial}"/>
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group col-lg-3 col-md-3 col-sm-3">
+                                    <h:outputLabel value="#{msg['characteristic']}:" for="caracteristica"/>
+                                    <h:selectOneMenu id="caracteristica" class="form-control mitooltip"
+                                                     value="#{controllerDolor.dolor.caracteristica}"
+                                                     title="dolorpalmacion">
+                                        <f:selectItems value="#{controllerDolor.dolor.seleccionCaracteristica}"/>
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group col-lg-3 col-md-3 col-sm-3">
+                                    <h:outputLabel value="#{msg['pain-palpation']}" for="dolorpalmacion"/>
+                                    <h:selectOneMenu id="dolorpalmacion" class="form-control mitooltip"
+                                                     value="#{controllerDolor.dolor.dolorPalmacion}"
+                                                     title="dolorpalmacion">
+                                        <f:selectItems value="#{controllerDolor.dolor.seleccionSiNo}"/>
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group col-lg-3 col-md-3 col-sm-3">
+                                    <h:outputLabel value="#{msg['vertigo']}" for="vertigo"/>
+                                    <h:selectOneMenu id="vertigo" class="form-control mitooltip"
+                                                     value="#{controllerDolor.dolor.vertigo}"
+                                                     title="dolorpalmacion">
+                                        <f:selectItems value="#{controllerDolor.dolor.seleccionSiNo}"
+                                                       class="radioBoton"/>
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group col-lg-3 col-md-3 col-sm-3">
+                                    <h:outputLabel value="#{msg['spasms']}" for="espasmos"/>
+                                    <h:selectOneMenu id="espasmos" class="form-control mitooltip"
+                                                     value="#{controllerDolor.dolor.espasmos}"
+                                                     title="dolorpalmacion">
+                                        <f:selectItems value="#{controllerDolor.dolor.seleccionSiNo}"/>
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group col-lg-3 col-md-3 col-sm-3">
+                                    <h:outputLabel value="#{msg['headache-presence']}" for="presenciaCefalea"/>
+                                    <h:selectOneMenu id="presenciaCefalea" class="form-control mitooltip"
+                                                     value="#{controllerDolor.dolor.presenciaCefalea}"
+                                                     title="dolorpalmacion">
+                                        <f:selectItems value="#{controllerDolor.dolor.seleccionSiNo}"/>
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
+                                    <br></br>
+                                    <h:commandButton class="btn btn-primary"
+                                                     actionListener="#{controllerAnamnesis.crearAnamnesis()}"
+                                                     value="#{msg['save']}"/>
+                                    &nbsp;
+                                    <h:commandButton class="btn btn-default"
+                                                     action="#{controllerHistorialClinico.selectInformacionBasica()}"
+                                                     value="#{msg['back']}"/>
+                                    &nbsp;
+                                    <h:commandButton class="btn btn-default"
+                                                     action="#{controllerHistorialClinico.selectMovilidad()}"
+                                                     value="#{msg['next']}"/>
+                                </div>
+                                <br>&nbsp;</br>
+                                <hr></hr>
+                            </h:form>
                             </ui:fragment>
                         </div>
                     </div>

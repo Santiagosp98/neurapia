@@ -290,7 +290,7 @@ public class ControllerCitaMedica extends ControllerApp {
                                                 if (Integer.parseInt(fechaHora) >= 8) {
                                                     System.out.println("creado cita contenido");
                                                     if (crearCitaContenido() == true) {
-                                                        return "ConsultarCitasMedicas?faces-redirect=true";
+                                                        return "citaspendientes?faces-redirect=true";
                                                     } else {
                                                         System.out.println("No se creo");
                                                         FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
@@ -355,7 +355,7 @@ public class ControllerCitaMedica extends ControllerApp {
                                             if (Integer.parseInt(fechaHora) >= 8) {
                                                 System.out.println("creado cita contenido");
                                                 if (crearCitaContenido() == true) {
-                                                    return "ConsultarCitasMedicas?faces-redirect=true";
+                                                    return "citaspendientes?faces-redirect=true";
                                                 } else {
                                                     System.out.println("No se creo");
                                                     FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",

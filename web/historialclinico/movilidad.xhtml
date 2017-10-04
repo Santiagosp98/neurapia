@@ -151,23 +151,13 @@
                         </h:column>
 
                     </h:dataTable>
-                    <p>Seleccione la parte del cuerpo que desea evaluar</p>
+                    
                     <h:form id="parteCuerpo" prependId="false" class="form-group">
-                        <div class="resultadoProceso">
-                            <h:outputLabel value="Parte del cuerpo:" for="tipoActividad" />
-                            <div>                                                
-                                <h:selectOneMenu id="pc" class="form-control mitooltip" value="#{controllerCaracteristicaMovilidad.caractMovilidad.codParteCuerpo}" converter="parteCuerpoConverter">
-                                    <f:selectItems value="#{controllerParteCuerpo.obtenerPartesCuerpo()}" var="pc" itemLabel="#{pc.nombreParteCuerpo}"/>
-                                </h:selectOneMenu>
-
-                                <h:commandButton class="btn btn-default" actionListener="#{controllerCaracteristicaMovilidad.listarPorParteCuerpo()}" value="Seleccionar">
-                                </h:commandButton>
-                                <hr/>
-                            </div>
+                        <div class="resultadoProceso">                            
                             <h:panelGroup id="caracteristicas">
                                 <h:outputLabel value="Caracteristica:" for="caracteristica" /> 
                                 <h:selectOneMenu id="caracteristica"  class="form-control mitooltip" value="#{controllerResultadoProceso.resultadoProceso.codCaracteristicaMovilidad}" converter="caracteristicaMovilidadConverter">
-                                    <f:selectItems value="#{controllerCaracteristicaMovilidad.lista}" var="carmov" itemLabel="#{carmov.tipoCaracteristica}"/>
+                                    <f:selectItems value="#{controllerCaracteristicaMovilidad.listarPorParteCuerpo()}" var="carmov" itemLabel="#{carmov.tipoCaracteristica}"/>
                                 </h:selectOneMenu>
                                 
                                 <h:outputLabel value="#{msg['process']}:" for="process" /> 
@@ -185,7 +175,7 @@
                         </div>
                     </h:form>
                     <hr/>
-                                                              
+                                                     
                     <table class="table" >
                         <h2>Caracteristicas examinadas</h2> 
                             <thead>
@@ -211,15 +201,14 @@
                             </tr>
                             </thead>
 
-                            <c:forEach items="#{controllerResultadoProceso.mapa}" var="l" varStatus="vs"> 
+                        <c:forEach items="#{controllerResultadoProceso.mapa}" var="l" varStatus="vs"> 
                                 <tbody>
                                     <tr>
-                                    <c:forEach begin="0" end="#{l.value.size() - 1}" step="4" var="i">                                    
-
-                                            <td rowspan="#{controllerResultadoProceso.mapa.size()}">#{l.key}</td>
-                                            <td>#{l.value.get(i).codCaracteristicaMovilidad.tipoCaracteristica}</td>
+                                    <c:forEach begin="0" end="#{l.value.size() - 1}" step="4" var="i">
+                                            <td rowspan="#{controllerResultadoProceso.mapa.size()}">#{l.value.get(i).codCaracteristicaMovilidad.codParteCuerpo.nombreParteCuerpo}</td>
+                                            <td>#{l.key}</td>
                                             <c:forEach begin="0" end="#{l.value.size() - 1}" var="j">
-                                                <td>#{l.value.get(i+j).resultadoProceso }</td>    
+                                                <td>#{l.value.get(i+j).resultadoProceso}</td>    
                                             </c:forEach>                                    
                                     </c:forEach>
                                     </tr>

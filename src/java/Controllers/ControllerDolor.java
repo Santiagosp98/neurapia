@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import ControllersConfiguracionSistema.ControllerCaracteristicaMovilidad;
 import Entities.Dolor;
 import Facade.DolorFacadeLocal;
 import java.util.List;
@@ -27,6 +28,7 @@ public class ControllerDolor extends ControllerApp {
      */
     
     @Inject ControllerAnamnesis ac;
+    @Inject ControllerCaracteristicaMovilidad cm;
     
     @EJB
     private DolorFacadeLocal dolorFacade;

@@ -141,8 +141,10 @@
                                             value="#{controllerHistorialClinico.historialClinico.codUsuario.estadoUsuario}"/>
                                 </h:column>
                             </h:dataTable>                            
-                            
+                            <hr></hr>
                             <h2>Agregar nuevo Objetivo de tratamiento</h2>
+                            <h:outputLabel value="Parte del cuerpo a Evaluar: #{controllerAnamnesis.anamnesis.codDolor.localizacion}:"/>
+                            <p class="text-capitalize"></p>
                             <h:form prependId="false">
                                 <div class="form-group ">
                                     <h:outputLabel value="#{msg['general-remark']}:" for="observacion-general"/>

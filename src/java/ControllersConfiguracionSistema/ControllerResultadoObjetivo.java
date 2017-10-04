@@ -51,6 +51,7 @@ public class ControllerResultadoObjetivo extends Controllers.ControllerApp {
     }
     
     public void crearResultadoObjetivo(){
+        iniciarConversacion();
         if (resObjetivo != null) {
             System.out.println("Estamos creando un resultado Objetivo");
             resObjetivo.setCodHistorialClinico(hc.getHistorialClinico());

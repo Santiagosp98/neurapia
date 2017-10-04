@@ -6,6 +6,7 @@
  */
 package Controllers;
 
+import ControllersConfiguracionSistema.ControllerCaracteristicaMovilidad;
 import ControllersConfiguracionSistema.ControllerResultadoProceso;
 import Entities.Historialclinico;
 import Entities.Usuario;
@@ -35,6 +36,7 @@ public class ControllerHistorialClinico extends ControllerApp {
     @Inject ControllerResultadoProceso rp;
     @Inject ControllerRespuestaActividad ra;    
     @Inject ControllersConfiguracionSistema.ControllerResultadoObjetivo ro;
+    @Inject ControllerCaracteristicaMovilidad cm;
 
     @EJB
     private HistorialclinicoFacadeLocal historialClinicoFacade;
@@ -113,12 +115,10 @@ public class ControllerHistorialClinico extends ControllerApp {
     public String crearHistorialClinico() throws ParseException {        
         iniciarConversacion();
         try {
-            if (controllerUsuario.getUsuario() != null) {
-                historialClinico.setCodUsuario(controllerUsuario.getUsuario());
-            }
+
             for (Historialclinico historialclinico : listaHistorialClinico) {
-                if (this.historialClinico.getCodUsuario() == historialclinico.getCodUsuario()) {
-                    if (this.usuario != null && this.historialClinico != null) {
+                if (this.historialClinico.getCodUsuario() != historialclinico.getCodUsuario()) {
+                    if (this.historialClinico != null) {
                         System.out.println("Estamos creando un hsitorial clinico");                
                         historialClinico.setFechaCreacion(new Date());
                         this.historialClinicoFacade.create(historialClinico);

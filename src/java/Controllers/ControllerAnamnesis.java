@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import ControllersConfiguracionSistema.ControllerCaracteristicaMovilidad;
 import Entities.Anamnesis;
 import Facade.AnamnesisFacadeLocal;
 import javax.inject.Named;
@@ -22,11 +23,9 @@ import javax.inject.Inject;
 @ConversationScoped
 public class ControllerAnamnesis extends ControllerApp{
 
-    @Inject
-    Controllers.ControllerHistorialClinico hc;
-    
-    @Inject
-    ControllerDolor dc;
+    @Inject Controllers.ControllerHistorialClinico hc;    
+    @Inject ControllerDolor dc;
+    @Inject ControllerCaracteristicaMovilidad cmc;
     
     @EJB
     private AnamnesisFacadeLocal anamnesisFacade;
@@ -69,7 +68,7 @@ public class ControllerAnamnesis extends ControllerApp{
         listaAnamnesisObtenidas = anamnesisFacade.seleccionarPorHistorialClinico(hc.getHistorialClinico().getIdHistorialClinico());
         for (Anamnesis a : listaAnamnesisObtenidas) {
             anamnesis = a;
-            System.out.println("anamnesis Obtenidas: " + anamnesis.getIdAnamnesis());
+            System.out.println("anamnesis Obtenidas: " + anamnesis.getIdAnamnesis());            
         }
         return listaAnamnesisObtenidas;        
     }
@@ -78,6 +77,18 @@ public class ControllerAnamnesis extends ControllerApp{
         System.out.println("Estamos actualizando la anamnesis");
         this.anamnesisFacade.edit(anamnesis);
         dc.editarDolor();
+    }
+    
+    public String seleccionarAnamnesis(Anamnesis anamnesis){       
+        if (anamnesis != null) {
+            this.anamnesis = anamnesis;
+            System.out.println("Anamnesis seleccionada: " + this.anamnesis.getIdAnamnesis());
+            dc.setDolor(anamnesis.getCodDolor());
+            System.out.println("Localización del problema: " + dc.getDolor().getLocalizacion());       
+            cmc.listarPorParteCuerpo();                        
+            return "editaranamnesis.xhtml?faces-redrect=true";
+        }
+        return "";        
     }
     
     public List<Anamnesis> getListaAnamnesisObtenidas() {
