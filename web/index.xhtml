@@ -294,7 +294,7 @@
                     <div class="modal fade" tabindex="-1" role="dialog"
                          aria-labelledby="myLargeModalLabel" id="modal-recuperar">
                         <div class="modal-dialog modal-sm" role="document">
-                            <h:form prependId="false" id="recuperar-contrasena" styleClass="custom-modal">
+                            <h:form id="recuperar-contrasena" styleClass="custom-modal" prependId="false">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -302,25 +302,26 @@
                                         <h1 class="modal-title" id="myModalLabel">#{msg['forgot-password']}</h1>
                                     </div>
                                     <div class="modal-body">
+                                        <div class="col-lg-12">
+                                            <h:message for="emailRe" errorClass="alert alert-danger" infoClass="alert alert-success"
+                                                       style="display: block" showSummary="true" showDetail="false"/>
+                                        </div>
                                         <div class="form-group col-lg-12">
                                             <label for="emailRe">#{msg['password-recovery-desc']}</label>
                                             <h:inputText a:type="email" class="form-control" id="emailRe"
                                                          a:placeholder="ejem@ejem.com"
-                                                         required="true"
-                                                         a:pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
+                                                         required="true" requiredMessage="El campo es obligatorio"
                                                          value="#{controllerEmail.emailDestinatario}"/>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <div class="form-group col-lg-12 ">
-                                            <h6>
-                                                <h:commandLink id="Olvidaste" class="btn btn-primary"
-                                                               value="#{msg['send']}">
-                                                    <f:ajax event="click"
-                                                            listener="#{controllerEmail.asignacionCorreos()}"
-                                                            onevent="miFuncion" execute="@form" render="@form"/>
-                                                </h:commandLink>
-                                            </h6>
+                                        <div class="col-lg-12">
+                                            <h:commandLink id="Olvidaste" class="btn btn-primary"
+                                                           onclick="return formTwo.valid()"
+                                                           value="#{msg['send']}"
+                                                           action="#{controllerEmail.asignacionCorreos}">
+                                                <f:ajax execute="@form" render="@form"/>
+                                            </h:commandLink>
                                         </div>
                                     </div>
                                 </div>
@@ -568,6 +569,23 @@
                     }
                 }
             })
+
+            var formTwo = $('#recuperar-contrasena');
+
+            formTwo.validate({
+                rules: {
+                    'emailRe': {
+                        required: true,
+                        email: /[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}/
+                    }
+                },
+                messages: {
+                    'emailRe': {
+                        required: "El campo es obligatorio.",
+                        email: 'Introduzca una de dirección de email válida.'
+                    }
+                }
+            });
         </script>
     </h:body>
 </f:view>
