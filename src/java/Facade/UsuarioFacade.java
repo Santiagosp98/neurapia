@@ -10,9 +10,9 @@ import Entities.Usuario;
 
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.enterprise.inject.Typed;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -146,8 +146,9 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
 
         return cantidad;
     }
+
     public Usuario buscarDocumentoEEmail(String documento, String correo) {
-        Usuario u = null;        
+        Usuario u = null;
         try {
             TypedQuery<Usuario> q = getEntityManager().createNamedQuery("Usuario.DocumentoOEmail", Usuario.class);
             q.setParameter("numeroDocumento", documento);
@@ -156,13 +157,55 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         return u;
     }
 
     @Override
     public Usuario buscarEmail(String email) {
-         return restableceContrasena(email);
+        return restableceContrasena(email);
+    }
+
+    @Override
+    public List<Object[]> usuariosRegistradosPorMes() {
+        List<Object[]> meses = null;
+
+        try {
+            Query query = getEntityManager().createNativeQuery("SELECT monthname(STR_TO_DATE(month(fechaRegistro), '%m')), count(*) FROM usuario WHERE TIMESTAMPDIFF(MONTH, fechaRegistro, now()) < 6 GROUP BY month(fechaRegistro);");
+            meses = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return meses;
+    }
+
+    @Override
+    public List<Object[]> usuariosPorTipoDocumento() {
+        List<Object[]> usuarios = null;
+
+        try {
+            Query query = getEntityManager().createNativeQuery("SELECT tipoDocumento, count(*) FROM usuario GROUP BY tipoDocumento;");
+            usuarios = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return usuarios;
+    }
+
+    @Override
+    public List<Object[]> usuariosPorEstado() {
+        List<Object[]> usuarios = null;
+
+        try {
+            Query query = getEntityManager().createNativeQuery("SELECT estadoUsuario, count(*) FROM usuario GROUP BY estadoUsuario;");
+            usuarios = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return usuarios;
     }
 
 }
