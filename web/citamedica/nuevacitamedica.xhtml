@@ -63,8 +63,27 @@
                                 </a>
                             </div>
                         </div>
+                        <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol ne 4}">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h6 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree"
+                                       aria-expanded="false" aria-controls="collapseOne">
+                                        <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                                        <h:outputText value="#{msg['reports']}"></h:outputText>
+                                        <span class="caret"></span>
+                                    </a>
+                                </h6>
+                            </div>
 
-
+                            <div id="collapseThree" class="panel-collapse collapse of" role="tabpanel"
+                                 aria-labelledby="headingThree">
+                                <div class="panel-body">
+                                    <a href="#{request.contextPath}/citamedica/reportecitamedica.xhtml">
+                                        <h:outputText value="Estadísticas"/>
+                                    </a>
+                                </div>
+                            </div>
+                        </ui:fragment>
                     </div>
                 </div>
             </ui:define>
