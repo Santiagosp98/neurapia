@@ -46,13 +46,17 @@ public interface CitamedicaFacadeLocal {
     List<Citamedica> citasPorFisioterapeutaEstado(Fisioterapeuta codFisioterapeuta, String estado);
     
     List<Citamedica> citasPorFisioterapeutaDobleEstado(Fisioterapeuta codFisioterapeuta, String estado, String estado2);
-    
-    
-    
+
     Citamedica buscarFisioFechaYHora (Fisioterapeuta codFisioterapeuta, Date fecha, Date hora);
 
     int count();
 
     int countCitasMedicasPorEstado(String estado);
+
+    List<Object[]> citasMedicasPorMes();
+
+    List<Object[]> citasMedicasRealizadasPorConsultorio();
+
+    List<Object[]> citasMedicasRealizadasPorFisioterapeuta();
     
 }
