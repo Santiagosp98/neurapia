@@ -27,8 +27,6 @@ public class ControllerGraficaCitaMedica implements Serializable {
     public ControllerGraficaCitaMedica() {
     }
 
-    ;
-
     public String getMonthString() {
         return monthString;
     }
