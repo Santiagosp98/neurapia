@@ -1,0 +1,24 @@
+//charts
+
+/**Chart styling**/
+.chart {
+  width: 100%;
+  &.large-chart {
+    height: 320px;
+  }
+  &.small-chart {
+    height: 215px;
+  }
+}
+
+/**Chart parent container**/
+.chart-container {
+  border: 1px solid #e8e8e8;
+  min-height: 415px;
+  padding: 15px;
+  margin-top: 10px;
+  box-shadow: 0 3px 5px rgba(0,0,0,0.05);
+  h4 {
+    border: none !important;
+  }
+}
