@@ -73,20 +73,20 @@
                     </div>
 
                     <div class="panel-heading" role="tab" id="headingThree">
-                        <h6 class="panel-title"><i class="fa fa-folder-open" aria-hidden="true"></i>
+                        <h6 class="panel-title">
                             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsThree"
                                aria-expanded="true" aria-controls="collapseThree">
+                                <i class="fa fa-bar-chart" aria-hidden="true"></i>
                                 <h:outputText value="#{msg['reports']}"></h:outputText>
                                 <span class="caret"></span>
                             </a>
                         </h6>
                     </div>
-
                     <div id="collapsThree" class="panel-collapse collapse of" role="tabpanel"
                          aria-labelledby="headingThree">
                         <div class="panel-body">
-                            <a href="#">
-                                <h:outputText value="#{msg['clinical-reports']}"></h:outputText>
+                            <a href="reportehistorialclinico.xhtml">
+                                <h:outputText value="Estadisticas"/>
                             </a>
                         </div>
                     </div>
@@ -199,10 +199,10 @@
  
                                     
                                 <h:commandButton class="btn btn-default"
-                                                 value="#{msg['back']}"></h:commandButton>
+                                                 value="#{msg['back']}" action="#{controllerHistorialClinico.selectMovilidad}"></h:commandButton>
                                 &nbsp;
                                 <h:commandButton class="btn btn-default"
-                                                 value="#{msg['next']}"></h:commandButton>
+                                                 value="#{msg['next']}" action="#{controllerHistorialClinico.selectReporteTratamiento}"></h:commandButton>
                             </h:form>
                             <br></br>
                             <ui:fragment rendered="#{controllerObjetivoTratamiento.objetivoTratamientoSeleccionado != null}">
