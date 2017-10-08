@@ -476,7 +476,7 @@ public class ControllerUsuario extends ControllerApp {
             if (!regexp.matcher(usuario.getCorreoElectronico()).matches()) {
                 UIComponent root = fc.getViewRoot();
                 UIComponent component = root.findComponent("registro:correo");
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Introduzca una dirección de email válidassdd.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Introduzca una dirección de email válida.", "");
                 fc.addMessage(component.getClientId(fc), message);
                 return;
             }
@@ -618,7 +618,7 @@ public class ControllerUsuario extends ControllerApp {
         return "nuevohistorialclinico.xhtml?faces-redirect=true";
     }
 
-    public String cambiarContrasena() {
+    public void cambiarContrasena() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
 
         Usuario usuarioEnSesion = cs.getUsuario();
@@ -629,25 +629,30 @@ public class ControllerUsuario extends ControllerApp {
                 if (usuarioEnSesion.getClaveUsuario().length() > 7) {
                     if (confirmarClave.equals(usuarioEnSesion.getClaveUsuario())) {
                         usuarioFacade.edit(usuarioEnSesion);
+                        UIComponent root = facesContext.getViewRoot();
+                        UIComponent component = root.findComponent("cambiar-contrasena:nueva-contrasena");
+                        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Contraseña modificada.", "");
+                        facesContext.addMessage(component.getClientId(facesContext), message);
                     } else {
-                        FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "Las contraseñas no coinciden.", "");
-                        facesContext.addMessage(null, m);
-                        return "";
+                        UIComponent root = facesContext.getViewRoot();
+                        UIComponent component = root.findComponent("cambiar-contrasena:nueva-contrasena");
+                        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Las contraseñas (nueva) no coinciden.", "");
+                        facesContext.addMessage(component.getClientId(facesContext), message);
                     }
                 } else {
-                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "La contraseña debe contener mínimo 8 carácteres.", "");
-                    facesContext.addMessage(null, m);
-                    return "";
+                    UIComponent root = facesContext.getViewRoot();
+                    UIComponent component = root.findComponent("cambiar-contrasena:nueva-contrasena");
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La contraseña de tener mínimo 8 carácteres.", "");
+                    facesContext.addMessage(component.getClientId(facesContext), message);
                 }
             } else {
-                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "Contraseña incorrecta.", "");
-                facesContext.addMessage(null, m);
-                return "";
+                UIComponent root = facesContext.getViewRoot();
+                UIComponent component = root.findComponent("cambiar-contrasena:contrasena-anterior");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La contraseña actual (anterior) ingresada no coincide.", "");
+                facesContext.addMessage(component.getClientId(facesContext), message);
             }
 
         }
-
-        return "perfil.xhtml?faces-redirect=true";
     }
 
 }

@@ -1,6 +1,6 @@
-AmCharts.themes.light = {
+AmCharts.themes.neurapia = {
 
-	themeName:"light",
+	themeName:"neurapia",
 
 	AmChart: {
 		color: "#000000", backgroundColor: "#FFFFFF"
@@ -15,7 +15,7 @@ AmCharts.themes.light = {
 	},
 
 	AmSlicedChart: {
-		colors: ["#67b7dc", "#fdd400", "#84b761", "#cc4748", "#cd82ad", "#2f4074", "#448e4d", "#b7b83f", "#b9783f", "#b93e3d", "#913167"],
+		colors: ["#3DCCC2", "#093242", "#151510", "#f0f0f0", "#cd82ad", "#2f4074", "#448e4d", "#b7b83f", "#b9783f", "#b93e3d", "#913167"],
 		outlineAlpha: 1,
 		outlineThickness: 2,
 		labelTickColor: "#000000",

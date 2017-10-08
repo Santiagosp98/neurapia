@@ -13,6 +13,9 @@ import java.io.File;
 import java.util.List;
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 import javax.mail.Authenticator;
 import javax.mail.BodyPart;
 import javax.inject.Named;
@@ -21,6 +24,7 @@ import java.io.Serializable;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.ejb.EJB;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -54,15 +58,15 @@ public class ControllerEmail implements Serializable {
     @EJB
     private UsuarioFacadeLocal ufl;
     private Usuario usuario;
-    
-    @EJB 
+
+    @EJB
     private CitamedicaFacadeLocal citaMedicaFacade;
     private Citamedica citaMedica;
 
     public ControllerEmail() {
     }
     public String getScript() {
-        
+
         return script;
     }
 
@@ -92,12 +96,23 @@ public class ControllerEmail implements Serializable {
     }
 
     public void asignacionCorreos() throws Exception {
-        System.out.println("Ingresamos a enviar correo" + emailDestinatario);
-        
+        FacesContext fc = FacesContext.getCurrentInstance();
+
+        Pattern regexp;
+
+        regexp = Pattern.compile("[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}");
+
+        if (!regexp.matcher(emailDestinatario).matches()) {
+            UIComponent root = fc.getViewRoot();
+            UIComponent component = root.findComponent("recuperar-contrasena:emailRe");
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Introduzca una dirección de email válida.", "");
+            fc.addMessage(component.getClientId(fc), message);
+            return;
+        }
+
             if (emailDestinatario != null && !emailDestinatario.equals("")) {
                 usuario = ufl.restableceContrasena(emailDestinatario);
                 if (usuario != null) {
-                    
                     System.out.println("email es:" + emailDestinatario);
                     System.out.println("contraseña es: " + usuario.getClaveUsuario());
                     System.out.println("Documento: "+ usuario.getNumeroDocumento());
@@ -107,18 +122,24 @@ public class ControllerEmail implements Serializable {
                     nuevaContraseña=usuario.getClaveUsuario();
                     ControllerEmail email = new ControllerEmail("neurapiaj3s@gmail.com", "neurapia12345", emailDestinatario);
                     email.enviarSimple("Nueva contraseña NEURAPIA", "Tu nueva contraseña es: " + nuevaContraseña);
+                    UIComponent root = fc.getViewRoot();
+                    UIComponent component = root.findComponent("recuperar-contrasena:emailRe");
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Contraseña reestablecida. Verifique su correo.", "");
+                    fc.addMessage(component.getClientId(fc), message);
                 } else {
-                    System.out.println("Email no esta en base de datos");
-                    throw new Exception("Correo invalido");
+                    UIComponent root = fc.getViewRoot();
+                    UIComponent component = root.findComponent("recuperar-contrasena:emailRe");
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La dirección de correo ingresada no existe.", "");
+                    fc.addMessage(component.getClientId(fc), message);
                 }
 
             } else {
-                
+
                 System.out.println("Email es nulo o vacio");
             }
-        
+
     }
-    
+
     public void enviarAsignacionDeCita(Citamedica cita){
         if (emailDestinatario != null && !emailDestinatario.equals("")) {
             System.out.println("Vamos a enviar asignacion de cita");
@@ -128,11 +149,11 @@ public class ControllerEmail implements Serializable {
             long hora = fecha2.getTime();
             java.sql.Date sqlDate = new java.sql.Date(lnMilisegundos);
             java.sql.Time sqlTime = new java.sql.Time(hora);
-            
+
             System.out.println(" Fecha con util date: "+ sqlDate + " hora con date: "+ sqlTime
             +" fecha total: "+ cita.getFecha() + " Hora total: " + cita.getHora());
             ControllerEmail email = new ControllerEmail("neurapiaj3s@gmail.com", "neurapia12345", emailDestinatario);
-            email.enviarSimple("Asignacion de cita Neurapia", "Se ha asignado una cita medica con los siguientes datos:" + 
+            email.enviarSimple("Asignacion de cita Neurapia", "Se ha asignado una cita medica con los siguientes datos:" +
                     "\nNombre del fisioterapeuta que atendera la cita: "+cita.getFullNameFisioterapeuta()
                     +"\nNombre del paciente de la cita: " + cita.getFullNameUsuario()
                     +"\nFecha de la cita: " + sqlDate

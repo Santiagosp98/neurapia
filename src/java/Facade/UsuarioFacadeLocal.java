@@ -50,4 +50,10 @@ public interface UsuarioFacadeLocal {
     int countCantidadUsuariosPorRol(int id);
 
     Usuario buscarEmail(String email);
+
+    List<Object[]> usuariosRegistradosPorMes();
+
+    List<Object[]> usuariosPorTipoDocumento();
+
+    List<Object[]> usuariosPorEstado();
 }
