@@ -113,4 +113,9 @@ p {
   }
 }
 
+/**Hide AmCharts ad**/
+a[href*="amcharts"] {
+  display: none !important;
+}
+
 /*Utilities*/

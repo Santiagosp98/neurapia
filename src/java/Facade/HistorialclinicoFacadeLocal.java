@@ -29,5 +29,12 @@ public interface HistorialclinicoFacadeLocal {
     List<Historialclinico> findRange(int[] range);
 
     int count();
-    
+
+    List<Object[]> historialesClinicosPorMes();
+
+    List<Object[]> pacientesPorGenero();
+
+    List<Object[]> pacientesPorGrupoSanguineo();
+
+    List<Object[]> pacientesPorPais();
 }

@@ -8,12 +8,14 @@ package Facade;
 import Entities.Citamedica;
 import Entities.Fisioterapeuta;
 import Entities.Usuario;
+
 import java.util.Date;
 
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -89,7 +91,7 @@ public class CitamedicaFacade extends AbstractFacade<Citamedica> implements Cita
 
     @Override
     public Citamedica buscarFisioFechaYHora(Fisioterapeuta codFisioterapeuta, Date fecha, Date hora) {
-        Citamedica c= null;
+        Citamedica c = null;
         try {
             TypedQuery<Citamedica> q = getEntityManager().createNamedQuery("Citamedica.citaPorFisioFechaHora", Citamedica.class);
             q.setParameter("codFisioterapeuta", codFisioterapeuta);
@@ -143,5 +145,48 @@ public class CitamedicaFacade extends AbstractFacade<Citamedica> implements Cita
         cita = q.getResultList();
         return cita;
     }
+
+    @Override
+    public List<Object[]> citasMedicasPorMes() {
+        List<Object[]> meses = null;
+
+        try {
+            Query query = getEntityManager().createNativeQuery("SELECT monthname(STR_TO_DATE(month(fecha), '%m')), count(*) FROM citamedica WHERE TIMESTAMPDIFF(MONTH, fecha, now()) < 6 GROUP BY month(fecha);");
+            meses = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return meses;
+    }
+
+    @Override
+    public List<Object[]> citasMedicasRealizadasPorConsultorio() {
+        List<Object[]> consultorios = null;
+
+        try {
+            Query query = getEntityManager().createNativeQuery("SELECT numeroConsultorio, count(*) FROM citamedica WHERE estado = 'Realizada' GROUP BY numeroConsultorio;");
+            consultorios = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return consultorios;
+    }
+
+    @Override
+    public List<Object[]> citasMedicasRealizadasPorFisioterapeuta() {
+        List<Object[]> fisioterapeutas = null;
+
+        try {
+            Query query = getEntityManager().createNativeQuery("SELECT concat(primerNombre, ' ', primerApellido), count(*)FROM citamedica INNER JOIN usuario ON citamedica.codFisioterapeuta = usuario.idUsuario WHERE estado = 'Realizada' GROUP BY codFisioterapeuta;");
+            fisioterapeutas = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return fisioterapeutas;
+    }
+
 
 }

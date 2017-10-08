@@ -64,12 +64,12 @@
                     <div id="collapseTwo" class="panel-collapse collapse of" role="tabpanel"
                          aria-labelledby="headingTwo">
                         <div class="panel-body">
-                            <a href="ConsultarHistorialClinico.xhtml">
+                            <a href="consultarhistorialesclinicos.xhtml">
                                 <h:outputText value="#{msg['consult-clinical-records']}"/>
                             </a>
                         </div>
                         <div class="panel-body">
-                            <a href="CrearHistorialClinico.xhtml">
+                            <a href="nuevohistorialclinico.xhtml">
                                 <h:outputText value="#{msg['add-clinical-record']}"/>
                             </a>
                         </div>
@@ -77,20 +77,19 @@
 
                     <div class="panel-heading" role="tab" id="headingThree">
                         <h6 class="panel-title">
-                            <i class="fa fa-folder-open" aria-hidden="true"></i>
                             <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsThree"
                                aria-expanded="true" aria-controls="collapseThree">
-                                <h:outputText value="#{msg['reports']}"/>
+                                <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                                <h:outputText value="#{msg['reports']}"></h:outputText>
                                 <span class="caret"></span>
                             </a>
                         </h6>
                     </div>
-
                     <div id="collapsThree" class="panel-collapse collapse of" role="tabpanel"
                          aria-labelledby="headingThree">
                         <div class="panel-body">
-                            <a href="#">
-                                <h:outputText value="#{msg['clinical-reports']}"/>
+                            <a href="reportehistorialclinico.xhtml">
+                                <h:outputText value="Estadisticas"/>
                             </a>
                         </div>
                     </div>

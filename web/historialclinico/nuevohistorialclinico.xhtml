@@ -46,24 +46,22 @@
 
                         <div class="panel-heading" role="tab" id="headingThree">
                             <h6 class="panel-title">
-                                <i class="fa fa-folder-open" aria-hidden="true"></i>
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsThree"
                                    aria-expanded="true" aria-controls="collapseThree">
-                                    <h:outputText value="#{msg['reports']}"/>
+                                    <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                                    <h:outputText value="#{msg['reports']}"></h:outputText>
                                     <span class="caret"></span>
                                 </a>
                             </h6>
                         </div>
-
                         <div id="collapsThree" class="panel-collapse collapse of" role="tabpanel"
                              aria-labelledby="headingThree">
                             <div class="panel-body">
-                                <a href="#">
-                                    <h:outputText value="#{msg['clinical-reports']}"/>
+                                <a href="reportehistorialclinico.xhtml">
+                                    <h:outputText value="Estadisticas"/>
                                 </a>
                             </div>
                         </div>
-
                     </div>
 
                 </div>
@@ -111,13 +109,13 @@
                             style="background-color: #f1f1f1; width: 100%; height: 20px; margin-left: -15px"/>
                     </ui:fragment>
 
-                    <h:form prependId="false" id="historialClinico">
+                    <h:form prependId="false" id="crear-historial">
                         <ui:fragment rendered="#{controllerUsuario.usuario.idUsuario eq null}">
                             <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                                <h:outputLabel value="#{msg['patient']}:" for="usuario"/>
-                                <h:selectOneMenu id="usuario" class="form-control mitooltip"
+                                <h:outputLabel value="#{msg['patient']}:" for="paciente"/>
+                                <h:selectOneMenu id="paciente" class="form-control"
                                                  value="#{controllerHistorialClinico.historialClinico.codUsuario}"
-                                                 converter="usuarioConverter" title="usuario">
+                                                 converter="usuarioConverter">
                                     <f:selectItems value="#{controllerUsuario.consultarUsuarios()}" var="user"
                                                    itemLabel="#{user.fullNameUsuario}"/>
                                 </h:selectOneMenu>
@@ -126,16 +124,19 @@
 
                         <div class="form-group col-lg-6 col-md-6 col-sm-6">
                             <h:outputLabel value="#{msg['address']}:" for="direccion"/>
-                            <h:inputText id="direccion" class="form-control mitooltip"
+                            <h:inputText id="direccion" a:name="direccion" class="form-control mitooltip"
                                          value="#{controllerHistorialClinico.historialClinico.direccion}"
-                                         title="Direccion"/>
+                                         required="true" requiredMessage="El campo 'Dirección' es obligatorio."
+                                         maxlength="45"
+                                         validatorMessage="Se ha excedido el número de carácteres permitidos(45) para el campo 'Dirección'."/>
                         </div>
 
                         <div class="form-group col-lg-6 col-md-6 col-sm-6">
                             <h:outputLabel value="#{msg['birth-date-l']}:" for="fecha"/>
-                            <h:inputText id="fecha" class="form-control mitooltip"
+                            <h:inputText id="fecha" a:name="fecha" class="form-control"
                                          value="#{controllerHistorialClinico.historialClinico.fechaNacimiento}"
-                                         title="FechaNacimiento">
+                                         required="true"
+                                         requiredMessage="El campo 'Fecha de nacimiento' es obligatorio.">
                                 <f:convertDateTime pattern="yyyy-MM-dd"/>
                             </h:inputText>
                         </div>
@@ -197,18 +198,20 @@
                             </h:selectOneMenu>
                         </div>
                         <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                            <h:outputLabel value="#{msg['city-of-residence']}:" for="ciudadResidencia"/>
-                            <h:inputText id="ciudadResidencia" class="form-control mitooltip"
-                                         value="#{controllerHistorialClinico.historialClinico.ciudadResidencia}"
-                                         title="CiudadResidencia"/>
+                            <h:outputLabel value="#{msg['place-of-birth']}:" for="ciudad-residencia"/>
+                            <h:inputText id="ciudad-residencia" a:name="ciudad-residencia" class="form-control"
+                                         required="true"
+                                         requiredMessage="El campo 'Ciudad de residencia' es obligatorio."
+                                         maxlength="45"
+                                         validatorMessage="Se ha excedido el número de carácteres permitidos(45) para el campo 'Ciudad de nacimiento'."
+                                         value="#{controllerHistorialClinico.historialClinico.ciudadResidencia}"/>
                         </div>
 
                         <div class="form-group col-lg-6 col-md-6 col-sm-6">
-                            <h:outputLabel value="#{msg['place-of-birth']}:" for="codLugarNacimiento"/>
+                            <h:outputLabel value="Departamento:" for="codLugarNacimiento"/>
                             <h:selectOneMenu id="codLugarNacimiento" class="form-control mitooltip"
                                              value="#{controllerHistorialClinico.historialClinico.codLugarNacimiento}"
                                              converter="departamentoConverter" title="CodLugarNacimiento">
-                                <!-- TODO: update below reference to list of available items-->
                                 <f:selectItems value="#{controllerDepartamento.listaDepartamento}" var="dep"
                                                itemLabel="#{dep.nombreCiudad}"/>
                             </h:selectOneMenu>
@@ -216,8 +219,10 @@
 
                         <div class="form-group col-lg-6 col-md-6 col-sm-6">
                             <h:outputLabel value="#{msg['country']}:" for="pais"/>
-                            <h:inputText id="pais" class="form-control mitooltip"
-                                         value="#{controllerHistorialClinico.historialClinico.pais}" title="Pais"/>
+                            <h:inputText id="pais" a:name="pais" class="form-control mitooltip" required="true"
+                                         requiredMessage="El campo 'Pais' es obligatorio." maxlength="45"
+                                         validatorMessage="Se ha excedido el número de carácteres permitidos(45) para el campo 'Pais'."
+                                         value="#{controllerHistorialClinico.historialClinico.pais}"/>
                         </div>
 
                         <div class="form-group col-lg-6 col-md-6 col-sm-6">
@@ -231,22 +236,27 @@
                         </div>
                         <div class="form-group col-lg-6 col-md-6 col-sm-6">
                             <h:outputLabel value="#{msg['employment']}:" for="ocupacion"/>
-                            <h:inputText id="ocupacion" class="form-control mitooltip"
+                            <h:inputText id="ocupacion" a:name="ocupacion" class="form-control mitooltip"
                                          value="#{controllerHistorialClinico.historialClinico.ocupacion}"
-                                         title="Ocupacion"/>
+                                         required="true" requiredMessage="El campo 'Ocupación' es obligatorio."
+                                         maxlength="45"
+                                         validatorMessage="Se ha excedido el número de carácteres permitidos(45) para el campo 'Ocupación'."/>
                         </div>
                         <div class="form-group col-lg-6 col-md-6 col-sm-6">
                             <h:outputLabel value="#{msg['phone-number']}:" for="telefono"/>
-                            <h:inputText id="telefono" class="form-control mitooltip"
-                                         value="#{controllerHistorialClinico.historialClinico.telefono}"
-                                         title="Telefono"/>
+                            <h:inputText id="telefono" a:name="telefono" class="form-control mitooltip"
+                                         value="#{controllerHistorialClinico.historialClinico.telefono}" required="true"
+                                         requiredMessage="El campo 'Teléfono' es obligatorio." maxlength="15"
+                                         validatorMessage="Se ha excedido el número de carácteres permitidos(15) para el campo 'Teléfono'."/>
                         </div>
 
                         <div class="form-group col-lg-6 col-md-6 col-sm-6">
                             <h:outputLabel value="#{msg['company']}:" for="empresa"/>
-                            <h:inputText id="empresa" class="form-control mitooltip"
+                            <h:inputText id="empresa" a:name="empresa" class="form-control mitooltip"
                                          value="#{controllerHistorialClinico.historialClinico.empresa}"
-                                         title="Empresa"/>
+                                         required="true" requiredMessage="El campo 'Empresa' es obligatorio."
+                                         maxlength="45"
+                                         validatorMessage="Se ha excedido el número de carácteres permitidos(45) para el campo 'Empresa'."/>
                         </div>
 
                         <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
@@ -259,7 +269,95 @@
                         </div>
                     </h:form>
                 </div>
+            </ui:define>
+            <ui:define name="ultimosScripts">
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $.validator.addMethod("address", function (value, element, pattern) {
+                            return pattern.test(value);
+                        });
 
+                        $.validator.addMethod("date", function (value, element, pattern) {
+                            return pattern.test(value);
+                        });
+
+                        $.validator.addMethod("alphabet", function (value, element, pattern) {
+                            return pattern.test(value);
+                        });
+
+                        $('#crear-historial').validate({
+                            rules: {
+                                'direccion': {
+                                    required: true,
+                                    maxlength: 45,
+                                    address: /^[a-zA-ZáéíóúÁÉÍÓÚ0-9#\- ]+$/
+                                },
+                                'fecha': {
+                                    required: true
+                                },
+                                'ciudad-residencia': {
+                                    required: true,
+                                    alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ ]+$/,
+                                    maxlength: 45
+                                },
+                                'pais': {
+                                    required: true,
+                                    alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ ]+$/,
+                                    maxlength: 45
+                                },
+                                'ocupacion': {
+                                    required: true,
+                                    alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ ]+$/,
+                                    maxlength: 45
+                                },
+                                'telefono': {
+                                    required: true,
+                                    number: true,
+                                    maxlength: 15
+                                },
+                                'empresa': {
+                                    required: true,
+                                    alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ ]+$/,
+                                    maxlength: 45
+                                }
+                            }, messages: {
+                                'direccion': {
+                                    required: 'El campo es obligatorio.',
+                                    address: 'No se permiten carácteres especiales.',
+                                    maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                                },
+                                'fecha': {
+                                    required: 'El campo es obligatorio.'
+                                },
+                                'ciudad-residencia': {
+                                    required: 'El campo es obligatorio.',
+                                    alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
+                                    maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                                },
+                                'pais': {
+                                    required: 'El campo es obligatorio.',
+                                    alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
+                                    maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                                },
+                                'ocupacion': {
+                                    required: 'El campo es obligatorio.',
+                                    alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
+                                    maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                                },
+                                'telefono': {
+                                    required: 'El campo es obligatorio.',
+                                    number: 'Sólo se permiten carácteres numéricos.',
+                                    maxlength: 'Se ha excedido el número de carácteres permitidos(15).'
+                                },
+                                'empresa': {
+                                    required: 'El campo es obligatorio.',
+                                    alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
+                                    maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                                }
+                            }
+                        })
+                    })
+                </script>
             </ui:define>
         </ui:composition>
     </h:body>
