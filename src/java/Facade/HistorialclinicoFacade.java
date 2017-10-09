@@ -6,11 +6,13 @@
 package Facade;
 
 import Entities.Historialclinico;
+import Entities.ReporteHistorialClinico;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.List;
 
 /**
  *
@@ -19,16 +21,29 @@ import java.util.List;
 @Stateless
 public class HistorialclinicoFacade extends AbstractFacade<Historialclinico> implements HistorialclinicoFacadeLocal {
 
+    public HistorialclinicoFacade() {
+        super(Historialclinico.class);
+    }
+    
     @PersistenceContext(unitName = "ProyectoPU")
     private EntityManager em;
 
     @Override
     protected EntityManager getEntityManager() {
         return em;
-    }
-
-    public HistorialclinicoFacade() {
-        super(Historialclinico.class);
+    }    
+    
+    @Override
+    public List<Object[]> reporteHc(){
+        List<Object[]> list = null;
+        Query q = getEntityManager().createNativeQuery("SELECT u.primerNombre, u.primerApellido, eps.nombreEps, h.ocupacion, d.localizacion, d.frecuencia FROM usuario u "
+                                                        + "INNER JOIN historialclinico h on u.idUsuario = h.codUsuario "
+                                                        + "INNER JOIN anamnesis a on a.codHistorialClinico = h.idHistorialClinico "
+                                                        + "INNER JOIN eps on eps.idEps = h.codEps "
+                                                        + "INNER JOIN dolor d on d.idDolor = a.codDolor;");
+        list = q.getResultList();
+        
+        return list;
     }
 
     @Override
@@ -87,4 +102,24 @@ public class HistorialclinicoFacade extends AbstractFacade<Historialclinico> imp
         return pacientes;
     }
     
+    private List<Object[]>lista;
+    
+    @Override
+    public List<ReporteHistorialClinico>  generarListaResultados(){
+        
+        List<ReporteHistorialClinico> listaResultados = new ArrayList();
+        lista = reporteHc();
+        
+        for (Object[] o : lista) {
+            ReporteHistorialClinico reporte = new ReporteHistorialClinico();
+            reporte.setPrimerNombre(o[0].toString());
+            reporte.setPrimerApellido(o[1].toString());
+            reporte.setNombreEps(o[2].toString());
+            reporte.setOcupacion(o[3].toString());
+            reporte.setLocalizacion(o[4].toString());
+            reporte.setFrecuencia(o[5].toString());
+            listaResultados.add(reporte);
+        }
+        return listaResultados;
+    }
 }

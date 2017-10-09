@@ -79,7 +79,8 @@ public class ControllerAnamnesis extends ControllerApp{
         dc.editarDolor();
     }
     
-    public String seleccionarAnamnesis(Anamnesis anamnesis){       
+    public String seleccionarAnamnesis(Anamnesis anamnesis){   
+        System.out.println("Estamos seleccionando la anamnesis: " + anamnesis);
         if (anamnesis != null) {
             this.anamnesis = anamnesis;
             System.out.println("Anamnesis seleccionada: " + this.anamnesis.getIdAnamnesis());

@@ -6,6 +6,7 @@
 package Facade;
 
 import Entities.Historialclinico;
+import Entities.ReporteHistorialClinico;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -27,6 +28,11 @@ public interface HistorialclinicoFacadeLocal {
     List<Historialclinico> findAll();
 
     List<Historialclinico> findRange(int[] range);
+    
+    List<ReporteHistorialClinico>  generarListaResultados();
+    
+    List<Object[]> reporteHc();
+    
 
     int count();
 
