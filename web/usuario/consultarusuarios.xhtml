@@ -113,9 +113,6 @@
                         <div class="fixed-table-body">
                             <h:form prependId="false">
                                 <h:messages showSummary="true" showDetail="true"/>
-
-                           <!-- <h:commandButton class="btn btn-primary" value="Exportar a pdf" actionListener="#{controllerReporteUsuario.exportPDF()}"/>
-                        </div> <div>-->
                                 
                                 <h:dataTable value="#{controllerUsuario.consultarUsuarios()}" var="item"
                                              class="table table-striped table-bordered" id="lista-usuarios">
@@ -184,10 +181,9 @@
                                         </h:commandLink>
                                     </h:column>
                                 </h:dataTable>
+                                <h:commandButton class="btn btn-info" actionListener="#{controllerReporteUsuario.exportPDF()}" value="Exportar pdf"/>
                             </h:form>
-                          <!--  <h:form prependId="false">
-                                <h:commandButton class="btn btn-default" actionListener="#{controllerReporteUsuario.exportPDF()}" value="Generar pdf"/>
-                            </h:form>-->
+           
                         </div>
                     </div>
 
