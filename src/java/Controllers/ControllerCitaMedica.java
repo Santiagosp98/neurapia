@@ -49,6 +49,7 @@ public class ControllerCitaMedica extends ControllerApp {
     private CitamedicaFacadeLocal citaMedicaFacade;
     private Citamedica citaMedica;
     private List<Citamedica> listaCitas;
+    private List<Object[]> lista;
     private List<Citamedica> listaCitas1;
     private int totalCitasMedicas;
     private int citasPendientes;
@@ -121,6 +122,7 @@ public class ControllerCitaMedica extends ControllerApp {
         System.out.println(listaCitas.size());
         return listaCitas;
     }
+    
 
     //Consulta de las citas por fisioterapeuta
     public List<Citamedica> listarCitasporFisioterapeuta() {
