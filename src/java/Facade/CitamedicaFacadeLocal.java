@@ -59,4 +59,6 @@ public interface CitamedicaFacadeLocal {
 
     List<Object[]> citasMedicasRealizadasPorFisioterapeuta();
     
+    List<Citamedica> citasPorDosMeses(Date fecha, Date fecha1);
+    
 }

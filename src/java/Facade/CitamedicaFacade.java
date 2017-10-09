@@ -188,5 +188,17 @@ public class CitamedicaFacade extends AbstractFacade<Citamedica> implements Cita
         return fisioterapeutas;
     }
 
+    @Override
+    public List<Citamedica> citasPorDosMeses(Date fecha, Date fecha1) {
+        List<Citamedica> cita = null;
+        TypedQuery<Citamedica> q = getEntityManager().createNamedQuery("Citamedica.citasEntreMeses", Citamedica.class);
+        q.setParameter("fecha", fecha);
+        q.setParameter("fecha2", fecha1);
+        cita = q.getResultList();
+        return cita;
+    }
+
+    
+
 
 }
