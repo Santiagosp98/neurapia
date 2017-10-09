@@ -179,7 +179,7 @@ public class CitamedicaFacade extends AbstractFacade<Citamedica> implements Cita
         List<Object[]> fisioterapeutas = null;
 
         try {
-            Query query = getEntityManager().createNativeQuery("SELECT concat(primerNombre, ' ', primerApellido), count(*)FROM citamedica INNER JOIN usuario ON citamedica.codFisioterapeuta = usuario.idUsuario WHERE estado = 'Realizada' GROUP BY codFisioterapeuta;");
+            Query query = getEntityManager().createNativeQuery("SELECT concat(primerNombre, ' ', primerApellido), count(*)FROM citamedica INNER JOIN fisioterapeuta ON citamedica.codFisioterapeuta = fisioterapeuta.idFisioterapeuta INNER JOIN usuario ON fisioterapeuta.CodUsuario = usuario.idUsuario WHERE estado = 'Realizada' GROUP BY codFisioterapeuta;");
             fisioterapeutas = query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
