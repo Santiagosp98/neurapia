@@ -49,27 +49,28 @@
                             </ui:fragment>
                         </div>
 
-                        <div class="panel-heading " role="tab" id="headingTwo">
-                            <h6 class="panel-title"><i class="fa fa-folder-open" aria-hidden="true"></i>
-                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsTwo"
-                                   aria-expanded="true" aria-controls="collapseOne">
-                                    Reportes<span class="caret"></span>
-                                </a>
-                            </h6>
-                        </div>
+                        <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol ne 4}">
 
-                        <div id="collapsTwo" class="panel-collapse collapse of" role="tabpanel"
-                             aria-labelledby="headingTwo">
-                            <div class="panel-body">
-                                <a href="#{request.contextPath}/prediagnostico/reporteprediagnostico.xhtml">Reportes de Prediagnostico</a>
+                            <div class="panel-heading " role="tab" id="headingTwo">
+                                <h6 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsTwo"
+                                       aria-expanded="true" aria-controls="collapseOne">
+                                        <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                                        <h:outputText value="#{msg['reports']}"></h:outputText>
+                                        <span class="caret"></span>
+                                    </a>
+                                </h6>
                             </div>
-
-                            <div class="panel-body">
-                                <a href="#{request.contextPath}/prediagnostico/reporteprediagnosticopendiente.xhtml">Reportes de Prediagnostico Pendiente</a>
+                            <div id="collapsTwo" class="panel-collapse collapse of" role="tabpanel"
+                                 aria-labelledby="headingTwo">
+                                <div class="panel-body">
+                                    <a href="#{request.contextPath}/prediagnostico/reporteprediagnostico.xhtml">Estadísticas</a>
+                                </div>
+                                <div class="panel-body">
+                                    <a href="#{request.contextPath}/prediagnostico/reporteprediagnosticopendiente.xhtml">Reportes de Prediagnostico Pendiente</a>
+                                </div>
                             </div>
-                        </div>
-
-
+                        </ui:fragment>
                     </div>
                 </div>
             </ui:define>
@@ -175,13 +176,19 @@
                                         </f:facet>
                                         &nbsp;
                                         <h:commandLink rendered="#{controllerSession.usuario.codRol.idRol eq 3}"
-                                                action="#{controllerPrediagnostico.seleccionarPrediagnostico(item)}" class="mitooltip" a:data-toggle="tooltip" a:data-placement="top" title="#{msg['edit']}"><span id="botonEdita" class="fa fa-pencil-square-o"
-                                                               aria-hidden="true"></span>
+                                                       action="#{controllerPrediagnostico.seleccionarPrediagnostico(item)}"
+                                                       class="mitooltip" a:data-toggle="tooltip" a:data-placement="top"
+                                                       title="#{msg['edit']}"><span id="botonEdita"
+                                                                                    class="fa fa-pencil-square-o"
+                                                                                    aria-hidden="true"></span>
                                         </h:commandLink>
                                         &nbsp;
                                         <h:commandLink rendered="#{controllerSession.usuario.codRol.idRol ne 3}"
-                                                       action="#{controllerPrediagnostico.seleccionarPrediagnostico(item)}" class="mitooltip" a:data-toggle="tooltip" a:data-placement="top" title="#{msg['result']}"><span id="botonEdita" class="fa fa-search"
-                                                                      aria-hidden="true"></span>
+                                                       action="#{controllerPrediagnostico.seleccionarPrediagnostico(item)}"
+                                                       class="mitooltip" a:data-toggle="tooltip" a:data-placement="top"
+                                                       title="#{msg['result']}"><span id="botonEdita"
+                                                                                      class="fa fa-search"
+                                                                                      aria-hidden="true"></span>
                                         </h:commandLink>
                                     </h:column>
                                 </h:dataTable>
