@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReportePrediagnostico" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="af896838-3815-45d2-8461-3fad2911b40d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="32"/>
+	<parameter name="Nombre" class="java.lang.String"/>
+	<field name="idPrediagnostico" class="java.lang.Integer"/>
+	<field name="numeroDocumento" class="java.lang.String"/>
+	<field name="primerNombre" class="java.lang.String"/>
+	<field name="primerApellido" class="java.lang.String"/>
+	<field name="correoElectronico" class="java.lang.String"/>
+	<field name="fecha" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-20" y="0" width="593" height="79" backcolor="#3DCCC2" uuid="dd15d465-a52b-4e05-b2e2-fe7a0dc5a5d5"/>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Transparent" x="160" y="15" width="318" height="44" forecolor="#093242" uuid="cbec7f29-1589-439a-9b84-b4c2c096aee4"/>
+				<textElement>
+					<font fontName="Verdana" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE RESULTADO DE PREDIAGNOSTICO PENDIENTE]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="15" width="140" height="34" uuid="e4b06551-9bf1-48c2-a4bf-1c88dd624ea8"/>
+				<imageExpression><![CDATA["imagen\logo1.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement x="79" y="6" width="100" height="20" uuid="2a5d77f2-7e8e-46a5-8be6-1335a582cccc"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="16" y="6" width="63" height="20" uuid="38ff67d8-ecc9-4368-ad76-4c0a263e66f4"/>
+				<text><![CDATA[Pagina]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="452" y="6" width="100" height="20" uuid="f4086e10-5c4b-46c9-ada2-e0e45bd61f01"/>
+				<textFieldExpression><![CDATA[$P{Nombre}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="92" height="20" uuid="942d047f-3190-4a5a-932c-a01158ec02ad"/>
+				<text><![CDATA[Codigo Prediagnostico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="92" y="0" width="92" height="20" uuid="1f984f36-d14b-4fec-9bf3-8a6f6f828460"/>
+				<text><![CDATA[Documento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="184" y="0" width="92" height="20" uuid="c8e35cce-5aa3-472c-83da-854be51aafc2"/>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="276" y="0" width="92" height="20" uuid="2014b70a-ee8a-4bff-b9bb-de67e6d7f83d"/>
+				<text><![CDATA[Apellido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="368" y="0" width="92" height="20" uuid="79f7839a-3d27-4ed5-be7c-cf4039fe4010"/>
+				<text><![CDATA[E-mail	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="0" width="92" height="20" uuid="d25cc27a-cfd4-4f35-a47c-a04b97648111"/>
+				<text><![CDATA[Fecha Creado]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="92" height="20" uuid="aa8b43fe-5844-4f1f-957f-cdd90114604d"/>
+				<textFieldExpression><![CDATA[$F{idPrediagnostico}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="92" y="0" width="92" height="20" uuid="74533496-a6bc-4ed8-8dd4-8116ffb054b3"/>
+				<textFieldExpression><![CDATA[$F{numeroDocumento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="184" y="0" width="92" height="20" uuid="87744c92-bc42-4c9c-abfd-c172f625976a"/>
+				<textFieldExpression><![CDATA[$F{primerNombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="276" y="0" width="92" height="20" uuid="4fb18a78-aec8-4685-80de-9632638829b0"/>
+				<textFieldExpression><![CDATA[$F{primerApellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="368" y="0" width="92" height="20" uuid="52166829-08f7-4011-a753-dbb7d4c67d4e"/>
+				<textFieldExpression><![CDATA[$F{correoElectronico}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="0" width="92" height="20" uuid="ff317b40-3d83-416d-981f-e2f1197adc02"/>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<line>
+				<reportElement x="16" y="25" width="524" height="2" uuid="c91ab515-44f6-4591-90e3-b1069c6ede2f"/>
+			</line>
+			<staticText>
+				<reportElement x="16" y="34" width="303" height="20" uuid="ccd29964-460e-46da-bfda-ba6c8088bcdc"/>
+				<text><![CDATA[Neurapia Development - Todos los derechos reservados]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
