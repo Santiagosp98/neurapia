@@ -68,8 +68,9 @@ public class ControllerRespuestaPreg extends ControllerApp {
         pre.setCodUsuario(cs.getUsuario());
         pre.setCodRespuestaPreg(respuestapreg);
         pre.setFecha(new Date());
-        pre.setResultadoPrediagnostico("Pendiente");
+        pre.setResultadoPrediagnostico("En espera.");
         pre.setCodCuestionario(cfl.find(1));
+        pre.setEstado("1");
         pfl.create(pre);
         return "ConsultarPrediagnostico?faces-redirect=true";
     }
