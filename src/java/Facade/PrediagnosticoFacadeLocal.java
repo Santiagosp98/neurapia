@@ -6,6 +6,7 @@
 package Facade;
 
 import Entities.Prediagnostico;
+import Entities.ReportePrediagnostico;
 import Entities.Usuario;
 import java.util.List;
 import javax.ejb.Local;
@@ -30,6 +31,12 @@ public interface PrediagnosticoFacadeLocal {
     List<Prediagnostico> findRange(int[] range);
     
     List<Prediagnostico> prediagnosticoPorUsuario (Usuario codUsuario);
+
+    List<Prediagnostico> prediagnosticoPorResultado (String estado);
+
+    List<ReportePrediagnostico> listaReporte (String estado);
+
+    List<Object[]> reportePred();
 
     int count();
     
