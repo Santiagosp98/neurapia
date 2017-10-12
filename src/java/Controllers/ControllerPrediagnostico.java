@@ -6,8 +6,10 @@
 package Controllers;
 
 
+import Entities.Fisioterapeuta;
 import Entities.Prediagnostico;
 import Entities.Usuario;
+import Facade.FisioterapeutaFacadeLocal;
 import Facade.PrediagnosticoFacadeLocal;
 import Facade.UsuarioFacadeLocal;
 
@@ -49,9 +51,14 @@ public class ControllerPrediagnostico extends ControllerApp {
     Usuario usuario;
     List<Usuario> listaUsuarios;
 
+    @EJB
+    private FisioterapeutaFacadeLocal ffl;
+    private Fisioterapeuta fisioterapeuta;
+
 
     @PostConstruct
     public void init() {
+        fisioterapeuta = new Fisioterapeuta();
         this.prediagnostico = new Prediagnostico();
         this.usuario = new Usuario();
         this.listaPrediagnistico = prediagnosticoFacade.findAll();
@@ -85,6 +92,9 @@ public class ControllerPrediagnostico extends ControllerApp {
     }
 
     public String guardarCambios() {
+        prediagnostico.setEstado("2");
+        fisioterapeuta = ffl.buscarPorCodUsuario(cs.getUsuario());
+        prediagnostico.setFisioterapeuta(fisioterapeuta);
         prediagnosticoFacade.edit(prediagnostico);
         finalizarConversacion();
         return "consultarprediagnostico.xhtml?faces-redirect=true";
