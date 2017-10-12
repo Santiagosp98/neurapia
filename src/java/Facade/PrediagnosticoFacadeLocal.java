@@ -39,5 +39,10 @@ public interface PrediagnosticoFacadeLocal {
     List<Object[]> reportePred();
 
     int count();
-    
+
+    List<Object[]> prediagnosticosPorMes();
+
+    List<Object[]> prediagnosticosPorEstado();
+
+    List<Object[]> prediagnosticosPorFisioterapeuta();
 }
