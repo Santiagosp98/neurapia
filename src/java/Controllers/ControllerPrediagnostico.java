@@ -41,8 +41,9 @@ public class ControllerPrediagnostico extends ControllerApp {
     private Prediagnostico prediagnostico;
     private List<Prediagnostico> listaPrediagnistico;
     private List<Prediagnostico> listaPrediagnisticoUsuario;
+    private List<Prediagnostico> listaPrediagnosticoResultado;
     private Prediagnostico prediagnosticoSeleccionado;
-    
+
     @EJB
     UsuarioFacadeLocal usuarioFacade;       
     Usuario usuario;
@@ -55,6 +56,7 @@ public class ControllerPrediagnostico extends ControllerApp {
         this.usuario = new Usuario();
         this.listaPrediagnistico = prediagnosticoFacade.findAll();
         this.listaPrediagnisticoUsuario = prediagnosticoFacade.prediagnosticoPorUsuario(usuario);
+        this.listaPrediagnosticoResultado=prediagnosticoFacade.prediagnosticoPorResultado("Pendiente");
     }
 
     public List<Prediagnostico> consultarPrediagnostico() {
@@ -68,6 +70,12 @@ public class ControllerPrediagnostico extends ControllerApp {
          listaPrediagnisticoUsuario = prediagnosticoFacade.prediagnosticoPorUsuario(cs.getUsuario());
          System.out.println(listaPrediagnisticoUsuario.size());
         return listaPrediagnisticoUsuario;
+    }
+
+    public List<Prediagnostico> prediagnosticoResultado(){
+        System.out.println(listaPrediagnosticoResultado.size());
+        listaPrediagnosticoResultado=prediagnosticoFacade.prediagnosticoPorResultado("Pendiente");
+        return listaPrediagnosticoResultado;
     }
 
     public String seleccionarPrediagnostico(Prediagnostico prediagnostico) {
@@ -121,6 +129,7 @@ public class ControllerPrediagnostico extends ControllerApp {
     public void setPrediagnosticoSeleccionado(Prediagnostico prediagnosticoSeleccionado) {
         this.prediagnosticoSeleccionado = prediagnosticoSeleccionado;
     }
+
 
     
 
