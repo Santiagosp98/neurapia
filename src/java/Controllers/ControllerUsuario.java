@@ -142,14 +142,14 @@ public class ControllerUsuario extends ControllerApp {
                 if (!usuario.getCodRol().equals(1)) {
                     usuarioFacade.remove(usuario);
                     finalizarConversacion();
-                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "El usuario ha sido eliminado correctamente", null);
+                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "El usuario ha sido eliminado.", null);
                     fc.addMessage(null, m);
                 } else {
-                    FacesMessage m1 = new FacesMessage(FacesMessage.SEVERITY_WARN, "Error al eliminar", "No se puede eliminar un Super Administrador");
+                    FacesMessage m1 = new FacesMessage(FacesMessage.SEVERITY_WARN, "No tiene permisos para realizar esta acción.", "");
                     fc.addMessage(null, m1);
                 }
             } else {
-                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al eliminar", "No se puede eliminar a sí mismo");
+                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "No se puede eliminar a sí mismo.", "");
                 fc.addMessage(null, m);
             }
         } catch (Exception e) {
@@ -228,6 +228,9 @@ public class ControllerUsuario extends ControllerApp {
             if (usuarioFacade.buscarDocumento(usuario.getNumeroDocumento()) == null || usuarioFacade.buscarDocumento(usuario.getNumeroDocumento()).equals(usuario)) {
                 if (usuarioFacade.buscarEmail(usuario.getCorreoElectronico()) == null || usuarioFacade.buscarEmail(usuario.getCorreoElectronico()).equals(usuario)) {
                     usuarioFacade.edit(usuario);
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "El usuario ha sido editado.", "");
+                    fc.addMessage(null, message);
+                    fc.getExternalContext().getFlash().setKeepMessages(true);
                     finalizarConversacion();
                     return "consultarusuarios?faces-redirect=true";
                 } else if (!(usuarioFacade.buscarEmail(usuario.getCorreoElectronico()) == null)) {
@@ -291,7 +294,10 @@ public class ControllerUsuario extends ControllerApp {
 
             if (usuarioFacade.buscarEmail(usuarioEnSesion.getCorreoElectronico()) == null || usuarioFacade.buscarEmail(usuarioEnSesion.getCorreoElectronico()).equals(usuarioEnSesion)) {
                 this.usuarioFacade.edit(usuarioEnSesion);
-                return "perfil.xhtml?faces-redirect=true";
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Perfil editado.", "");
+                fc.addMessage(null, message);
+                fc.getExternalContext().getFlash().setKeepMessages(true);
+                return "editarperfil.xhtml?faces-redirect=true";
             } else {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El correo ingresado ya está registrado en el sistema", "");
                 fc.addMessage(null, message);
@@ -388,7 +394,7 @@ public class ControllerUsuario extends ControllerApp {
                         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "El usuario ha sido creado.", "");
                         fc.addMessage(null, message);
                         fc.getExternalContext().getFlash().setKeepMessages(true);
-                        return "consultarusuarios.xhtml?faces-redirect=true";
+                        return "crearusuarios.xhtml?faces-redirect=true";
                     } else {
                         usuario.setIngresos(usuario.getIngresos());
                         usuario.setUltimaSesion(calendar.getTime());
@@ -396,7 +402,7 @@ public class ControllerUsuario extends ControllerApp {
                         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "El usuario ha sido creado.", "");
                         fc.addMessage(null, message);
                         fc.getExternalContext().getFlash().setKeepMessages(true);
-                        return "consultarusuarios.xhtml?faces-redirect=true";
+                        return "crearusuario.xhtml?faces-redirect=true";
                     }
                 } else {
                     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El email ingresado ya está registrado.", "");
