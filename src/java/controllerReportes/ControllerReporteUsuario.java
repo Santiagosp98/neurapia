@@ -27,8 +27,6 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import org.jboss.weld.bean.builtin.ee.HttpServletRequestBean;
-import org.jfree.util.HashNMap;
 
 /**
  *
