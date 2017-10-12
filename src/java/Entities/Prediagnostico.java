@@ -56,6 +56,10 @@ public class Prediagnostico implements Serializable {
     @Column(name = "fecha")
     @Temporal(TemporalType.DATE)
     private Date fecha;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "estado")
+    private String estado;
     @JoinColumn(name = "codCuestionario", referencedColumnName = "idCuestionario")
     @ManyToOne(fetch = FetchType.LAZY)
     private Cuestionario codCuestionario;
@@ -65,6 +69,9 @@ public class Prediagnostico implements Serializable {
     @JoinColumn(name = "codUsuario", referencedColumnName = "idUsuario")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Usuario codUsuario;
+    @JoinColumn(name = "idFisioterapeuta", referencedColumnName = "idFisioterapeuta")
+    @ManyToOne (fetch = FetchType.LAZY)
+    private Fisioterapeuta fisioterapeuta;
 
     public Prediagnostico() {
     }
@@ -102,6 +109,14 @@ public class Prediagnostico implements Serializable {
         this.fecha = fecha;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     public Cuestionario getCodCuestionario() {
         return codCuestionario;
     }
@@ -124,6 +139,14 @@ public class Prediagnostico implements Serializable {
 
     public void setCodUsuario(Usuario codUsuario) {
         this.codUsuario = codUsuario;
+    }
+
+    public Fisioterapeuta getFisioterapeuta() {
+        return fisioterapeuta;
+    }
+
+    public void setFisioterapeuta(Fisioterapeuta fisioterapeuta) {
+        this.fisioterapeuta = fisioterapeuta;
     }
 
     @Override
