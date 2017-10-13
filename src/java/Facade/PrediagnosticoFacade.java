@@ -86,7 +86,7 @@ public class PrediagnosticoFacade extends AbstractFacade<Prediagnostico> impleme
     public List<Prediagnostico> prediagnosticoPorResultado(String estado) {
         List<Prediagnostico> preDiagResultado =null;
         TypedQuery<Prediagnostico> q = getEntityManager().createNamedQuery("Prediagnostico.prediagnosticoPorResultado", Prediagnostico.class);
-        q.setParameter("resultadoPrediagnostico", estado);
+        q.setParameter("estado", estado);
         preDiagResultado =q.getResultList();
         return preDiagResultado;
     }
