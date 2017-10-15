@@ -27,6 +27,8 @@ public interface DolorFacadeLocal {
     List<Dolor> findAll();
 
     List<Dolor> findRange(int[] range);
+    
+    List<Dolor> reporteDolor();
 
     int count();
     

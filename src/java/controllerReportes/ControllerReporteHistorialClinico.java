@@ -5,11 +5,16 @@
  */
 package controllerReportes;
 
+import Entities.Dolor;
 import Entities.ReporteHistorialClinico;
 import Entities.Historialclinico;
 import Entities.ReporteHistorialClinico;
+import Facade.DolorFacadeLocal;
 import Facade.HistorialclinicoFacadeLocal;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,10 +30,14 @@ import javax.persistence.PersistenceContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import org.jfree.chart.plot.PlotOrientation;
+        
 /**
  *
  * @author BRYAN BUITRAGO
@@ -57,10 +66,16 @@ public class ControllerReporteHistorialClinico {
     
     private List<ReporteHistorialClinico> listaReporte;
     
+    @EJB
+    private DolorFacadeLocal dfl;
+    private Dolor dolor;
+    private List<Dolor> listaDolor;
+    
     
     @PostConstruct
     public void init(){        
         listaReporte = hcfl.generarListaResultados();
+        listaDolor = dfl.reporteDolor();
     }
     
     protected EntityManager getEntityManager() {
@@ -85,6 +100,32 @@ public class ControllerReporteHistorialClinico {
         HttpServletResponse res = (HttpServletResponse) ec.getResponse();
         res.setContentType(contentType);
         res.addHeader("Content-disposition", "attachment; filename=\"ReporteHistorialClinico.pdf\"");
+        out = res.getOutputStream();
+        JasperExportManager.exportReportToPdfStream(jP, out);
+        fc.responseComplete();
+    }
+    
+    private void prepareGraphics() throws JRException, ClassNotFoundException, SQLException, IOException{
+        Connection conn;
+        Class.forName("com.mysql.jdbc.Driver");
+        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/sistemaneurapia?zeroDateTimeBehavior=convertToNull","jair","3208743082");
+        Map<String, Object> params = new HashMap<>();
+//        params.put("NombreSesssion", cS.getUsuario().getFullNameUsuario());
+        JRBeanCollectionDataSource bcds = new JRBeanCollectionDataSource(listaDolor);
+        String reportPath = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/")+ "/WEB-INF/reportes/historialclinico/Grafico.jasper";
+        jP = JasperFillManager.fillReport(reportPath, params, conn);
+        
+    }
+    public void exportGraphicsPDF() throws IOException, JRException, ClassNotFoundException, SQLException{
+//        System.out.println(listaReporte.toString());
+        prepareGraphics();
+        ServletOutputStream out = null;
+        String contentType =  "application/pdf";
+        FacesContext fc = FacesContext.getCurrentInstance();
+        ExternalContext ec = fc.getExternalContext();
+        HttpServletResponse res = (HttpServletResponse) ec.getResponse();
+        res.setContentType(contentType);
+        res.addHeader("Content-disposition", "attachment; filename=\"GraficoPromedioDolor.pdf\"");
         out = res.getOutputStream();
         JasperExportManager.exportReportToPdfStream(jP, out);
         fc.responseComplete();

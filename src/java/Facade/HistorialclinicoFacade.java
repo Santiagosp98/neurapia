@@ -119,7 +119,7 @@ public class HistorialclinicoFacade extends AbstractFacade<Historialclinico> imp
             reporte.setLocalizacion(o[4].toString());
             reporte.setFrecuencia(o[5].toString());
             listaResultados.add(reporte);
-        }
+        }   
         return listaResultados;
     }
 }
