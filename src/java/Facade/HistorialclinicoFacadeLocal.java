@@ -43,4 +43,6 @@ public interface HistorialclinicoFacadeLocal {
     List<Object[]> pacientesPorGrupoSanguineo();
 
     List<Object[]> pacientesPorPais();
+
+    void cargarInformacionBasica(String path);
 }

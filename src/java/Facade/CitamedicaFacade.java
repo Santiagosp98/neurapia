@@ -198,7 +198,14 @@ public class CitamedicaFacade extends AbstractFacade<Citamedica> implements Cita
         return cita;
     }
 
-    
-
-
+    @Override
+    public void cargarCitas(String path) {
+        try {
+            Query query = getEntityManager().createNativeQuery("LOAD DATA LOCAL INFILE '" + path
+                    + "' INTO TABLE citamedica FIELDS TERMINATED BY ';' LINES TERMINATED BY '\n' (hora, fecha, numeroConsultorio, codUsuario, codFisioterapeuta, estado)");
+            query.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

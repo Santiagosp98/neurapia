@@ -56,4 +56,6 @@ public interface UsuarioFacadeLocal {
     List<Object[]> usuariosPorTipoDocumento();
 
     List<Object[]> usuariosPorEstado();
+
+    void cargarUsuarios(String path);
 }

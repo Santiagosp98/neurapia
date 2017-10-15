@@ -208,4 +208,14 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
         return usuarios;
     }
 
+    @Override
+    public void cargarUsuarios(String path) {
+        try {
+            Query query = getEntityManager().createNativeQuery("LOAD DATA LOCAL INFILE '" + path
+                    + "' INTO TABLE usuario FIELDS TERMINATED BY ';' LINES TERMINATED BY '\n' (tipoDocumento, numeroDocumento, primerNombre, segundoNombre, primerApellido, segundoApellido, codRol, estadoUsuario, fechaRegistro, correoElectronico, claveUsuario)");
+            query.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

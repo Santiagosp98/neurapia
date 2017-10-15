@@ -122,4 +122,15 @@ public class HistorialclinicoFacade extends AbstractFacade<Historialclinico> imp
         }   
         return listaResultados;
     }
+
+    @Override
+    public void cargarInformacionBasica(String path) {
+        try {
+            Query query = getEntityManager().createNativeQuery("LOAD DATA LOCAL INFILE '" + path
+                    + "' INTO TABLE historialclinico FIELDS TERMINATED BY ';' LINES TERMINATED BY '\n' (fechaCreacion, direccion, fechaNacimiento, sexo, grupoSanguineo, religion, codEps, estrato, codLugarNacimiento, Zona, ciudadResidencia, empresa, pais, estudio, ocupacion, telefono, codUsuario)");
+            query.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
