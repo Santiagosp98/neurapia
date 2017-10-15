@@ -72,12 +72,12 @@ public class ControllerRespuestaPreg extends ControllerApp {
         pre.setCodCuestionario(cfl.find(1));
         pre.setEstado("1");
         pfl.create(pre);
-        return "ConsultarPrediagnostico?faces-redirect=true";
+        return "consultarprediagnostico?faces-redirect=true";
     }
 
     public String aceptar() {
 
-        return "ConsultarPrediagnostico?faces-redirect=true";
+        return "consultarprediagnostico?faces-redirect=true";
     }
 
     public RespuestapregFacadeLocal getRespuestapregFacade() {
