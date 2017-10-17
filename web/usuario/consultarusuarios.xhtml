@@ -109,8 +109,6 @@
                     <h4 class="page-title">
                         <h:outputText value="#{msg['users-system']}"></h:outputText>
                     </h4>
-
-
                     <div class="fixed-table-body">
                         <h:form prependId="false">
                             <h:messages showSummary="true" showDetail="false" errorClass="alert alert-danger"
@@ -187,9 +185,24 @@
                             <h:commandButton class="btn btn-info"
                                              actionListener="#{controllerReporteUsuario.exportPDF()}"
                                              value="Exportar pdf"/>
-                        </h:form>
 
+                        </h:form>
                     </div>
+                    <hr class="col-lg-12 col-md-12 col-sm-12 col-sm-12"
+                        style="background-color: #f1f1f1; width: 100%; height: 20px; margin-left: -15px"/>
+                    <h4 class="page-title">
+                        <h:outputText value="Cargar registros de forma masiva"></h:outputText>
+                    </h4>
+                    <p class="description" style="margin-top: 20px">
+                        Carga de forma masiva desde un archivo con extensión csv. Los registros a cargar deben estar separados por punto y coma (;).
+                    </p>
+                    <h:form enctype="multipart/form-data" styleClass="form-inline" style="padding: 15px">
+                        <div class="form-group">
+                            <h:inputFile value="#{cargaDatos.file}" id="file" style="display: inline-block"/>
+                        </div>
+                        <h:commandButton action="#{cargaUsuario.cargarUsuarios}" styleClass="btn btn-primary"
+                                         value="Cargar" style="margin-left: 10px"/>
+                    </h:form>
                 </div>
 
                 <div id="myModal" class="modal fade" role="dialog">
