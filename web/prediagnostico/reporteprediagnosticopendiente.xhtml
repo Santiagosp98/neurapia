@@ -133,12 +133,11 @@
                                     <h:commandButton class="btn btn-primary" value="REPORTE PDF" actionListener="#{controllerReportePrediagnostico.exportarPDF()}">
 
                                     </h:commandButton>
-                                </div>
-                                <div>
-                                    <h:commandButton class="btn btn-primary" value="GRAFICO PDF" actionListener="#{controllerReportePrediagnostico.exportGraphicsPDF()}">
+                                    <h:commandButton class="btn btn-default " value="GRAFICO PDF" actionListener="#{controllerReportePrediagnostico.exportGraphicsPDF()}">
 
                                     </h:commandButton>
                                 </div>
+
                                 <h:dataTable value="#{controllerPrediagnostico.prediagnosticoResultado()}" var="item"
                                              class="table table-striped table-bordered" id="consultar-prediagnostico">
 
