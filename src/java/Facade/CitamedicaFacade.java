@@ -115,33 +115,36 @@ public class CitamedicaFacade extends AbstractFacade<Citamedica> implements Cita
     }
 
     @Override
-    public List<Citamedica> citasPorUsuarioDobleEstado(Usuario codUsuario, String estado, String estado2) {
+    public List<Citamedica> citasPorUsuarioDobleEstado(Usuario codUsuario, String estado, String estado2, String estado3) {
         List<Citamedica> cita = null;
         TypedQuery<Citamedica> q = getEntityManager().createNamedQuery("Citamedica.citasPorUsuarioDobleEstado", Citamedica.class);
         q.setParameter("codUsuario", codUsuario);
         q.setParameter("estado", estado);
         q.setParameter("estado2", estado2);
+        q.setParameter("estado3", estado3);
         cita = q.getResultList();
         return cita;
     }
 
     @Override
-    public List<Citamedica> citasPorFisioterapeutaDobleEstado(Fisioterapeuta codFisioterapeuta, String estado, String estado2) {
+    public List<Citamedica> citasPorFisioterapeutaDobleEstado(Fisioterapeuta codFisioterapeuta, String estado, String estado2, String estado3) {
         List<Citamedica> cita = null;
         TypedQuery<Citamedica> q = getEntityManager().createNamedQuery("Citamedica.citasPorFisioterapeutaDobleEstado", Citamedica.class);
         q.setParameter("codFisioterapeuta", codFisioterapeuta);
         q.setParameter("estado", estado);
         q.setParameter("estado2", estado2);
+        q.setParameter("estado3", estado3);
         cita = q.getResultList();
         return cita;
     }
 
     @Override
-    public List<Citamedica> citasPorDobleEstado(String estado, String estado2) {
+    public List<Citamedica> citasPorDobleEstado(String estado, String estado2, String estado3) {
         List<Citamedica> cita = null;
         TypedQuery<Citamedica> q = getEntityManager().createNamedQuery("Citamedica.citasPorDobleEstado", Citamedica.class);
         q.setParameter("estado", estado);
         q.setParameter("estado2", estado2);
+        q.setParameter("estado3", estado3);
         cita = q.getResultList();
         return cita;
     }
