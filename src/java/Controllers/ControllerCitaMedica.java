@@ -15,6 +15,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import javax.inject.Named;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -81,12 +82,27 @@ public class ControllerCitaMedica extends ControllerApp {
         this.citasRealizadas = citaMedicaFacade.countCitasMedicasPorEstado("Realizada");
     }
 
-    public List<Citamedica> consultarCitaMedica() {
+    public List<Citamedica> consultarCitaMedica() throws ParseException {
         Usuario uS = cs.getUsuario();
+        for (Citamedica item : listaCitas) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+            Calendar c1 = Calendar.getInstance();
+
+            DateFormat fecha = new SimpleDateFormat("yyyy-MM-dd");
+            String convertido = fecha.format(item.getFecha());
+            Date fechaCita = sdf.parse(convertido);
+            System.out.println("fecha : " + fechaCita + " comparacion " + fechaCita.compareTo(c1.getTime()) + " estado " + item.getEstado());
+            if (fechaCita.compareTo(c1.getTime()) < 0 && item.getEstado().equals("Pendiente")) {
+                item.setEstado("Incumplida");
+                System.out.println("estado " + item.getEstado());
+                this.citaMedicaFacade.edit(item);
+            }
+        }
         System.out.println("rol: " + uS.getCodRol().getNombreRol());
         if (uS.getCodRol() != null) {
             if (uS.getCodRol().getNombreRol().equals("Super Administrador") || uS.getCodRol().getNombreRol().equals("Administrador")) {
-                this.listaCitas = citaMedicaFacade.citasPorDobleEstado("Cancelada", "Realizada");
+                this.listaCitas = citaMedicaFacade.citasPorDobleEstado("Cancelada", "Realizada", "Incumplida");
                 return listaCitas;
             } else if (uS.getCodRol().getNombreRol().equals("Fisioterapeuta")) {
                 listarCitasporFisioterapeuta();
@@ -118,11 +134,10 @@ public class ControllerCitaMedica extends ControllerApp {
     //Consultas de el usuario desde rol usuario
     public List<Citamedica> listarCitasporUsuario() {
         System.out.println(listaCitas.size());
-        listaCitas = citaMedicaFacade.citasPorUsuarioDobleEstado(cs.getUsuario(), "Cancelada", "Realizada");
+        listaCitas = citaMedicaFacade.citasPorUsuarioDobleEstado(cs.getUsuario(), "Cancelada", "Realizada", "Incumplida");
         System.out.println(listaCitas.size());
         return listaCitas;
     }
-    
 
     //Consulta de las citas por fisioterapeuta
     public List<Citamedica> listarCitasporFisioterapeuta() {
@@ -134,7 +149,7 @@ public class ControllerCitaMedica extends ControllerApp {
                     System.out.println("Estoy listando por fisoterapeuta");
                     fisioterapeuta.setIdFisioterapeuta(ft.getIdFisioterapeuta());
                     System.out.println(fisioterapeuta.getCodUsuario());
-                    listaCitas = citaMedicaFacade.citasPorFisioterapeutaDobleEstado(fisioterapeuta, "Cancelada", "Realizada");
+                    listaCitas = citaMedicaFacade.citasPorFisioterapeutaDobleEstado(fisioterapeuta, "Cancelada", "Realizada", "Incumplida");
                 }
             }
         } catch (Exception e) {
@@ -192,12 +207,28 @@ public class ControllerCitaMedica extends ControllerApp {
 
     public String cancelarCita(Citamedica citamedica) {
         try {
+            FacesContext fc = FacesContext.getCurrentInstance();
             if (citamedica != null) {
-                citamedica.setEstado("Cancelada");
-                System.out.println("Estado: " + citamedica.getEstado());
-                this.citaMedicaFacade.edit(citamedica);
-                return "ConsultarCitasMedicas?faces-redirect=true";
-            }else{
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Calendar c1 = Calendar.getInstance();
+                c1.add(Calendar.DAY_OF_YEAR, -3);
+                DateFormat fecha = new SimpleDateFormat("yyyy-MM-dd");
+                String convertido = fecha.format(citamedica.getFecha());
+                Date fechaCita = sdf.parse(convertido);
+                if (fechaCita.compareTo(c1.getTime()) < 0) {
+                    citamedica.setEstado("Cancelada");
+                    System.out.println("Estado: " + citamedica.getEstado());
+                    this.citaMedicaFacade.edit(citamedica);
+                    return "historialdecitas?faces-redirect=true";
+                } else {
+                    System.out.println("No se puede cancelar cita");
+                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al cancelar cita",
+                            "No se puede cancelar la cita 2 dia antes de ella");
+                    fc.addMessage(null, m);
+                    return "";
+                }
+
+            } else {
                 System.out.println("citamedica: " + citamedica);
                 return "";
             }
@@ -215,30 +246,29 @@ public class ControllerCitaMedica extends ControllerApp {
 
             regexp = Pattern.compile("\\d+");
 
-            if (!regexp.matcher(fechaHora).matches()){
+            if (!regexp.matcher(fechaHora).matches()) {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Hora' solo admite carácteres numéricos.", "");
                 fc.addMessage(null, message);
                 return "";
             }
 
-            if (!regexp.matcher(fechaCitaDia).matches()){
+            if (!regexp.matcher(fechaCitaDia).matches()) {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Día' solo admite carácteres numéricos.", "");
                 fc.addMessage(null, message);
                 return "";
             }
 
-            if (!regexp.matcher(fechaCitaMes).matches()){
+            if (!regexp.matcher(fechaCitaMes).matches()) {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Mes' solo admite carácteres numéricos.", "");
                 fc.addMessage(null, message);
                 return "";
             }
 
-            if (!regexp.matcher(fechaCitaAño).matches()){
+            if (!regexp.matcher(fechaCitaAño).matches()) {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Año' solo admite carácteres numéricos.", "");
                 fc.addMessage(null, message);
                 return "";
             }
-
 
             this.citaMedica.setEstado(String.valueOf(citaMedica.getSeleccionEstado().get(1).toString()));
             int validacionFecha = Integer.parseInt(fechaCitaMes);
@@ -262,7 +292,7 @@ public class ControllerCitaMedica extends ControllerApp {
                                             } else {
                                                 System.out.println("No se creo");
                                                 FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
-                                                        "El fisioterapeuta que selecciono ya esta ocupado en la fecha y hora digitada");
+                                                        "El fisioterapeuta que selecciono ya esta ocupado en la fecha y hora digitada  o usted esta invalidado para pedir otra cita");
                                                 fc.addMessage(null, m);
                                             }
                                         } else {
@@ -296,7 +326,7 @@ public class ControllerCitaMedica extends ControllerApp {
                                                     } else {
                                                         System.out.println("No se creo");
                                                         FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
-                                                                "El fisioterapeuta que selecciono ya esta ocupado en la fecha y hora digitada");
+                                                                "El fisioterapeuta que selecciono ya esta ocupado en la fecha y hora digitada  o usted esta invalidado para pedir otra cita");
                                                         fc.addMessage(null, m);
                                                     }
                                                 } else {
@@ -328,7 +358,7 @@ public class ControllerCitaMedica extends ControllerApp {
                                                     } else {
                                                         System.out.println("No se creo");
                                                         FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
-                                                                "El fisioterapeuta que selecciono ya esta ocupado en la fecha y hora digitada");
+                                                                "El fisioterapeuta que selecciono ya esta ocupado en la fecha y hora digitada  o usted esta invalidado para pedir otra cita");
                                                         fc.addMessage(null, m);
                                                     }
                                                 } else {
@@ -361,7 +391,7 @@ public class ControllerCitaMedica extends ControllerApp {
                                                 } else {
                                                     System.out.println("No se creo");
                                                     FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
-                                                            "El fisioterapeuta que selecciono ya esta ocupado en la fecha y hora digitada");
+                                                            "El fisioterapeuta que selecciono ya esta ocupado en la fecha y hora digitada o usted esta invalidado para pedir otra cita");
                                                     fc.addMessage(null, m);
                                                 }
                                             } else {
@@ -444,9 +474,27 @@ public class ControllerCitaMedica extends ControllerApp {
             cm = citaMedicaFacade.buscarFisioFechaYHora(citaMedica.getCodFisioterapeuta(), format.parse(armarFecha), formaHora.parse(armarHora));
             System.out.println("Cita buscada : " + cm);
             if (cm == null) {
-                ce.enviarAsignacionDeCita(citaMedica);
-                citaMedicaFacade.create(citaMedica);
-                return true;
+                boolean banderaCita=false;
+                
+                for (Citamedica listaCita : listaCitas) {
+                    System.out.println("Cita medica u " + citaMedica.getCodUsuario() + " Lista " + listaCita.getCodUsuario());
+                    if (citaMedica.getCodUsuario().equals(listaCita.getCodUsuario())) {
+                        System.out.println("Usuario: " + listaCita.getCodUsuario() + "Estado: " + listaCita.getEstado());
+                        if (listaCita.getEstado().equals("Incumplida") || listaCita.getEstado().equals("Pendiente")) {
+                            banderaCita=true;
+                            System.out.println("Bandera: " + banderaCita);
+                        }
+                    }
+                }
+                System.out.println("Bandera: " + banderaCita);
+                if(!banderaCita){
+                    ce.enviarAsignacionDeCita(citaMedica);
+                    citaMedicaFacade.create(citaMedica);
+                    return true;
+                }else{
+                    return false;
+                }
+
             } else {
                 return false;
             }
