@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="neurapia1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9c1c5932-43e6-41bb-bd3c-d886751a2449">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="0.9090909090909091"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="NombreSesssion" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT monthname(STR_TO_DATE(month(fechaRegistro), '%m')) as mes, count(*) as contador FROM usuario WHERE TIMESTAMPDIFF(MONTH, fechaRegistro, now()) < 6 GROUP BY month(fechaRegistro);]]>
+	</queryString>
 	<field name="primerNombre" class="java.lang.String"/>
 	<field name="primerApellido" class="java.lang.String"/>
 	<field name="estadoUsuario" class="java.lang.String"/>
-	<field name="fechaRegistro" class="java.lang.String"/>
+	<field name="fechaRegistro" class="java.util.Date"/>
 	<field name="correoElectronico" class="java.lang.String"/>
-	<field name="ultimaSesion" class="java.lang.String"/>
+	<field name="ultimaSesion" class="java.util.Date"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -33,10 +36,6 @@
 	</title>
 	<pageHeader>
 		<band height="35" splitType="Stretch">
-			<textField>
-				<reportElement x="400" y="6" width="100" height="20" uuid="3be62fcc-d737-4f72-8b4c-ef65ab021ede"/>
-				<textFieldExpression><![CDATA[$P{NombreSesssion}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="339" y="6" width="59" height="20" uuid="2a8fa9e7-ac4f-4667-a461-8e6f082a122f"/>
 				<text><![CDATA[Señor(a):]]></text>
@@ -49,6 +48,10 @@
 				<reportElement x="54" y="6" width="100" height="20" uuid="941f10d8-3340-4dbe-b117-98df190cdcbe"/>
 				<text><![CDATA[Pagina: ]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="428" y="7" width="100" height="20" uuid="3be62fcc-d737-4f72-8b4c-ef65ab021ede"/>
+				<textFieldExpression><![CDATA[$P{NombreSesssion}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
