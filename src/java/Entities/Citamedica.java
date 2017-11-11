@@ -39,15 +39,15 @@ import javax.xml.bind.annotation.XmlRootElement;
         , @NamedQuery(name = "Citamedica.findByHora", query = "SELECT c FROM Citamedica c WHERE c.hora = :hora")
         , @NamedQuery(name = "Citamedica.findByFecha", query = "SELECT c FROM Citamedica c WHERE c.fecha = :fecha")
         , @NamedQuery(name = "Citamedica.findByEstado", query = "SELECT c FROM Citamedica c WHERE c.estado = :estado")
-        , @NamedQuery(name = "Citamedica.citasPorDobleEstado", query = "SELECT c FROM Citamedica c WHERE c.estado = :estado OR c.estado =:estado2")
+        , @NamedQuery(name = "Citamedica.citasPorDobleEstado", query = "SELECT c FROM Citamedica c WHERE c.estado = :estado OR c.estado =:estado2 OR c.estado =:estado3")
         , @NamedQuery(name = "Citamedica.citasPorUsuario", query = "SELECT c FROM Citamedica c WHERE c.codUsuario = :codUsuario")
         , @NamedQuery(name = "Citamedica.citasEntreMeses", query = "SELECT c FROM Citamedica c WHERE c.fecha<:fecha AND c.fecha>:fecha2")
         , @NamedQuery(name = "Citamedica.citasPorUsuarioEstado", query = "SELECT c FROM Citamedica c WHERE c.codUsuario = :codUsuario AND c.estado = :estado")
-        , @NamedQuery(name = "Citamedica.citasPorUsuarioDobleEstado", query = "SELECT c FROM Citamedica c WHERE c.codUsuario = :codUsuario AND c.estado = :estado OR c.estado = :estado2 AND c.codUsuario = :codUsuario")
+        , @NamedQuery(name = "Citamedica.citasPorUsuarioDobleEstado", query = "SELECT c FROM Citamedica c WHERE c.codUsuario = :codUsuario AND c.estado = :estado OR c.estado = :estado2 AND c.codUsuario = :codUsuario  OR c.estado = :estado3 AND c.codUsuario = :codUsuario ")
         , @NamedQuery(name = "Citamedica.citasPorFisioterapeuta", query = "SELECT c FROM Citamedica c WHERE c.codFisioterapeuta = :codFisioterapeuta")
         , @NamedQuery(name = "Citamedica.citaPorFisioFechaHora", query = "SELECT c FROM Citamedica c WHERE c.codFisioterapeuta = :codFisioterapeuta AND c.fecha =:fecha AND c.hora =:hora")
         , @NamedQuery(name = "Citamedica.citasPorFisioterapeutaEstado", query = "SELECT c FROM Citamedica c WHERE c.codFisioterapeuta = :codFisioterapeuta AND c.estado = :estado")
-        , @NamedQuery(name = "Citamedica.citasPorFisioterapeutaDobleEstado", query = "SELECT c FROM Citamedica c WHERE c.codFisioterapeuta = :codFisioterapeuta AND c.estado = :estado OR c.estado =:estado2 AND c.codFisioterapeuta = :codFisioterapeuta")
+        , @NamedQuery(name = "Citamedica.citasPorFisioterapeutaDobleEstado", query = "SELECT c FROM Citamedica c WHERE c.codFisioterapeuta = :codFisioterapeuta AND c.estado = :estado OR c.estado =:estado2 AND c.codFisioterapeuta = :codFisioterapeuta  OR c.estado =:estado3 AND c.codFisioterapeuta = :codFisioterapeuta")
         , @NamedQuery(name = "Citamedica.findByNumeroConsultorio", query = "SELECT c FROM Citamedica c WHERE c.numeroConsultorio = :numeroConsultorio")
         , @NamedQuery(name = "Citamedica.countByEstado", query = "SELECT COUNT(c) FROM Citamedica c WHERE c.estado = :estado")
 })
@@ -158,6 +158,7 @@ public class Citamedica implements Serializable {
         listaRol.add("Cancelada");
         listaRol.add("Pendiente");
         listaRol.add("Realizada");
+        listaRol.add("Incumplida");
         return listaRol;
     }
 
