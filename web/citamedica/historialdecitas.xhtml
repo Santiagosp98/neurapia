@@ -149,6 +149,18 @@
                                         <h:outputText value="#{item.estado}"/>
                                     </h:column>
 
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{msg['actions']}"/>
+                                        </f:facet>
+                                        <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol ne 4 and item.estado eq 'Incumplida'}">
+                                            <h:commandLink action="#{controllerCitaMedica.cancelarCita(item)}" value="" class="mitooltip" a:data-toggle="tooltip" a:data-placement="top" title="#{msg['cancel-appointment']}"><span id="botonElimina"  class="fa fa-times" aria-hidden="true"></span>
+                                            </h:commandLink>
+                                        </ui:fragment>
+                                    </h:column>
+
+
+
                                 </h:dataTable>
                             </h:form>
                         </div>
