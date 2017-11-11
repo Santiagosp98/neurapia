@@ -101,7 +101,7 @@
                     <h:form prependId="false" id="crear-cita" a:name="crear-cita">
 
                         <div class="col-lg-12 col-md-12 col-sm-12">
-                            <h:messages showSummary="true" showDetail="false" infoClass="alert alert-sucess"
+                            <h:messages showSummary="true" showDetail="true" infoClass="alert alert-sucess"
                                         errorClass="alert alert-danger"/>
                         </div>
 
@@ -135,6 +135,13 @@
                             <h:outputLabel value="#{msg['hour']}:" for="hora"/>
                             <h:inputText id="hora" class="form-control mitooltip" a:placeholder="HH"
                                          value="#{controllerCitaMedica.fechaHora}" required="true"
+                                         requiredMessage="La hora es requerida." a:name="hora" maxlength="2"
+                                         validatorMessage="Se ha excedido el número de carácteres permitidos(2)."/>
+                        </div>
+                        <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                            <h:outputLabel value="Minutos" for="hora"/>
+                            <h:inputText id="minutos" class="form-control mitooltip" a:placeholder="mm"
+                                         value="00" disabled="true"
                                          requiredMessage="La hora es requerida." a:name="hora" maxlength="2"
                                          validatorMessage="Se ha excedido el número de carácteres permitidos(2)."/>
                         </div>
