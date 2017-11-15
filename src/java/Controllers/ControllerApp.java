@@ -6,9 +6,12 @@
 package Controllers;
 
 import java.io.IOException;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.PropertyResourceBundle;
+import java.util.ResourceBundle;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.faces.context.FacesContext;
@@ -16,7 +19,6 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- *
  * @author jair3
  */
 @Named(value = "controllerVarios")
@@ -24,30 +26,33 @@ import javax.servlet.http.HttpServletRequest;
 public class ControllerApp implements Serializable {
 
     public ControllerApp() {
-        
+
     }
-    
+
     @Inject
     private Conversation conversacion;
-    
-    public void iniciarConversacion(){
+
+    protected transient @Inject
+    PropertyResourceBundle msg;
+
+    public void iniciarConversacion() {
         if (conversacion.isTransient()) {
             conversacion.begin();
         }
     }
-    
-    public void finalizarConversacion(){
+
+    public void finalizarConversacion() {
         if (conversacion.isTransient()) {
             conversacion.end();
         }
     }
-    
-    public String cancelar(){
+
+    public String cancelar() {
         finalizarConversacion();
         return "";
     }
-    
-    public String cancelarConfiguracionSistema(){
+
+    public String cancelarConfiguracionSistema() {
         finalizarConversacion();
         return "registrosenelsistema.xhtml?faces-redirect=true";
     }
@@ -59,17 +64,17 @@ public class ControllerApp implements Serializable {
     public void setConversacion(Conversation conversacion) {
         this.conversacion = conversacion;
     }
-    
+
     public void redireccionar(String url) throws IOException {
-        
-        url = this.hostName()+ url + ".xhtml";
-        
-        if(!"".equals(url)) {
-            
+
+        url = this.hostName() + url + ".xhtml";
+
+        if (!"".equals(url)) {
+
             FacesContext.getCurrentInstance().getExternalContext().redirect(url);
-            
+
         }
-         
+
     }
     
 /*    public String hostName() {
@@ -90,14 +95,14 @@ public class ControllerApp implements Serializable {
         return name; 
     }*/
 
-        //generar una url completa para redireccionar y validar si es localhost o el dominio del sitio
+    //generar una url completa para redireccionar y validar si es localhost o el dominio del sitio
     public String hostName() {
-        
+
         FacesContext fc = FacesContext.getCurrentInstance();
         int port = fc.getExternalContext().getRequestServerPort();
-        String name =  fc.getExternalContext().getRequestScheme() + "://" + fc.getExternalContext().getRequestServerName() + ":" + port + fc.getExternalContext().getRequestContextPath() + "/";
+        String name = fc.getExternalContext().getRequestScheme() + "://" + fc.getExternalContext().getRequestServerName() + ":" + port + fc.getExternalContext().getRequestContextPath() + "/";
         return name;
-        
+
     }
 
     public void recargar() {
@@ -108,11 +113,11 @@ public class ControllerApp implements Serializable {
             e.printStackTrace();
         }
     }
-    
-    public String redirecMovilidad(){
+
+    public String redirecMovilidad() {
         return "movilidad.xhtml?faces-redirect=true";
     }
-    
+
     public String selectAnamnesis() {
         return "anamnesis.xhtml?faces-redirect=true";
     }
@@ -132,9 +137,9 @@ public class ControllerApp implements Serializable {
     public String selectReporteTratamiento() {
         return "reportetratamiento.xhtml?faces-redirect=true";
     }
-    
-    public String selectListarOBjetivos(){
+
+    public String selectListarOBjetivos() {
         return "listarobjetivos.xhtml?faces-redirect=true";
     }
-    
+
 }
