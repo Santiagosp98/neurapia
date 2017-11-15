@@ -93,41 +93,41 @@
                     <!-- Formulario de inicio de sesión -->
                     <h:form prependId="false" id="formIngreso" class="form-horizontal">
                         <div>
-                            <h:messages id="msj-global" showSummary="true" showDetail="true"/>
+                            <h:messages globalOnly="false" showSummary="true" showDetail="false"
+                                        errorClass="alert alert-danger" styleClass="message" />
                         </div>
-                        <h:form prependId="false">
-                            <div class="form-group">
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                    <h:inputText id="email" class="form-control" value="#{controllerSession.email}"
-                                                 a:placeholder="Email" required="true"
-                                                 a:pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
-                                                 requiredMessage="El correo electrónico es requerido"/>
-                                </div>
+                        <div class="form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <h:inputText id="email" class="form-control" value="#{controllerSession.email}"
+                                             a:placeholder="Email"
+                                             a:pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"/>
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                    <h:inputSecret id="password" class="form-control" value="#{controllerSession.clave}"
-                                                   a:placeholder="#{msg['password']}" required="true"
-                                                   requiredMessage="La contraseña es requerida"/>
-                                </div>
+                        <div class="form-group">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <h:inputSecret id="password" class="form-control" value="#{controllerSession.clave}"
+                                               a:placeholder="#{msg['password']}"/>
                             </div>
-                            <div>
-                                <ul id="questions">
-                                    <li>
-                                        <h:commandLink value="#{msg['forgot-password']}"
-                                                       onclick="$('#modal-recuperar').modal('show')"/>
-                                    </li>
-                                    <li>
-                                        <h:commandLink value="#{msg['signup']}" onclick="$('#sign-up').modal('show')"/>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h:commandButton class="btn btn-primary " value="#{msg['enter']}"
-                                                 action="#{controllerSession.iniciarSesion()}"/>
-                            </div>
-                        </h:form>
+                        </div>
+                        <div>
+                            <ul id="questions">
+                                <li>
+                                    <a href="#" onclick="$('#modal-recuperar').modal('show')">
+                                        #{msg['forgot-password']}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" onclick="$('#sign-up').modal('show')">
+                                        #{msg['signup']}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h:commandButton class="btn btn-primary " value="#{msg['enter']}"
+                                             action="#{controllerSession.iniciarSesion()}"/>
+                        </div>
                     </h:form>
                     <!-- Formulario de inicio de sesión -->
 
@@ -184,10 +184,10 @@
                                             <h:inputText a:placeholder="#{msg['document-number']}"
                                                          class="form-control mitooltip"
                                                          tabindex="2" id="numero-documento" maxlength="20"
-                                                         validatorMessage="Se ha excedido el número de carácteres permitidos(20) para el campo 'Numero de documento'."
+                                                         validatorMessage="#{msg['max-length']}(20) #{msg['for-the-field']} '#{msg['document-number']}'."
                                                          value="#{controllerUsuario.usuario.numeroDocumento}"
                                                          required="true"
-                                                         requiredMessage="El campo 'Numero de documento' es obligatorio."
+                                                         requiredMessage="#{msg['the-field']} '#{msg['document-number']}' #{msg['is-required']}"
                                                          a:name="numero-documento">
                                             </h:inputText>
                                         </div>
@@ -199,9 +199,9 @@
                                                          value="#{controllerUsuario.usuario.primerNombre}"
                                                          a:name="primer-nombre"
                                                          required="true"
-                                                         requiredMessage="El campo 'Primer nombre' es obligatorio."
+                                                         requiredMessage="#{msg['the-field']} #{msg['first-name']} #{msg['is-required']}"
                                                          maxlength="45"
-                                                         validatorMessage="Se ha excedido el número de carácteres permitidos(45) para el campo 'Primer nombre'">
+                                                         validatorMessage="#{msg['max-length']}(45) #{msg['for-the-field']} #{msg['first-name']}">
                                             </h:inputText>
                                         </div>
                                         <div class="form-group col-lg-6 col-md-6 col-sm-6">
@@ -212,7 +212,7 @@
                                                          value="#{controllerUsuario.usuario.segundoNombre}"
                                                          a:name="segundo-nombre"
                                                          required="false" maxlength="45"
-                                                         validatorMessage="Se ha excedido el número de carácteres permitidos(45) para el campo 'Segundo nombre'">
+                                                         validatorMessage="#{msg['max-length']}(45) #{msg['for-the-field']} #{msg['middle-name']}">
                                             </h:inputText>
                                         </div>
                                         <div class="form-group col-lg-6 col-md-6 col-sm-6">
@@ -223,9 +223,9 @@
                                                          value="#{controllerUsuario.usuario.primerApellido}"
                                                          a:name="primer-apellido"
                                                          required="true"
-                                                         requiredMessage="El campo 'Primer apellido' es obligatorio."
+                                                         requiredMessage="#{msg['the-field']} #{msg['surname']} #{msg['is-required']}"
                                                          maxlength="45"
-                                                         validatorMessage="Se ha excedido el número de carácteres permitidos(45) para el campo 'Primer apellido'">
+                                                         validatorMessage="#{msg['max-length']}(45) #{msg['for-the-field']} #{msg['surname']}">
                                             </h:inputText>
                                         </div>
                                         <div class="form-group col-lg-6 col-md-6 col-sm-6">
@@ -236,7 +236,7 @@
                                                          value="#{controllerUsuario.usuario.segundoApellido}"
                                                          a:name="segundo-apellido"
                                                          required="false" maxlength="45"
-                                                         validatorMessage="Se ha excedido el número de carácteres permitidos(45) para el campo 'Segundo apellido'">
+                                                         validatorMessage="#{msg['max-length']}(45) #{msg['for-the-field']} #{msg['second-surname']}">
                                             </h:inputText>
                                         </div>
                                         <div class="form-group col-lg-6 col-md-6 col-sm-6">
@@ -245,10 +245,10 @@
                                                          a:placeholder="ejem@ejem.com"
                                                          value="#{controllerUsuario.usuario.correoElectronico}"
                                                          required="true"
-                                                         requiredMessage="El campo 'Correo' es obligatorio."
+                                                         requiredMessage="#{msg['the-field']} #{msg['email']} #{msg['is-required']}"
                                                          a:name="correo"
                                                          maxlength="45"
-                                                         validatorMessage="Se ha excedido el número de carácteres permitidos(45) para el campo 'Correo'">
+                                                         validatorMessage="#{msg['max-length']}(45) #{msg['for-the-field']} #{msg['email']}">
                                             </h:inputText>
                                         </div>
                                         <div class="form-group col-lg-6 col-md-6 col-sm-6">
@@ -258,8 +258,8 @@
                                                            a:data-toggle="tooltip" a:data-placement="top"
                                                            value="#{controllerUsuario.usuario.claveUsuario}"
                                                            a:name="clave-usuario"
-                                                           required="true" requiredMessage="Ingrese una contraseña."
-                                                           validatorMessage="Se ha excedido el número de carácteres permitidos(45) para el campo 'Clave usuario'">
+                                                           required="true" requiredMessage="#{msg['void-password']}"
+                                                           validatorMessage="#{msg['max-length']}(45) #{msg['for-the-field']} #{msg['user-password']}">
                                             </h:inputSecret>
                                         </div>
 
@@ -301,14 +301,15 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="col-lg-12">
-                                            <h:message for="emailRe" errorClass="alert alert-danger" infoClass="alert alert-success"
+                                            <h:message for="emailRe" errorClass="alert alert-danger"
+                                                       infoClass="alert alert-success"
                                                        style="display: block" showSummary="true" showDetail="false"/>
                                         </div>
                                         <div class="form-group col-lg-12">
                                             <label for="emailRe">#{msg['password-recovery-desc']}</label>
                                             <h:inputText a:type="email" class="form-control" id="emailRe"
                                                          a:placeholder="ejem@ejem.com"
-                                                         required="true" requiredMessage="El campo es obligatorio"
+                                                         required="true" requiredMessage="#{msg['required']}"
                                                          value="#{controllerEmail.emailDestinatario}"/>
                                         </div>
                                     </div>
@@ -529,41 +530,41 @@
                     }
                 }, messages: {
                     'numero-documento': {
-                        required: 'El campo es obligatorio.',
-                        number: 'Sólo se permiten carácteres numéricos.',
-                        maxlength: 'Se ha excedido el número de carácteres permitidos(20).'
+                        required: '#{msg["required"]}',
+                        number: '#{msg["numeric"]}',
+                        maxlength: '#{msg["max-length"]}(20).'
                     },
                     'primer-nombre': {
-                        required: 'El campo es obligatorio.',
-                        alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
-                        maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                        required: '#{msg["required"]}',
+                        alphabet: '#{msg["alphabet"]}',
+                        maxlength: '#{msg["max-length"]}(45).'
                     },
                     'segundo-nombre': {
-                        alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
-                        maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                        alphabet: '#{msg["alphabet"]}',
+                        maxlength: '#{msg["max-length"]}(45).'
                     },
                     'primer-apellido': {
-                        required: 'El campo es obligatorio.',
-                        alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
-                        maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                        required: '#{msg["required"]}',
+                        alphabet: '#{msg["alphabet"]}',
+                        maxlength: '#{msg["max-length"]}(45).'
                     },
                     'segundo-apellido': {
-                        alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
-                        maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                        alphabet: '#{msg["alphabet"]}',
+                        maxlength: '#{msg["max-length"]}(45).'
                     },
                     correo: {
-                        required: 'El campo es obligatorio.',
-                        email: 'Introduzca una dirección de email válida.',
-                        maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                        required: '#{msg["required"]}',
+                        email: '#{msg["mail"]}',
+                        maxlength: '#{msg["max-length"]}(45).'
                     },
                     'clave-usuario': {
-                        required: 'El campo es obligatorio.',
-                        minlength: 'La contraseña debe contener mínimo 8 carácteres.',
-                        maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                        required: '#{msg["required"]}',
+                        minlength: '#{msg["password-length"]}',
+                        maxlength: '#{msg["max-length"]}(45).'
                     },
                     'confirmar-clave': {
-                        required: 'El campo es obligatorio.',
-                        equalTo: 'Las contraseñas no coinciden.'
+                        required: '#{msg["required"]}',
+                        equalTo: '#{msg["equal-pass"]}'
                     }
                 }
             })
@@ -579,8 +580,8 @@
                 },
                 messages: {
                     'emailRe': {
-                        required: "El campo es obligatorio.",
-                        email: 'Introduzca una de dirección de email válida.'
+                        required: '#{msg["required"]}',
+                        email: '#{msg["mail"]}'
                     }
                 }
             });

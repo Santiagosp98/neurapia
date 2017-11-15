@@ -11,12 +11,13 @@ import Entities.Usuario;
 import Facade.RolFacadeLocal;
 import Facade.UsuarioFacadeLocal;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.ParseException;
 import javax.faces.component.UIComponent;
 import javax.inject.Named;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Pattern;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -142,14 +143,14 @@ public class ControllerUsuario extends ControllerApp {
                 if (!usuario.getCodRol().equals(1)) {
                     usuarioFacade.remove(usuario);
                     finalizarConversacion();
-                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "El usuario ha sido eliminado.", null);
+                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("delete-user-action"), null);
                     fc.addMessage(null, m);
                 } else {
-                    FacesMessage m1 = new FacesMessage(FacesMessage.SEVERITY_WARN, "No tiene permisos para realizar esta acción.", "");
+                    FacesMessage m1 = new FacesMessage(FacesMessage.SEVERITY_WARN, msg.getString("request-denied"), "");
                     fc.addMessage(null, m1);
                 }
             } else {
-                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "No se puede eliminar a sí mismo.", "");
+                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("delete-logged-user"), "");
                 fc.addMessage(null, m);
             }
         } catch (Exception e) {
@@ -167,7 +168,7 @@ public class ControllerUsuario extends ControllerApp {
             return "editarusuario?faces-redirect=true";
         } else {
             finalizarConversacion();
-            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, "No puede modificar un Super administrador", "No tiene permisos para esta acción");
+            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_WARN, msg.getString("request-denied"), "");
             fc.addMessage(null, m);
         }
         return "";
@@ -180,7 +181,7 @@ public class ControllerUsuario extends ControllerApp {
             Pattern regexp = Pattern.compile("\\d+");
 
             if (!regexp.matcher(usuario.getNumeroDocumento()).matches()) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Numero de documento' solo admite carácteres numéricos.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("the-field") + " " + msg.getString("document-number") + " " + msg.getString("not-numeric"), "");
                 fc.addMessage(null, message);
                 return "";
             }
@@ -188,7 +189,7 @@ public class ControllerUsuario extends ControllerApp {
             regexp = Pattern.compile("^[a-zA-ZáéíóúÁÉÍÓÚ]+$");
 
             if (!regexp.matcher(usuario.getPrimerNombre()).matches()) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Primer nombre' no admite carácteres que no pertenezcan al alfabeto.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("the-field") + msg.getString("first-name") + " " + msg.getString("not-alphabet"), "");
                 fc.addMessage(null, message);
                 return "";
             }
@@ -196,7 +197,7 @@ public class ControllerUsuario extends ControllerApp {
             regexp = Pattern.compile("^[a-zA-ZáéíóúÁÉÍÓÚ]*$");
 
             if (!regexp.matcher(usuario.getSegundoNombre()).matches()) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Segundo nombre' no admite carácteres que no pertenezcan al alfabeto.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("the-field") + " " + msg.getString("middle-name") + " " + msg.getString("not-alphabet"), "");
                 fc.addMessage(null, message);
                 return "";
             }
@@ -204,7 +205,7 @@ public class ControllerUsuario extends ControllerApp {
             regexp = Pattern.compile("^[a-zA-ZáéíóúÁÉÍÓÚ]+$");
 
             if (!regexp.matcher(usuario.getPrimerApellido()).matches()) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Primer apellido' no admite carácteres que no pertenezcan al alfabeto.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("the-field") + " " + msg.getString("surname") + " " + msg.getString("not-alphabet"), "");
                 fc.addMessage(null, message);
                 return "";
             }
@@ -212,7 +213,7 @@ public class ControllerUsuario extends ControllerApp {
             regexp = Pattern.compile("^[a-zA-ZáéíóúÁÉÍÓÚ]*$");
 
             if (!regexp.matcher(usuario.getSegundoApellido()).matches()) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Segundo apellido' no admite carácteres que no pertenezcan al alfabeto.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("the-field") + " " + msg.getString("second-surname") + " " + msg.getString("not-alphabet"), "");
                 fc.addMessage(null, message);
                 return "";
             }
@@ -220,7 +221,7 @@ public class ControllerUsuario extends ControllerApp {
             regexp = Pattern.compile("[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}");
 
             if (!regexp.matcher(usuario.getCorreoElectronico()).matches()) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Introduzca una dirección de email válida.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("mail"), "");
                 fc.addMessage(null, message);
                 return "";
             }
@@ -228,18 +229,18 @@ public class ControllerUsuario extends ControllerApp {
             if (usuarioFacade.buscarDocumento(usuario.getNumeroDocumento()) == null || usuarioFacade.buscarDocumento(usuario.getNumeroDocumento()).equals(usuario)) {
                 if (usuarioFacade.buscarEmail(usuario.getCorreoElectronico()) == null || usuarioFacade.buscarEmail(usuario.getCorreoElectronico()).equals(usuario)) {
                     usuarioFacade.edit(usuario);
-                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "El usuario ha sido editado.", "");
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("edit-user-action"), "");
                     fc.addMessage(null, message);
                     fc.getExternalContext().getFlash().setKeepMessages(true);
                     finalizarConversacion();
                     return "consultarusuarios?faces-redirect=true";
                 } else if (!(usuarioFacade.buscarEmail(usuario.getCorreoElectronico()) == null)) {
-                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El correo ingresado ya está registrado.", "");
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("existing-email"), "");
                     fc.addMessage(null, message);
                     return "";
                 }
             } else if (!(usuarioFacade.buscarDocumento(usuario.getNumeroDocumento()) == null)) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El número de documento ingresado ya está registrado.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("existing-document"), "");
                 fc.addMessage(null, message);
                 return "";
             }
@@ -255,7 +256,7 @@ public class ControllerUsuario extends ControllerApp {
             regexp = Pattern.compile("^[a-zA-ZáéíóúÁÉÍÓÚ]+$");
 
             if (!regexp.matcher(usuarioEnSesion.getPrimerNombre()).matches()) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Primer nombre' no admite carácteres que no pertenezcan al alfabeto.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("the-field") + " " + msg.getString("first-name") + " " + msg.getString("not-alphabet"), "");
                 fc.addMessage(null, message);
                 return "";
             }
@@ -263,7 +264,7 @@ public class ControllerUsuario extends ControllerApp {
             regexp = Pattern.compile("^[a-zA-ZáéíóúÁÉÍÓÚ]*$");
 
             if (!regexp.matcher(usuarioEnSesion.getSegundoNombre()).matches()) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Segundo nombre' no admite carácteres que no pertenezcan al alfabeto.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("the-field") + " " + msg.getString("middle-name") + " " + msg.getString("not-alphabet"), "");
                 fc.addMessage(null, message);
                 return "";
             }
@@ -271,7 +272,7 @@ public class ControllerUsuario extends ControllerApp {
             regexp = Pattern.compile("^[a-zA-ZáéíóúÁÉÍÓÚ]+$");
 
             if (!regexp.matcher(usuarioEnSesion.getPrimerApellido()).matches()) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Primer apellido' no admite carácteres que no pertenezcan al alfabeto.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("the-field") + " " + msg.getString("surname") + " " + msg.getString("not-alphabet"), "");
                 fc.addMessage(null, message);
                 return "";
             }
@@ -279,7 +280,7 @@ public class ControllerUsuario extends ControllerApp {
             regexp = Pattern.compile("^[a-zA-ZáéíóúÁÉÍÓÚ]*$");
 
             if (!regexp.matcher(usuarioEnSesion.getSegundoApellido()).matches()) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Segundo apellido' no admite carácteres que no pertenezcan al alfabeto.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("the-field") + " " + msg.getString("second-surname") + " " + msg.getString("not-alphabet"), "");
                 fc.addMessage(null, message);
                 return "";
             }
@@ -287,19 +288,19 @@ public class ControllerUsuario extends ControllerApp {
             regexp = Pattern.compile("[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}");
 
             if (!regexp.matcher(usuarioEnSesion.getCorreoElectronico()).matches()) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Introduzca una dirección de email válida.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("mail"), "");
                 fc.addMessage(null, message);
                 return "";
             }
 
             if (usuarioFacade.buscarEmail(usuarioEnSesion.getCorreoElectronico()) == null || usuarioFacade.buscarEmail(usuarioEnSesion.getCorreoElectronico()).equals(usuarioEnSesion)) {
                 this.usuarioFacade.edit(usuarioEnSesion);
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Perfil editado.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("profile-edited"), "");
                 fc.addMessage(null, message);
                 fc.getExternalContext().getFlash().setKeepMessages(true);
                 return "editarperfil.xhtml?faces-redirect=true";
             } else {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El correo ingresado ya está registrado en el sistema", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("existing-email"), "");
                 fc.addMessage(null, message);
                 return "";
             }
@@ -324,7 +325,7 @@ public class ControllerUsuario extends ControllerApp {
             Pattern regexp = Pattern.compile("\\d+");
 
             if (!regexp.matcher(usuario.getNumeroDocumento()).matches()) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Numero de documento' solo admite carácteres numéricos.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("the-field") + " " + msg.getString("document-number") + " " + msg.getString("not-numeric"), "");
                 fc.addMessage(null, message);
                 return "";
             }
@@ -332,7 +333,7 @@ public class ControllerUsuario extends ControllerApp {
             regexp = Pattern.compile("^[a-zA-ZáéíóúÁÉÍÓÚ]+$");
 
             if (!regexp.matcher(usuario.getPrimerNombre()).matches()) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Primer nombre' no admite carácteres que no pertenezcan al alfabeto.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("the-field") + " " + msg.getString("first-name") + " " + msg.getString("not-alphabet"), "");
                 fc.addMessage(null, message);
                 return "";
             }
@@ -340,7 +341,7 @@ public class ControllerUsuario extends ControllerApp {
             regexp = Pattern.compile("^[a-zA-ZáéíóúÁÉÍÓÚ]*$");
 
             if (!regexp.matcher(usuario.getSegundoNombre()).matches()) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Segundo nombre' no admite carácteres que no pertenezcan al alfabeto.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("the-field") + " " + msg.getString("middle-name") + " " + msg.getString("not-alphabet"), "");
                 fc.addMessage(null, message);
                 return "";
             }
@@ -348,7 +349,7 @@ public class ControllerUsuario extends ControllerApp {
             regexp = Pattern.compile("^[a-zA-ZáéíóúÁÉÍÓÚ]+$");
 
             if (!regexp.matcher(usuario.getPrimerApellido()).matches()) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Primer apellido' no admite carácteres que no pertenezcan al alfabeto.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("the-field") + " " + msg.getString("surname") + " " + msg.getString("not-alphabet"), "");
                 fc.addMessage(null, message);
                 return "";
             }
@@ -356,7 +357,7 @@ public class ControllerUsuario extends ControllerApp {
             regexp = Pattern.compile("^[a-zA-ZáéíóúÁÉÍÓÚ]*$");
 
             if (!regexp.matcher(usuario.getSegundoApellido()).matches()) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Segundo apellido' no admite carácteres que no pertenezcan al alfabeto.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("the-field") + " " + msg.getString("second-surname") + " " + msg.getString("not-alphabet"), "");
                 fc.addMessage(null, message);
                 return "";
             }
@@ -364,19 +365,19 @@ public class ControllerUsuario extends ControllerApp {
             regexp = Pattern.compile("[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}");
 
             if (!regexp.matcher(usuario.getCorreoElectronico()).matches()) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Introduzca una dirección de email válida.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("mail"), "");
                 fc.addMessage(null, message);
                 return "";
             }
 
             if (usuario.getClaveUsuario().length() < 8) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La contraseña debe contener mínimo 8 carácteres.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("password-length"), "");
                 fc.addMessage(null, message);
                 return "";
             }
 
             if (!usuario.getClaveUsuario().equals(confirmarClave)) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Las contraseñas no coinciden.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("equal-pass"), "");
                 fc.addMessage(null, message);
                 return "";
             }
@@ -391,7 +392,7 @@ public class ControllerUsuario extends ControllerApp {
                         usuario.setIngresos(usuario.getIngresos());
                         usuario.setUltimaSesion(calendar.getTime());
                         usuarioFacade.create(usuario);
-                        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "El usuario ha sido creado.", "");
+                        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("create-user-action"), "");
                         fc.addMessage(null, message);
                         fc.getExternalContext().getFlash().setKeepMessages(true);
                         return "crearusuarios.xhtml?faces-redirect=true";
@@ -399,20 +400,20 @@ public class ControllerUsuario extends ControllerApp {
                         usuario.setIngresos(usuario.getIngresos());
                         usuario.setUltimaSesion(calendar.getTime());
                         usuarioFacade.create(usuario);
-                        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "El usuario ha sido creado.", "");
+                        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("create-user-action"), "");
                         fc.addMessage(null, message);
                         fc.getExternalContext().getFlash().setKeepMessages(true);
                         return "crearusuario.xhtml?faces-redirect=true";
                     }
                 } else {
-                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El email ingresado ya está registrado.", "");
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("existing-email"), "");
                     fc.addMessage(null, message);
                     return "";
 
                 }
 
             } else {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El número de documento ingresado ya está registrado.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("existing-document"), "");
                 fc.addMessage(null, message);
                 return "";
             }
@@ -432,7 +433,7 @@ public class ControllerUsuario extends ControllerApp {
             if (!regexp.matcher(usuario.getNumeroDocumento()).matches()) {
                 UIComponent root = fc.getViewRoot();
                 UIComponent component = root.findComponent("registro:numero-documento");
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Numero de documento' solo admite carácteres numéricos.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("the-field") + " " + msg.getString("document-number") + " " + msg.getString("not-numeric"), "");
                 fc.addMessage(component.getClientId(fc), message);
                 return;
             }
@@ -442,7 +443,7 @@ public class ControllerUsuario extends ControllerApp {
             if (!regexp.matcher(usuario.getPrimerNombre()).matches()) {
                 UIComponent root = fc.getViewRoot();
                 UIComponent component = root.findComponent("registro:primer-nombre");
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Primer nombre' no admite carácteres que no pertenezcan al alfabeto.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("the-field") + " " + msg.getString("first-name") + " " + msg.getString("not-alphabet"), "");
                 fc.addMessage(component.getClientId(fc), message);
                 return;
             }
@@ -452,7 +453,7 @@ public class ControllerUsuario extends ControllerApp {
             if (!regexp.matcher(usuario.getSegundoNombre()).matches()) {
                 UIComponent root = fc.getViewRoot();
                 UIComponent component = root.findComponent("registro:segundo-nombre");
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Segundo nombre' no admite carácteres que no pertenezcan al alfabeto.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("the-field") + " " + msg.getString("middle-name") + " " + msg.getString("not-alphabet"), "");
                 fc.addMessage(component.getClientId(fc), message);
                 return;
             }
@@ -462,7 +463,7 @@ public class ControllerUsuario extends ControllerApp {
             if (!regexp.matcher(usuario.getPrimerApellido()).matches()) {
                 UIComponent root = fc.getViewRoot();
                 UIComponent component = root.findComponent("registro:primer-apellido");
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Primer apellido' no admite carácteres que no pertenezcan al alfabeto.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("the-field") + " " + msg.getString("surname") + " " + msg.getString("not-alphabet"), "");
                 fc.addMessage(component.getClientId(fc), message);
                 return;
             }
@@ -472,7 +473,7 @@ public class ControllerUsuario extends ControllerApp {
             if (!regexp.matcher(usuario.getSegundoApellido()).matches()) {
                 UIComponent root = fc.getViewRoot();
                 UIComponent component = root.findComponent("registro:segundo-apellido");
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Segundo apellido' no admite carácteres que no pertenezcan al alfabeto.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("the-field") + " " + msg.getString("second-surname") + " " + msg.getString("not-alphabet"), "");
                 fc.addMessage(component.getClientId(fc), message);
                 return;
             }
@@ -482,7 +483,7 @@ public class ControllerUsuario extends ControllerApp {
             if (!regexp.matcher(usuario.getCorreoElectronico()).matches()) {
                 UIComponent root = fc.getViewRoot();
                 UIComponent component = root.findComponent("registro:correo");
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Introduzca una dirección de email válida.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("mail"), "");
                 fc.addMessage(component.getClientId(fc), message);
                 return;
             }
@@ -490,7 +491,7 @@ public class ControllerUsuario extends ControllerApp {
             if (usuario.getClaveUsuario().length() < 8) {
                 UIComponent root = fc.getViewRoot();
                 UIComponent component = root.findComponent("registro:clave-usuario");
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La contraseña debe contener mínimo 8 carácteres.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("password-length"), "");
                 fc.addMessage(component.getClientId(fc), message);
                 return;
             }
@@ -498,7 +499,7 @@ public class ControllerUsuario extends ControllerApp {
             if (!usuario.getClaveUsuario().equals(confirmarClave)) {
                 UIComponent root = fc.getViewRoot();
                 UIComponent component = root.findComponent("registro:confirmar-clave");
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Las contraseñas no coinciden.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("equal-pass"), "");
                 fc.addMessage(component.getClientId(fc), message);
                 return;
             }
@@ -516,19 +517,19 @@ public class ControllerUsuario extends ControllerApp {
                     usuarioFacade.create(usuario);
                     UIComponent root = fc.getViewRoot();
                     UIComponent component = root.findComponent("registro:correo");
-                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cuenta de usuario registrada.", "");
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("account-registered"), "");
                     fc.addMessage(component.getClientId(fc), message);
                 } else {
                     UIComponent root = fc.getViewRoot();
                     UIComponent component = root.findComponent("registro:correo");
-                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El email ingresado ya está registrado.", "");
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("existing-email"), "");
                     fc.addMessage(component.getClientId(fc), message);
                 }
 
             } else {
                 UIComponent root = fc.getViewRoot();
                 UIComponent component = root.findComponent("registro:numero-documento");
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El numero de documento ingresado ya está registrado.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("existing-document"), "");
                 fc.addMessage(component.getClientId(fc), message);
             }
         }
@@ -637,24 +638,24 @@ public class ControllerUsuario extends ControllerApp {
                         usuarioFacade.edit(usuarioEnSesion);
                         UIComponent root = facesContext.getViewRoot();
                         UIComponent component = root.findComponent("cambiar-contrasena:nueva-contrasena");
-                        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Contraseña modificada.", "");
+                        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("modify-password-action"), "");
                         facesContext.addMessage(component.getClientId(facesContext), message);
                     } else {
                         UIComponent root = facesContext.getViewRoot();
                         UIComponent component = root.findComponent("cambiar-contrasena:nueva-contrasena");
-                        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Las contraseñas (nueva) no coinciden.", "");
+                        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("equal-pass"), "");
                         facesContext.addMessage(component.getClientId(facesContext), message);
                     }
                 } else {
                     UIComponent root = facesContext.getViewRoot();
                     UIComponent component = root.findComponent("cambiar-contrasena:nueva-contrasena");
-                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La contraseña de tener mínimo 8 carácteres.", "");
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("password-length"), "");
                     facesContext.addMessage(component.getClientId(facesContext), message);
                 }
             } else {
                 UIComponent root = facesContext.getViewRoot();
                 UIComponent component = root.findComponent("cambiar-contrasena:contrasena-anterior");
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La contraseña actual (anterior) ingresada no coincide.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("password-not-match"), "");
                 facesContext.addMessage(component.getClientId(facesContext), message);
             }
 

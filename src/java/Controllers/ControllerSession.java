@@ -11,9 +11,7 @@ import Facade.UsuarioFacadeLocal;
 import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -36,15 +34,15 @@ public class ControllerSession extends ControllerApp {
      */
     public ControllerSession() {
     }
-    
+
     @EJB
     private UsuarioFacadeLocal usuarioFacade;
     private String email;
     private String clave;
     private Usuario usuario;
-    
+
     @PostConstruct
-    public void init(){        
+    public void init() {
     }
 
     public String getEmail() {
@@ -70,39 +68,40 @@ public class ControllerSession extends ControllerApp {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    
-    public String iniciarSesion(){
+
+    public String iniciarSesion() {
         System.out.println("Estamos en Sesión");
         FacesContext fc = FacesContext.getCurrentInstance();
-        if (email != null && !email.equals("") && clave != null && !clave.equals("") ) {
+        if (email != null && !email.equals("") && clave != null && !clave.equals("")) {
             usuario = usuarioFacade.iniciarSesion(email, clave);
             if (usuario != null) {
-                if(usuario.getEstadoUsuario().equals("Activo")){
+                if (usuario.getEstadoUsuario().equals("Activo")) {
                     System.out.println("El usuario ingresado es: " + usuario.getPrimerNombre());
                     usuario.setIngresos(usuario.getIngresos() + 1);
                     Calendar calendar = Calendar.getInstance();
                     usuario.setUltimaSesion(calendar.getTime());
                     usuarioFacade.edit(usuario);
                     return "usuario/perfil.xhtml?faces-redirect=true";
-                }else{
-                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Lo sentimos tu usuario esta inactivo", "Hable con el administrador para activar");
+                } else {
+                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("inactive-user"), "");
                     fc.addMessage(null, m);
                 }
-                        
-            }else{
-                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Email o clave incorrectas", "verifique los datos");
+
+            } else {
+                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("incorrect-email-or-password"), "");
                 fc.addMessage(null, m);
             }
-        }else{
-            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Todos los datos son obligatorios", "Diligencie todos los datos");
-                fc.addMessage(null, m);
-        }return "";
+        } else {
+            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("all-fields-required"), "");
+            fc.addMessage(null, m);
+        }
+        return "";
     }
-    
-    public void cerrarSesion(){
+
+    public void cerrarSesion() {
         try {
             System.out.println("Estamos cerrando Sesion");
-            
+
             FacesContext fc = FacesContext.getCurrentInstance();
             ExternalContext ec = fc.getExternalContext();
             System.out.println(ec.getContext());
@@ -111,108 +110,109 @@ public class ControllerSession extends ControllerApp {
             this.email = "";
             this.usuario = null;
             ec.redirect(hostName() + "index.xhtml");
-            System.out.println(ec.getRequestContextPath()+ "/index.xhtml");
+            System.out.println(ec.getRequestContextPath() + "/index.xhtml");
         } catch (IOException ex) {
             Logger.getLogger(ControllerSession.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public boolean inicioSesion(){
-        System.out.println( "Host name: " + hostName());
+
+    public boolean inicioSesion() {
+        System.out.println("Host name: " + hostName());
         System.out.println("Validando");
-        return(usuario != null);
+        return (usuario != null);
     }
-    
-    public void validarSesion() throws IOException{
+
+    public void validarSesion() throws IOException {
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-        if (inicioSesion()) {            
+        if (inicioSesion()) {
             if (true) {
                 HttpServletRequest req = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
                 String url = req.getRequestURL().toString();
                 if (!consultarPermiso(url)) {
                     ec.redirect(hostName() + "usuario/perfil.xhtml?faces-redirect=true");
                 }
-            }else{
+            } else {
                 cerrarSesion();
             }
         }
     }
-    
-    public boolean consultarPermiso(String url){
+
+    public boolean consultarPermiso(String url) {
         if (url.endsWith("historialclinico")) {
             System.out.println("Tiene permiso");
-            return true;        
+            return true;
         }
         for (Permiso p : usuario.getCodRol().getPermisoList()) {
-            if ( p.getUrl() != null && url.endsWith(p.getUrl())) {
+            if (p.getUrl() != null && url.endsWith(p.getUrl())) {
                 System.out.println("No tiene permiso");
                 return false;
             }
         }
-        return true;        
+        return true;
     }
-    
-    public boolean accesoSuperAdmin(){
+
+    public boolean accesoSuperAdmin() {
         System.out.println("SuperAdmin");
         System.out.println(usuario.getCodRol().getNombreRol());
-        if(usuario.getCodRol().getNombreRol().equals("Super Administrador") || usuario.getCodRol().getNombreRol().equals("Administrador")){
+        if (usuario.getCodRol().getNombreRol().equals("Super Administrador") || usuario.getCodRol().getNombreRol().equals("Administrador")) {
             System.out.println(usuario.getCodRol().getIdRol());
             return false;
         }
         return true;
     }
-    public boolean accesoUsuario(){
+
+    public boolean accesoUsuario() {
         System.out.println("Usuario");
         System.out.println(usuario.getCodRol().getNombreRol());
-        if(usuario.getCodRol().getNombreRol().equals("Usuario")){
+        if (usuario.getCodRol().getNombreRol().equals("Usuario")) {
             System.out.println("Ingreso igual usuario");
             return false;
         }
         return true;
 
     }
-    
-    public boolean accesoFisioterapeuta(){
+
+    public boolean accesoFisioterapeuta() {
         System.out.println("Fisioterapeuta");
         System.out.println(usuario.getCodRol().getNombreRol());
-        if(usuario.getCodRol().getNombreRol().equals("Fisioterapeuta")){
+        if (usuario.getCodRol().getNombreRol().equals("Fisioterapeuta")) {
             System.out.println("Ingreso igual a fisioterapeuta");
             return false;
         }
         return true;
     }
-    
-    public void validarAccesoFisioterapeuta(){
+
+    public void validarAccesoFisioterapeuta() {
         System.out.println("Validando");
-        if(accesoFisioterapeuta() == false){
-            System.out.println("Validado");
-            redireccionPaciente();
-        }
-    }
-    
-    public void validarAccesoUsuario(){
-        System.out.println("Validando");
-        if(accesoUsuario() == false){
-            System.out.println("Validado");
-            redireccionPaciente();
-        }
-    }
-    
-    public void validarAccesoSuperAdmin(){
-        System.out.println("Hola validando");
-        if(accesoSuperAdmin() == false){
+        if (accesoFisioterapeuta() == false) {
             System.out.println("Validado");
             redireccionPaciente();
         }
     }
 
-    public void redireccionPaciente(){
+    public void validarAccesoUsuario() {
+        System.out.println("Validando");
+        if (accesoUsuario() == false) {
+            System.out.println("Validado");
+            redireccionPaciente();
+        }
+    }
+
+    public void validarAccesoSuperAdmin() {
+        System.out.println("Hola validando");
+        if (accesoSuperAdmin() == false) {
+            System.out.println("Validado");
+            redireccionPaciente();
+        }
+    }
+
+    public void redireccionPaciente() {
         try {
             FacesContext fc = FacesContext.getCurrentInstance();
             ExternalContext ec = fc.getExternalContext();
             System.out.println(hostName() + "usuario/perfil.xhtml");
             ec.redirect(hostName() + "usuario/perfil.xhtml");
-            
+
         } catch (IOException ex) {
             Logger.getLogger(ControllerSession.class.getName()).log(Level.SEVERE, null, ex);
 
