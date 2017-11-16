@@ -79,7 +79,7 @@
                                  aria-labelledby="headingThree">
                                 <div class="panel-body">
                                     <a href="#{request.contextPath}/citamedica/reportecitamedica.xhtml">
-                                        <h:outputText value="Estadísticas"/>
+                                        <h:outputText value="#{msg['statistics']}"/>
                                     </a>
                                 </div>
                             </div>
@@ -102,7 +102,7 @@
 
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <h:messages showSummary="true" showDetail="true" infoClass="alert alert-sucess"
-                                        errorClass="alert alert-danger"/>
+                                        errorClass="alert alert-danger" styleClass="message"/>
                         </div>
 
                         <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol eq 3}">
@@ -139,7 +139,7 @@
                                          validatorMessage="Se ha excedido el número de carácteres permitidos(2)."/>
                         </div>
                         <div class="form-group col-lg-6 col-md-12 col-sm-12">
-                            <h:outputLabel value="Minutos" for="hora"/>
+                            <h:outputLabel value="#{msg['minutes']}" for="hora"/>
                             <h:inputText id="minutos" class="form-control mitooltip" a:placeholder="mm"
                                          value="00" disabled="true"
                                          requiredMessage="La hora es requerida." a:name="hora" maxlength="2"
@@ -147,21 +147,21 @@
                         </div>
 
                         <div class="form-group col-lg-6 col-md-12 col-sm-12">
-                            <h:outputLabel value="Dia" for="dia"/>
+                            <h:outputLabel value="#{msg['day']}" for="dia"/>
                             <h:inputText id="dia" a:placeholder="dd" class="form-control mitooltip"
                                          value="#{controllerCitaMedica.fechaCitaDia}" required="true"
                                          requiredMessage="El dia es requerido." a:name="dia" maxlength="2"
                                          validatorMessage="Se ha excedido el número de carácteres permitidos(2)."/>
                         </div>
                         <div class="form-group col-lg-6 col-md-12 col-sm-12">
-                            <h:outputLabel value="Mes" for="mes"/>
+                            <h:outputLabel value="#{msg['month']}" for="mes"/>
                             <h:inputText id="mes" a:placeholder="mm" class="form-control mitooltip"
                                          value="#{controllerCitaMedica.fechaCitaMes}" required="true"
                                          requiredMessage="El mes es requerido." a:name="mes" maxlength="2"
                                          validatorMessage="Se ha excedido el número de carácteres permitidos(2)."/>
                         </div>
                         <div class="form-group col-lg-6 col-md-12 col-sm-12">
-                            <h:outputLabel value="Año" for="anio"/>
+                            <h:outputLabel value="#{msg['year']}" for="anio"/>
                             <h:inputText id="anio" a:placeholder="yyyy" class="form-control mitooltip"
                                          value="#{controllerCitaMedica.fechaCitaAño}" required="true"
                                          requiredMessage="El año es requerido." maxlength="4" a:name="anio"

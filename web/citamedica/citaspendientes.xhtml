@@ -97,10 +97,8 @@
                         </h4>
                         <div class="fixed-table-body">
                             <h:form prependId="false">
-                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <h:messages showSummary="true" showDetail="true" infoClass="alert alert-sucess"
-                                                errorClass="alert alert-danger"/>
-                                </div>
+                                    <h:messages showSummary="true" showDetail="true" infoClass="alert alert-success"
+                                                errorClass="alert alert-danger" styleClass="message"/>
                                 <h:dataTable value="#{controllerCitaMedica.listarCitasporEstado()}" var="item"
                                              class="table table-striped table-bordered" id="citas-pendientes">
 

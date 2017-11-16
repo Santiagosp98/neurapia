@@ -11,6 +11,7 @@ import Entities.Usuario;
 import Facade.CitamedicaFacadeLocal;
 import Facade.FisioterapeutaFacadeLocal;
 import Facade.UsuarioFacadeLocal;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,7 +28,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 /**
- *
  * @author jair3
  */
 @Named(value = "controllerCitaMedica")
@@ -219,11 +219,12 @@ public class ControllerCitaMedica extends ControllerApp {
                     citamedica.setEstado("Cancelada");
                     System.out.println("Estado: " + citamedica.getEstado());
                     this.citaMedicaFacade.edit(citamedica);
-                    return "historialdecitas?faces-redirect=true";
+                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("appointment-canceled"), "");
+                    fc.addMessage(null, message);
+                    return "";
                 } else {
                     System.out.println("No se puede cancelar cita");
-                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al cancelar cita",
-                            "No se puede cancelar la cita 2 dia antes de ella");
+                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("cannot-cancel-appointment"), "");
                     fc.addMessage(null, m);
                     return "";
                 }
@@ -247,25 +248,25 @@ public class ControllerCitaMedica extends ControllerApp {
             regexp = Pattern.compile("\\d+");
 
             if (!regexp.matcher(fechaHora).matches()) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Hora' solo admite carácteres numéricos.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("the-field") + " " + msg.getString("hour") + " " + msg.getString("not-numeric"), "");
                 fc.addMessage(null, message);
                 return "";
             }
 
             if (!regexp.matcher(fechaCitaDia).matches()) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Día' solo admite carácteres numéricos.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("the-field") + " " + msg.getString("day") + " " + msg.getString("not-numeric"), "");
                 fc.addMessage(null, message);
                 return "";
             }
 
             if (!regexp.matcher(fechaCitaMes).matches()) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Mes' solo admite carácteres numéricos.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("the-field") + " " + msg.getString("month") + " " + msg.getString("not-numeric"), "");
                 fc.addMessage(null, message);
                 return "";
             }
 
             if (!regexp.matcher(fechaCitaAño).matches()) {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El campo 'Año' solo admite carácteres numéricos.", "");
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("the-field") + " " + msg.getString("year") + " " + msg.getString("not-numeric"), "");
                 fc.addMessage(null, message);
                 return "";
             }
@@ -287,27 +288,30 @@ public class ControllerCitaMedica extends ControllerApp {
                                         System.out.println("fecha menor a 20");
                                         if (Integer.parseInt(fechaHora) >= 8) {
                                             System.out.println("creado cita contenido");
-                                            if (crearCitaContenido() == true) {
-                                                return "historialdecitas.xhtml?faces-redirect=true";
+                                            if (crearCitaContenido()) {
+                                                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("appointment-created"), "");
+                                                fc.addMessage(null, message);
+                                                fc.getExternalContext().getFlash().setKeepMessages(true);
+                                                return "citaspendientes.xhtml?faces-redirect=true";
                                             } else {
-                                                System.out.println("No se creo");
-                                                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
-                                                        "El fisioterapeuta que selecciono ya esta ocupado en la fecha y hora digitada  o usted esta invalidado para pedir otra cita");
-                                                fc.addMessage(null, m);
+                                                if (cs.getUsuario().getCodRol().getIdRol() == 4) {
+                                                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("appointment-not-available-user"), "");
+                                                    fc.addMessage(null, m);
+                                                } else {
+                                                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("appointment-not-available"), "");
+                                                    fc.addMessage(null, m);
+                                                }
                                             }
                                         } else {
-                                            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
-                                                    "Solo atendemos desde las 8 horas del dia ");
+                                            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("hours-of-operation"), "");
                                             fc.addMessage(null, m);
                                         }
                                     } else {
-                                        FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
-                                                "Atendemos hasta las 20 horas del dia");
+                                        FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("hours-of-operation"), "");
                                         fc.addMessage(null, m);
                                     }
                                 } else {
-                                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
-                                            "El dia tiene que ser mayor de 0 y menor o igual que 31 para el mes digitado");
+                                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("day-range-31"), "");
                                     fc.addMessage(null, m);
                                 }
                             } else {
@@ -321,27 +325,27 @@ public class ControllerCitaMedica extends ControllerApp {
                                                 System.out.println("fecha menor a 20");
                                                 if (Integer.parseInt(fechaHora) >= 8) {
                                                     System.out.println("creado cita contenido");
-                                                    if (crearCitaContenido() == true) {
+                                                    if (crearCitaContenido()) {
                                                         return "citaspendientes?faces-redirect=true";
                                                     } else {
-                                                        System.out.println("No se creo");
-                                                        FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
-                                                                "El fisioterapeuta que selecciono ya esta ocupado en la fecha y hora digitada  o usted esta invalidado para pedir otra cita");
-                                                        fc.addMessage(null, m);
+                                                        if (cs.getUsuario().getCodRol().getIdRol() == 4) {
+                                                            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("appointment-not-available-user"), "");
+                                                            fc.addMessage(null, m);
+                                                        } else {
+                                                            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("appointment-not-available"), "");
+                                                            fc.addMessage(null, m);
+                                                        }
                                                     }
                                                 } else {
-                                                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
-                                                            "Solo atendemos desde las 8 horas del dia ");
+                                                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("hours-of-operation"), "");
                                                     fc.addMessage(null, m);
                                                 }
                                             } else {
-                                                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
-                                                        "Atendemos hasta las 20 horas del dia");
+                                                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("hours-of-operation"), "");
                                                 fc.addMessage(null, m);
                                             }
                                         } else {
-                                            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
-                                                    "El dia tiene que ser mayor de 0 y menor o igual que 29 para el mes febrero y año biciesto");
+                                            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("day-range-29"), "");
                                             fc.addMessage(null, m);
 
                                         }
@@ -353,27 +357,30 @@ public class ControllerCitaMedica extends ControllerApp {
                                                 System.out.println("fecha menor a 20");
                                                 if (Integer.parseInt(fechaHora) >= 8) {
                                                     System.out.println("creado cita contenido");
-                                                    if (crearCitaContenido() == true) {
-                                                        return "historialdecitas?faces-redirect=true";
+                                                    if (crearCitaContenido()) {
+                                                        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("appointment-created"), "");
+                                                        fc.addMessage(null, message);
+                                                        fc.getExternalContext().getFlash().setKeepMessages(true);
+                                                        return "citaspendientes?faces-redirect=true";
                                                     } else {
-                                                        System.out.println("No se creo");
-                                                        FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
-                                                                "El fisioterapeuta que selecciono ya esta ocupado en la fecha y hora digitada  o usted esta invalidado para pedir otra cita");
-                                                        fc.addMessage(null, m);
+                                                        if (cs.getUsuario().getCodRol().getIdRol() == 4) {
+                                                            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("appointment-not-available-user"), "");
+                                                            fc.addMessage(null, m);
+                                                        } else {
+                                                            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("appointment-not-available"), "");
+                                                            fc.addMessage(null, m);
+                                                        }
                                                     }
                                                 } else {
-                                                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
-                                                            "Solo atendemos desde las 8 horas del dia ");
+                                                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("hours-of-operation"), "");
                                                     fc.addMessage(null, m);
                                                 }
                                             } else {
-                                                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
-                                                        "Atendemos hasta las 20 horas del dia");
+                                                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("hours-of-operation"), "");
                                                 fc.addMessage(null, m);
                                             }
                                         } else {
-                                            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
-                                                    "El dia tiene que ser mayor de 0 y menor o igual que 28 para el mes febrero y año no biciesto");
+                                            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("day-range-28"), "");
                                             fc.addMessage(null, m);
                                         }
                                     }
@@ -386,27 +393,30 @@ public class ControllerCitaMedica extends ControllerApp {
                                             System.out.println("fecha menor a 20");
                                             if (Integer.parseInt(fechaHora) >= 8) {
                                                 System.out.println("creado cita contenido");
-                                                if (crearCitaContenido() == true) {
+                                                if (crearCitaContenido()) {
+                                                    FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("appointment-created"), "");
+                                                    fc.addMessage(null, message);
+                                                    fc.getExternalContext().getFlash().setKeepMessages(true);
                                                     return "citaspendientes?faces-redirect=true";
                                                 } else {
-                                                    System.out.println("No se creo");
-                                                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
-                                                            "El fisioterapeuta que selecciono ya esta ocupado en la fecha y hora digitada o usted esta invalidado para pedir otra cita");
-                                                    fc.addMessage(null, m);
+                                                    if (cs.getUsuario().getCodRol().getIdRol() == 4) {
+                                                        FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("appointment-not-available-user"), "");
+                                                        fc.addMessage(null, m);
+                                                    } else {
+                                                        FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("appointment-not-available"), "");
+                                                        fc.addMessage(null, m);
+                                                    }
                                                 }
                                             } else {
-                                                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
-                                                        "Solo atendemos desde las 8 horas del dia ");
+                                                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("hours-of-operation"), "");
                                                 fc.addMessage(null, m);
                                             }
                                         } else {
-                                            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
-                                                    "Atendemos hasta las 20 horas del dia");
+                                            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("hours-of-operation"), "");
                                             fc.addMessage(null, m);
                                         }
                                     } else {
-                                        FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
-                                                "El dia tiene que ser mayor de 0 y menor o igual que 30 para el mes digitado");
+                                        FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("day-range-30"), "");
                                         fc.addMessage(null, m);
                                     }
 
@@ -414,24 +424,23 @@ public class ControllerCitaMedica extends ControllerApp {
                             }
 
                         } else {
-                            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica", "El mes tiene que ser mayor a 0 y menor o igual a 12");
+                            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("invalid-month"), "");
                             fc.addMessage(null, m);
                         }
                     } else {
-                        FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
-                                "La fecha que digito ya paso");
+                        FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("invalid-date"),
+                                "");
                         fc.addMessage(null, m);
                     }
 
                 } else {
-                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
-                            "La fecha digitada ya paso");
+                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("invalid-date"),
+                            "");
                     fc.addMessage(null, m);
                 }
 
             } else {
-                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al crear cita medica",
-                        "El año no puede ser anterior al actual " + c1.get(Calendar.YEAR));
+                FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("invalid-year"), "");
                 fc.addMessage(null, m);
             }
 
@@ -474,24 +483,24 @@ public class ControllerCitaMedica extends ControllerApp {
             cm = citaMedicaFacade.buscarFisioFechaYHora(citaMedica.getCodFisioterapeuta(), format.parse(armarFecha), formaHora.parse(armarHora));
             System.out.println("Cita buscada : " + cm);
             if (cm == null) {
-                boolean banderaCita=false;
-                
+                boolean banderaCita = false;
+
                 for (Citamedica listaCita : listaCitas) {
                     System.out.println("Cita medica u " + citaMedica.getCodUsuario() + " Lista " + listaCita.getCodUsuario());
                     if (citaMedica.getCodUsuario().equals(listaCita.getCodUsuario())) {
                         System.out.println("Usuario: " + listaCita.getCodUsuario() + "Estado: " + listaCita.getEstado());
                         if (listaCita.getEstado().equals("Incumplida") || listaCita.getEstado().equals("Pendiente")) {
-                            banderaCita=true;
+                            banderaCita = true;
                             System.out.println("Bandera: " + banderaCita);
                         }
                     }
                 }
                 System.out.println("Bandera: " + banderaCita);
-                if(!banderaCita){
+                if (!banderaCita) {
                     ce.enviarAsignacionDeCita(citaMedica);
                     citaMedicaFacade.create(citaMedica);
                     return true;
-                }else{
+                } else {
                     return false;
                 }
 
