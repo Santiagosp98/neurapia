@@ -8,6 +8,9 @@ package Controllers;
 import ControllersConfiguracionSistema.ControllerCaracteristicaMovilidad;
 import Entities.Anamnesis;
 import Facade.AnamnesisFacadeLocal;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.enterprise.context.ConversationScoped;
 import java.util.List;
@@ -30,6 +33,7 @@ public class ControllerAnamnesis extends ControllerApp{
     @EJB
     private AnamnesisFacadeLocal anamnesisFacade;
     private Anamnesis anamnesis;
+    private Anamnesis nuevaAnamnesis;
     private List<Anamnesis> listaAnamnesis;
     private List<Anamnesis> listaAnamnesisObtenidas;
     
@@ -44,17 +48,17 @@ public class ControllerAnamnesis extends ControllerApp{
     }
     public String redireccionarCrearAnamnesis(){
         iniciarConversacion();
-        this.anamnesis = new Anamnesis();
+        this.nuevaAnamnesis = new Anamnesis();
         return "crearanamnesis.xhtml?faces-redirect=true";
     }
     public void crearAnamnesis(){
         try {
-            if (this.anamnesis != null && hc.getHistorialClinico() != null && dc.crearDolor() != null) {                
+            if (this.nuevaAnamnesis != null && hc.getHistorialClinico() != null && dc.crearDolor() != null) {
                 System.out.println("Estamos creando nueva anamnesis");
                 System.out.println("id HC numero: " + hc.getHistorialClinico().getIdHistorialClinico());
-                anamnesis.setCodDolor(dc.crearDolor());                
-                anamnesis.setCodHistorialClinico(hc.getHistorialClinico());              
-                anamnesisFacade.create(anamnesis);
+                nuevaAnamnesis.setCodDolor(dc.crearDolor());
+                nuevaAnamnesis.setCodHistorialClinico(hc.getHistorialClinico());
+                anamnesisFacade.create(nuevaAnamnesis);
                 selectAnamnesis();
             } else{
                 System.out.println("Error al crear una nueva anamnesis");
@@ -73,10 +77,16 @@ public class ControllerAnamnesis extends ControllerApp{
         return listaAnamnesisObtenidas;        
     }
     
-    public void editarAnamnesis() {
-        System.out.println("Estamos actualizando la anamnesis");
+    public String editarAnamnesis() {
+        FacesContext context = FacesContext.getCurrentInstance();
+
         this.anamnesisFacade.edit(anamnesis);
         dc.editarDolor();
+
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("anamnesis-edited"), "");
+        context.addMessage(null, message);
+
+        return "";
     }
     
     public String seleccionarAnamnesis(Anamnesis anamnesis){   
@@ -119,6 +129,14 @@ public class ControllerAnamnesis extends ControllerApp{
 
     public void setAnamnesis(Anamnesis anamnesis) {
         this.anamnesis = anamnesis;
+    }
+
+    public Anamnesis getNuevaAnamnesis() {
+        return nuevaAnamnesis;
+    }
+
+    public void setNuevaAnamnesis(Anamnesis nuevaAnamnesis) {
+        this.nuevaAnamnesis = nuevaAnamnesis;
     }
 
     public List<Anamnesis> getListaAnamnesis() {
