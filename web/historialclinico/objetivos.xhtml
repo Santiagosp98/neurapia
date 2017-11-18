@@ -37,15 +37,14 @@
                                 <h:commandLink action="#{controllerHistorialClinico.selectMovilidad}"
                                                value="#{msg['mobility']}"/>
                             </div>
+                            <div class="panel-body">
+                                <h:commandLink action="#{controllerHistorialClinico.selectReporteTratamiento()}"
+                                               value="Actividades"/>
+                            </div>
                             <div class="panel-body active">
                                 <h:commandLink action="#{controllerHistorialClinico.selectObjetivoTratamiento()}"
                                                value="#{msg['treatment-objectives']}"/>
                             </div>
-                            <div class="panel-body">
-                                <h:commandLink action="#{controllerHistorialClinico.selectReporteTratamiento()}"
-                                               value="#{msg['treatment-report']}"/>
-                            </div>
-
                         </h:form>
                     </div>
                     <div class="panel-heading" role="tab" id="headingTwo">

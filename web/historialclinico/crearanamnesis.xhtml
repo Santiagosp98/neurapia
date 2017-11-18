@@ -36,18 +36,13 @@
                                                value="Anamnesis"/>
                             </div>
                             <div class="panel-body">
-                                <h:commandLink action="#{controllerHistorialClinico.selectMovilidad}"
-                                               value="#{msg['mobility']}"/>
+                                <h:commandLink action="#{controllerHistorialClinico.selectReporteTratamiento()}"
+                                               value="Actividades"/>
                             </div>
                             <div class="panel-body">
                                 <h:commandLink action="#{controllerHistorialClinico.selectObjetivoTratamiento()}"
                                                value="#{msg['treatment-objectives']}"/>
                             </div>
-                            <div class="panel-body">
-                                <h:commandLink action="#{controllerHistorialClinico.selectReporteTratamiento()}"
-                                               value="#{msg['treatment-report']}"/>
-                            </div>
-
                         </h:form>
                     </div>
                     <div class="panel-heading" role="tab" id="headingTwo">
@@ -158,25 +153,28 @@
 
                             </h:dataTable>
 
+                            <hr class="col-lg-12 col-md-12 col-sm-12 col-sm-12"
+                                style="background-color: #f1f1f1; width: 100%; height: 20px; margin-left: -15px"/>
+
                             <h:form prependId="false">
                                 <h3>Anamnesis</h3>
                     
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                     <h:outputLabel value="#{msg['initial-assessment']}:" for="anamnesis"/>
                                     <h:inputTextarea class="form-control mitooltip" rows="4" cols="30" id="anamnesis"
-                                                     value="#{controllerAnamnesis.anamnesis.anamnesis}"
+                                                     value="#{controllerAnamnesis.nuevaAnamnesis.anamnesis}"
                                                      title="Anamnesis"/>
                                 </div>
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                     <h:outputLabel value="#{msg['diagnosis']}:" for="diagnostico"/>
                                     <h:inputText class="form-control mitooltip" id="diagnostico"
-                                                 value="#{controllerAnamnesis.anamnesis.diagnostico}"
+                                                 value="#{controllerAnamnesis.nuevaAnamnesis.diagnostico}"
                                                  title="Diagnostico"/>
                                 </div>
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                     <h:outputLabel value="#{msg['consultation-reason']}:" for="motivoConsulta"/>
                                     <h:inputText id="motivoConsulta" class="form-control mitooltip"
-                                                 value="#{controllerAnamnesis.anamnesis.motivoConsulta}"
+                                                 value="#{controllerAnamnesis.nuevaAnamnesis.motivoConsulta}"
                                                  title="MotivoConsulta"/>
                                 </div>
                                 <br></br>&nbsp;<br></br>

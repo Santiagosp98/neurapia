@@ -41,12 +41,12 @@
                                                value="#{msg['mobility']}"/>
                             </div>
                             <div class="panel-body">
-                                <h:commandLink action="#{controllerHistorialClinico.selectObjetivoTratamiento()}"
-                                               value="#{msg['treatment-objectives']}"/>
+                                <h:commandLink action="#{controllerHistorialClinico.selectReporteTratamiento()}"
+                                               value="Actividades"/>
                             </div>
                             <div class="panel-body">
-                                <h:commandLink action="#{controllerHistorialClinico.selectReporteTratamiento()}"
-                                               value="#{msg['treatment-report']}"/>
+                                <h:commandLink action="#{controllerHistorialClinico.selectObjetivoTratamiento()}"
+                                               value="#{msg['treatment-objectives']}"/>
                             </div>
 
                         </h:form>
@@ -118,6 +118,9 @@
                                 </div>
                             </div>
 
+                            <h:messages globalOnly="false" showSummary="true" showDetail="false"
+                                        errorClass="alert alert-danger" infoClass="alert alert-success" styleClass="message" />
+
                             <div class="basic-data col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                 <h2>#{msg['medical-record']} N°: #{controllerHistorialClinico.historialClinico.idHistorialClinico}</h2>
                             </div>
@@ -159,18 +162,9 @@
                                 </h:column>
 
                             </h:dataTable>
-                            
-                            <h:form>                                   
-                                <ui:fragment rendered="#{controllerAnamnesis.anamnesis.codHistorialClinico == null}">
-                                    <h4>Agregar Un nuevo Historial Clínico</h4>
-                                    <p>Este historial Clínico no cuenta actualmente con ningún diagnostico 
-                                    realizado al paciente</p><hr></hr>
-                                </ui:fragment>
-                                <p>La anamnesis es un diagnostico inicial por medio del cual se evalua el estado del paciente. Agrega un nuevo proceso de anamnesis al historial clínico actual</p>
-                                <h:commandButton class="btn btn-primary" action="#{controllerAnamnesis.redireccionarCrearAnamnesis()}" value="#{msg['Nueva Anamnesis']}">
-                            </h:commandButton>    
-                            </h:form>   
-                            
+
+                            <hr class="col-lg-12 col-md-12 col-sm-12 col-sm-12"
+                                style="background-color: #f1f1f1; width: 100%; height: 20px; margin-left: -15px"/>
                             
                             <ui:fragment rendered="#{controllerAnamnesis.anamnesis.codHistorialClinico != null}">
                             
@@ -270,7 +264,7 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
                                     <br></br>
                                     <h:commandButton class="btn btn-primary"
-                                                     actionListener="#{controllerAnamnesis.crearAnamnesis()}"
+                                                     actionListener="#{controllerAnamnesis.editarAnamnesis()}"
                                                      value="#{msg['save']}"/>
                                     &nbsp;
                                     <h:commandButton class="btn btn-default"
@@ -281,8 +275,6 @@
                                                      action="#{controllerHistorialClinico.selectMovilidad()}"
                                                      value="#{msg['next']}"/>
                                 </div>
-                                <br>&nbsp;</br>
-                                <hr></hr>
                             </h:form>
                             </ui:fragment>
                         </div>

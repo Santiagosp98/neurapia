@@ -41,12 +41,12 @@
                                                value="#{msg['mobility']}"/>
                             </div>
                             <div class="panel-body">
-                                <h:commandLink action="#{controllerHistorialClinico.selectObjetivoTratamiento()}"
-                                               value="#{msg['treatment-objectives']}"/>
+                                <h:commandLink action="#{controllerHistorialClinico.selectReporteTratamiento()}"
+                                               value="Actividades"/>
                             </div>
                             <div class="panel-body">
-                                <h:commandLink action="#{controllerHistorialClinico.selectReporteTratamiento()}"
-                                               value="#{msg['treatment-report']}"/>
+                                <h:commandLink action="#{controllerHistorialClinico.selectObjetivoTratamiento()}"
+                                               value="#{msg['treatment-objectives']}"/>
                             </div>
                         </h:form>
                     </div>
@@ -150,33 +150,50 @@
                         </h:column>
 
                     </h:dataTable>
-                    
+
+                    <hr class="col-lg-12 col-md-12 col-sm-12 col-sm-12"
+                        style="background-color: #f1f1f1; width: 100%; height: 20px; margin-left: -15px"/>
+
+                    <h3>Examinar característica</h3>
                     <h:form id="parteCuerpo" prependId="false" class="form-group">
-                        <div class="resultadoProceso">                            
+                        <div class="col-lg-12">
                             <h:panelGroup id="caracteristicas">
-                                <h:outputLabel value="Caracteristica:" for="caracteristica" /> 
-                                <h:selectOneMenu id="caracteristica"  class="form-control mitooltip" value="#{controllerResultadoProceso.resultadoProceso.codCaracteristicaMovilidad}" converter="caracteristicaMovilidadConverter">
-                                    <f:selectItems value="#{controllerCaracteristicaMovilidad.listarPorParteCuerpo()}" var="carmov" itemLabel="#{carmov.tipoCaracteristica}"/>
-                                </h:selectOneMenu>
-                                
-                                <h:outputLabel value="#{msg['process']}:" for="process" /> 
-                                <h:selectOneMenu id="process"  class="form-control mitooltip" value="#{controllerResultadoProceso.resultadoProceso.codProceso}" converter="procesoConverter">
-                                    <f:selectItems value="#{controllerProceso.listaProceso}" var="pro" itemLabel="#{pro.nombreProceso}"/>
-                                </h:selectOneMenu>
-                                
-                                <h:outputLabel value="#{msg['result']}:" for="result"/> 
-                                <h:inputText id="result" class="form-control mitooltip" value="#{controllerResultadoProceso.resultadoProceso.resultadoProceso}"/>
+                                <div class="form-group">
+                                    <h:outputLabel value="Caracteristica:" for="caracteristica"/>
+                                    <h:selectOneMenu id="caracteristica" class="form-control mitooltip"
+                                                     value="#{controllerResultadoProceso.resultadoProceso.codCaracteristicaMovilidad}"
+                                                     converter="caracteristicaMovilidadConverter">
+                                        <f:selectItems
+                                                value="#{controllerCaracteristicaMovilidad.listarPorParteCuerpo()}"
+                                                var="carmov" itemLabel="#{carmov.tipoCaracteristica}"/>
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel value="#{msg['process']}:" for="process"/>
+                                    <h:selectOneMenu id="process" class="form-control mitooltip"
+                                                     value="#{controllerResultadoProceso.resultadoProceso.codProceso}"
+                                                     converter="procesoConverter">
+                                        <f:selectItems value="#{controllerProceso.listaProceso}" var="pro"
+                                                       itemLabel="#{pro.nombreProceso}"/>
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group">
+                                    <h:outputLabel value="#{msg['result']}:" for="result"/>
+                                    <h:inputText id="result" class="form-control mitooltip"
+                                                 value="#{controllerResultadoProceso.resultadoProceso.resultadoProceso}"/>
+                                </div>
                             </h:panelGroup>
-                            
-                            <h:commandButton class="btn btn-primary" action="#{controllerResultadoProceso.crearResultadoProceso()}" value="Guardar">
+                            <h:commandButton class="btn btn-primary"
+                                             action="#{controllerResultadoProceso.crearResultadoProceso()}"
+                                             value="Guardar">
                                 <f:ajax execute="@form" rendered=":examinadas"></f:ajax>
                             </h:commandButton>
+                            <br/><br/><br/>
                         </div>
                     </h:form>
-                    <hr/>
-                                                     
-                    <table class="table" >
-                        <h2>Caracteristicas examinadas</h2> 
+                    <h3>Caracteristicas examinadas</h3>
+                    <div class="col-lg-12">
+                        <table class="table">
                             <thead>
                             <tr>
                                 <th>
@@ -200,24 +217,30 @@
                             </tr>
                             </thead>
 
-                        <c:forEach items="#{controllerResultadoProceso.mapa}" var="l" varStatus="vs"> 
+                            <c:forEach items="#{controllerResultadoProceso.mapa}" var="l" varStatus="vs">
                                 <tbody>
-                                    <tr>
+                                <tr>
                                     <c:forEach begin="0" end="#{l.value.size() - 1}" step="4" var="i">
-                                            <td rowspan="#{controllerResultadoProceso.mapa.size()}">#{l.value.get(i).codCaracteristicaMovilidad.codParteCuerpo.nombreParteCuerpo}</td>
-                                            <td>#{l.key}</td>
-                                            <c:forEach begin="0" end="#{l.value.size() - 1}" var="j">
-                                                <td>#{l.value.get(i+j).resultadoProceso}</td>    
-                                            </c:forEach>                                    
+                                        <td rowspan="#{controllerResultadoProceso.mapa.size()}">#{l.value.get(i).codCaracteristicaMovilidad.codParteCuerpo.nombreParteCuerpo}</td>
+                                        <td>#{l.key}</td>
+                                        <c:forEach begin="0" end="#{l.value.size() - 1}" var="j">
+                                            <td>#{l.value.get(i+j).resultadoProceso}</td>
+                                        </c:forEach>
                                     </c:forEach>
-                                    </tr>
+                                </tr>
                                 </tbody>
-                            </c:forEach>  
+                            </c:forEach>
                         </table>
-                    <h:form>
-                        <h:commandButton class="btn btn-default" value="#{msg['back']}" action="#{controllerHistorialClinico.selectAnamnesis()}"></h:commandButton>
-                        <h:commandButton class="btn btn-default" value="#{msg['next']}" action="#{controllerHistorialClinico.selectObjetivoTratamiento()}"></h:commandButton>
-                    </h:form>
+                    </div>
+                    <div class="col-lg-12">
+                        <h:form>
+                            <h:commandButton class="btn btn-default" value="#{msg['back']}"
+                                             action="#{controllerHistorialClinico.selectAnamnesis()}"></h:commandButton>
+                            &nbsp;
+                            <h:commandButton class="btn btn-default" value="#{msg['next']}"
+                                             action="#{controllerHistorialClinico.selectObjetivoTratamiento()}"></h:commandButton>
+                        </h:form>
+                    </div>
                 </div>
             </div>
         </ui:define>

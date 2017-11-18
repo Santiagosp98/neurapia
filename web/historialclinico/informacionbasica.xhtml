@@ -41,18 +41,13 @@
                                                    value="Anamnesis"/>
                                 </div>
                                 <div class="panel-body">
-                                    <h:commandLink action="#{controllerHistorialClinico.selectMovilidad}"
-                                                   value="#{msg['mobility']}"/>
+                                    <h:commandLink action="#{controllerHistorialClinico.selectReporteTratamiento()}"
+                                                   value="Actividades"/>
                                 </div>
                                 <div class="panel-body">
                                     <h:commandLink action="#{controllerHistorialClinico.selectObjetivoTratamiento()}"
                                                    value="#{msg['treatment-objectives']}"/>
                                 </div>
-                                <div class="panel-body">
-                                    <h:commandLink action="#{controllerHistorialClinico.selectReporteTratamiento()}"
-                                                   value="#{msg['treatment-report']}"/>
-                                </div>
-
                             </h:form>
                         </div>
                         <div class="panel-heading" role="tab" id="headingTwo">
@@ -118,6 +113,9 @@
                                 <h:outputText value="#{msg['record-update-description']}"/>
                             </p>
                         </div>
+
+                        <h:messages globalOnly="false" showSummary="true" showDetail="false"
+                                    errorClass="alert alert-danger" infoClass="alert alert-success" styleClass="message" />
 
                         <div class="basic-data col-lg-9 col-md-9 col-sm-9 col-xs-12">
                             <h2>#{msg['medical-record']} N°: #{controllerHistorialClinico.historialClinico.idHistorialClinico}</h2>
@@ -303,14 +301,9 @@
                                                  value="#{msg['save']}"/>
                                 &nbsp;
                                 <h:commandButton class="btn btn-default"
-                                                 action="#{controllerHistorialClinico.consultarHistorialClinico()}"
-                                                 value="#{msg['back']}"/>
-                                &nbsp;
-                                <h:commandButton class="btn btn-default"
                                                  action="#{controllerHistorialClinico.selectAnamnesis()}"
                                                  value="#{msg['next']}"/>
                             </div>
-
                         </h:form>
                     </div>
                 </div>
