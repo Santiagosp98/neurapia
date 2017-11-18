@@ -12,6 +12,7 @@ import Entities.Historialclinico;
 import Entities.Usuario;
 import Facade.HistorialclinicoFacadeLocal;
 import Facade.UsuarioFacadeLocal;
+
 import java.text.ParseException;
 import java.util.*;
 import javax.inject.Inject;
@@ -31,48 +32,54 @@ import javax.persistence.EntityManagerFactory;
 @ConversationScoped
 public class ControllerHistorialClinico extends ControllerApp {
 
-    @Inject ControllerUsuario controllerUsuario;
-    @Inject ControllerAnamnesis ac;
-    @Inject ControllerResultadoProceso rp;
-    @Inject ControllerRespuestaActividad ra;    
-    @Inject ControllersConfiguracionSistema.ControllerResultadoObjetivo ro;
-    @Inject ControllerCaracteristicaMovilidad cm;
+    @Inject
+    ControllerUsuario controllerUsuario;
+    @Inject
+    ControllerAnamnesis ac;
+    @Inject
+    ControllerResultadoProceso rp;
+    @Inject
+    ControllerRespuestaActividad ra;
+    @Inject
+    ControllersConfiguracionSistema.ControllerResultadoObjetivo ro;
+    @Inject
+    ControllerCaracteristicaMovilidad cm;
 
     @EJB
     private HistorialclinicoFacadeLocal historialClinicoFacade;
     private Historialclinico historialClinico;
     private List<Historialclinico> listaHistorialClinico;
     private int edad;
-    
-    FacesContext fc= FacesContext.getCurrentInstance();
+
+    FacesContext fc = FacesContext.getCurrentInstance();
 
     @EJB
     private UsuarioFacadeLocal usuarioFacade;
     private Usuario usuario;
-    private List<Usuario> listaUsuarios;    
-    
+    private List<Usuario> listaUsuarios;
+
     public ControllerHistorialClinico() {
     }
-    
+
     @PostConstruct
     public void init() {
         historialClinico = new Historialclinico();
         listaHistorialClinico = historialClinicoFacade.findAll();
         usuario = new Usuario();
-        listaUsuarios = usuarioFacade.findAll();       
+        listaUsuarios = usuarioFacade.findAll();
     }
-    
+
     public List<Historialclinico> consultarHistorialClinico() {
         this.listaHistorialClinico = historialClinicoFacade.findAll();
         return listaHistorialClinico;
     }
 
-    public String seleccionarHistorialclinico(Historialclinico historialClinico){
+    public String seleccionarHistorialclinico(Historialclinico historialClinico) {
         iniciarConversacion();
         try {
             this.historialClinico = historialClinico;
             int id = historialClinico.getIdHistorialClinico();
-            ac.listaAnamnesisObtenidas();            
+            ac.listaAnamnesisObtenidas();
             rp.listaResultadosProcesosObtenidos();
             ra.listarRespuestasActividad();
             rp.inicializarListaOrdenada();
@@ -83,55 +90,51 @@ public class ControllerHistorialClinico extends ControllerApp {
         }
         return "";
     }
-    
-    public void actualizarHistorialClinico(Integer idHistorialClinico){
+
+    public void actualizarHistorialClinico(Integer idHistorialClinico) {
         try {
             this.historialClinico = historialClinicoFacade.find(idHistorialClinico);
             seleccionarHistorialclinico(this.historialClinico);
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "El Historial Clínico ha sido actualizado correctamente.", "");
-                fc.addMessage(null, message);
         } catch (Exception e) {
             System.out.println("Error al actualizar: " + e.getMessage() + " " + e.getCause());
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El Historial Clínico no ha sido actualizado correctamente.", "");
-                fc.addMessage(null, message);
         }
     }
 
-    public void editarHistorialClinico() {
+    public String editarHistorialClinico() {
+        FacesContext fc = FacesContext.getCurrentInstance();
         try {
             if (historialClinico != null || !historialClinico.equals("")) {
                 System.out.println(historialClinico.getCodEps().getIdEps());
                 this.historialClinicoFacade.edit(historialClinico);
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Historial Clínico editado exitosamente.", "");
-                    fc.addMessage(null, message);
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("basic-information-edited"), "");
+                fc.addMessage(null, message);
             }
         } catch (Exception e) {
-            System.out.println("Error al editar: " + e.getMessage() + " " + e.getCause());
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El Historial Clínico no ha sido editado.", "");
-                fc.addMessage(null, message);
+            e.printStackTrace();
         }
+        return "";
     }
 
-    public String crearHistorialClinico() throws ParseException {        
+    public String crearHistorialClinico() throws ParseException {
         iniciarConversacion();
         try {
 
             for (Historialclinico historialclinico : listaHistorialClinico) {
                 if (this.historialClinico.getCodUsuario() != historialclinico.getCodUsuario()) {
                     if (this.historialClinico != null) {
-                        System.out.println("Estamos creando un hsitorial clinico");                
+                        System.out.println("Estamos creando un hsitorial clinico");
                         historialClinico.setFechaCreacion(new Date());
                         this.historialClinicoFacade.create(historialClinico);
                         iniciarConversacion();
                         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Nuevo Historial Clínico añadido.", "");
-                            fc.addMessage(null, message);
+                        fc.addMessage(null, message);
                         return "anamnesis?faces-redirect=true";
                     }
                     System.out.println("no se pudo crear");
                     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El Historial Clínico no ha podido ser añadido al sistema.", "");
-                        fc.addMessage(null, message);
+                    fc.addMessage(null, message);
                     return "ConsultarUsuarios?faces-redirect=true";
-                }else{
+                } else {
                     FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "El paciente ya cuenta con un Historial Clínico.", "");
                     fc.addMessage(null, message);
                     System.out.println("Historial Existente, no se puede crear mas de un historial por paciente");
@@ -149,15 +152,15 @@ public class ControllerHistorialClinico extends ControllerApp {
             this.historialClinico = historialclinico;
             historialClinicoFacade.remove(historialclinico);
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Historial Clínico enviado a la papelera.", "");
-                    fc.addMessage(null, message);
+            fc.addMessage(null, message);
             this.consultarHistorialClinico();
         } catch (Exception e) {
             System.out.println("Error Eliminar: " + e.getMessage() + " " + e.getCause());
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El Historial Clínico no ha podido ser suprimido.", "");
-                fc.addMessage(null, message);
+            fc.addMessage(null, message);
         }
     }
-    
+
     public List<Usuario> getListaUsuarios() {
         return listaUsuarios;
     }
