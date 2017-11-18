@@ -44,6 +44,7 @@ public class ControllerPrediagnostico extends ControllerApp {
     private List<Prediagnostico> listaPrediagnistico;
     private List<Prediagnostico> listaPrediagnisticoUsuario;
     private List<Prediagnostico> listaPrediagnosticoResultado;
+    private List<Prediagnostico> listaPrediagnsticoEstado;
     private Prediagnostico prediagnosticoSeleccionado;
 
     @EJB
@@ -64,6 +65,8 @@ public class ControllerPrediagnostico extends ControllerApp {
         this.listaPrediagnistico = prediagnosticoFacade.findAll();
         this.listaPrediagnisticoUsuario = prediagnosticoFacade.prediagnosticoPorUsuario(usuario);
         this.listaPrediagnosticoResultado=prediagnosticoFacade.prediagnosticoPorResultado("Pendiente");
+        this.listaPrediagnsticoEstado=prediagnosticoFacade.prediagnosticoPorEstado("En espera");
+
     }
 
     public List<Prediagnostico> consultarPrediagnostico() {

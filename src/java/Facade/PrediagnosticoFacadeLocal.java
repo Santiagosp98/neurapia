@@ -32,7 +32,9 @@ public interface PrediagnosticoFacadeLocal {
     
     List<Prediagnostico> prediagnosticoPorUsuario (Usuario codUsuario);
 
-    List<Prediagnostico> prediagnosticoPorResultado (String estado);
+    List<Prediagnostico> prediagnosticoPorResultado (String resultado);
+
+    List<Prediagnostico> prediagnosticoPorEstado (String estado);
 
     List<ReportePrediagnostico> listaReporte (String estado);
 

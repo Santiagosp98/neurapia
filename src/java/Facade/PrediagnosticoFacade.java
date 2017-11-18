@@ -91,6 +91,11 @@ public class PrediagnosticoFacade extends AbstractFacade<Prediagnostico> impleme
         return preDiagResultado;
     }
 
+    @Override
+    public List<Prediagnostico> prediagnosticoPorEstado(String estado) {
+        return null;
+    }
+
     private List<Object[]>listaPrediagnostico;
 
     @Override
