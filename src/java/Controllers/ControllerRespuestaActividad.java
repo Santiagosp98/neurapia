@@ -112,6 +112,7 @@ public class ControllerRespuestaActividad extends ControllerApp {
     }
     
     public void crearRespuestaActividad(){
+        listRespActSeleccionadas.add(respuestaAct);
         System.out.println("Estamos creando");
         System.out.println(hc.getHistorialClinico().getIdHistorialClinico());
         respuestaAct.setIdHistorialclinico(hc.getHistorialClinico());
