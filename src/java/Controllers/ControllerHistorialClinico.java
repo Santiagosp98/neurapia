@@ -41,8 +41,6 @@ public class ControllerHistorialClinico extends ControllerApp {
     @Inject
     ControllerRespuestaActividad ra;
     @Inject
-    ControllersConfiguracionSistema.ControllerResultadoObjetivo ro;
-    @Inject
     ControllerCaracteristicaMovilidad cm;
 
     @EJB
@@ -83,7 +81,6 @@ public class ControllerHistorialClinico extends ControllerApp {
             rp.listaResultadosProcesosObtenidos();
             ra.listarRespuestasActividad();
             rp.inicializarListaOrdenada();
-            ro.listaResultadosObjetivo();
             return "informacionbasica.xhtml?faces-redirect=true";
         } catch (Exception e) {
             System.out.println("Error al seleccionar el hc: " + e.getMessage() + " " + e.getCause());

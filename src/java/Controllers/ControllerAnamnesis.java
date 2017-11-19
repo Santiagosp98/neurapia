@@ -46,6 +46,7 @@ public class ControllerAnamnesis extends ControllerApp{
         this.anamnesis = new Anamnesis();
         listaAnamnesis = anamnesisFacade.findAll();
     }
+    
     public String redireccionarCrearAnamnesis(){
         iniciarConversacion();
         this.nuevaAnamnesis = new Anamnesis();
@@ -79,9 +80,9 @@ public class ControllerAnamnesis extends ControllerApp{
     
     public String editarAnamnesis() {
         FacesContext context = FacesContext.getCurrentInstance();
-
-        this.anamnesisFacade.edit(anamnesis);
         dc.editarDolor();
+        this.anamnesisFacade.edit(anamnesis);
+        
 
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("anamnesis-edited"), "");
         context.addMessage(null, message);

@@ -55,9 +55,13 @@ public class ControllerDolor extends ControllerApp {
     }
     
     public void editarDolor() {
-        dolor = ac.getAnamnesis().getCodDolor();
-        System.out.println("Estamos editando Dolor");
-        this.dolorFacade.edit(dolor);
+        if (dolor != null) {
+            dolor = ac.getAnamnesis().getCodDolor();
+            System.out.println("Estamos editando Dolor");
+            this.dolorFacade.edit(dolor);
+        }else{
+            System.out.println("El dolor no ha podido ser modificado");
+        }
     }
     
     public List<Dolor> consultarDolor(){
