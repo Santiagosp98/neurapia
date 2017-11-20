@@ -6,9 +6,11 @@
 package Facade;
 
 import Entities.ResultadoFinal;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -28,5 +30,19 @@ public class ResultadoFinalFacade extends AbstractFacade<ResultadoFinal> impleme
     public ResultadoFinalFacade() {
         super(ResultadoFinal.class);
     }
+
+    @Override
+    public List<ResultadoFinal> consultarResultadosPorAnamnesis(int id) {
+        List<ResultadoFinal> lista = null;
+        try {
+            TypedQuery q = getEntityManager().createNamedQuery("ResultadoFinal.findByAnamnesis", ResultadoFinal.class);
+            q.setParameter("codAnamnesis", id);
+            lista = q.getResultList();
+        } catch (Exception e) {
+            System.out.println( e.getMessage());;
+        }
+        return lista;
+    }
+    
     
 }

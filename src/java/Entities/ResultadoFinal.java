@@ -36,7 +36,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "ResultadoFinal.findById", query = "SELECT r FROM ResultadoFinal r WHERE r.id = :id")
     , @NamedQuery(name = "ResultadoFinal.findByResultadoActividad", query = "SELECT r FROM ResultadoFinal r WHERE r.resultadoActividad = :resultadoActividad")
     , @NamedQuery(name = "ResultadoFinal.findByObservacion", query = "SELECT r FROM ResultadoFinal r WHERE r.observacion = :observacion")
-    , @NamedQuery(name = "ResultadoFinal.findByFecha", query = "SELECT r FROM ResultadoFinal r WHERE r.fecha = :fecha")})
+    , @NamedQuery(name = "ResultadoFinal.findByFecha", query = "SELECT r FROM ResultadoFinal r WHERE r.fecha = :fecha")
+    , @NamedQuery(name = "ResultadoFinal.findByAnamnesis", query = "SELECT r FROM ResultadoFinal r WHERE r.codAnamnesis.idAnamnesis = :codAnamnesis")})
 public class ResultadoFinal implements Serializable {
 
     private static final long serialVersionUID = 1L;

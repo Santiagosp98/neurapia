@@ -27,6 +27,8 @@ public interface ResultadoFinalFacadeLocal {
     List<ResultadoFinal> findAll();
 
     List<ResultadoFinal> findRange(int[] range);
+    
+    List<ResultadoFinal> consultarResultadosPorAnamnesis(int id);
 
     int count();
     

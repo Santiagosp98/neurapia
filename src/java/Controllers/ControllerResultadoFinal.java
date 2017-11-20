@@ -35,6 +35,7 @@ public class ControllerResultadoFinal extends ControllerApp{
     private ResultadoFinalFacadeLocal rffl;
     private ResultadoFinal resFinal;
     private List<ResultadoFinal> listaResFinal;
+    private List<ResultadoFinal> lista = null;
     
     @Inject
     ControllerAnamnesis cA;
@@ -63,6 +64,14 @@ public class ControllerResultadoFinal extends ControllerApp{
     public void setListaResFinal(List<ResultadoFinal> listaResFinal) {
         this.listaResFinal = listaResFinal;
     }  
+
+    public List<ResultadoFinal> getLista() {
+        return lista;
+    }
+
+    public void setLista(List<ResultadoFinal> lista) {
+        this.lista = lista;
+    }
     
     public String  crearRespuestaFinal(){
         iniciarConversacion();
@@ -106,8 +115,10 @@ public class ControllerResultadoFinal extends ControllerApp{
         
     }
     
-    public List<ResultadoFinal> consultarResultadosFinales(){
-        return this.listaResFinal;
+    public List<ResultadoFinal> consultarResultadosFinales(){                
+        int id = cA.getAnamnesis().getIdAnamnesis();
+        lista = rffl.consultarResultadosPorAnamnesis(id);   
+        return lista;
     }
 
     

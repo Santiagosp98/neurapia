@@ -53,7 +53,6 @@ public class ControllerRespuestaActividad extends ControllerApp {
     public void init(){
         this.respuestaAct = new Respuestaactividad();
         this.listRespAct = respActFac.findAll();
-        this.listRespActSeleccionadas = new ArrayList();
         
         this.listaHc = hcf.findAll();
         this.listaHcSeleccionado = new ArrayList();
@@ -103,12 +102,18 @@ public class ControllerRespuestaActividad extends ControllerApp {
     }
     
     public List<Respuestaactividad> listarRespuestasActividad(){
-        int id = hc.getHistorialClinico().getIdHistorialClinico();
-        listRespActSeleccionadas = respActFac.respuestasActividadObtenidas(id);
-        for (Respuestaactividad ra : listRespActSeleccionadas) {
-            System.out.println("Respuestas Actividad: " + ra.getIdRespuestaActividad());
+        List<Respuestaactividad> lista = null;
+        try {
+            lista = new ArrayList();
+            int id = hc.getHistorialClinico().getIdHistorialClinico();
+            lista = respActFac.respuestasActividadObtenidas(id);
+            for (Respuestaactividad ra : lista) {
+                System.out.println("Respuestas Actividad: " + ra.getIdRespuestaActividad());
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
         }
-        return listRespActSeleccionadas;
+        return lista;
     }
     
     public void crearRespuestaActividad(){
