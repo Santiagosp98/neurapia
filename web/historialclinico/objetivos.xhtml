@@ -99,8 +99,7 @@
                 <!-- Titulo -->
                 <h4 class="page-title">
                     Resultados de tratamiento
-                </h4>
-                
+                </h4>                
                 <h:messages globalOnly="false" showSummary="true" showDetail="false"
                                 errorClass="alert alert-danger" infoClass="alert alert-success" styleClass="message" />
 
@@ -146,48 +145,52 @@
 
                     </h:dataTable>
 
-                <h4>Resultados del tratamiento</h4>
+                <h4>Resultados y Observaciones</h4>
+                <p><b>Parte del Cuerpo evaluada:</b>&nbsp; #{controllerDolor.dolor.localizacion}</p>
                 
-                <h:form prependId="false">
-                    <h:dataTable class="table table-bordered" value="#{controllerResultadoFinal.consultarResultadosFinales()}" var="item">
+                <ui:fragment rendered="#{controllerResultadoFinal.lista.size() > 0}">
+                
+                    <h:form prependId="false">
+                        <h:dataTable id="resultados" class="table table-bordered" value="#{controllerResultadoFinal.consultarResultadosFinales()}" var="item">
 
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Fecha"/>
-                            </f:facet>
-                            <h:outputText value="#{item.fecha}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
-                            </h:outputText>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Diagnostico"/>
-                            </f:facet>
-                            <h:outputText value="#{item.codAnamnesis.diagnostico}"/>
-                        </h:column> 
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="ResultadoActividad"/>
-                            </f:facet>
-                            <h:outputText value="#{item.resultadoActividad}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Observación"/>
-                            </f:facet>
-                            <h:outputText value="#{item.observacion}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Acciones"/>
-                            </f:facet>
-                            <h:commandLink action="#{controllerResultadoFinal.eliminarResultadoFinal(item)}" class="mitooltip" a:data-toggle="tooltip" a:data-placement="top" title="#{msg['delete']}"
-                                            value=""><span id="botonElimina" class="fa fa-times"
-                                                           aria-hidden="true"></span>
-                            </h:commandLink>
-                        </h:column>
-                    </h:dataTable>                    
-                </h:form>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Fecha"/>
+                                </f:facet>
+                                <h:outputText value="#{item.fecha}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Diagnostico"/>
+                                </f:facet>
+                                <h:outputText value="#{item.codAnamnesis.diagnostico}"/>
+                            </h:column> 
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="ResultadoActividad"/>
+                                </f:facet>
+                                <h:outputText value="#{item.resultadoActividad}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Observación"/>
+                                </f:facet>
+                                <h:outputText value="#{item.observacion}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Acciones"/>
+                                </f:facet>
+                                <h:commandLink action="#{controllerResultadoFinal.eliminarResultadoFinal(item)}" class="mitooltip" a:data-toggle="tooltip" a:data-placement="top" title="#{msg['delete']}"
+                                                value=""><span id="botonElimina" class="fa fa-times"
+                                                               aria-hidden="true"></span>
+                                </h:commandLink>
+                            </h:column>
+                        </h:dataTable>                    
+                    </h:form>
+                </ui:fragment>
                 <h3>Crear Nuevo Resultado de Traramiento</h3>
                 <h:form prependId="false" class="form">
                     <div class="form-group col-lg-12 col-md-12 col-sm-12">
@@ -211,7 +214,9 @@
                     </div>
                     
                     <h:commandButton class="btn btn-primary" action="#{controllerResultadoFinal.crearRespuestaFinal()}"
-                                             value="#{msg['save']}"/>
+                                     value="#{msg['save']}">
+                        <f:ajax rendered=":resultados" execute="@form"/>
+                    </h:commandButton>
                 </h:form>
 
             </div>

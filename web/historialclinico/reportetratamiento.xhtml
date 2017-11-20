@@ -236,7 +236,20 @@
                                     </h:commandButton>
                                 </div>
                             </h:form>
+                            
+                            <div class="col-lg-12">
+                                <h:form>
+                                    <h:commandButton class="btn btn-default" value="#{msg['back']}"
+                                                     action="#{controllerHistorialClinico.selectMovilidad()}"></h:commandButton>
+                                    &nbsp;
+                                    <h:commandButton class="btn btn-default" value="#{msg['next']}"
+                                                     action="#{controllerHistorialClinico.selectObjetivoTratamiento()}"></h:commandButton>
+                                </h:form>
+                            </div>
+                            
                         </div>
+                        
+                        
                     </div>
                 </div>
             </div>
