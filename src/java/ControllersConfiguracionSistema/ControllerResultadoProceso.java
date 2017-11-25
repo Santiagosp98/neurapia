@@ -14,6 +14,8 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.ConversationScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -88,18 +90,21 @@ public class ControllerResultadoProceso extends Controllers.ControllerApp{
     }
     
     public String crearResultadoProceso(){
+        FacesContext context = FacesContext.getCurrentInstance();
         try {
             if (resultadoProceso != null) {
                 resultadoProceso.setCodHistorialClinico(hc.getHistorialClinico()); //debemos modificarlo por anamnesis.getAnamnesis();
                 resultadoProcesoFacade.create(resultadoProceso); 
                 listaResultadosProcesosObtenidos();
                 inicializarListaOrdenada();
-                return "movilidad.xhtml?faces-redirect=true";
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("characteristic-examined"), "");
+                context.addMessage(null, message);
+                return "";
             }
         } catch (Exception e) {
             System.out.println("Error crear Resultado Proceso: " + e.getMessage());
         }        
-        return "movilidad.xhtml?faces-redirect=true";
+        return "";
     }   
         
     public String ActualizarResultadoProceso(){
