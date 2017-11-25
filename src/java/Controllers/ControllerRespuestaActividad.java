@@ -34,6 +34,9 @@ public class ControllerRespuestaActividad extends ControllerApp {
     
     @Inject
     private ControllerActividad act;
+
+    @Inject
+    private ControllerTipoActividad controllerTipoActividad;
     
     @EJB
     RespuestaactividadFacadeLocal respActFac;
@@ -101,19 +104,19 @@ public class ControllerRespuestaActividad extends ControllerApp {
         this.listRespActSeleccionadas = listRespActSeleccionadas;
     }
     
-    public List<Respuestaactividad> listarRespuestasActividad(){
-        List<Respuestaactividad> lista = null;
+    public List<Respuestaactividad>  listarRespuestasActividad(){
+        listRespActSeleccionadas = null;
         try {
-            lista = new ArrayList();
+            listRespActSeleccionadas = new ArrayList<>();
             int id = hc.getHistorialClinico().getIdHistorialClinico();
-            lista = respActFac.respuestasActividadObtenidas(id);
-            for (Respuestaactividad ra : lista) {
+            listRespActSeleccionadas = respActFac.respuestasActividadObtenidas(id);
+            for (Respuestaactividad ra : listRespActSeleccionadas) {
                 System.out.println("Respuestas Actividad: " + ra.getIdRespuestaActividad());
             }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-        return lista;
+        return listRespActSeleccionadas;
     }
     
     public void crearRespuestaActividad(){
@@ -122,13 +125,14 @@ public class ControllerRespuestaActividad extends ControllerApp {
         System.out.println(hc.getHistorialClinico().getIdHistorialClinico());
         respuestaAct.setIdHistorialclinico(hc.getHistorialClinico());
         respuestaAct.setFechaActividad(new Date());
+        respuestaAct.setEstado("1");
         this.respActFac.create(respuestaAct);        
         System.out.println("Respuesta id creada: " + respuestaAct.getIdRespuestaActividad());
         //init();
         hc.actualizarHistorialClinico(respuestaAct.getIdHistorialclinico().getIdHistorialClinico());
     }
     
-    public void editarRespuestaActividad(){
+  /*  public void editarRespuestaActividad(){
         FacesContext fc = FacesContext.getCurrentInstance();
         iniciarConversacion();
         try {
@@ -146,6 +150,24 @@ public class ControllerRespuestaActividad extends ControllerApp {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "La edición de la respuesta de actividad no ha sido realizada.", "");
                 fc.addMessage(null, message);
         }
-        
+
+    }
+    */
+    public String editarRespuestaActividad() {
+        try{
+            respActFac.edit(respuestaAct);
+            return "reportetratamiento.html?faces-redirect=true";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "";
+    }
+
+    public String seleccionarActividad(Respuestaactividad respuestaactividad) {
+        iniciarConversacion();
+        this.respuestaAct = respuestaactividad;
+        controllerTipoActividad.setRespuestaactividad(respuestaAct);
+        return "editaractividad.xhtml?faces-redirect=true";
     }
 }
