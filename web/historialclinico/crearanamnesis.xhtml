@@ -37,11 +37,11 @@
                             </div>
                             <div class="panel-body">
                                 <h:commandLink action="#{controllerHistorialClinico.selectReporteTratamiento()}"
-                                               value="Actividades"/>
+                                               value="#{msg['activities']}"/>
                             </div>
                             <div class="panel-body">
                                 <h:commandLink action="#{controllerHistorialClinico.selectObjetivoTratamiento()}"
-                                               value="#{msg['treatment-objectives']}"/>
+                                               value="#{msg['activity-results']}"/>
                             </div>
                         </h:form>
                     </div>
@@ -83,7 +83,7 @@
                          aria-labelledby="headingThree">
                         <div class="panel-body">
                             <a href="reportehistorialclinico.xhtml">
-                                <h:outputText value="Estadisticas"/>
+                                <h:outputText value="#{msg['statistics']}"/>
                             </a>
                         </div>
                     </div>
@@ -178,7 +178,7 @@
                                                  title="MotivoConsulta"/>
                                 </div>
                                 <br></br>&nbsp;<br></br>
-                                <h3>Dolor</h3>
+                                <h3>#{msg['pain']}</h3>
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                     <h:outputLabel value="#{msg['location']}:" for="localizacion"/>
                                     <h:selectOneMenu id="localizacion" class="form-control mitooltip" value="#{controllerDolor.dolor.localizacion}">
@@ -254,16 +254,12 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
                                     <br></br>
                                     <h:commandButton class="btn btn-primary"
-                                                     actionListener="#{controllerAnamnesis.crearAnamnesis()}"
+                                                     action="#{controllerAnamnesis.crearAnamnesis()}"
                                                      value="#{msg['save']}"/>
                                     &nbsp;
                                     <h:commandButton class="btn btn-default"
                                                      action="#{controllerHistorialClinico.selectInformacionBasica()}"
                                                      value="#{msg['back']}"/>
-                                    &nbsp;
-                                    <h:commandButton class="btn btn-default"
-                                                     action="#{controllerHistorialClinico.selectMovilidad()}"
-                                                     value="#{msg['next']}"/>
                                 </div>
                             </h:form>
                         </div>

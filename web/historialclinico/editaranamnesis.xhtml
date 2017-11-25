@@ -40,15 +40,6 @@
                                 <h:commandLink action="#{controllerHistorialClinico.selectMovilidad}"
                                                value="#{msg['mobility']}"/>
                             </div>
-                            <div class="panel-body">
-                                <h:commandLink action="#{controllerHistorialClinico.selectReporteTratamiento()}"
-                                               value="Actividades"/>
-                            </div>
-                            <div class="panel-body">
-                                <h:commandLink action="#{controllerHistorialClinico.selectObjetivoTratamiento()}"
-                                               value="#{msg['treatment-objectives']}"/>
-                            </div>
-
                         </h:form>
                     </div>
                     <div class="panel-heading" role="tab" id="headingTwo">
@@ -89,8 +80,8 @@
                     <div id="collapsThree" class="panel-collapse collapse of" role="tabpanel"
                          aria-labelledby="headingThree">
                         <div class="panel-body">
-                            <a href="#">
-                                <h:outputText value="#{msg['clinical-reports']}"/>
+                            <a href="reportehistorialclinico.xhtml">
+                                <h:outputText value="#{msg['statistics']}"/>
                             </a>
                         </div>
                     </div>
@@ -188,7 +179,7 @@
                                                  title="MotivoConsulta"/>
                                 </div>
                                 <br></br>&nbsp;<br></br>
-                                <h3>Dolor</h3>
+                                <h3>#{msg['pain']}</h3>
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                     <h:outputLabel value="#{msg['location']}:" for="localizacion"/>
                                     <h:selectOneMenu id="localizacion" class="form-control mitooltip" value="#{controllerDolor.dolor.localizacion}">

@@ -40,14 +40,6 @@
                                     <h:commandLink action="#{controllerHistorialClinico.selectAnamnesis}"
                                                    value="Anamnesis"/>
                                 </div>
-                                <div class="panel-body">
-                                    <h:commandLink action="#{controllerHistorialClinico.selectReporteTratamiento()}"
-                                                   value="Actividades"/>
-                                </div>
-                                <div class="panel-body">
-                                    <h:commandLink action="#{controllerHistorialClinico.selectObjetivoTratamiento()}"
-                                                   value="#{msg['treatment-objectives']}"/>
-                                </div>
                             </h:form>
                         </div>
                         <div class="panel-heading" role="tab" id="headingTwo">
@@ -88,7 +80,7 @@
                              aria-labelledby="headingThree">
                             <div class="panel-body">
                                 <a href="reportehistorialclinico.xhtml">
-                                    <h:outputText value="Estadisticas"/>
+                                    <h:outputText value="#{msg['statistics']}"/>
                                 </a>
                             </div>
                         </div>
@@ -115,7 +107,8 @@
                         </div>
 
                         <h:messages globalOnly="false" showSummary="true" showDetail="false"
-                                    errorClass="alert alert-danger" infoClass="alert alert-success" styleClass="message" />
+                                    errorClass="alert alert-danger" infoClass="alert alert-success"
+                                    styleClass="message"/>
 
                         <div class="basic-data col-lg-9 col-md-9 col-sm-9 col-xs-12">
                             <h2>#{msg['medical-record']} N°: #{controllerHistorialClinico.historialClinico.idHistorialClinico}</h2>

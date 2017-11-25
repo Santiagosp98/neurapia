@@ -42,11 +42,11 @@
                             </div>
                             <div class="panel-body active">
                                 <h:commandLink action="#{controllerHistorialClinico.selectReporteTratamiento()}"
-                                               value="Actividades"/>
+                                               value="#{msg['activities']}"/>
                             </div>
                             <div class="panel-body">
                                 <h:commandLink action="#{controllerHistorialClinico.selectObjetivoTratamiento()}"
-                                               value="#{msg['treatment-objectives']}"/>
+                                               value="#{msg['activity-results']}"/>
                             </div>
                         </h:form>
                     </div>
@@ -88,7 +88,7 @@
                          aria-labelledby="headingThree">
                         <div class="panel-body">
                             <a href="reportehistorialclinico.xhtml">
-                                <h:outputText value="Estadisticas"/>
+                                <h:outputText value="#{msg['statistics']}"/>
                             </a>
                         </div>
                     </div>
@@ -100,7 +100,7 @@
             <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 shadow" id="right-container">
                 <!-- Titulo -->
                 <h4 class="page-title">
-                    <h:outputText value="#{msg['treatment-report']}"/>
+                    <h:outputText value="#{msg['activities']}"/>
                 </h4>
                 <div class="contenido">
                     <div class="contenido">
@@ -143,57 +143,58 @@
                             <hr class="col-lg-12 col-md-12 col-sm-12 col-sm-12"
                                 style="background-color: #f1f1f1; width: 100%; height: 20px; margin-left: -15px"/>
 
-
-                            <h:form prependId="false" id="tipoAct">
-                                <ui:fragment
-                                        rendered="#{! empty(controllerRespuestaActividad.listRespActSeleccionadas)}">
-                                    <h3>Actividades</h3>
-                                    <h:panelGroup id="lorem">
-                                        <ui:repeat value="#{controllerRespuestaActividad.listRespActSeleccionadas}"
-                                                   var="item">
-                                            <h:panelGroup class="form-group col-lg-6 col-md-6 col-sm-6" id="act1"
-                                                          layout="block">
-                                                <h:outputLabel
-                                                        value="#{item.codTipoActividad.codActividad.nombreActividad}"
-                                                        for="codActividad_#{item.idRespuestaActividad}"/>
-                                                <h:selectOneMenu class="form-control mitooltip"
-                                                                 value="#{item.codTipoActividad}"
-                                                                 converter="tipoActividadConverter" title="CodRespuesta"
-                                                                 required="true"
-                                                                 requiredMessage="The CodRespuesta field is required.">
-                                                    <f:selectItems
-                                                            value="#{controllerTipoActividad.listadoTipoActividades()}"
-                                                            var="t" itemLabel="#{t.descripcionActividad}"/>
-                                                </h:selectOneMenu>
-                                            </h:panelGroup>
-
-                                            <h:panelGroup class="form-group col-lg-6 col-md-6 col-sm-6" id="act2"
-                                                          layout="block">
-                                                <h:outputLabel value="Fecha Actividad realizada:" for="fechaActividad"/>
-                                                <h:inputText class="form-control mitooltip"
-                                                             value="#{item.fechaActividad}" title="FechaActividad">
-                                                    <f:convertDateTime pattern="MM/dd/yyyy" timeZone="America/Bogota"/>
-                                                </h:inputText>
-                                            </h:panelGroup>
-                                            <h:panelGroup class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"
-                                                          id="act3" layout="block">
-                                                <h:outputLabel value="#{item.codRespuesta.nombreRespuesta}"
-                                                               for="descripcionRespuesta"/>
-                                                <h:inputTextarea class="form-control mitooltip" rows="4" cols="30"
-                                                                 value="#{item.descripcionRespuesta}"
-                                                                 title="DescripcionRespuesta"/>
-                                            </h:panelGroup>
-                                        </ui:repeat>
-                                    </h:panelGroup>
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
-                                        <h:commandButton class="btn btn-primary"
-                                                         actionListener="#{controllerRespuestaActividad.editarRespuestaActividad()}"
-                                                         value="Guardar"/>
+                            <h:form prependId="false"
+                                    style='display: #{not empty controllerRespuestaActividad.listarRespuestasActividad() ? "block" : "none"}'>
+                                <h3 id="title">#{msg['activities']}</h3>
+                                <div class="fixed-table-body">
+                                    <div>
+                                        <h:dataTable id="activities-list"
+                                                     value="#{controllerRespuestaActividad.listarRespuestasActividad()}"
+                                                     var="activity" styleClass="table table-striped table-bordered">
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{msg['activity']}"></h:outputText>
+                                                </f:facet>
+                                                #{activity.codTipoActividad.descripcionActividad}
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{msg['measurement']}"></h:outputText>
+                                                </f:facet>
+                                                #{activity.codRespuesta.nombreRespuesta}
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{msg['activity-date']}"></h:outputText>
+                                                </f:facet>
+                                                <h:outputText value="#{activity.fechaActividad}">
+                                                    <f:convertDateTime pattern="yyyy-MM-dd" timeZone="America/Bogota"/>
+                                                </h:outputText>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{msg['status']}"></h:outputText>
+                                                </f:facet>
+                                                #{activity.estado}
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{msg['actions']}"/>
+                                                </f:facet>
+                                                &nbsp;
+                                                <h:commandLink
+                                                        action="#{controllerRespuestaActividad.seleccionarActividad(activity)}"
+                                                        value=""
+                                                        class="mitooltip" a:data-toggle="tooltip" a:data-placement="top"
+                                                        title="#{msg['edit']}"><span
+                                                        id="botonEdita" class="fa fa-pencil-square-o"
+                                                        aria-hidden="true"></span>
+                                                </h:commandLink>
+                                            </h:column>
+                                        </h:dataTable>
                                     </div>
-
-                                </ui:fragment>
+                                </div>
                             </h:form>
-
                         </div>
 
                         <div class="col-lg-12 col-md-12 col-sm-12 col-sm-12">
@@ -201,58 +202,94 @@
                             <!--                          Espaciado                       -->
                         </div>
 
-                        <h3>Añadir nueva actividad</h3>
+                        <h3>#{msg['add-activity']}</h3>
                         <div class="">
                             <h:form prependId="false">
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                                    <h:outputLabel value="Nombre de respuesta" for="nombreRespuesta"/>
+                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 form-group">
+                                    <h:outputLabel value="#{msg['response-name']}" for="nombreRespuesta"/>
                                     <h:selectOneMenu id="nombreRespuesta" class="form-control mitooltip"
                                                      value="#{controllerRespuestaActividad.respuestaAct.codRespuesta}"
-                                                     converter="respuestaConverter" title="DescripcionRespuesta">
+                                                     converter="respuestaConverter">
                                         <f:selectItems value="#{controllerRespuesta.listaRespuesta}" var="r"
                                                        itemLabel="#{r.nombreRespuesta}"/>
                                     </h:selectOneMenu>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form-group">
-                                    <h:outputLabel value="Nombre de respuesta" for="tipoActividad"/>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 form-group">
+                                    <h:outputLabel value="#{msg['pain-scale']}" for="tipoActividad"/>
+                                    <h:selectOneMenu id="tipoActivida2d" class="form-control mitooltip"
+                                                     value="#{controllerRespuestaActividad.respuestaAct.escalaDeDolor}">
+                                        <c:forEach var="i" begin="1" end="10">
+                                            <f:selectItem itemValue="#{i}" itemLabel="#{i}"/>
+                                        </c:forEach>
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 form-group">
+                                    <h:outputLabel value="#{msg['type-of-activity']}" for="tipoActividad"/>
                                     <h:selectOneMenu id="tipoActividad" class="form-control mitooltip"
                                                      value="#{controllerRespuestaActividad.respuestaAct.codTipoActividad}"
-                                                     converter="tipoActividadConverter" title="DescripcionRespuesta">
-                                        <f:selectItems value="#{controllerTipoActividad.listadoTipoActividades()}"
-                                                       var="t" itemLabel="#{t.descripcionActividad}"/>
+                                                     converter="tipoActividadConverter">
+                                            <f:selectItems value="#{controllerTipoActividad.listadoTipoActividades()}"
+                                                           var="t" itemLabel="#{t.descripcionActividad}" rendered="#{t.id != activity.codTipoActividad.codActividad.idActividad}"/>
                                     </h:selectOneMenu>
                                 </div>
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 form-group">
-                                    <h:outputLabel value="Descripcion:" for="descripcionRespuesta"/>
+                                    <h:outputLabel value="#{msg['description']}" for="descripcionRespuesta"/>
                                     <h:inputTextarea rows="4" cols="30" id="descripcionRespuesta"
                                                      class="form-control mitooltip"
-                                                     value="#{controllerRespuestaActividad.respuestaAct.descripcionRespuesta}"
-                                                     title="DescripcionRespuesta"/>
+                                                     value="#{controllerRespuestaActividad.respuestaAct.descripcionRespuesta}"/>
                                 </div>
-                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-                                    <h:commandButton class="btn btn-primary" value="Añadir Actividad"
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <h:commandButton class="btn btn-primary" value="#{msg['save']}"
                                                      action="#{controllerRespuestaActividad.crearRespuestaActividad()}">
-                                        <f:ajax execute="@form" render=":lorem :act1 :act2 :act3"/>
+                                        <f:ajax execute="@form" render=":activities-list"/>
                                     </h:commandButton>
-                                </div>
-                            </h:form>
-                            
-                            <div class="col-lg-12">
-                                <h:form>
+                                    &nbsp;
                                     <h:commandButton class="btn btn-default" value="#{msg['back']}"
-                                                     action="#{controllerHistorialClinico.selectMovilidad()}"></h:commandButton>
+                                                     action="#{controllerHistorialClinico.selectMovilidad()}"/>
                                     &nbsp;
                                     <h:commandButton class="btn btn-default" value="#{msg['next']}"
-                                                     action="#{controllerHistorialClinico.selectObjetivoTratamiento()}"></h:commandButton>
-                                </h:form>
-                            </div>
-                            
+                                                     action="#{controllerHistorialClinico.selectObjetivoTratamiento()}"/>
+                                </div>
+                            </h:form>
                         </div>
-                        
-                        
                     </div>
                 </div>
             </div>
+        </ui:define>
+        <ui:define name="ultimosScripts">
+            <script type="text/javascript">
+                $('.mitooltip').tooltip();
+
+                $(document).ready(function () {
+                    $("#activities-list").DataTable({
+                        autoWidth: false,
+                        language: {
+                            url: "#{resource[msg['datatables-lang']]}"
+
+                        },
+                        responsive: true,
+                        columnDefs: [
+                            {responsivePriority: 1, targets: -1},
+                            {responsivePriority: 2, targets: 1}
+                        ],
+                        dom: "Bfrtip",
+                        buttons: [
+                            {
+                                extend: "csv",
+                                className: "btn-sm"
+                            },
+                            {
+                                extend: "excel",
+                                className: "btn-sm"
+                            },
+                            {
+                                extend: "pdfHtml5",
+                                className: "btn-sm"
+                            }
+                        ]
+                    })
+                })
+            </script>
         </ui:define>
     </ui:composition>
 </f:view>

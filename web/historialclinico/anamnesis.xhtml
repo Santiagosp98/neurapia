@@ -36,14 +36,6 @@
                                 <h:commandLink action="#{controllerHistorialClinico.selectAnamnesis}"
                                                value="Anamnesis"/>
                             </div>
-                            <div class="panel-body">
-                                <h:commandLink action="#{controllerHistorialClinico.selectReporteTratamiento()}"
-                                               value="Actividades"/>
-                            </div>
-                            <div class="panel-body">
-                                <h:commandLink action="#{controllerHistorialClinico.selectObjetivoTratamiento()}"
-                                               value="#{msg['treatment-objectives']}"/>
-                            </div>
                         </h:form>
                     </div>
                     <div class="panel-heading" role="tab" id="headingTwo">
@@ -84,7 +76,7 @@
                          aria-labelledby="headingThree">
                         <div class="panel-body">
                             <a href="reportehistorialclinico.xhtml">
-                                <h:outputText value="Estadisticas"/>
+                                <h:outputText value="#{msg['statistics']}"/>
                             </a>
                         </div>
                     </div>
@@ -208,6 +200,11 @@
                     </div>
                 </div>
             </div>
+        </ui:define>
+        <ui:define name="ultimosScripts">
+            <script type="text/javascript">
+                $('.mitooltip').tooltip();
+            </script>
         </ui:define>
     </ui:composition>
 </f:view>
