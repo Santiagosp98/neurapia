@@ -52,6 +52,10 @@ public class Respuestaactividad implements Serializable {
     @Column(name = "fechaActividad")
     @Temporal(TemporalType.DATE)
     private Date fechaActividad;
+    @Column(name = "escalaDeDolor")
+    private Integer escalaDeDolor;
+    @Column(name = "estado")
+    private String estado;
     @JoinColumn(name = "codRespuesta", referencedColumnName = "idRespuesta")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Respuesta codRespuesta;
@@ -91,6 +95,22 @@ public class Respuestaactividad implements Serializable {
 
     public void setFechaActividad(Date fechaActividad) {
         this.fechaActividad = fechaActividad;
+    }
+
+    public Integer getEscalaDeDolor() {
+        return escalaDeDolor;
+    }
+
+    public void setEscalaDeDolor(Integer escalaDeDolor) {
+        this.escalaDeDolor = escalaDeDolor;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public Respuesta getCodRespuesta() {
