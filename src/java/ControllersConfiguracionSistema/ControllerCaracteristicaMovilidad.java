@@ -9,18 +9,20 @@ import Controllers.ControllerApp;
 import Controllers.ControllerDolor;
 import Entities.Caracteristicamovilidad;
 import Entities.Partecuerpo;
+import Entities.Resultadoproceso;
 import Facade.CaracteristicamovilidadFacadeLocal;
 import Facade.PartecuerpoFacadeLocal;
+
 import javax.inject.Named;
 import javax.enterprise.context.ConversationScoped;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Inject;
 
 /**
- *
  * @author jair3
  */
 @Named(value = "controllerCaracteristicaMovilidad")
@@ -60,19 +62,19 @@ public class ControllerCaracteristicaMovilidad extends ControllerApp {
             if (cd.getDolor() != null) {                
                 lista = cmfl.listarPorParteCuerpo(cd.getDolor().getLocalizacion());
                 for (Caracteristicamovilidad caracteristicamovilidad : lista) {
-                    System.out.println("caracteristicas Seleccionada: " + caracteristicamovilidad.getTipoCaracteristica());
+                    lista.removeIf(x -> x.getResultadoprocesoList().size() == 4);
                 }
-                return lista;                
-            }  else{
+                return lista;
+            } else {
                 System.out.println("La lista es nula");
-            }          
+            }
         } catch (Exception e) {
-            System.out.println(e.getMessage());            
+            System.out.println(e.getMessage());
         }
         return lista;
     }
-    
-    public List<Partecuerpo> obtenerPartesCuerpo(){
+
+    public List<Partecuerpo> obtenerPartesCuerpo() {
         listaparteCuerpo = pcfl.findAll();
         return listaparteCuerpo;
     }
