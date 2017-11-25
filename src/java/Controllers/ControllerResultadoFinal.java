@@ -73,7 +73,7 @@ public class ControllerResultadoFinal extends ControllerApp{
         this.lista = lista;
     }
     
-    public String  crearRespuestaFinal(){
+    public String crearRespuestaFinal(){
         iniciarConversacion();
         if(resFinal != null && cA.getAnamnesis() != null && cResAct.getRespuestaAct() != null){
             System.out.println("Estamos creando el resultado final");
@@ -82,10 +82,10 @@ public class ControllerResultadoFinal extends ControllerApp{
             resFinal.setCodAnamnesis(cA.getAnamnesis());
             resFinal.setFecha(new Date());
             rffl.create(resFinal);
-            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, "El Resultado Final ha sido creado exitosamente", "");
+            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("final-result-created"), "");
             FacesContext.getCurrentInstance().addMessage(null, msj); 
             System.out.println("Respuesta Final creada Exitosamente");
-            return "objetivos.xhtml?faces-redirect=true";
+            return "";
         }else{
             FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_ERROR, "El Resultado Final no ha sido creado exitosamente", "");
             FacesContext.getCurrentInstance().addMessage(null, msj); 
@@ -105,7 +105,7 @@ public class ControllerResultadoFinal extends ControllerApp{
     public void eliminarResultadoFinal(ResultadoFinal resfFinal){
         try {
             rffl.remove(resfFinal);
-            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, "El Resultado Final ha sido eliminado correctamente", "");
+            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("final-result-deleted"), "");
             FacesContext.getCurrentInstance().addMessage(null, msj);            
         } catch (Exception e) {
             FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, "El Resultado Final no ha sido eliminado exitosamente", "");

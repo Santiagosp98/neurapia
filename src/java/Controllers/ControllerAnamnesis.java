@@ -19,40 +19,44 @@ import javax.ejb.EJB;
 import javax.inject.Inject;
 
 /**
- *
  * @author jair3
  */
 @Named(value = "controllerAnamnesis")
 @ConversationScoped
-public class ControllerAnamnesis extends ControllerApp{
+public class ControllerAnamnesis extends ControllerApp {
 
-    @Inject Controllers.ControllerHistorialClinico hc;    
-    @Inject ControllerDolor dc;
-    @Inject ControllerCaracteristicaMovilidad cmc;
-    
+    @Inject
+    Controllers.ControllerHistorialClinico hc;
+    @Inject
+    ControllerDolor dc;
+    @Inject
+    ControllerCaracteristicaMovilidad cmc;
+
     @EJB
     private AnamnesisFacadeLocal anamnesisFacade;
     private Anamnesis anamnesis;
     private Anamnesis nuevaAnamnesis;
     private List<Anamnesis> listaAnamnesis;
     private List<Anamnesis> listaAnamnesisObtenidas;
-    
+
     public ControllerAnamnesis() {
-        
+
     }
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         this.anamnesis = new Anamnesis();
         listaAnamnesis = anamnesisFacade.findAll();
     }
-    
-    public String redireccionarCrearAnamnesis(){
+
+    public String redireccionarCrearAnamnesis() {
         iniciarConversacion();
         this.nuevaAnamnesis = new Anamnesis();
         return "crearanamnesis.xhtml?faces-redirect=true";
     }
-    public void crearAnamnesis(){
+
+    public String crearAnamnesis() {
+        FacesContext context = FacesContext.getCurrentInstance();
         try {
             if (this.nuevaAnamnesis != null && hc.getHistorialClinico() != null && dc.crearDolor() != null) {
                 System.out.println("Estamos creando nueva anamnesis");
@@ -60,49 +64,52 @@ public class ControllerAnamnesis extends ControllerApp{
                 nuevaAnamnesis.setCodDolor(dc.crearDolor());
                 nuevaAnamnesis.setCodHistorialClinico(hc.getHistorialClinico());
                 anamnesisFacade.create(nuevaAnamnesis);
-                selectAnamnesis();
-            } else{
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("anamnesis-created"), "");
+                context.getExternalContext().getFlash().setKeepMessages(true);
+                context.addMessage(null, message);
+                return selectAnamnesis();
+            } else {
                 System.out.println("Error al crear una nueva anamnesis");
             }
         } catch (Exception e) {
             System.out.println("Error al crear nueva anamnesis: " + e.getMessage());
         }
+        return "";
     }
-    
-    public List<Anamnesis> listaAnamnesisObtenidas(){
+
+    public List<Anamnesis> listaAnamnesisObtenidas() {
         listaAnamnesisObtenidas = anamnesisFacade.seleccionarPorHistorialClinico(hc.getHistorialClinico().getIdHistorialClinico());
         for (Anamnesis a : listaAnamnesisObtenidas) {
             anamnesis = a;
-            System.out.println("anamnesis Obtenidas: " + anamnesis.getIdAnamnesis());            
+            System.out.println("anamnesis Obtenidas: " + anamnesis.getIdAnamnesis());
         }
-        return listaAnamnesisObtenidas;        
+        return listaAnamnesisObtenidas;
     }
-    
+
     public String editarAnamnesis() {
         FacesContext context = FacesContext.getCurrentInstance();
         dc.editarDolor();
         this.anamnesisFacade.edit(anamnesis);
         
-
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("anamnesis-edited"), "");
         context.addMessage(null, message);
 
         return "";
     }
-    
-    public String seleccionarAnamnesis(Anamnesis anamnesis){   
+
+    public String seleccionarAnamnesis(Anamnesis anamnesis) {
         System.out.println("Estamos seleccionando la anamnesis: " + anamnesis);
         if (anamnesis != null) {
             this.anamnesis = anamnesis;
             System.out.println("Anamnesis seleccionada: " + this.anamnesis.getIdAnamnesis());
             dc.setDolor(anamnesis.getCodDolor());
-            System.out.println("Localización del problema: " + dc.getDolor().getLocalizacion());       
-            cmc.listarPorParteCuerpo();                        
+            System.out.println("Localización del problema: " + dc.getDolor().getLocalizacion());
+            cmc.listarPorParteCuerpo();
             return "editaranamnesis.xhtml?faces-redrect=true";
         }
-        return "";        
+        return "";
     }
-    
+
     public List<Anamnesis> getListaAnamnesisObtenidas() {
         return listaAnamnesisObtenidas;
     }
@@ -110,12 +117,12 @@ public class ControllerAnamnesis extends ControllerApp{
     public void setListaAnamnesisObtenidas(List<Anamnesis> listaAnamnesisObtenidas) {
         this.listaAnamnesisObtenidas = listaAnamnesisObtenidas;
     }
-    
-    public List<Anamnesis> consultarAnamnesis(){
+
+    public List<Anamnesis> consultarAnamnesis() {
         listaAnamnesis = anamnesisFacade.findAll();
         return listaAnamnesis;
     }
-    
+
     public AnamnesisFacadeLocal getAnamnesisFacade() {
         return anamnesisFacade;
     }
@@ -147,6 +154,6 @@ public class ControllerAnamnesis extends ControllerApp{
     public void setListaAnamnesis(List<Anamnesis> listaAnamnesis) {
         this.listaAnamnesis = listaAnamnesis;
     }
-    
-    
+
+
 }
