@@ -55,9 +55,12 @@ public class ControllerObjetivoTratamiento extends Controllers.ControllerApp {
     }
 
     public String crearobjetivoTratamiento() {
+        FacesContext context = FacesContext.getCurrentInstance();
         if (objetivoTratamiento.getNombreObjetivo() != null && !objetivoTratamiento.getNombreObjetivo().equals("")) {
             this.objetivoTratamientoFacade.create(objetivoTratamiento);
-            return "registrosenelsistema.xhtml?faces-redirect=true";
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("treatment-objective-created"), "");
+            context.addMessage(null, message);
+            return "";
         } else {
 
         }
@@ -71,12 +74,14 @@ public class ControllerObjetivoTratamiento extends Controllers.ControllerApp {
     }
 
     public String guardarCambios() {
+        FacesContext context = FacesContext.getCurrentInstance();
         if (objetivoTratamientoSeleccionado.getNombreObjetivo() != null && !objetivoTratamientoSeleccionado.getNombreObjetivo().equals("")) {
             objetivoTratamientoFacade.edit(objetivoTratamientoSeleccionado);
             finalizarConversacion();
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("treatment-objective-edited"), "");
+            context.getExternalContext().getFlash().setKeepMessages(true);
+            context.addMessage(null ,message);
             return "registrosenelsistema.xhtml?faces-redirect=true";
-        } else {
-
         }
         return "";
     }

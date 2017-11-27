@@ -9,6 +9,8 @@ import Controllers.ControllerHistorialClinico;
 import Entities.Respuesta;
 import Facade.RespuestaFacadeLocal;
 import java.util.ArrayList;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.enterprise.context.ConversationScoped;
 import java.util.List;
@@ -51,9 +53,12 @@ public class ControllerRespuesta extends Controllers.ControllerApp {
     }
     
     public String crearRespuesta() {
+        FacesContext context = FacesContext.getCurrentInstance();
         if (respuesta.getNombreRespuesta() != null && !respuesta.getNombreRespuesta().equals("")) {
             this.respuestaFacade.create(respuesta);
-            return "registrosenelsistema.xhtml?faces-redirect=true";
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("response-created"), "");
+            context.addMessage(null, message);
+            return "";
         } else {
         }
         return "";
@@ -66,9 +71,13 @@ public class ControllerRespuesta extends Controllers.ControllerApp {
     }
 
     public String guardarCambios() {
+        FacesContext context = FacesContext.getCurrentInstance();
         if (respuestaSeleccionada.getNombreRespuesta()!= null && !respuestaSeleccionada.getNombreRespuesta().equals("")) {
             respuestaFacade.edit(respuestaSeleccionada);
             finalizarConversacion();
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("response-edited"), "");
+            context.getExternalContext().getFlash().setKeepMessages(true);
+            context.addMessage(null, message);
             return "registrosenelsistema.xhtml?faces-redirect=true";
         } else {
 

@@ -5,6 +5,7 @@
  */
 package ControllersConfiguracionSistema;
 
+import Controllers.ControllerApp;
 import Entities.Objetivotratamiento;
 import Facade.ObjetivotratamientoFacadeLocal;
 import java.io.Serializable;
@@ -21,7 +22,7 @@ import javax.inject.Inject;
  */
 @Named(value = "controllerObjetivoTratamientoEliminar")
 @ViewScoped
-public class ControllerObjetivoTratamientoEliminar implements Serializable {
+public class ControllerObjetivoTratamientoEliminar extends ControllerApp {
 
     /**
      * Creates a new instance of ControllerObjetivoTratamienntoEliminar
@@ -53,14 +54,13 @@ public class ControllerObjetivoTratamientoEliminar implements Serializable {
 
     public void prepararEliminarObjetivoTratamiento(Objetivotratamiento objt) {
         selecccionarEliminarObjetivoTratamiento = objt;
-        System.out.println(selecccionarEliminarObjetivoTratamiento.getNombreObjetivo());
     }
 
     public void eliminarObjetivoTratamiento() {
         try {
             System.out.println(selecccionarEliminarObjetivoTratamiento);
             objetivoTratamientoFacade.remove(selecccionarEliminarObjetivoTratamiento);
-            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, "Objetivo Tratamiento elimiando correctamente", "");
+            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("treatment-objective-deleted"), "");
             FacesContext.getCurrentInstance().addMessage(null, msj);
 
         } catch (Exception e) {

@@ -5,8 +5,11 @@
  */
 package ControllersConfiguracionSistema;
 
+import Controllers.ControllerApp;
 import Entities.Educacion;
 import Facade.EducacionFacadeLocal;
+import net.sf.jasperreports.web.servlets.Controller;
+
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -20,7 +23,7 @@ import javax.faces.view.ViewScoped;
  */
 @Named(value = "controllerEducacionEliminar")
 @ViewScoped
-public class ControllerEducacionEliminar implements Serializable {
+public class ControllerEducacionEliminar extends ControllerApp {
 
     /**
      * Creates a new instance of ControllerEducacionEliminar
@@ -42,14 +45,13 @@ public class ControllerEducacionEliminar implements Serializable {
 
     public void prepararEliminarEducacion(Educacion educ) {
         seleccionarEliminarEducacion = educ;
-        System.out.println(seleccionarEliminarEducacion.getTipoEducacion());
     }
 
     public void eliminarEducacion() {
         try {
             System.out.println(seleccionarEliminarEducacion);
             educacionFacade.remove(seleccionarEliminarEducacion);
-            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, "Actividad eliminada correctamente", "");
+            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("degree-deleted"), "");
             FacesContext.getCurrentInstance().addMessage(null, msj);
 
         } catch (Exception e) {

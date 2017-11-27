@@ -5,6 +5,7 @@
  */
 package ControllersConfiguracionSistema;
 
+import Controllers.ControllerApp;
 import Entities.Departamento;
 import Facade.DepartamentoFacadeLocal;
 import java.io.Serializable;
@@ -20,7 +21,7 @@ import javax.faces.view.ViewScoped;
  */
 @Named(value = "controllerDepartamentoEliminar")
 @ViewScoped
-public class ControllerDepartamentoEliminar implements Serializable {
+public class ControllerDepartamentoEliminar extends ControllerApp {
 
     /**
      * Creates a new instance of ControllerDepartamentoEliminar
@@ -42,14 +43,13 @@ public class ControllerDepartamentoEliminar implements Serializable {
 
     public void prepararEliminarDepartamento(Departamento dep) {
         seleccionarEliminarDepartamento = dep;
-        System.out.println(seleccionarEliminarDepartamento.getNombreCiudad());
     }
 
     public void eliminarDepartamento() {
         try {
             System.out.println(seleccionarEliminarDepartamento.getNombreCiudad());
             departamentoFacade.remove(seleccionarEliminarDepartamento);
-            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, "Departamento eliminado correctamente", "");
+            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("department-deleted"), "");
             FacesContext.getCurrentInstance().addMessage(null, msj);
         } catch (Exception e) {
             e.printStackTrace();

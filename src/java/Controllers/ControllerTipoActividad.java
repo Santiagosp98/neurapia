@@ -106,6 +106,7 @@ public class ControllerTipoActividad extends ControllerApp {
                  resAct.listarRespuestasActividad()) {
                 if (Objects.equals(tipoactividad.getIdTipoActividad(), respuestaactividad.getCodTipoActividad().getIdTipoActividad()) && Objects.equals(respuestaactividad.getEstado(), "En proceso")) {
                     tipoactividadIterator.remove();
+                    break;
                 }
             }
         }
@@ -170,7 +171,6 @@ public class ControllerTipoActividad extends ControllerApp {
         lista.add("Ejercicios prueba");
         return lista;
     }
-
 
 
 }

@@ -48,10 +48,12 @@ public class ControllerActividad extends ControllerApp {
     }
 
     public String crearActividad() {
+        FacesContext context = FacesContext.getCurrentInstance();
         if (actividad.getNombreActividad() != null && !actividad.getNombreActividad().equals("")) {
             this.actividadFacade.create(actividad);
-            return "registrosenelsistema.xhtml?faces-redirect=true";
-        } else {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("activity-created"), "");
+            context.addMessage(null, message);
+            return "";
         }
         return "";
     }
@@ -63,12 +65,14 @@ public class ControllerActividad extends ControllerApp {
     }
 
     public String guardarCambios() {
+        FacesContext context = FacesContext.getCurrentInstance();
         if (actividadSeleccionada.getNombreActividad() != null && !actividadSeleccionada.getNombreActividad().equals("")) {
             actividadFacade.edit(actividadSeleccionada);
             finalizarConversacion();
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("activity-edited"), "");
+            context.getExternalContext().getFlash().setKeepMessages(true);
+            context.addMessage(null, message);
             return "registrosenelsistema.xhtml?faces-redirect=true";
-        } else {
-
         }
         return "";
     }

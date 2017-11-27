@@ -7,6 +7,7 @@ package ControllersConfiguracionSistema;
 
 import Entities.Departamento;
 import Facade.DepartamentoFacadeLocal;
+
 import javax.inject.Named;
 import javax.enterprise.context.ConversationScoped;
 import java.util.List;
@@ -16,7 +17,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 /**
- *
  * @author Jeisson Diaz
  */
 @Named(value = "controllerDepartamento")
@@ -46,13 +46,15 @@ public class ControllerDepartamento extends Controllers.ControllerApp {
         return listaDepartamento;
     }
 
-    public String crearDepartamento() {        
+    public String crearDepartamento() {
         FacesContext fcDep = FacesContext.getCurrentInstance();
-        if (departamento.getNombreCiudad()!= null && !departamento.getNombreCiudad().equals("")) {
+        if (departamento.getNombreCiudad() != null && !departamento.getNombreCiudad().equals("")) {
             this.departamentoFacade.create(departamento);
-        return "registrosenelsistema.xhtml?faces-redirect=true";
-        }else{
-            FacesMessage mAct = new FacesMessage(FacesMessage.SEVERITY_WARN, 
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("department-created"), "");
+            fcDep.addMessage(null, message);
+            return "";
+        } else {
+            FacesMessage mAct = new FacesMessage(FacesMessage.SEVERITY_WARN,
                     "El campo 'NUEVA DEPARTAMENTO' no debe ser nulo,", "Por favor ingreselo nuevamente");
             fcDep.addMessage(null, mAct);
         }
@@ -70,6 +72,9 @@ public class ControllerDepartamento extends Controllers.ControllerApp {
         if (departamentoSeleccionado.getNombreCiudad() != null && !departamentoSeleccionado.getNombreCiudad().equals("")) {
             departamentoFacade.edit(departamentoSeleccionado);
             finalizarConversacion();
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("department-edited"), "");
+            fcDep.getExternalContext().getFlash().setKeepMessages(true);
+            fcDep.addMessage(null, message);
             return "registrosenelsistema.xhtml?faces-redirect=true";
         } else {
             FacesMessage mDep = new FacesMessage(FacesMessage.SEVERITY_WARN,

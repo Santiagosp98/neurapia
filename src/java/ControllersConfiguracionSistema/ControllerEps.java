@@ -7,6 +7,7 @@ package ControllersConfiguracionSistema;
 
 import Entities.Eps;
 import Facade.EpsFacadeLocal;
+
 import javax.inject.Named;
 import javax.enterprise.context.ConversationScoped;
 import java.util.List;
@@ -17,7 +18,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 /**
- *
  * @author Jair3
  */
 @Named(value = "controllerEps")
@@ -34,7 +34,7 @@ public class ControllerEps extends Controllers.ControllerApp {
     EpsFacadeLocal epsFacade;
     Eps eps;
     List<Eps> listaEps;
-    
+
     private Eps epsSeleccionada;
 
     @PostConstruct
@@ -49,9 +49,12 @@ public class ControllerEps extends Controllers.ControllerApp {
     }
 
     public String crearEps() {
+        FacesContext context = FacesContext.getCurrentInstance();
         if (eps.getNombreEps() != null && !eps.getNombreEps().equals("")) {
             this.epsFacade.create(eps);
-            return "registrosenelsistema.xhtml?faces-redirect=true";
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("eps-created"), "");
+            context.addMessage(null, message);
+            return "";
         } else {
 
         }
@@ -64,18 +67,21 @@ public class ControllerEps extends Controllers.ControllerApp {
         return "editareps.xhtml?faces-redirect=true";
     }
 
-    public String guardarCambios() {  
-         FacesContext fc1 = FacesContext.getCurrentInstance();
+    public String guardarCambios() {
+        FacesContext fc1 = FacesContext.getCurrentInstance();
         if (epsSeleccionada.getNombreEps() != null || !epsSeleccionada.getNombreEps().equals("")) {
             epsFacade.edit(epsSeleccionada);
             finalizarConversacion();
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("eps-edited"), null);
+            fc1.getExternalContext().getFlash().setKeepMessages(true);
+            fc1.addMessage("", message);
             return "registrosenelsistema.xhtml?faces-redirect=true";
         } else {
-            FacesMessage m1 = new FacesMessage(FacesMessage.SEVERITY_INFO,"campo no debe ser vacio",null);
+            FacesMessage m1 = new FacesMessage(FacesMessage.SEVERITY_INFO, "campo no debe ser vacio", null);
             fc1.addMessage("prueba", m1);
             System.out.println("si");
             return "";
-       }
+        }
     }
 
     public EpsFacadeLocal getEpsFacade() {

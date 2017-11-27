@@ -5,6 +5,7 @@
  */
 package ControllersConfiguracionSistema;
 
+import Controllers.ControllerApp;
 import Entities.Eps;
 import Facade.EpsFacadeLocal;
 import java.io.Serializable;
@@ -20,7 +21,7 @@ import javax.faces.view.ViewScoped;
  */
 @Named(value = "controllerEpsEliminar")
 @ViewScoped
-public class ControllerEpsEliminar implements Serializable{
+public class ControllerEpsEliminar extends ControllerApp{
 
     /**
      * Creates a new instance of ControllerEpsEliminar
@@ -43,14 +44,13 @@ public class ControllerEpsEliminar implements Serializable{
     
     public void prepararEliminarEps(Eps ep) {
         seleccionarEliminarEps = ep;
-        System.out.println(seleccionarEliminarEps.getNombreEps());
     }
 
     public void eliminarEps() {
         try {
             System.out.println(seleccionarEliminarEps.getNombreEps());
             epsFacade.remove(seleccionarEliminarEps);
-            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, "EPS eliminada correctamente", "");
+            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("eps-deleted"), "");
             FacesContext.getCurrentInstance().addMessage(null, msj);
         } catch (Exception e) {
             e.printStackTrace();

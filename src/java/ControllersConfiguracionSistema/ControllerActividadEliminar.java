@@ -5,6 +5,7 @@
  */
 package ControllersConfiguracionSistema;
 
+import Controllers.ControllerApp;
 import Entities.Actividad;
 import Facade.ActividadFacadeLocal;
 import java.io.Serializable;
@@ -17,7 +18,7 @@ import javax.faces.view.ViewScoped;
 
 @Named(value = "controllerActividadEliminar")
 @ViewScoped
-public class ControllerActividadEliminar implements Serializable{
+public class ControllerActividadEliminar extends ControllerApp{
 
     /**
      * Creates a new instance of ControllerActividadEliminar
@@ -41,14 +42,13 @@ public class ControllerActividadEliminar implements Serializable{
     
      public void prepararEliminarActividad(Actividad elimact){
         seleccionarEliminarActividad = elimact;
-        System.out.println(seleccionarEliminarActividad.getNombreActividad());
     }
     
         public void eliminarActividad(){
         try {
             System.out.println(seleccionarEliminarActividad);
             actividadFacade.remove(seleccionarEliminarActividad);
-            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, "Actividad eliminada correctamente", "");
+            FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("activity-deleted"), "");
             FacesContext.getCurrentInstance().addMessage(null, msj);
             
         } catch (Exception e) {

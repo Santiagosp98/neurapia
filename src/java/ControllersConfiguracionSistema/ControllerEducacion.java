@@ -52,9 +52,12 @@ public class ControllerEducacion extends Controllers.ControllerApp {
     }
 
     public String crearEducacion() {
+        FacesContext context = FacesContext.getCurrentInstance();
         if (educacion.getTipoEducacion() != null && !educacion.getTipoEducacion().equals("")) {
             this.educacionFacade.create(educacion);
-            return "registrosenelsistema.xhtml?faces-redirect=true";
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("degree-created"), "");
+            context.addMessage(null, message);
+            return "";
         } else {
 
         }
@@ -68,11 +71,14 @@ public class ControllerEducacion extends Controllers.ControllerApp {
     }
 
     public String guardarCambios() {
+        FacesContext context = FacesContext.getCurrentInstance();
         if (educacionSeleccionada.getTipoEducacion() != null || !educacionSeleccionada.getTipoEducacion().equals("")) {
             educacionFacade.edit(educacionSeleccionada);
             finalizarConversacion();
-            return cancelar();
-        } else {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("degree-edited"), "");
+            context.getExternalContext().getFlash().setKeepMessages(true);
+            context.addMessage(null, message);
+            return "registrosenelsistema.xhtml?faces-redirect=true";
         }
         return "";
     }
