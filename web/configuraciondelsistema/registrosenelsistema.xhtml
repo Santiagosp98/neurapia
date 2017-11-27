@@ -51,6 +51,8 @@
                         <h:outputText value="#{msg['system-records']}"/>
                     </h4>
 
+                    <h:messages infoClass="alert alert-success" styleClass="message" globalOnly="false"/>
+
                     <div class="contenido">
                         <div class="contenido">
                             <p class="description">
@@ -252,20 +254,7 @@
                                             <h:outputText value="#{msg['process']}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.nombreProceso}"/>
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="#{msg['actions']}" />
-                                        </f:facet>
-                                        &nbsp;
-                                        <h:commandLink action="#{controllerProceso.prepararEditar(item)}" value=""><span id="botonEdita" class="fa fa-pencil-square-o" aria-hidden="true"></span>
-                                        </h:commandLink>
-                                        &nbsp;
-                                        <h:commandLink id="btnModalProc" class="btnModalProc" value=""><span id="botonEliminaProc"  class="fa fa-times" aria-hidden="true"></span>
-                                            <f:ajax event="click" listener="#{controllerProcesoEliminar.prepararEliminarProceso(item)}" 
-                                                    render=":contenido-modal-eliminar-respuesta"/>
-                                        </h:commandLink>
-                                    </h:column>
+                                    </h:column>>
                                 </h:dataTable>
                             </h:form>
                         </div>
