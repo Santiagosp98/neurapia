@@ -114,10 +114,10 @@
 
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="#{msg['document-number']}"/>
+                                    <h:outputText value="#{msg['email']}"/>
                                 </f:facet>
                                 <h:outputText
-                                        value="#{controllerPrediagnostico.prediagnostico.codUsuario.numeroDocumento}"/>
+                                        value="#{controllerPrediagnostico.prediagnostico.codUsuario.correoElectronico}"/>
                             </h:column>
 
                             <h:column>
@@ -163,19 +163,21 @@
 
                                 <h:column>
                                     <f:facet name="header">
+                                        <h:outputText value="#{msg['specialization']}"/>
+                                    </f:facet>
+                                    <h:outputText
+                                            value="#{controllerPrediagnostico.prediagnostico.fisioterapeuta.especializacion}"/>
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header">
                                         <h:outputText value="#{msg['email']}"/>
                                     </f:facet>
                                     <h:outputText
                                             value="#{controllerPrediagnostico.prediagnostico.fisioterapeuta.correoEmpresarial}"/>
                                 </h:column>
 
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="#{msg['specialization']}"/>
-                                    </f:facet>
-                                    <h:outputText
-                                            value="#{controllerPrediagnostico.prediagnostico.fisioterapeuta.especializacion}"/>
-                                </h:column>
+
 
                             </h:dataTable>
                             <hr class="col-lg-12 col-md-12 col-sm-12 col-sm-12"

@@ -40,6 +40,7 @@
                             <div class="panel-body active">
                                 <a href="#{request.contextPath}/prediagnostico/consultarprediagnostico.xhtml">#{msg['prediagnosis-historial']}</a>
                             </div>
+
                             <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol eq 4}">
                                 <div class="panel-body">
                                     <h:form>
@@ -49,7 +50,7 @@
                             </ui:fragment>
                         </div>
 
-                        <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol ne 4}">
+                        <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol ne 3 and controllerSession.usuario.codRol.idRol ne 4}">
 
                             <div class="panel-heading " role="tab" id="headingTwo">
                                 <h6 class="panel-title">
@@ -66,11 +67,15 @@
                                 <div class="panel-body">
                                     <a href="#{request.contextPath}/prediagnostico/reporteprediagnostico.xhtml">Estadísticas</a>
                                 </div>
+                                <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol ne 3}">
                                 <div class="panel-body">
                                     <a href="#{request.contextPath}/prediagnostico/reporteprediagnosticopendiente.xhtml">Reportes de Prediagnostico Pendiente</a>
                                 </div>
+                                </ui:fragment>
                             </div>
                         </ui:fragment>
+
+
                     </div>
                 </div>
             </ui:define>
@@ -79,7 +84,18 @@
             <ui:define name="content">
                 <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 shadow" id="right-container">
                     <!-- Titulo -->
-                    <h4 class="page-title">#{msg['prediagnostics']}</h4>
+                    <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol eq '4'}">
+                    <h4 class="page-title">#{msg['my-prediagnostics']}</h4>
+                    </ui:fragment>
+
+                    <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol eq '3'}">
+                        <h4 class="page-title">#{msg['prediagnosis-pending-for-result']}</h4>
+                    </ui:fragment>
+
+                    <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol ne '3' and controllerSession.usuario.codRol.idRol ne '4' }">
+                        <h4 class="page-title">#{msg['prediagnosis']}</h4>
+                    </ui:fragment>
+
                     <div class="fixed-table-body">
 
                         <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol eq '4'}">
@@ -106,21 +122,27 @@
 
                                     <h:column>
                                         <f:facet name="header">
+                                            <h:outputText value="#{msg['status']}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.estado}"/>
+
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
                                             <h:outputText value="#{msg['actions']}"/>
                                         </f:facet>
                                         &nbsp;
                                         <h:commandLink
                                                 action="#{controllerPrediagnostico.seleccionarPrediagnostico(item)}"
-                                                value=""><span id="botonEdita" class="fa fa-pencil-square-o"
-                                                               aria-hidden="true"></span>
+                                                class="mitooltip" a:data-toggle="tooltip" a:data-placement="top"
+                                                title="#{msg['result']}"><span id="botonEdita"
+                                                                               class="fa fa-eye"
+                                                                               aria-hidden="true"></span>
+
                                         </h:commandLink>
                                         &nbsp;
-                                        <h:commandLink id="btnModalPrediag" class="btnModalPrediag" value=""><span
-                                                id="botonEliminaPrediag" class="fa fa-times" aria-hidden="true"></span>
-                                            <f:ajax event="click"
-                                                    listener="#{controllerPrediagnosticoEliminar.prepararEliminarPrediagnostico(item)}"
-                                                    render=":contenido-modal-eliminar-prediagnostico"/>
-                                        </h:commandLink>
+
                                     </h:column>
                                 </h:dataTable>
                             </h:form>
@@ -197,6 +219,7 @@
 
                         <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol ne '4' and controllerSession.usuario.codRol.idRol ne'3' }">
                             <h:form prependId="false">
+
                                 <h:dataTable value="#{controllerPrediagnostico.consultarPrediagnostico()}" var="item"
                                              class="table table-striped table-bordered" id="consultar-prediagnostico">
 
@@ -209,13 +232,6 @@
 
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="#{msg['document']}"/>
-                                        </f:facet>
-                                        <h:outputText value="#{item.codUsuario.numeroDocumento}"/>
-                                    </h:column>
-
-                                    <h:column>
-                                        <f:facet name="header">
                                             <h:outputText value="#{msg['user']}"/>
                                         </f:facet>
                                         <h:outputText value="#{item.codUsuario.fullNameUsuario}">
@@ -224,10 +240,9 @@
 
                                     <h:column>
                                         <f:facet name="header">
-                                            <h:outputText value="#{msg['email']}"/>
+                                            <h:outputText value="#{msg['document']}"/>
                                         </f:facet>
-                                        <h:outputText value="#{item.codUsuario.correoElectronico}">
-                                        </h:outputText>
+                                        <h:outputText value="#{item.codUsuario.numeroDocumento}"/>
                                     </h:column>
 
                                     <h:column>
@@ -236,6 +251,14 @@
                                         </f:facet>
                                         <h:outputText value="#{item.fecha}">
                                             <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                        </h:outputText>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{msg['status']}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.estado}">
                                         </h:outputText>
                                     </h:column>
 
@@ -256,7 +279,7 @@
                                                        action="#{controllerPrediagnostico.seleccionarPrediagnostico(item)}"
                                                        class="mitooltip" a:data-toggle="tooltip" a:data-placement="top"
                                                        title="#{msg['result']}"><span id="botonEdita"
-                                                                                      class="fa fa-search"
+                                                                                      class="fa fa-eye"
                                                                                       aria-hidden="true"></span>
                                         </h:commandLink>
                                     </h:column>
@@ -302,7 +325,7 @@
                 <script>
                     $(document).ready(function () {
 
-                        $("#consultar-prediagnostico").DataTable({
+                        $("#consultar-prediagnostico, #consultar-prediagnostico-resultado, #consultar-prediagnostico-usuario").DataTable({
                             language: {
                                 url: "#{resource[msg['datatables-lang']]}"
                             },
