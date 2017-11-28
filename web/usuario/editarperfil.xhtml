@@ -99,10 +99,12 @@
                         <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 custom-col-lg-3">
                             <div class="photo">
                                 <a href="#">
-                                    <div style="background-image: url(#{request.contextPath}/#{msg['default-photo']});"
-                                         class="img-circle">
-
-                                    </div>
+                                    <ui:fragment rendered="#{controllerSession.usuario.imagen eq null || empty(controllerSession.usuario.imagen)}">
+                                        <div style="background-image: url(#{request.contextPath}/#{msg['default-photo']});" class="img-circle"></div>
+                                    </ui:fragment>                                    
+                                    <ui:fragment rendered="#{!empty(controllerSession.usuario.imagen)}">
+                                        <div style="background-image: url(#{request.contextPath}/files/uploads/#{controllerSession.usuario.imagen});" class="img-circle"></div>
+                                    </ui:fragment>                                         
                                 </a>
                             </div>
                             <div class="basic-information">
@@ -134,6 +136,17 @@
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-6 col-sm-6 col-xs-12 custom-col-lg-9">
+                            <div class="container">            
+                                <h:form enctype="multipart/form-data" id="form" class="form-inline" prependId="false">
+                                    
+                                    <label class="custom-file">
+                                        <h:inputFile id="fileUpload" a:multiple="true" class="custom-file-input"/>
+                                        <span class="custom-file-control"></span>
+                                    </label>
+                                    <h:commandButton id="upload" class="btn btn-primary" value="Cargar Imagen" actionListener="#{controllerFileUpload.upload()}"/>
+
+                                </h:form>
+                            </div>
                             <h:form prependId="false" id="editar-perfil" a:name="editar-perfil">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <h:messages showDetail="false" showSummary="true" infoClass="alert alert-success"
