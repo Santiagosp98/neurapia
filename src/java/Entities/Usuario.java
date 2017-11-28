@@ -48,6 +48,7 @@ import java.util.ArrayList;
     , @NamedQuery(name = "Usuario.findBySegundoApellido", query = "SELECT u FROM Usuario u WHERE u.segundoApellido = :segundoApellido")
     , @NamedQuery(name = "Usuario.findByEstadoUsuario", query = "SELECT u FROM Usuario u WHERE u.estadoUsuario = :estadoUsuario")
     , @NamedQuery(name = "Usuario.findByFechaRegistro", query = "SELECT u FROM Usuario u WHERE u.fechaRegistro = :fechaRegistro")
+    , @NamedQuery(name = "Usuario.findByImagen", query = "SELECT u FROM Usuario u WHERE u.imagen = :imagen")
     , @NamedQuery(name = "Usuario.findByCorreoElectronico", query = "SELECT u FROM Usuario u WHERE u.correoElectronico = :email")
     , @NamedQuery(name = "Usuario.DocumentoOEmail", query = "SELECT u FROM Usuario u WHERE u.correoElectronico = :email OR u.numeroDocumento = :numeroDocumento")
     , @NamedQuery(name = "Usuario.listaporRol", query = "SELECT u FROM Usuario u WHERE u.codRol = :rol")
@@ -98,13 +99,16 @@ public class Usuario implements Serializable {
     @Column(name = "fechaRegistro")
     @Temporal(TemporalType.DATE)
     private Date fechaRegistro;
+    @Size(max = 500)
+    @Column(name = "imagen")
+    private String imagen;
     @Size(max = 45)
     @Column(name = "correoElectronico")
     private String correoElectronico;
     @Size(max = 45)
     @Column(name = "claveUsuario")
     private String claveUsuario;
-        @Column(name = "ingresos")
+    @Column(name = "ingresos")
     private int ingresos;
     @Column(name = "ultimaSesion")
     private Date ultimaSesion;
@@ -204,6 +208,14 @@ public class Usuario implements Serializable {
 
     public void setFechaRegistro(Date fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
+    }    
+    
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     public String getCorreoElectronico() {

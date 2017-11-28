@@ -10,7 +10,6 @@ import Entities.Respuestaactividad;
 import Entities.Tipoactividad;
 import Facade.ActividadFacadeLocal;
 import Facade.TipoactividadFacadeLocal;
-import org.jboss.weld.context.http.Http;
 
 import javax.faces.context.FacesContext;
 import javax.faces.convert.FacesConverter;
