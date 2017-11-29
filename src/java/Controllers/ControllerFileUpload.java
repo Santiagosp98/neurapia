@@ -19,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -34,7 +35,7 @@ import util.FileBean;
  */
 @Named(value = "controllerFileUpload")
 @ViewScoped
-public class ControllerFileUpload implements Serializable {
+public class ControllerFileUpload extends ControllerApp {
 
     private final static String UPLOAD_DIR = "/files/uploads/";
     
@@ -65,7 +66,7 @@ public class ControllerFileUpload implements Serializable {
 
     }
 
-    public void upload() {
+    public String upload() {
         try {
             System.out.println("Usuario: " + cS.getUsuario().getFullNameUsuario());
             FacesContext fc = FacesContext.getCurrentInstance();
@@ -81,11 +82,16 @@ public class ControllerFileUpload implements Serializable {
                 System.out.println("Archivo: " + cS.getUsuario().getImagen());
             }
             deleteFile(ec, "Tablero y TV.c4d");
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg.getString("image-uploaded"), "");
+            fc.addMessage(null, message);
+            return "";
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch (ServletException ex) {
             ex.printStackTrace();
         }
+
+        return "";
     }
 
     private List<FileBean> getFilesUpload(ExternalContext ec) throws IOException, ServletException {
