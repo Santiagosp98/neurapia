@@ -76,7 +76,7 @@
                                  aria-labelledby="headingThree">
                                 <div class="panel-body">
                                     <a href="#{request.contextPath}/usuario/reporteusuario.xhtml">
-                                        <h:outputText value="Estadísticas"/>
+                                        <h:outputText value="#{msg['statistics']}"/>
                                     </a>
                                 </div>
                             </div>
@@ -139,24 +139,20 @@
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-6 col-sm-6 col-xs-12 custom-col-lg-9">
-                            <div class="container">
-                                <h:form enctype="multipart/form-data" id="form" class="form-inline" prependId="false">
-
-                                    <label class="custom-file">
-                                        <h:inputFile id="fileUpload" a:multiple="true" class="custom-file-input"/>
-                                        <span class="custom-file-control"></span>
-                                    </label>
-                                    <h:commandButton id="upload" class="btn btn-primary" value="Cargar Imagen"
-                                                     actionListener="#{controllerFileUpload.upload()}"/>
-
-                                </h:form>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <h:messages showDetail="false" showSummary="true" infoClass="alert alert-success"
+                                            errorClass="alert alert-danger" styleClass="message"
+                                            globalOnly="true"/>
                             </div>
+                            <h:form enctype="multipart/form-data" id="form" styleClass="col-lg-12" prependId="false">
+                                <h:outputLabel for="fileUpload" style="display:block;">#{msg['image']}:</h:outputLabel>
+                                <h:inputFile id="fileUpload" style="display: inline"/>
+                                &nbsp;
+                                <h:commandButton id="upload" class="btn btn-primary btn-sm"
+                                                 value="#{msg['upload-image']}"
+                                                 actionListener="#{controllerFileUpload.upload()}"/>
+                            </h:form>
                             <h:form prependId="false" id="editar-perfil" a:name="editar-perfil">
-                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <h:messages showDetail="false" showSummary="true" infoClass="alert alert-success"
-                                                errorClass="alert alert-danger" styleClass="message"
-                                                globalOnly="true"/>
-                                </div>
                                 <div class="form-group col-lg-12">
                                     <h:outputLabel value="#{msg['document-type']}:" for="tipo-documento"/>
                                     <h:selectOneMenu disabled="true" id="tipo-documento" class="form-control mitooltip"
