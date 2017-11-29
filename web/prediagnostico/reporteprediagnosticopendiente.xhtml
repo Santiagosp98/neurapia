@@ -20,36 +20,66 @@
                 <div class="panel-group shadow" id="accordion" role="tablist" aria-multiselectable="true">
 
                     <div class="panel panel-default">
-                        <div class="panel-heading active" role="tab" id="headingOne">
-                            <h6 class="panel-title"><i class="fa fa-users" aria-hidden="true"></i>
-                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsOne"
-                                   aria-expanded="true" aria-controls="collapseOne">
-                                    <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol ne 4}">
-                                        #{msg['prediagnosis']}
-                                    </ui:fragment>
-                                    <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol eq 4}">
-                                        <h:outputText value="#{msg['my-prediagnostics']}"/>
-                                    </ui:fragment>
-                                    <span class="caret"></span>
-                                </a>
-                            </h6>
-                        </div>
+                        <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol ne 3}">
+                            <div class="panel-heading active" role="tab" id="headingOne">
+                                <h6 class="panel-title"><i class="fa fa-users" aria-hidden="true"></i>
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsOne"
+                                       aria-expanded="true" aria-controls="collapseOne">
+                                        <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol ne 4}">
+                                            #{msg['prediagnosis']}
+                                        </ui:fragment>
 
-                        <div id="collapsOne" class="panel-collapse collapse of" role="tabpanel"
-                             aria-labelledby="headingOne">
-                            <div class="panel-body ">
-                                <a href="#{request.contextPath}/prediagnostico/consultarprediagnostico.xhtml">#{msg['prediagnosis-historial']}</a>
+                                        <span class="caret"></span>
+                                    </a>
+                                </h6>
                             </div>
-                            <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol eq 4}">
-                                <div class="panel-body">
+
+                            <div id="collapsOne" class="panel-collapse collapse of" role="tabpanel"
+                                 aria-labelledby="headingOne">
+                                <div class="panel-body ">
+                                    <a href="#{request.contextPath}/prediagnostico/consultarprediagnostico.xhtml">#{msg['prediagnosis-historial']}</a>
+                                </div>
+
+                                <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol eq 3}">
+                                    <div class="panel-body">
+                                        <h:form>
+                                            <a href="#{request.contextPath}/prediagnostico/reporteprediagnosticopendiente.xhtml">#{msg['pending-prediagnostics']}</a>
+                                        </h:form>
+                                    </div>
+                                </ui:fragment>
+                            </div>
+                        </ui:fragment>
+
+                        <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol eq 3}">
+                            <div class="panel-heading active" role="tab" id="headingOnef">
+                                <h6 class="panel-title"><i class="fa fa-users" aria-hidden="true"></i>
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsOnef"
+                                       aria-expanded="true" aria-controls="collapseOne">
+                                        <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol ne 4}">
+                                            #{msg['prediagnosis']}
+                                        </ui:fragment>
+
+                                        <span class="caret"></span>
+                                    </a>
+                                </h6>
+                            </div>
+
+                            <div id="collapsOnef" class="panel-collapse collapse in" role="tabpanel"
+                                 aria-labelledby="headingOnef">
+                                <div class="panel-body ">
+                                    <a href="#{request.contextPath}/prediagnostico/consultarprediagnostico.xhtml">#{msg['prediagnosis-historial']}</a>
+                                </div>
+
+                                <div class="panel-body active">
                                     <h:form>
-                                        <a href="#{request.contextPath}/prediagnostico/crearprediagnostico.xhtml">#{msg['create-prediagnosis']}</a>
+                                        <a href="#{request.contextPath}/prediagnostico/reporteprediagnosticopendiente.xhtml">#{msg['pending-prediagnostics']}</a>
                                     </h:form>
                                 </div>
-                            </ui:fragment>
-                        </div>
 
-                        <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol ne 4}">
+                            </div>
+                        </ui:fragment>
+
+                        <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol ne 3}">
 
                             <div class="panel-heading " role="tab" id="headingTwo">
                                 <h6 class="panel-title">
@@ -61,15 +91,47 @@
                                     </a>
                                 </h6>
                             </div>
-                            <div id="collapsTwo" class="panel-collapse collapse in" role="tabpanel"
-                                 aria-labelledby="headingTwo">
-                                <div class="panel-body">
-                                    <a href="#{request.contextPath}/prediagnostico/reporteprediagnostico.xhtml">Estadísticas</a>
+
+                            <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol ne 3}">
+                                <div id="collapsTwo" class="panel-collapse collapse in" role="tabpanel"
+                                     aria-labelledby="headingTwo">
+                                    <div class="panel-body">
+                                        <a href="#{request.contextPath}/prediagnostico/reporteprediagnostico.xhtml">Estadísticas</a>
+                                    </div>
+
+                                    <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol ne 3}">
+                                        <div class="panel-body active">
+                                            <a href="#{request.contextPath}/prediagnostico/reporteprediagnosticopendiente.xhtml">Reportes de Prediagnostico Pendiente</a>
+                                        </div>
+                                    </ui:fragment>
                                 </div>
-                                <div class="panel-body active">
-                                    <a href="#{request.contextPath}/prediagnostico/reporteprediagnosticopendiente.xhtml">Reportes de Prediagnostico Pendiente</a>
-                                </div>
+                            </ui:fragment>
+
+                        </ui:fragment>
+
+                        <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol eq 3}">
+
+                            <div class="panel-heading " role="tab" id="headingTwof">
+                                <h6 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsTwof"
+                                       aria-expanded="true" aria-controls="collapseOne">
+                                        <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                                        <h:outputText value="#{msg['reports']}"></h:outputText>
+                                        <span class="caret"></span>
+                                    </a>
+                                </h6>
                             </div>
+
+                            <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol eq 3}">
+                                <div id="collapsTwof" class="panel-collapse collapse of" role="tabpanel"
+                                     aria-labelledby="headingTwof">
+                                    <div class="panel-body">
+                                        <a href="#{request.contextPath}/prediagnostico/reporteprediagnostico.xhtml">Estadísticas</a>
+                                    </div>
+
+                                </div>
+                            </ui:fragment>
+
                         </ui:fragment>
                     </div>
                 </div>
@@ -127,16 +189,21 @@
                             </h:form>
                         </ui:fragment>
 
-                        <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol ne '4'}">
+                        <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol ne '4' and controllerSession.usuario.codRol.idRol ne '3'}">
                             <h:form prependId="false">
-                                <div>
-                                    <h:commandButton class="btn btn-primary" value="REPORTE PDF" actionListener="#{controllerReportePrediagnostico.exportarPDF()}">
 
-                                    </h:commandButton>
-                                    <h:commandButton class="btn btn-default " value="GRAFICO PDF" actionListener="#{controllerReportePrediagnostico.exportGraphicsPDF()}">
+                                <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol ne '3'}">
+                                    <div>
+                                        <h:commandButton class="btn btn-primary" value="REPORTE PDF"
+                                                         actionListener="#{controllerReportePrediagnostico.exportarPDF()}">
 
-                                    </h:commandButton>
-                                </div>
+                                        </h:commandButton>
+                                        <h:commandButton class="btn btn-default " value="GRAFICO PDF"
+                                                         actionListener="#{controllerReportePrediagnostico.exportGraphicsPDF()}">
+
+                                        </h:commandButton>
+                                    </div>
+                                </ui:fragment>
 
                                 <h:dataTable value="#{controllerPrediagnostico.prediagnosticoResultado()}" var="item"
                                              class="table table-striped table-bordered" id="consultar-prediagnostico">
@@ -187,8 +254,75 @@
                                             <f:convertDateTime pattern="yyyy-MM-dd"/>
                                         </h:outputText>
                                     </h:column>
+                                </h:dataTable>
+                            </h:form>
+                        </ui:fragment>
 
+                        <ui:fragment rendered="#{controllerSession.usuario.codRol.idRol eq '3'}">
+                            <h:form prependId="false">
+                                <h:dataTable value="#{controllerPrediagnostico.prediagnosticoResultado()}" var="item"
+                                             class="table table-striped table-bordered" id="consultar-prediagnostico-resultado">
 
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{msg['code']}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.idPrediagnostico}"/>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{msg['document']}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.codUsuario.numeroDocumento}"/>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{msg['user']}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.codUsuario.fullNameUsuario}">
+                                        </h:outputText>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{msg['email']}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.codUsuario.correoElectronico}">
+                                        </h:outputText>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{msg['date']}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.fecha}">
+                                            <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                        </h:outputText>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="#{msg['actions']}"/>
+                                        </f:facet>
+                                        &nbsp;
+                                        <h:commandLink rendered="#{controllerSession.usuario.codRol.idRol eq 3}"
+                                                       action="#{controllerPrediagnostico.seleccionarPrediagnostico(item)}"
+                                                       class="mitooltip" a:data-toggle="tooltip" a:data-placement="top"
+                                                       title="#{msg['edit']}"><span id="botonEdita"
+                                                                                    class="fa fa-pencil-square-o"
+                                                                                    aria-hidden="true"></span>
+                                        </h:commandLink>
+                                        &nbsp;
+                                        <h:commandLink rendered="#{controllerSession.usuario.codRol.idRol ne 3}"
+                                                       action="#{controllerPrediagnostico.seleccionarPrediagnostico(item)}"
+                                                       class="mitooltip" a:data-toggle="tooltip" a:data-placement="top"
+                                                       title="#{msg['result']}"><span id="botonEdita"
+                                                                                      class="fa fa-search"
+                                                                                      aria-hidden="true"></span>
+                                        </h:commandLink>
+                                    </h:column>
                                 </h:dataTable>
                             </h:form>
                         </ui:fragment>
@@ -231,7 +365,7 @@
                 <script>
                     $(document).ready(function () {
 
-                        $("#consultar-prediagnostico").DataTable({
+                        $("#consultar-prediagnostico, #consultar-prediagnostico-resultado").DataTable({
                             language: {
                                 url: "#{resource[msg['datatables-lang']]}"
                             },
