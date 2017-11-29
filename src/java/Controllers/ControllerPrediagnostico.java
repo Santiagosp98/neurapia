@@ -42,6 +42,7 @@ public class ControllerPrediagnostico extends ControllerApp {
     private PrediagnosticoFacadeLocal prediagnosticoFacade;
     private Prediagnostico prediagnostico;
     private List<Prediagnostico> listaPrediagnistico;
+    private List<Prediagnostico> listaPrediagnisticoFisioterapeuta;
     private List<Prediagnostico> listaPrediagnisticoUsuario;
     private List<Prediagnostico> listaPrediagnosticoResultado;
     private List<Prediagnostico> listaPrediagnsticoEstado;
@@ -52,9 +53,11 @@ public class ControllerPrediagnostico extends ControllerApp {
     Usuario usuario;
     List<Usuario> listaUsuarios;
 
+
     @EJB
     private FisioterapeutaFacadeLocal ffl;
     private Fisioterapeuta fisioterapeuta;
+    private List<Fisioterapeuta> listaFisioterapeuta;
 
 
     @PostConstruct
@@ -63,6 +66,7 @@ public class ControllerPrediagnostico extends ControllerApp {
         this.prediagnostico = new Prediagnostico();
         this.usuario = new Usuario();
         this.listaPrediagnistico = prediagnosticoFacade.findAll();
+        this.listaPrediagnisticoFisioterapeuta = prediagnosticoFacade.prediagnosticoPorFisioterapeuta(fisioterapeuta);
         this.listaPrediagnisticoUsuario = prediagnosticoFacade.prediagnosticoPorUsuario(usuario);
         this.listaPrediagnosticoResultado=prediagnosticoFacade.prediagnosticoPorResultado("Pendiente");
         this.listaPrediagnsticoEstado=prediagnosticoFacade.prediagnosticoPorEstado("En espera");
@@ -80,6 +84,15 @@ public class ControllerPrediagnostico extends ControllerApp {
          listaPrediagnisticoUsuario = prediagnosticoFacade.prediagnosticoPorUsuario(cs.getUsuario());
          System.out.println(listaPrediagnisticoUsuario.size());
         return listaPrediagnisticoUsuario;
+    }
+
+    public List<Prediagnostico> prediagnosticoPorFisioterapeuta(){
+        //System.out.println(listaPrediagnisticoFisioterapeuta.size());
+
+        fisioterapeuta = ffl.buscarPorCodUsuario(cs.getUsuario());
+        listaPrediagnisticoFisioterapeuta = prediagnosticoFacade.prediagnosticoPorFisioterapeuta(fisioterapeuta);
+        System.out.println(listaPrediagnisticoFisioterapeuta.size());
+        return listaPrediagnisticoFisioterapeuta;
     }
 
     public List<Prediagnostico> prediagnosticoResultado(){
