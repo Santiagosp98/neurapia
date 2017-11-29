@@ -5,6 +5,7 @@
  */
 package Facade;
 
+import Entities.Fisioterapeuta;
 import Entities.Prediagnostico;
 import Entities.ReportePrediagnostico;
 import Entities.Usuario;
@@ -31,6 +32,8 @@ public interface PrediagnosticoFacadeLocal {
     List<Prediagnostico> findRange(int[] range);
     
     List<Prediagnostico> prediagnosticoPorUsuario (Usuario codUsuario);
+
+    List<Prediagnostico> prediagnosticoPorFisioterapeuta (Fisioterapeuta codFisioterapeuta);
 
     List<Prediagnostico> prediagnosticoPorResultado (String resultado);
 

@@ -5,6 +5,7 @@
  */
 package Facade;
 
+import Entities.Fisioterapeuta;
 import Entities.Prediagnostico;
 import Entities.ReportePrediagnostico;
 import Entities.Usuario;
@@ -52,6 +53,15 @@ public class PrediagnosticoFacade extends AbstractFacade<Prediagnostico> impleme
         q.setParameter("codUsuario", usuario);
         preUsuario = q.getResultList();
         return preUsuario;
+    }
+
+    @Override
+    public List<Prediagnostico> prediagnosticoPorFisioterapeuta(Fisioterapeuta fisioterapeuta) {
+        List<Prediagnostico> preFisioterapeuta = null;
+        TypedQuery<Prediagnostico> q = getEntityManager().createNamedQuery("Prediagnostico.prediagnosticoPorFisioterapeuta", Prediagnostico.class);
+        q.setParameter("fisioterapeuta", fisioterapeuta);
+        preFisioterapeuta = q.getResultList();
+        return preFisioterapeuta;
     }
 
     @Override
