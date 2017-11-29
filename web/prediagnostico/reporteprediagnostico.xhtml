@@ -70,12 +70,12 @@
         </ui:define>
         <ui:define name="content">
             <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" id="right-container">
-                <h4 class="page-title">Estadísticas de prediagnóstico</h4>
+                <h4 class="page-title">#{msg['prediagnosis-statistics']}</h4>
 
                 <div class="row" style="padding: 15px;">
                     <div class="col-lg-12">
                         <h:form id="chart-one" prependId="false" styleClass="chart-container">
-                            <h4 class="page-title">Prediagnósticos registrados en los últimos 6 meses</h4>
+                            <h4 class="page-title">#{msg['prediagnostics-recorded']}</h4>
                             <div class="chart large-chart" id="chart-div-1"/>
                             <h:inputText id="data-month" value="#{chartPrediagnostico.monthString}" style="display: none"/>
                         </h:form>
@@ -85,7 +85,7 @@
                     <div class="col-lg-6">
 
                         <h:form id="chart-form" prependId="false" styleClass="chart-container">
-                            <h4 class="text-center page-title">Prediagnósticos por estado</h4>
+                            <h4 class="text-center page-title">#{msg['prediagnostics-by-status']}</h4>
                             <div id="chart-div-2" class="chart small-chart"/>
                             <div id="legend-one"/>
                             <h:inputText id="data-string" value="#{chartPrediagnostico.statusString}" style="display: none"/>
@@ -93,7 +93,7 @@
                     </div>
                     <div class="col-lg-6">
                         <h:form id="chart-three" prependId="false" styleClass="chart-container">
-                            <h4 class="page-title">Prediagnósticos realizados por fisioterapeuta</h4>
+                            <h4 class="page-title">#{msg['prediagnosis-by-physiotherapist']}</h4>
                             <div id="chart-div-3" class="chart small-chart"/>
                             <div id="legend-two"/>
                             <h:inputText id="data-document" value="#{chartPrediagnostico.physiotherapistString}"

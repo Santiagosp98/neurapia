@@ -61,12 +61,12 @@
         </ui:define>
         <ui:define name="content">
             <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" id="right-container">
-                <h4 class="page-title">Estadísticas de historial clínico</h4>
+                <h4 class="page-title">#{msg['medical-history-statistics']}</h4>
 
                 <div class="row" style="padding: 15px;">
                     <div class="col-lg-12">
                         <h:form id="chart-one" prependId="false" styleClass="chart-container">
-                            <h4 class="page-title">Historiales clínicos registrados en los últimos 6 meses</h4>
+                            <h4 class="page-title">#{msg['clinical-records-recorded']}</h4>
                             <div class="chart large-chart" id="chart-div-1"/>
                             <h:inputText id="data-month" value="#{chartHistorial.monthString}" style="display: none"/>
                         </h:form>
@@ -76,7 +76,7 @@
                     <div class="col-lg-4">
 
                         <h:form id="chart-form" prependId="false" styleClass="chart-container">
-                            <h4 class="text-center page-title">Pacientes en el sistema por género</h4>
+                            <h4 class="text-center page-title">#{msg['patients-by-gender']}</h4>
                             <div id="chart-div-2" class="chart small-chart"/>
                             <div id="legend-one"/>
                             <h:inputText id="data-string" value="#{chartHistorial.patientString}" style="display: none"/>
@@ -84,7 +84,7 @@
                     </div>
                     <div class="col-lg-4">
                         <h:form id="chart-three" prependId="false" styleClass="chart-container">
-                            <h4 class="page-title">Pacientes en el sistema por grupo sanguíneo</h4>
+                            <h4 class="page-title">#{msg['patients-by-blood-type']}</h4>
                             <div id="chart-div-3" class="chart small-chart"/>
                             <div id="legend-two"/>
                             <h:inputText id="data-document" value="#{chartHistorial.rhString}"
@@ -93,7 +93,7 @@
                     </div>
                     <div class="col-lg-4">
                         <h:form id="chart-four" prependId="false" styleClass="chart-container">
-                            <h4 class="page-title">Pacientes en el sistema por país</h4>
+                            <h4 class="page-title">#{msg['patients-by-country']}</h4>
                             <div id="chart-div-4" class="chart small-chart"/>
                             <div id="legend-three"/>
                             <h:inputText id="data-status" value="#{chartHistorial.countryString}"

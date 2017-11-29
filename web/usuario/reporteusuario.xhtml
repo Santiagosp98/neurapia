@@ -70,7 +70,7 @@
                              aria-labelledby="headingThree">
                             <div class="panel-body active">
                                 <a href="#{request.contextPath}/usuario/reporteusuario.xhtml">
-                                    <h:outputText value="Estadísticas"/>
+                                    <h:outputText value="#{msg['statistics']}"/>
                                 </a>
                             </div>
                         </div>
@@ -85,7 +85,7 @@
                 <div class="row" style="padding: 15px;">
                     <div class="col-lg-12">
                         <h:form id="chart-one" prependId="false" styleClass="chart-container">
-                            <h4 class="page-title">Usuarios registrados en los últimos 6 meses</h4>
+                            <h4 class="page-title">#{msg['last-6-month-users']}</h4>
                             <div class="chart large-chart" id="chart-div-1"/>
                             <h:inputText id="data-month" value="#{chartUsuario.monthString}" style="display: none"/>
                         </h:form>
@@ -95,7 +95,7 @@
                     <div class="col-lg-4">
 
                         <h:form id="chart-form" prependId="false" styleClass="chart-container">
-                            <h4 class="text-center page-title">Cantidad de usuarios en el sistema</h4>
+                            <h4 class="text-center page-title">#{msg['users-in-the-system']}</h4>
                             <div id="chart-div-2" class="chart small-chart"/>
                             <div id="legend-one"/>
                             <h:inputText id="data-string" value="#{chartUsuario.dataString}" style="display: none"/>
@@ -103,7 +103,7 @@
                     </div>
                     <div class="col-lg-4">
                         <h:form id="chart-three" prependId="false" styleClass="chart-container">
-                            <h4 class="page-title">Usuarios por tipo de documento</h4>
+                            <h4 class="page-title">#{msg['users-by-document-type']}</h4>
                             <div id="chart-div-3" class="chart small-chart"/>
                             <div id="legend-two"/>
                             <h:inputText id="data-document" value="#{chartUsuario.documentString}"
@@ -112,7 +112,7 @@
                     </div>
                     <div class="col-lg-4">
                         <h:form id="chart-four" prependId="false" styleClass="chart-container">
-                            <h4 class="page-title">Cantidad de usuarios por estado</h4>
+                            <h4 class="page-title">#{msg['users-per-state']}</h4>
                             <div id="chart-div-4" class="chart small-chart"/>
                             <div id="legend-three"/>
                             <h:inputText id="data-status" value="#{chartUsuario.statusString}"

@@ -89,7 +89,7 @@
                                  aria-labelledby="headingThree">
                                 <div class="panel-body">
                                     <a href="#{request.contextPath}/usuario/reporteusuario.xhtml">
-                                        <h:outputText value="Estadísticas"/>
+                                        <h:outputText value="#{msg['statistics']}"/>
                                     </a>
                                 </div>
                             </div>
@@ -182,26 +182,26 @@
                                     </h:commandLink>
                                 </h:column>
                             </h:dataTable>
-                            <h:commandButton class="btn btn-info"
+                            <h:commandButton class="btn btn-primary"
                                              actionListener="#{controllerReporteUsuario.exportPDF()}"
-                                             value="Exportar pdf"/>
+                                             value="#{msg['generate-report']}"/>
 
                         </h:form>
                     </div>
                     <hr class="col-lg-12 col-md-12 col-sm-12 col-sm-12"
                         style="background-color: #f1f1f1; width: 100%; height: 20px; margin-left: -15px"/>
                     <h4 class="page-title">
-                        <h:outputText value="Cargar registros de forma masiva"></h:outputText>
+                        <h:outputText value="#{msg['upload-bulk-records']}"></h:outputText>
                     </h4>
                     <p class="description" style="margin-top: 20px">
-                        Carga de forma masiva desde un archivo con extensión csv. Los registros a cargar deben estar separados por punto y coma (;).
+                        #{msg['upload-bulk-records-description']}
                     </p>
                     <h:form enctype="multipart/form-data" styleClass="form-inline" style="padding: 15px">
                         <div class="form-group">
                             <h:inputFile value="#{cargaDatos.file}" id="file" style="display: inline-block"/>
                         </div>
                         <h:commandButton action="#{cargaUsuario.cargarUsuarios}" styleClass="btn btn-primary"
-                                         value="Cargar" style="margin-left: 10px"/>
+                                         value="#{msg['upload']}" style="margin-left: 10px"/>
                     </h:form>
                 </div>
 
