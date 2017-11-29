@@ -99,12 +99,15 @@
                         <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 custom-col-lg-3">
                             <div class="photo">
                                 <a href="#">
-                                    <ui:fragment rendered="#{controllerSession.usuario.imagen eq null || empty(controllerSession.usuario.imagen)}">
-                                        <div style="background-image: url(#{request.contextPath}/#{msg['default-photo']});" class="img-circle"></div>
-                                    </ui:fragment>                                    
+                                    <ui:fragment
+                                            rendered="#{controllerSession.usuario.imagen eq null || empty(controllerSession.usuario.imagen)}">
+                                        <div style="background-image: url(#{request.contextPath}/#{msg['default-photo']});"
+                                             class="img-circle"></div>
+                                    </ui:fragment>
                                     <ui:fragment rendered="#{!empty(controllerSession.usuario.imagen)}">
-                                        <div style="background-image: url(#{request.contextPath}/files/uploads/#{controllerSession.usuario.imagen});" class="img-circle"></div>
-                                    </ui:fragment>                                         
+                                        <div style="background-image: url(#{request.contextPath}/files/uploads/#{controllerSession.usuario.imagen});"
+                                             class="img-circle"></div>
+                                    </ui:fragment>
                                 </a>
                             </div>
                             <div class="basic-information">
@@ -136,14 +139,15 @@
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-6 col-sm-6 col-xs-12 custom-col-lg-9">
-                            <div class="container">            
+                            <div class="container">
                                 <h:form enctype="multipart/form-data" id="form" class="form-inline" prependId="false">
-                                    
+
                                     <label class="custom-file">
                                         <h:inputFile id="fileUpload" a:multiple="true" class="custom-file-input"/>
                                         <span class="custom-file-control"></span>
                                     </label>
-                                    <h:commandButton id="upload" class="btn btn-primary" value="Cargar Imagen" actionListener="#{controllerFileUpload.upload()}"/>
+                                    <h:commandButton id="upload" class="btn btn-primary" value="Cargar Imagen"
+                                                     actionListener="#{controllerFileUpload.upload()}"/>
 
                                 </h:form>
                             </div>
@@ -151,7 +155,7 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <h:messages showDetail="false" showSummary="true" infoClass="alert alert-success"
                                                 errorClass="alert alert-danger" styleClass="message"
-                                                globalOnly="false"/>
+                                                globalOnly="true"/>
                                 </div>
                                 <div class="form-group col-lg-12">
                                     <h:outputLabel value="#{msg['document-type']}:" for="tipo-documento"/>
@@ -299,7 +303,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <div class="col-lg-12 col-md-12 col-sm-12">
-                                            <h:commandButton class="btn btn-primary" type="submit"
+                                            <h:commandButton class="btn btn-primary"
                                                              value="#{msg['save']}"
                                                              action="#{controllerUsuario.cambiarContrasena()}"
                                                              onclick="return form.valid()">
@@ -316,7 +320,131 @@
             </ui:define>
 
             <ui:define name="ultimosScripts">
+                <script type="text/javascript">
+                    $("#lista-usuarios").DataTable({
+                        language: {
+                            url: "#{resource['js/spanish.lang']}"
+                        },
+                        dom: "Bfrtip",
+                        buttons: [
+                            {
+                                extend: "csv",
+                                className: "btn-sm"
+                            },
+                            {
+                                extend: "excel",
+                                className: "btn-sm"
+                            },
+                            {
+                                extend: "pdfHtml5", className: "btn-sm"
+                            }
+                        ]
+                    });
 
+                    $(".btnModal").click(function () {
+                        console.log("imprime");
+                        $("#myModal").modal("show");
+                    });
+
+                    $.validator.addMethod("alphabet", function (value, element, pattern) {
+                        return pattern.test(value);
+                    });
+
+                    $.validator.addMethod("email", function (value, element, pattern) {
+                        return pattern.test(value);
+                    });
+
+                    $('#editar-perfil').validate({
+                        rules: {
+                            'primer-nombre': {
+                                required: true,
+                                alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]+$/,
+                                maxlength: 45
+                            },
+                            'segundo-nombre': {
+                                alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]*$/,
+                                maxlength: 45
+                            },
+                            'primer-apellido': {
+                                required: true,
+                                alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]+$/,
+                                maxlength: 45
+                            },
+                            'segundo-apellido': {
+                                alphabet: /^[a-zA-ZáéíóúÁÉÍÓÚ]*$/,
+                                maxlength: 45
+                            },
+                            correo: {
+                                required: true,
+                                email: /[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}/,
+                                maxlength: 45
+                            },
+                        }, messages: {
+                            'numero-documento': {
+                                required: 'El campo es obligatorio.',
+                                number: 'Sólo se permiten carácteres numéricos.',
+                                maxlength: 'Se ha excedido el número de carácteres permitidos(20).'
+                            },
+                            'primer-nombre': {
+                                required: 'El campo es obligatorio.',
+                                alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
+                                maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                            },
+                            'segundo-nombre': {
+                                alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
+                                maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                            },
+                            'primer-apellido': {
+                                required: 'El campo es obligatorio.',
+                                alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
+                                maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                            },
+                            'segundo-apellido': {
+                                alphabet: 'No se permiten carácteres que no pertenezcan al alfabeto.',
+                                maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                            },
+                            correo: {
+                                required: 'El campo es obligatorio.',
+                                email: 'Introduzca una dirección de email válida.',
+                                maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                            },
+                        }
+                    })
+
+                    var form = $('#cambiar-contrasena');
+
+                    form.validate({
+                        rules: {
+                            'contrasena-anterior': {
+                                required: true
+                            },
+                            'nueva-contrasena': {
+                                required: true,
+
+                                minlength: 8,
+                                maxlength: 45
+                            },
+                            'confirmar-contrasena': {
+                                required: 'true',
+                                equalTo: '#nueva-contrasena'
+                            }
+                        },
+                        messages: {
+                            'contrasena-anterior': {
+                                required: 'El campo es obligatorio.'
+                            },
+                            'nueva-contrasena': {
+                                required: 'El campo es obligatorio.',
+                                minlength: 'La contraseña debe contener mínimo 8 carácteres.',
+                                maxlength: 'Se ha excedido el número de carácteres permitidos(45).'
+                            },
+                            'confirmar-contrasena': {
+                                required: 'El campo es obligatorio.',
+                                equalTo: 'Las contraseñas no coinciden.'
+                            }
+                        }
+                    })
+                </script>
             </ui:define>
 
         </ui:composition>
