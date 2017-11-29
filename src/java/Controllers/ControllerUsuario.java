@@ -140,6 +140,11 @@ public class ControllerUsuario extends ControllerApp {
             System.out.println("Inicio sesion: " + uS.getPrimerNombre());
             if (uS.getIdUsuario().intValue() != usuario.getIdUsuario()) {
                 System.out.println(usuario.getCodRol());
+                if (usuario.getHistorialclinicoList().size() > 0) {
+                    FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, msg.getString("delete-user-with-medical-record"), null);
+                    fc.addMessage(null, m);
+                    return;
+                }
                 if (!usuario.getCodRol().equals(1)) {
                     usuarioFacade.remove(usuario);
                     finalizarConversacion();
@@ -154,6 +159,7 @@ public class ControllerUsuario extends ControllerApp {
                 fc.addMessage(null, m);
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
