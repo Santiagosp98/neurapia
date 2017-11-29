@@ -84,7 +84,7 @@
                                  aria-labelledby="headingThree">
                                 <div class="panel-body">
                                     <a href="#{request.contextPath}/usuario/reporteusuario.xhtml">
-                                        <h:outputText value="Estadísticas"/>
+                                        <h:outputText value="#{msg['statistics']}"/>
                                     </a>
                                 </div>
                             </div>
@@ -102,11 +102,16 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 custom-col-lg-3">
                             <div class="photo">
-                                <div style="background-image: url(#{request.contextPath}/#{msg['default-photo']});"
-                                     class="img-circle">
-
-                                </div>
-                            </div>git
+                                <ui:fragment
+                                        rendered="#{controllerSession.usuario.imagen eq null || empty(controllerSession.usuario.imagen)}">
+                                    <div style="background-image: url(#{request.contextPath}/#{msg['default-photo']});"
+                                         class="img-circle"></div>
+                                </ui:fragment>
+                                <ui:fragment rendered="#{!empty(controllerSession.usuario.imagen)}">
+                                    <div style="background-image: url(#{request.contextPath}/files/uploads/#{controllerSession.usuario.imagen});"
+                                         class="img-circle"></div>
+                                </ui:fragment>
+                            </div>
                             <div class="basic-information">
                                 <h2 class="text-center">
                                     <strong>
