@@ -1,5 +1,6 @@
 package ControllersGraficos;
 
+import ControllersConfiguracionSistema.ControllerResultadoProceso;
 import Facade.HistorialclinicoFacadeLocal;
 import com.google.gson.Gson;
 
@@ -8,25 +9,47 @@ import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import javax.inject.Inject;
 
 @Named(value = "chartHistorial")
 @ViewScoped
 public class ControllerGraficaHistorialClinico implements Serializable {
+    
+    @Inject
+    private ControllerResultadoProceso crp;
+    
+    private String characteristicString;
+    
     private String monthString;
     private String patientString;
     private String rhString;
     private String countryString;
 
+    private List<Data> characteristicList;
     private List<Data> monthList;
     private List<Data> patientList;
     private List<Data> rhList;
     private List<Data> countryList;
 
+    String[] lista = {"Estado Inicial", "Objetivo", "Resultado", "Porcentaje Cumplimiento"};
+
     public ControllerGraficaHistorialClinico() {
     }
 
+    public String getCharacteristicString() {
+        return characteristicString;
+    }
+
+    public void setCharacteristicString(String characteristicString) {
+        this.characteristicString = characteristicString;
+    }    
+     
     public String getMonthString() {
         return monthString;
     }
@@ -75,7 +98,18 @@ public class ControllerGraficaHistorialClinico implements Serializable {
         for (Object[] patient : patients) {
             patientList.add(new Data(patient[0].toString(), patient[1].toString()));
         }
-
+        
+        
+        Iterator entries = crp.getMapa().entrySet().iterator();
+        while(entries.hasNext()){
+            int i = 0;
+            Map.Entry entry = (Map.Entry) entries.next();
+            Integer key = (Integer)entry.getKey();
+            Integer value = (Integer)entry.getValue();
+            characteristicList.add(new Data(lista[i], value.toString()));
+            i++;
+        }
+       
         rhList = new ArrayList<>();
         List<Object[]> rhs = historialClinicoFacade.pacientesPorGrupoSanguineo();
         for (Object[] rh : rhs) {
@@ -87,7 +121,8 @@ public class ControllerGraficaHistorialClinico implements Serializable {
         for (Object[] country : countries) {
             countryList.add(new Data(country[0].toString(), country[1].toString()));
         }
-
+        
+        characteristicString = new Gson().toJson(characteristicList);
         monthString = new Gson().toJson(monthList);
         patientString = new Gson().toJson(patientList);
         rhString = new Gson().toJson(rhList);
