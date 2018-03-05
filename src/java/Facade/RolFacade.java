@@ -17,7 +17,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class RolFacade extends AbstractFacade<Rol> implements RolFacadeLocal {
 
-    @PersistenceContext(unitName = "ProyectoPU")
+    @PersistenceContext(unitName = "NeurapiaPersistenceUnit")
     private EntityManager em;
 
     @Override

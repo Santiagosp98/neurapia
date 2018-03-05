@@ -17,7 +17,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class ProcesoFacade extends AbstractFacade<Proceso> implements ProcesoFacadeLocal {
 
-    @PersistenceContext(unitName = "ProyectoPU")
+    @PersistenceContext(unitName = "NeurapiaPersistenceUnit")
     private EntityManager em;
 
     @Override

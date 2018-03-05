@@ -22,7 +22,7 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class AnamnesisFacade extends AbstractFacade<Anamnesis> implements AnamnesisFacadeLocal {
 
-    @PersistenceContext(unitName = "ProyectoPU")
+    @PersistenceContext(unitName = "NeurapiaPersistenceUnit")
     private EntityManager em;
 
     @Override

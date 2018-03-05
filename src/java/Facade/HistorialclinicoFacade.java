@@ -24,8 +24,8 @@ public class HistorialclinicoFacade extends AbstractFacade<Historialclinico> imp
     public HistorialclinicoFacade() {
         super(Historialclinico.class);
     }
-    
-    @PersistenceContext(unitName = "ProyectoPU")
+
+    @PersistenceContext(unitName = "NeurapiaPersistenceUnit")
     private EntityManager em;
 
     @Override

@@ -19,7 +19,7 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class TipoactividadFacade extends AbstractFacade<Tipoactividad> implements TipoactividadFacadeLocal {
 
-    @PersistenceContext(unitName = "ProyectoPU")
+    @PersistenceContext(unitName = "NeurapiaPersistenceUnit")
     private EntityManager em;
 
     @Override

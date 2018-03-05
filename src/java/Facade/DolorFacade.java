@@ -19,7 +19,7 @@ import javax.persistence.Query;
 @Stateless
 public class DolorFacade extends AbstractFacade<Dolor> implements DolorFacadeLocal {
 
-    @PersistenceContext(unitName = "ProyectoPU")
+    @PersistenceContext(unitName = "NeurapiaPersistenceUnit")
     private EntityManager em;
 
     @Override

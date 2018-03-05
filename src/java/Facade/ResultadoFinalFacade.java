@@ -19,7 +19,7 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class ResultadoFinalFacade extends AbstractFacade<ResultadoFinal> implements ResultadoFinalFacadeLocal {
 
-    @PersistenceContext(unitName = "ProyectoPU")
+    @PersistenceContext(unitName = "NeurapiaPersistenceUnit")
     private EntityManager em;
 
     @Override

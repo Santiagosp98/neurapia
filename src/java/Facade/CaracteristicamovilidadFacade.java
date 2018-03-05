@@ -20,7 +20,7 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class CaracteristicamovilidadFacade extends AbstractFacade<Caracteristicamovilidad> implements CaracteristicamovilidadFacadeLocal {
 
-    @PersistenceContext(unitName = "ProyectoPU")
+    @PersistenceContext(unitName = "NeurapiaPersistenceUnit")
     private EntityManager em;
 
     @Override

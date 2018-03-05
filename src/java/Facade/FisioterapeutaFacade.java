@@ -20,7 +20,7 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class FisioterapeutaFacade extends AbstractFacade<Fisioterapeuta> implements FisioterapeutaFacadeLocal {
 
-    @PersistenceContext(unitName = "ProyectoPU")
+    @PersistenceContext(unitName = "NeurapiaPersistenceUnit")
     private EntityManager em;
 
     @Override
