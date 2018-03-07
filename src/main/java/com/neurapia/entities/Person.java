@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Mapping for table 'person' from neurapia's database.
@@ -73,6 +74,20 @@ public class Person implements Serializable {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
+    @ManyToOne
+    @JoinColumn(name = "created_by", referencedColumnName = "id")
+    private Person createdBy;
+
+    @ManyToOne
+    @JoinColumn(name = "modified_by", referencedColumnName = "id")
+    private Person modifiedBy;
+
+    @OneToMany(mappedBy = "createdBy", fetch = FetchType.LAZY)
+    private List<Person> creators;
+
+    @OneToMany(mappedBy = "modifiedBy", fetch = FetchType.LAZY)
+    private List<Person> editors;
+    
     public Person() {
     }
 
