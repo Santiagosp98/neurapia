@@ -26,8 +26,8 @@ public class Credential implements Serializable {
     @Column(name = "password")
     private String password;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JoinColumn(name = "person_id")
     private Person person;
 
     public Credential() {

@@ -87,7 +87,10 @@ public class Person implements Serializable {
 
     @OneToMany(mappedBy = "modifiedBy", fetch = FetchType.LAZY)
     private List<Person> editors;
-    
+
+    @OneToOne(mappedBy = "person")
+    private Credential credential;
+
     public Person() {
     }
 
