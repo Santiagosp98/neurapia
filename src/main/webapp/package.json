@@ -1,0 +1,10 @@
+{
+  "name": "neurapia",
+  "version": "1.0.0",
+  "description": "A re-write of the beautiful but dumb app, neurapia.",
+  "main": "index.js",
+  "repository": "https://github.com/Santiagosp98/neurapia",
+  "author": "Santiago Samper",
+  "license": "unlicensed",
+  "private": true
+}
