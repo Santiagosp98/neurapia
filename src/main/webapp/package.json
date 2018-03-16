@@ -6,5 +6,30 @@
   "repository": "https://github.com/Santiagosp98/neurapia",
   "author": "Santiago Samper",
   "license": "unlicensed",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.4",
+    "@types/bootstrap": "^4.0.0",
+    "@types/jquery": "^3.3.1",
+    "bootstrap": "4.0.0-beta.2",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.1"
+  },
+  "devDependencies": {
+    "css-loader": "^0.28.10",
+    "node-sass": "^4.7.2",
+    "postcss-loader": "^2.1.1",
+    "precss": "^3.1.2",
+    "sass-loader": "^6.0.7",
+    "style-loader": "^0.20.3",
+    "ts-loader": "^4.0.1",
+    "typescript": "^2.7.2",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12",
+    "webpack-uglify-js-plugin": "^1.1.9"
+  },
+  "scripts": {
+    "build": "webpack"
+  }
 }
